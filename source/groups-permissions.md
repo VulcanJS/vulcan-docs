@@ -103,5 +103,3 @@ categories.remove.all
 ```
 
 The `*.*.all` actions are generally used as a proxy to check for permission when editing restricted properties. For example, to check if a user can edit a post's `status`, a check is made for the user's ability to perform the `posts.edit.all` action (as there is no dedicated `posts.edit.status` action).
-
-

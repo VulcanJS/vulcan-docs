@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Use GraphQL with React
-propertytitle: Apollo React Docs
-subtitle: React Guide
-description: A guide to using the Apollo GraphQL Client with React.
+title: Nova Docs
+propertytitle: Nova Docs
+subtitle: Nova Docs
+description: Nova Docs
 author:
 language:
 timezone:
@@ -25,6 +25,10 @@ sidebar_categories:
     - theming
     - groups-permissions
     - routing
+    - internationalization
+  Tutorials:
+    - tutorial-framework
+    - tutorial-customizing
 github_repo: telescopejs/nova-docs
 content_root: source
 
@@ -32,17 +36,16 @@ typescript_api_box:
   data_file: docs.json
 
 social_links:
-  github: 'https://github.com/apollostack'
-  twitter: '@apollostack'
+  github: 'https://github.com/telescopejs/telescope'
+  twitter: '@telescopeapp'
 
 # API keys
 apis:
-  segment: wgrIo8Bul0Ujl8USETG3DB6hONdy4kTg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://dev.apollodata.com/react
-root: /react/
+url: http://nova-docs.telescopeapp.org/
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -91,10 +94,15 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
+plugins:
+#  - hexo-generator-cname
+
 ## Themes: http://hexo.io/themes/
 theme: meteor
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: https://github.com/TelescopeJS/nova-docs
+  branch: gh-pages

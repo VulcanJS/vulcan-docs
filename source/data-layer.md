@@ -4,6 +4,24 @@ title: Data Layer
 
 Nova uses the [Apollo](http://apollostack.com) data layer to manage its [GraphQL API](http://graphql.org/). 
 
+## Data Flow
+
+When you connect to a GraphQL-powered site, the client makes an API request to load the data it needs. 
+
+Unlike traditional REST APIs, the client doesn't just hit an API endpoint but actually sends a list of *what data it needs* to the server. The specific document properties needed by the client are defined in a **fragment**. 
+
+Upon receiving that query, the server validates the fragment against the main GraphQL **schema**.
+
+If that validation passes, the server then looks for a **query resolver** that will specify how to actually retrieve the data (presumably through some kind of database `find()` operation).
+
+Data mutations (inserting, editing, or removing a document) function in a similar way.
+
+The client sends a query that includes the name of the mutation, the mutation arguments, as well as specifies what data the client expects back once the mutation is complete. 
+
+The server then looks for a **mutation resolver** and executes it.
+
+## Helper Functions
+
 Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `Telescope.createCollection` function:
 
 ```js
@@ -173,3 +191,119 @@ Callback hooks run with the following arguments:
 - `remove`: `document`, `currentUser`.
 
 You can learn more about callbacks in the [Callbacks](callbacks.html) section. 
+
+<h2 id="hocs">Higher-Order Components</h2>
+
+To make working with Apollo easier, Nova provides you with a set of higher-order components (HoC). 
+
+An HoC is simply a function you can call on a React component to give it additional props.
+
+### withList
+
+The `withList` HoC is used to display lists of documents. It takes the following options:
+
+- `queryName`: an arbitrary name for the query.
+- `collection`: the collection on which to look for the `list` resolver.
+- `fragment`: the fragment to use (see below).
+- `fragmentName`: the name of the fragment. 
+
+For example:
+
+```js
+const listOptions = {
+  collection: Movies,
+  queryName: 'moviesListQuery',
+  fragmentName: MoviesItem.fragmentName,
+  fragment: MoviesItem.fragment,
+};
+
+export default withList(listOptions)(MoviesList);
+```
+
+The resulting wrapped component also takes in the following options:
+
+- `terms`: an object containing a list of quering, sorting, and filtering terms.
+
+Note that `terms` needs to be passed not as an option, but as a prop from the *parent* component.
+
+The HoC then passes on the following props:
+
+- `loading`: `true` while the data is loading.
+- `results`: the loaded array of documents.
+- `totalCount`: the total count of results.
+- `count`: the number of current results (i.e. `results.length`).
+- `refetch`: a function that can be called to trigger a query refetch.
+- `loadMore`: a function that can be called to load more data. 
+
+### withSingle
+
+The `withSingle` HoC displays a single document. It takes the same options as `withList`, but takes a `documentId` **prop**. 
+
+Like `terms` for `withList`, `documentId` needs to be passed not as an option, but as a prop from the *parent* component.
+
+This HoC then passes on the following child prop:
+
+- `loading`: `true` while the data is loading.
+- `document`: the loaded document.
+
+### withNew
+
+This HoC takes the following four options:
+
+- `collection`: the collection to operate on.
+- `queryName`: the name of the query to update on the client.
+- `fragment`: specifies the data to ask for as a return value.
+- `fragmentName`: the name of the fragment.
+
+And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
+
+### withEdit
+
+Same options as `withNew`. The returned `editMutation` mutation takes three arguments: `documentId`, `set`, and `unset`. 
+
+### withRemove
+
+Same options as `withNew`. The returned `removeMutation` mutation takes a single `documentId` argument. 
+
+Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you. 
+
+<h2 id="fragments">Fragments</h2>
+
+A fragment is a piece of schema, usually used to define what data you want to query for. 
+
+A good practice is defining the fragment wherever the data will actually be used. Note that this doesn't have to be the component that directly receives this data. 
+
+For example, you could define a fragment in one component:
+
+```js
+class MoviesItem extends Component {
+  //...
+};
+
+MoviesItem.fragmentName = 'moviesItemFragment';
+MoviesItem.fragment = gql`
+  fragment moviesItemFragment on Movie {
+    _id
+    name
+    year
+    user {
+      __displayName
+    }
+  }
+`;
+
+export default MoviesItem;
+```
+
+And reuse it in another:
+
+```js
+const listOptions = {
+  collection: Movies,
+  queryName: 'moviesListQuery',
+  fragmentName: MoviesItem.fragmentName,
+  fragment: MoviesItem.fragment,
+};
+
+export default withList(listOptions)(MoviesList);
+```
