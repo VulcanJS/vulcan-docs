@@ -13,13 +13,13 @@ function setEditedAt (post, user) {
   post.editedAt = new Date();
   return post;
 }
-Telescope.callbacks.add("posts.edit.sync", setEditedAt);
+Callbacks.add("posts.edit.sync", setEditedAt);
 ```
 
 If the callback function is named (i.e. declared using the `function foo () {}` syntax), you can also remove it from the callback using:
 
 ```js
-Telescope.callbacks.remove("posts.edit.sync", "setEditedAt");
+Callbacks.remove("posts.edit.sync", "setEditedAt");
 ```
 
 Methods support three distinct types of callbacks, each with their own hook:
@@ -30,10 +30,10 @@ Methods support three distinct types of callbacks, each with their own hook:
 
 <h2 id="running-callbacks">Running Callbacks</h2>
 
-Callbacks are run using the `Telescope.callbacks.runSync` and `Telescope.callbacks.runAsync` functions:
+Callbacks are run using the `Callbacks.runSync` and `Callbacks.runAsync` functions:
 
 ```js
-modifier = Telescope.callbacks.run(`movies.edit.sync`, modifier, document, currentUser)
+modifier = Callbacks.run(`movies.edit.sync`, modifier, document, currentUser)
 ```
 
 In each case, the **first** argument is the name of the callback hook, the **second** argument is the one iterated on by each callback function on the hook, while any remaining arguments are just passed along from one iteration to the next.

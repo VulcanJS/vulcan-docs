@@ -22,10 +22,10 @@ The server then looks for a **mutation resolver** and executes it.
 
 ## Helper Functions
 
-Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `Telescope.createCollection` function:
+Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `createCollection` function:
 
 ```js
-const Movies = Telescope.createCollection({
+const Movies = createCollection({
 
   collectionName: 'movies',
 
@@ -50,13 +50,13 @@ The function takes the following arguments:
 
 The first piece of any GraphQL API is the **schema**, which defines what data is made available to the client. 
 
-In Nova, this GraphQL schema can be generated automatically from your collection's JSON schema, so you don't have to type things twice. Just pass a [SimpleSchema](https://github.com/aldeed/meteor-simple-schema)-compatible JSON schema as `Telescope.createCollection`'s `schema` property.
+In Nova, this GraphQL schema can be generated automatically from your collection's JSON schema, so you don't have to type things twice. Just pass a [SimpleSchema](https://github.com/aldeed/meteor-simple-schema)-compatible JSON schema as `createCollection`'s `schema` property.
 
 You can learn more on defining your schema in the [Schema](schema.html) section.
 
 ### Custom Schemas
 
-If you need to manually add a schema, you can also do so using the `Telescope.graphQL.addSchema` function:
+If you need to manually add a schema, you can also do so using the `GraphQLSchema.addSchema` function:
 
 ```js
 const customSchema = `
@@ -66,7 +66,7 @@ const customSchema = `
     title: String
   }
 `;
-Telescope.graphQL.addSchema(customSchema);
+GraphQLSchema.addSchema(customSchema);
 ```
 
 <h2 id="resolvers">Resolvers</h2>
@@ -98,7 +98,7 @@ The `total` resolver takes a `terms` argument and should return the total count 
 
 ### Custom Resolvers
 
-Just like for the schema, you can also define resolvers manually using `Telescope.graphQL.addResolvers`:
+Just like for the schema, you can also define resolvers manually using `GraphQLSchema.addResolvers`:
 
 ```js
 const movieResolver = {
@@ -108,7 +108,7 @@ const movieResolver = {
     },
   },
 };
-Telescope.graphQL.addResolvers(movieResolver);
+GraphQLSchema.addResolvers(movieResolver);
 ```
 
 Resolvers can be defined on any new or existing type (e.g. `Movie`).
@@ -139,11 +139,11 @@ Takes a single `documentId` argument.
 
 ### Custom Mutations
 
-You can also add your own mutations using `Telescope.graphQL.addMutation` and `Telescope.graphQL.addResolvers`:
+You can also add your own mutations using `GraphQLSchema.addMutation` and `GraphQLSchema.addResolvers`:
 
 ```js
 
-Telescope.graphQL.addMutation('postsVote(documentId: String, voteType: String) : Post');
+GraphQLSchema.addMutation('postsVote(documentId: String, voteType: String) : Post');
 
 const voteResolver = {
   Mutation: {
@@ -153,7 +153,7 @@ const voteResolver = {
   },
 };
 
-Telescope.graphQL.addResolvers(voteResolver);
+GraphQLSchema.addResolvers(voteResolver);
 ```
 
 ### Boilerplate Operations
@@ -205,7 +205,6 @@ The `withList` HoC is used to display lists of documents. It takes the following
 - `queryName`: an arbitrary name for the query.
 - `collection`: the collection on which to look for the `list` resolver.
 - `fragment`: the fragment to use (see below).
-- `fragmentName`: the name of the fragment. 
 
 For example:
 
@@ -213,7 +212,6 @@ For example:
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragmentName: MoviesItem.fragmentName,
   fragment: MoviesItem.fragment,
 };
 
@@ -235,9 +233,9 @@ The HoC then passes on the following props:
 - `refetch`: a function that can be called to trigger a query refetch.
 - `loadMore`: a function that can be called to load more data. 
 
-### withSingle
+### withDocument
 
-The `withSingle` HoC displays a single document. It takes the same options as `withList`, but takes a `documentId` **prop**. 
+The `withDocument` HoC displays a single document. It takes the same options as `withList`, but takes a `documentId` **prop**. 
 
 Like `terms` for `withList`, `documentId` needs to be passed not as an option, but as a prop from the *parent* component.
 
@@ -253,7 +251,6 @@ This HoC takes the following four options:
 - `collection`: the collection to operate on.
 - `queryName`: the name of the query to update on the client.
 - `fragment`: specifies the data to ask for as a return value.
-- `fragmentName`: the name of the fragment.
 
 And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
 
@@ -280,7 +277,6 @@ class MoviesItem extends Component {
   //...
 };
 
-MoviesItem.fragmentName = 'moviesItemFragment';
 MoviesItem.fragment = gql`
   fragment moviesItemFragment on Movie {
     _id
@@ -301,7 +297,6 @@ And reuse it in another:
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragmentName: MoviesItem.fragmentName,
   fragment: MoviesItem.fragment,
 };
 

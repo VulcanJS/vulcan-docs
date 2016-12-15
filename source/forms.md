@@ -4,7 +4,7 @@ title: Forms
 
 The `nova:forms` package provides a `NovaForm` component that lets you easily generate new document and edit document forms. 
 
-### Features
+## Features
 
 This package can generate new document and edit document forms from a [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) schema. Features include:
 
@@ -16,7 +16,7 @@ This package can generate new document and edit document forms from a [SimpleSch
 - Support for custom form controls.
 - Submission to Meteor methods. 
 
-### Usage
+## Usage
 
 Example schema:
 
@@ -81,17 +81,23 @@ Edit document form:
 />
 ```
 
-### Props
+## Props
 
 #### `collection`
 
 The collection in which to edit or insert a document.
 
+#### `fragment`
+
+A fragment that defines what data you expect back from the mutation. 
+
+If no fragment is passed, NovaForms will only return fields used in the form, but that might lead to discrepancies when compared with documents already loaded on the client (an example would be a `createdAt` date added automatically on creation even though it's not part of the actual form).  
+
 #### `schema`
 
 If you prefer, you can also specify a schema instead of a collection.
 
-#### `document`
+#### `documentId`
 
 If present, the document to edit. If not present, the form will be a “new document” form. 
 
@@ -119,63 +125,7 @@ A function to call on field names to get the label.
 
 A set of props to prefill for new documents. 
 
-### Collection Schema
-
-This package generates forms based on the following special schema properties (see also the [Smart Methods](https://github.com/meteor-utilities/smart-methods) package:
-
-#### `insertableIf(user)`
-
-A function called on the `user` performing the operation, should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user. 
-
-#### `editableIf(user, document)`
-
-Called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user. 
-
-#### `control`
-
-Either a text string (one of `text`, `textarea`, `checkbox`, `checkboxgroup`, `radiogroup`, or `select`) or a React component. 
-
-#### `order`
-
-A number corresponding to the position of the property's field inside the form. 
-
-#### `group`
-
-An optional object containing the group/section/fieldset in which to include the form element. Groups have `name`, `label`, and `order` properties.
-
-For example:
-
-```js
-postedAt: {
-  type: Date,
-  optional: true,
-  insertableIf: Users.isAdmin,
-  editableIf: Users.isAdmin,
-  publish: true,
-  control: "datetime",
-  group: {
-    name: "admin",
-    label: "Admin Options",
-    order: 2
-  }
-},
-```
-
-Note that fields with no groups are always rendered first in the form. 
-
-#### `placeholder`
-
-A placeholder value for the form field. 
-
-#### `beforeComponent`
-
-A React component that will be inserted just before the form component itself.
-
-#### `afterComponent`
-
-A React component that will be inserted just after the form component itself.
-
-### Context
+## Context
 
 The main `NovaForm` components makes the following objects available as context to all its children:
 
@@ -195,7 +145,7 @@ A callback function that can be used to throw an error.
 
 A function that lets you retrieve the current document from a form component.
 
-### Handling Values
+## Handling Values
 
 The component handles three different layers of input values:
 
@@ -205,7 +155,7 @@ The component handles three different layers of input values:
 
 The highest-priority value is the user input. If there is no user input, we default to the database value provided by the `props`. And if that one is empty too, we then look for autofilled values. 
 
-### i18n
+## i18n
 
 This package uses [React Intl](https://github.com/yahoo/react-intl/) to automatically translate all labels. In order to do so it expects an `intl` object ot be passed as part of its context. For example, in a parent component: 
 

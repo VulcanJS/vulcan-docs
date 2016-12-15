@@ -14,8 +14,6 @@ This prevents you from having to specify your schema twice in two different form
 
 Nova will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation. 
 
-![http://g.recordit.co/FcZuDIo8Rw.gif](http://g.recordit.co/FcZuDIo8Rw.gif)
-
 For example, here's how you would display a form to edit a single movie:
 
 ```js
@@ -33,7 +31,7 @@ Note that NovaForm will also take care of loading the document to edit, if it's 
 
 <h2 id="data-loading">Easy Data Loading</h2>
 
-Nova features a set of data loading helpers to make loading Apollo data easier, `withList` (to load a list of documents) and `withSingle` (to load a single document). 
+Nova features a set of data loading helpers to make loading Apollo data easier, `withList` (to load a list of documents) and `withDocument` (to load a single document). 
 
 For example, here's how you would use `withList` to pass a `results` prop containing all movies to your `MoviesList` component:
 
@@ -41,7 +39,6 @@ For example, here's how you would use `withList` to pass a `results` prop contai
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragmentName: 'myFragment',
   fragment: fragment,
 };
 

@@ -15,17 +15,21 @@ versions:
 sidebar_categories:
   null:
     - index
+  Overview:
     - features
     - architecture
+  API:
+    - theming
+    - custom-fields
     - schema
     - data-layer
     - forms
     - callbacks
     - email
-    - theming
     - groups-permissions
     - routing
     - internationalization
+    - settings
   Tutorials:
     - tutorial-framework
     - tutorial-customizing

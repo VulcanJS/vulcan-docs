@@ -5,20 +5,21 @@ title: Routing
 Here's how you can add child routes to your app (using React Router):
 
 ```js
-Telescope.routes.add({
+addRoute({
   name: "foo",
   path: "/foo",
   component: Foo
 });
 ```
 
-To change the index (`/`) route, you can do:
+To change the index (`/`) route, you can just do:
 
 ```js
-Telescope.routes.indexRoute = { 
-  name: "myIndexRoute", 
-  component: myIndexRouteComponent
-};
+addRoute({
+  name: "foo",
+  path: "/",
+  component: Foo
+});
 ```
 
 For more complex router customizations, you can also disable the `nova:routing` package altogether and replace it with your own React Router code. 

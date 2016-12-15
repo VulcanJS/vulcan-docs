@@ -8,7 +8,11 @@ But it's important to understand that you can also use the underlying framework 
 
 So in this tutorial, we'll focus on understanding this framework and seeing how to build a simple paginated list of movies. 
 
-The completed code for this tutorial can be found in the `movies-demo` package. 
+The completed code for this tutorial can be found in the [nova-framework-tutorial branch](https://github.com/TelescopeJS/Telescope/tree/nova-framework-tutorial/packages/my-package), and you can also check out the `nova:movies-demo` package in the regular branch for a more full-featured version of the same example. 
+
+## Intro
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RzoYVqsD9WI" frameborder="0" allowfullscreen></iframe>
 
 ## Set Up
 
@@ -137,10 +141,10 @@ export default MoviesWrapper;
 Then, create a new `routes.js` file inside `lib`:
 
 ```js
-import Telescope from 'meteor/nova:lib';
+import { addRoute } from 'meteor/nova:core';
 import MoviesWrapper from './components/MoviesWrapper.jsx';
 
-Telescope.routes.indexRoute = { name: 'movies', component: MoviesWrapper };
+addRoute = { name: 'movies', path: '/', component: MoviesWrapper };
 ```
 
 Make sure to also import `routes.js` inside `modules.js`:
@@ -200,10 +204,10 @@ We're also setting up an `autoValue` function on the `createdAt` field to initia
 We're now ready to set up our `Movies` collection. Create a new `collection.js` file inside `lib`:
 
 ```js
-import Telescope from 'meteor/nova:lib';
+import { createCollection } from 'meteor/nova:core';
 import schema from './schema.js';
 
-const Movies = Telescope.createCollection({
+const Movies = createCollection({
 
   collectionName: 'movies',
 
@@ -227,7 +231,7 @@ It might not look like much has changed, but we now have a functional GraphQL sc
 
 ```
 import Telescope from 'meteor/nova:lib'
-Telescope.graphQL.finalSchema
+GraphQLSchema.finalSchema
 ```
 
 ## Query Resolvers
@@ -235,8 +239,6 @@ Telescope.graphQL.finalSchema
 Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. Create a new `resolvers.js` file inside `lib` and add:
 
 ```js
-import Telescope from 'meteor/nova:lib';
-
 const resolvers = {
   list: {
     name: 'moviesList',
@@ -267,7 +269,7 @@ import Telescope from 'meteor/nova:lib';
 import schema from './schema.js';
 import resolvers from './resolvers.js';
 
-const Movies = Telescope.createCollection({
+const Movies = createCollection({
 
   collectionName: 'movies',
 
@@ -287,7 +289,7 @@ We can try out our new query resolver using [GraphiQL](https://github.com/graphq
 ```js
 import Movies from './collection.js';
 import Users from 'meteor/nova:users';
-import Telescope, { newMutation, editMutation, removeMutation } from 'meteor/nova:lib';
+import { newMutation } from 'meteor/nova:core';
 
 const seedData = [
   {
@@ -403,7 +405,6 @@ We'll need two pieces for this: a **container** component that loads the data, a
 Create a new `MoviesItem` component inside `components`:
 
 ```js
-import Telescope from 'meteor/nova:lib';
 import React, { PropTypes, Component } from 'react';
 import gql from 'graphql-tag';
 
@@ -418,21 +419,10 @@ class MoviesItem extends Component {
   }
 };
 
-MoviesItem.fragmentName = 'moviesItemFragment';
-MoviesItem.fragment = gql`
-  fragment moviesItemFragment on Movie {
-    _id
-    name
-    year
-  }
-`;
-
 export default MoviesItem;
 ```
 
-Note that since `MoviesItem` is the component that displays the `name` and `year` properties of each movie, it's also the component where we'll define the fragment that will query for these two properties. 
-
-We'll also create a new `MoviesList` component which will use the fragment we just defined:
+We'll also create a new `MoviesList` component, which will use a GraphQL fragment to specify what data we want to load:
 
 ```js
 import Telescope from 'meteor/nova:lib';
@@ -440,15 +430,22 @@ import React, { PropTypes, Component } from 'react';
 import Movies from '../collection.js';
 import MoviesItem from './MoviesItem.jsx';
 import { withList } from 'meteor/nova:core';
+import gql from 'graphql-tag';
 
-const LoadMore = props => <a href="#" className="load-more button button--primary" onClick={props.loadMore}>Load More ({props.count}/{props.totalCount})</a>
+const LoadMore = props => {
+  return (
+    <a href="#" className="load-more button button--primary" onClick={props.loadMore}>
+      Load More ({props.count}/{props.totalCount})
+    </a>
+  )
+}
 
 class MoviesList extends Component {
 
   render() {
     
     if (this.props.loading) {
-      return <Telescope.components.Loading />
+      return <Components.Loading />
     } else {
       const hasMore = this.props.totalCount > this.props.results.length;
       return (
@@ -462,11 +459,18 @@ class MoviesList extends Component {
 
 };
 
+export const MoviesListFragment = gql`
+  fragment moviesItemFragment on Movie {
+    _id
+    name
+    year
+  }
+`;
+
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragmentName: MoviesItem.fragmentName,
-  fragment: MoviesItem.fragment,
+  fragment: MoviesListFragment,
 };
 
 export default withList(listOptions)(MoviesList);
@@ -506,7 +510,6 @@ So far so good, but we can't yet do a lot with our app. In order to give it a li
 Create a new `Accounts.jsx` component inside `components`:
 
 ```js
-import Telescope from 'meteor/nova:lib';
 import React, { PropTypes, Component } from 'react';
 import { Accounts } from 'meteor/std:accounts-ui';
 import { withApollo } from 'react-apollo';
@@ -569,7 +572,7 @@ Before we can build the user facing part of this feature though, we need to thin
 Create a new `mutations.js` file in `lib`:
 
 ```js
-import Telescope, { newMutation } from 'meteor/nova:lib';
+import { newMutation } from 'meteor/nova:core';
 
 const mutations = {
   new: {
@@ -604,12 +607,11 @@ This mutation performs a simple check for the presence of a logged-in user, and 
 Let's pass it on to our `createCollection` function in `collection.js`:
 
 ```js
-import Telescope from 'meteor/nova:lib';
 import schema from './schema.js';
 import resolvers from './resolvers.js';
 import mutations from './mutations.js';
 
-const Movies = Telescope.createCollection({
+const Movies = createCollection({
 
   collectionName: 'movies',
 
@@ -673,15 +675,16 @@ In this case, the three fields we want users to be able to write to are `name`, 
 We now have everything we need to create a new `MoviesNewForm.jsx` component:
 
 ```js
-import Telescope from 'meteor/nova:lib';
 import React, { PropTypes, Component } from 'react';
 import NovaForm from "meteor/nova:forms";
 import Movies from '../collection.js';
+import { MoviesListFragment } from './MoviesList.jsx';
 
 const MoviesNewForm = (props, context) => {
   return (
     <NovaForm 
       collection={Movies}
+      fragment={MoviesListFragment}
     />
   )
 }
@@ -689,18 +692,26 @@ const MoviesNewForm = (props, context) => {
 export default MoviesNewForm;
 ```
 
-And import it from `MoviesList.jsx`:
+We'll pass the `MoviesListFragment` to the form so that it knows what data to return from the server once the mutation is complete. 
 
-```js
-import Telescope from 'meteor/nova:lib';
+Let's import the form from `MoviesList.jsx`:
+
+~~~javascript
 import React, { PropTypes, Component } from 'react';
 import Movies from '../collection.js';
 import MoviesItem from './MoviesItem.jsx';
 import { withCurrentUser, withList } from 'meteor/nova:core';
 import MoviesNewForm from './MoviesNewForm.jsx';
 import { compose } from 'react-apollo';
+import gql from 'graphql-tag';
 
-const LoadMore = props => <a href="#" className="load-more button button--primary" onClick={props.loadMore}>Load More ({props.count}/{props.totalCount})</a>
+const LoadMore = props => {
+  return (
+    <a href="#" className="load-more button button--primary" onClick={props.loadMore}>
+      Load More ({props.count}/{props.totalCount})
+    </a>
+  )
+}
 
 class MoviesList extends Component {
 
@@ -709,7 +720,7 @@ class MoviesList extends Component {
     const canCreateNewMovie = Movies.options.mutations.new.check(this.props.currentUser);
 
     if (this.props.loading) {
-      return <Telescope.components.Loading />
+      return <Components.Loading />
     } else {
       const hasMore = this.props.totalCount > this.props.results.length;
       return (
@@ -724,10 +735,20 @@ class MoviesList extends Component {
 
 };
 
+export const MoviesListFragment = gql`
+  fragment moviesItemFragment on Movie {
+    _id
+    name
+    year
+    user {
+      __displayName
+    }
+  }
+`;
+
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragmentName: MoviesItem.fragmentName,
   fragment: MoviesItem.fragment,
 };
 
@@ -735,41 +756,13 @@ export default compose(
   withList(listOptions), 
   withCurrentUser
 )(MoviesList);
-```
+~~~
 
 We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the mutation's `check` function to figure this out.
 
 We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component and use the `compose` utility to keep the syntax clean. 
 
-Now fill out the form and submit it. It may seem at first like nothing happened, but if you reload the page you'll see your brand new movie at the top of the list!
-
-## Updating Data
-
-Of course this doesn't make for a great user experience. Ideally, we'd want our movie to pop in as soon as it's inserted. 
-
-Thankfully we can do this by passing the name of the query we want to update (as defined in `MoviesList.jsx`) to `NovaForm`:
-
-```js
-import Telescope from 'meteor/nova:lib';
-import React, { PropTypes, Component } from 'react';
-import NovaForm from "meteor/nova:forms";
-import Movies from '../collection.js';
-
-const MoviesNewForm = (props, context) => {
-  return (
-    <NovaForm 
-      collection={Movies}
-      queryName="moviesListQuery"
-    />
-  )
-}
-
-export default MoviesNewForm;
-```
-
-That's it! Now whenever we submit a new movie, the query will be updated and it'll appear right there in our list. 
-
-(Note: doesn't work yet)
+Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! 
 
 ## Going Further
 
@@ -782,3 +775,5 @@ This is probably a good place to stop, but you can go further simply by going th
 - Define GraphQL “joins” in your schema to decorate objects with more data.
 
 And this is just the start. You can do a lot more with Nova, Apollo, and React, as you'll soon see!
+
+
