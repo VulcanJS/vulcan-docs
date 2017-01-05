@@ -641,7 +641,7 @@ const schema = {
   name: {
     label: 'Name',
     type: String,
-    insertableBy: ['default'],
+    insertableBy: ['members'],
   },
   createdAt: {
     type: Date,
@@ -653,12 +653,12 @@ const schema = {
     label: 'Year',
     type: String,
     optional: true,
-    insertableBy: ['default'],
+    insertableBy: ['members'],
   },
   review: {
     label: 'Review',
     type: String,
-    insertableBy: ['default'],
+    insertableBy: ['members'],
     control: 'textarea',
   },
   userId: {

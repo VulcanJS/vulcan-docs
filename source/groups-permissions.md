@@ -103,8 +103,8 @@ First, here's how you would define a private field's `viewableBy` property to re
 privateComments: {
   type: String,
   viewableBy: Users.owns,
-  insertableBy: ['default'],
-  editableBy: ['default']
+  insertableBy: ['members'],
+  editableBy: ['members']
 },
 ```
 
