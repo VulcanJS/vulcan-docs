@@ -749,7 +749,7 @@ export const MoviesListFragment = gql`
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragment: MoviesItem.fragment,
+  fragment: MoviesListFragment,
 };
 
 export default compose(
