@@ -144,7 +144,7 @@ Then, create a new `routes.js` file inside `lib`:
 import { addRoute } from 'meteor/nova:core';
 import MoviesWrapper from './components/MoviesWrapper.jsx';
 
-addRoute = { name: 'movies', path: '/', component: MoviesWrapper };
+addRoute({ name: 'movies', path: '/', component: MoviesWrapper });
 ```
 
 Make sure to also import `routes.js` inside `modules.js`:
