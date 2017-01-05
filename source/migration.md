@@ -17,13 +17,13 @@ The first step will be merging in the latest commits from the `apollo` branch. I
 I would suggest creating a new local `apollo` branch (so you can easily go back to your last working version if things don't work out) first with:
 
 ```
-git checkout -B apollo
+git checkout -B devel-apollo
 ```
 
 And then pulling in the changes:
 
 ```
-git pull origin apollo
+git pull origin devel
 ```
 
 This will probably result in at least a few Git conflicts between the old and new versions of the same files. Here are some of the most commonly affected files:
@@ -63,8 +63,8 @@ Other changes:
 
 A few schema properties have been changed, and these will trigger schema errors until you update them:
 
-- `insertableIf` is now `insertableBy`, and takes either the name of a group or a function. 
-- `editableIf` is now `editableBy`, and takes either the name of a group or a function. 
+- `insertableBy` is now `insertableBy`, and takes either the name of a group or a function. 
+- `editableBy` is now `editableBy`, and takes either the name of a group or a function. 
 - `publish` is replaced by `viewableBy`, which works similarly to `insertableBy` and `editableBy`. 
 - `join` has been replaced by `resolveAs`, which you can use to specify a GraphQL resolver for the field.
 

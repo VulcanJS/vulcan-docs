@@ -10,9 +10,10 @@ You can get a good overview of what Nova can do in the [Features](features.html)
 
 ## Install
 
-Clone this repo locally, then:
+Clone the [Nova repo](https://github.com/TelescopeJS/Telescope/) locally, then:
 
 ```
+git checkout devel
 npm install
 meteor
 ```

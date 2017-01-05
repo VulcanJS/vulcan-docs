@@ -8,19 +8,19 @@ See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-sch
 
 ## Data Layer Properties
 
-#### `viewableIf`
+#### `viewableBy`
 
 Can either be an array of group names or a function.
 
 If it's a function, it'll be called on the `user` viewing the document, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user. 
 
-#### `insertableIf`
+#### `insertableBy`
 
 Can either be an array of group names or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user. 
 
-#### `editableIf`
+#### `editableBy`
 
 Can either be an array of group names or a function.
 
@@ -50,8 +50,8 @@ For example:
 postedAt: {
   type: Date,
   optional: true,
-  insertableIf: Users.isAdmin,
-  editableIf: Users.isAdmin,
+  insertableBy: Users.isAdmin,
+  editableBy: Users.isAdmin,
   publish: true,
   control: "datetime",
   group: {

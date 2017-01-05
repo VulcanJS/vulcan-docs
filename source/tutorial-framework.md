@@ -630,7 +630,7 @@ export default Movies;
 
 One last thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
-Once again, we do this through the schema. We'll add an `insertableIf` property to any “insertable” field and set it to `[default]` to indicate that a field should be insertable by any member of the `default` group (in other words, regular logged-in users):
+Once again, we do this through the schema. We'll add an `insertableBy` property to any “insertable” field and set it to `[default]` to indicate that a field should be insertable by any member of the `default` group (in other words, regular logged-in users):
 
 ```js
 const schema = {
@@ -641,7 +641,7 @@ const schema = {
   name: {
     label: 'Name',
     type: String,
-    insertableIf: ['default'],
+    insertableBy: ['default'],
   },
   createdAt: {
     type: Date,
@@ -653,12 +653,12 @@ const schema = {
     label: 'Year',
     type: String,
     optional: true,
-    insertableIf: ['default'],
+    insertableBy: ['default'],
   },
   review: {
     label: 'Review',
     type: String,
-    insertableIf: ['default'],
+    insertableBy: ['default'],
     control: 'textarea',
   },
   userId: {

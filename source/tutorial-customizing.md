@@ -221,9 +221,9 @@ Posts.addField(
       type: String,
       control: 'select', // use a select form control
       optional: true, // this field is not required
-      insertableIf: ['default'],
-      editableIf: ['default'],
-      viewableIf: ['default'],
+      insertableBy: ['default'],
+      editableBy: ['default'],
+      viewableBy: ['default'],
       form: {
         options: function () { // options for the select form control
           return [
