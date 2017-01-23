@@ -302,3 +302,6 @@ const listOptions = {
 
 export default withList(listOptions)(MoviesList);
 ```
+
+## Terms
+

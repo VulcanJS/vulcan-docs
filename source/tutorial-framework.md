@@ -52,9 +52,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'nova:core@0.27.4-nova',
-    'nova:forms@0.27.4-nova',
-    'std:accounts-ui@1.2.9',
+    'nova:core',
+    'nova:forms',
+    'std:accounts-ui',
   ]);
 
   api.mainModule('server.js', 'server');

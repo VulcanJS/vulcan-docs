@@ -30,6 +30,9 @@ sidebar_categories:
     - routing
     - internationalization
     - settings
+  Resources:
+    - learn
+    - plugins
   Tutorials:
     - tutorial-framework
     - tutorial-customizing

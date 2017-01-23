@@ -4,7 +4,7 @@ title: Customizing & Extending Nova
 
 Nova was made to be extensible from the ground up. This means that you can tweak and adapt many existing features to your needs without having to rewrite them from scratch. 
 
-In this tutorial, we'll look at the `my-custom-package` code file by file to see how we can easily extend Nova with minimal work. 
+In this tutorial, we'll look at the `customization-demo` code file by file to see how we can easily extend Nova with minimal work. 
 
 ## Intro
 
