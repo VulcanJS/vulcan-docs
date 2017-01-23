@@ -8,7 +8,7 @@ But it's important to understand that you can also use the underlying framework 
 
 So in this tutorial, we'll focus on understanding this framework and seeing how to build a simple paginated list of movies. 
 
-The completed code for this tutorial can be found in the [nova-framework-tutorial branch](https://github.com/TelescopeJS/Telescope/tree/nova-framework-tutorial/packages/my-package), and you can also check out the `nova:movies-demo` package in the regular branch for a more full-featured version of the same example. 
+The completed code for this tutorial can be found in the [nova-framework-tutorial branch](https://github.com/TelescopeJS/Telescope/tree/nova-framework-tutorial/packages/my-package), and you can also check out the `framework-demo` package in the regular branch for a more full-featured version of the same example. 
 
 ## Intro
 
@@ -52,9 +52,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'nova:core',
-    'nova:forms',
-    'std:accounts-ui',
+    'nova:core@1.0.0-nova',
+    'nova:forms@1.0.0-nova',
+    'std:accounts-ui@1.2.17',
   ]);
 
   api.mainModule('server.js', 'server');
@@ -749,7 +749,7 @@ export const MoviesListFragment = gql`
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragment: MoviesItem.fragment,
+  fragment: MoviesListFragment,
 };
 
 export default compose(
@@ -766,7 +766,7 @@ Now fill out the form and submit it. The query will be updated and the new movie
 
 ## Going Further
 
-This is probably a good place to stop, but you can go further simply by going through the code of the `nova:movies-demo` package. In it, you'll see how to:
+This is probably a good place to stop, but you can go further simply by going through the code of the `framework-demo` package. In it, you'll see how to:
 
 - Create a resolver for single documents so you can load more data for a specific movie.
 - Add edit and remove mutations and forms so you can manage your list.

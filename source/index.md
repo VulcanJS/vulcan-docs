@@ -10,6 +10,8 @@ You can get a good overview of what Nova can do in the [Features](features.html)
 
 ## Install
 
+Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
+
 Clone the [Nova repo](https://github.com/TelescopeJS/Telescope/) locally, then:
 
 ```

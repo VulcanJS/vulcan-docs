@@ -37,6 +37,7 @@ sidebar_categories:
     - tutorial-framework
     - tutorial-customizing
     - migration
+    - deployment
 github_repo: telescopejs/nova-docs
 content_root: source
 
