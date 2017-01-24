@@ -18,9 +18,11 @@ sidebar_categories:
   Overview:
     - features
     - architecture
+  Tutorials:
+    - tutorial-customizing
+    - tutorial-framework
   API:
     - theming
-    - custom-fields
     - schema
     - data-layer
     - forms
@@ -30,9 +32,12 @@ sidebar_categories:
     - routing
     - internationalization
     - settings
-  Tutorials:
-    - tutorial-framework
-    - tutorial-customizing
+  Resources:
+    - examples
+    - plugins
+    - themes
+    - tutorials
+    - videos
 github_repo: telescopejs/nova-docs
 content_root: source
 

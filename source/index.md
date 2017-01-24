@@ -32,6 +32,10 @@ Once you've done that, depending on which path you're interested in you can refe
 
 If you're not sure which one is for you, I recommend starting with the first tutorial, as the second one covers more advanced concepts.
 
+## Roadmap
+
+You can find the [Nova roadmap on Trello](https://trello.com/b/dwPR0LTz/nova-roadmap).
+
 ## Contribute
 
 We're looking for contributors! If you're interested in this project, come say hello in the [Nova Slack chatroom](http://slack.telescopeapp.org).

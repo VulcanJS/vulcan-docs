@@ -7,6 +7,8 @@ title: Components & Theming
 Nova components are all listed in `nova:core`'s `Components` object. You can add new ones with the 'registerComponent` method:
 
 ```js
+import { registerComponent } from 'meteor/nova:core';
+
 const Logo = props => {
   return (
     <div>/* component code */</div>
@@ -21,6 +23,22 @@ The first argument of `registerComponent` is the component's name, the second is
 registerComponent('Logo', Logo, withCurrentUser, withRouter);
 ```
 
+## Using Components
+
+Once a component is registered, you can use it with `Components.Foo`. For example:
+
+```js
+import { Components } from 'meteor/nova:core';
+
+const Header = props => {
+  return (
+    <div>
+      <Components.Logo />
+    </div>
+  )
+}
+```
+
 ## Components & HoCs
 
 To understand how theming works in Nova, it's important to understand how components and higher-order components (HoCs) interact. 
@@ -33,7 +51,7 @@ In practice, to create a higher-order component you call a **factory function** 
 const WrappedComponent = withCurrentUser(MyComponent);
 ```
 
-Which would result a *new* `WrappedCopmonent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedCopmonent`. 
+Which would result a *new* `WrappedComponent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedComponent`. 
 
 For that reason, Nova provides a `getRawComponent` utility that lets you access the unwrapped “raw” component, provided said component has been registered with `registerComponent`:
 
@@ -55,6 +73,8 @@ If you only need to modify a single component, you can simply override it with a
 For example, if you wanted to use your own `CustomLogo` component you would do:
 
 ```js
+import { replaceComponent } from 'meteor/nova:core';
+
 const CustomLogo = props => {
   return (
     <div>/* custom component code */</div>
@@ -70,7 +90,21 @@ registerComponent('Logo', Logo, withCurrentUser, withRouter);
 replaceComponent('Logo', CustomLogo);
 ```
 
-The `CustomLogo` component will also be wrapped with `withCurrentUser` and `withRouter`. 
+The `CustomLogo` component will also be wrapped with `withCurrentUser` and `withRouter`.
+
+Once you've replaced the `Logo` component with your own `CustomLogo`, `Components.Logo` will now point to `CustomLogo`. If you want an easy way to keep track of which components have been customized, you could add a `custom` attribute when calling the component as a reminder for yourself:
+
+```js
+import { Components } from 'meteor/nova:core';
+
+const CustomHeader = props => {
+  return (
+    <div>
+      <Components.Logo custom />
+    </div>
+  )
+}
+```
 
 ## Extending Components
 
