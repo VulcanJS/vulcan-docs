@@ -50,8 +50,8 @@ For example:
 postedAt: {
   type: Date,
   optional: true,
-  insertableIf: Users.isAdmin,
-  editableIf: Users.isAdmin,
+  insertableBy: Users.isAdmin,
+  editableBy: Users.isAdmin,
   publish: true,
   control: "datetime",
   group: {

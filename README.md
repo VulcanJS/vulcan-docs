@@ -1,10 +1,10 @@
-# docs
+# Nova Docs
 
 To run:
 
 ```
-git clone --recursive https://github.com/apollostack/react-docs.git
-cd react-docs
+git clone --recursive https://github.com/TelescopeJS/nova-docs.git
+cd nova-docs
 npm install
 npm start
 ```

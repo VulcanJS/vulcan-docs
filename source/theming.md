@@ -2,6 +2,15 @@
 title: Components & Theming
 ---
 
+## Using Components
+
+There are two ways to use components.
+
+- Outisde a compomnent, you can call `getComponent('Foo')`.
+- Inside a component, you can simply use `<Components.Foo/>`.
+
+The advantage of calling the `getComponent` function instead of using `Components.Foo` directly, is that you can ensure that the `Foo` component is only resolved when the function is called, which in turns makes it possible to override them anywhere in your code. 
+
 ## Registering Components
 
 Nova components are all listed in `nova:core`'s `Components` object. You can add new ones with the 'registerComponent` method:

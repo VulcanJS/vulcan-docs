@@ -33,11 +33,17 @@ sidebar_categories:
     - internationalization
     - settings
   Resources:
+    - learn
     - examples
     - plugins
     - themes
     - tutorials
     - videos
+  Tutorials:
+    - tutorial-framework
+    - tutorial-customizing
+    - migration
+    - deployment
 github_repo: telescopejs/nova-docs
 content_root: source
 

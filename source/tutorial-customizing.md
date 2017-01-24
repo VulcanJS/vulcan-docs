@@ -4,7 +4,7 @@ title: Customizing & Extending Nova
 
 Nova was made to be extensible from the ground up. This means that you can tweak and adapt many existing features to your needs without having to rewrite them from scratch. 
 
-In this tutorial, we'll look at the `my-custom-package` code file by file to see how we can easily extend Nova with minimal work. 
+In this tutorial, we'll look at the `customization-demo` code file by file to see how we can easily extend Nova with minimal work. 
 
 ## Intro
 
@@ -209,7 +209,7 @@ You can learn more about translating strings in the [Internationalization](inter
 
 ## Custom Fields
 
-Custom fields let you add extra properties to predefined collections like `Posts` or `Comments`. In the `custom_fields.js` file, we're adding a new `color` property to posts, and making it insertable, editable, and viewable by any member of the `default` user group (in other words, regular users):
+Custom fields let you add extra properties to predefined collections like `Posts` or `Comments`. In the `custom_fields.js` file, we're adding a new `color` property to posts, and making it insertable, editable, and viewable by any member of the `members` user group (in other words, regular users):
 
 ```js
 import Posts from "meteor/nova:posts";
@@ -221,9 +221,9 @@ Posts.addField(
       type: String,
       control: 'select', // use a select form control
       optional: true, // this field is not required
-      insertableIf: ['default'],
-      editableIf: ['default'],
-      viewableIf: ['default'],
+      insertableBy: ['members'],
+      editableBy: ['members'],
+      viewableBy: ['members'],
       form: {
         options: function () { // options for the select form control
           return [
@@ -310,7 +310,7 @@ You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 
 ## Groups
 
-Out of the box, Nova considers three kind of users: anonymous users (without an account), default users (everybody else), and admins. Let's add a fourth kind, mods, in `groups.js`:
+Out of the box, Nova considers three kind of users: guests (users without an account), members (users with a normal account), and admins. Let's add a fourth kind, mods, in `groups.js`:
 
 ```js
 import Users from 'meteor/nova:users';

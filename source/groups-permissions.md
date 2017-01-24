@@ -103,8 +103,8 @@ First, here's how you would define a private field's `viewableBy` property to re
 privateComments: {
   type: String,
   viewableBy: Users.owns,
-  insertableBy: ['default'],
-  editableBy: ['default']
+  insertableBy: ['members'],
+  editableBy: ['members']
 },
 ```
 
@@ -181,8 +181,8 @@ Documents can be Posts, Comments, or Users.
 
 Note that some groups are applied automatically without having to call `addToGroup`:
 
-- `anonymous`: any non-logged-in user is considered anonymous. This group is special in that anonymous users are by definition not part of any other group.
-- `default`: default group for all existing users. Is applied to every user in addition to any other groups. 
+- `guests`: any non-logged-in user is considered guest. This group is special in that guests users are by definition not part of any other group.
+- `members`: default group for all existing users. Is applied to every user in addition to any other groups. 
 - `admins`: any user with the `isAdmin` flag set to true.
 
 ## Assigning Actions
@@ -202,14 +202,14 @@ Users.groups.mods.can("invite"); // new custom action
 Here's a list of all out-of-the-box permissions:
 
 ```js
-// anonymous actions
+// guests actions
 posts.view.approved.own
 posts.view.approved.all
 comments.view.own
 comments.view.all
 categories.view.all
 
-// default actions
+// members actions
 posts.view.approved.own
 posts.view.approved.all
 posts.view.pending.own

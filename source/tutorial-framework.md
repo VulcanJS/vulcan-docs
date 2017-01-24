@@ -52,9 +52,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'nova:core@0.27.4-nova',
-    'nova:forms@0.27.4-nova',
-    'std:accounts-ui@1.2.9',
+    'nova:core@1.0.0-nova',
+    'nova:forms@1.0.0-nova',
+    'std:accounts-ui@1.2.17',
   ]);
 
   api.mainModule('server.js', 'server');
@@ -144,7 +144,7 @@ Then, create a new `routes.js` file inside `lib`:
 import { addRoute } from 'meteor/nova:core';
 import MoviesWrapper from './components/MoviesWrapper.jsx';
 
-addRoute = { name: 'movies', path: '/', component: MoviesWrapper };
+addRoute({ name: 'movies', path: '/', component: MoviesWrapper });
 ```
 
 Make sure to also import `routes.js` inside `modules.js`:
@@ -630,7 +630,7 @@ export default Movies;
 
 One last thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
-Once again, we do this through the schema. We'll add an `insertableIf` property to any “insertable” field and set it to `[default]` to indicate that a field should be insertable by any member of the `default` group (in other words, regular logged-in users):
+Once again, we do this through the schema. We'll add an `insertableBy` property to any “insertable” field and set it to `[default]` to indicate that a field should be insertable by any member of the `default` group (in other words, regular logged-in users):
 
 ```js
 const schema = {
@@ -641,7 +641,7 @@ const schema = {
   name: {
     label: 'Name',
     type: String,
-    insertableIf: ['default'],
+    insertableBy: ['members'],
   },
   createdAt: {
     type: Date,
@@ -653,12 +653,12 @@ const schema = {
     label: 'Year',
     type: String,
     optional: true,
-    insertableIf: ['default'],
+    insertableBy: ['members'],
   },
   review: {
     label: 'Review',
     type: String,
-    insertableIf: ['default'],
+    insertableBy: ['members'],
     control: 'textarea',
   },
   userId: {
@@ -749,7 +749,7 @@ export const MoviesListFragment = gql`
 const listOptions = {
   collection: Movies,
   queryName: 'moviesListQuery',
-  fragment: MoviesItem.fragment,
+  fragment: MoviesListFragment,
 };
 
 export default compose(
@@ -766,7 +766,7 @@ Now fill out the form and submit it. The query will be updated and the new movie
 
 ## Going Further
 
-This is probably a good place to stop, but you can go further simply by going through the code of the `nova:movies-demo` package. In it, you'll see how to:
+This is probably a good place to stop, but you can go further simply by going through the code of the `framework-demo` package. In it, you'll see how to:
 
 - Create a resolver for single documents so you can load more data for a specific movie.
 - Add edit and remove mutations and forms so you can manage your list.

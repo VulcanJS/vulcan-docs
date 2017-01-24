@@ -20,7 +20,7 @@ The client sends a query that includes the name of the mutation, the mutation ar
 
 The server then looks for a **mutation resolver** and executes it.
 
-## Nova Collections
+## Helper Functions
 
 Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `createCollection` function:
 
@@ -46,7 +46,7 @@ The function takes the following arguments:
 - `typeName`: the name of the GraphQL type that will be generated for the collection.
 - `schema`, `resolvers`, `mutations`: see below.
 
-### Schema
+<h2 id="schema">Schema</h2>
 
 The first piece of any GraphQL API is the **schema**, which defines what data is made available to the client. 
 
@@ -54,7 +54,7 @@ In Nova, this GraphQL schema can be generated automatically from your collection
 
 You can learn more on defining your schema in the [Schema](schema.html) section.
 
-#### Custom Schemas
+### Custom Schemas
 
 If you need to manually add a schema, you can also do so using the `GraphQLSchema.addSchema` function:
 
@@ -69,7 +69,7 @@ const customSchema = `
 GraphQLSchema.addSchema(customSchema);
 ```
 
-### Resolvers
+<h2 id="resolvers">Resolvers</h2>
 
 You can pass a `resolver` object to `createCollection`. It should include three `list`, `single`, and `total` resolvers.
 
@@ -78,7 +78,7 @@ Each resolver should have the following properties:
 - `name`: the resolver's name.
 - `resolver`: the resolver function.
 
-#### List Resolver
+### List Resolver
 
 The `list` resolver is used to display lists of documents. It takes the following arguments:
 
@@ -88,15 +88,15 @@ The `list` resolver is used to display lists of documents. It takes the followin
 
 It should return an array of documents.
 
-#### Single Resolver
+### Single Resolver
 
 The `single` resolver takes a `documentId` argument, and should return a single document.
 
-#### List Total Resolver
+### List Total Resolver
 
 The `total` resolver takes a `terms` argument and should return the total count of results matching these terms in the database. 
 
-#### Custom Resolvers
+### Custom Resolvers
 
 Just like for the schema, you can also define resolvers manually using `GraphQLSchema.addResolvers`:
 
@@ -113,7 +113,7 @@ GraphQLSchema.addResolvers(movieResolver);
 
 Resolvers can be defined on any new or existing type (e.g. `Movie`).
 
-### Mutations
+<h2 id="mutations">Mutations</h2>
 
 Finally, `createCollection` also accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
 
@@ -121,11 +121,11 @@ Finally, `createCollection` also accepts a `mutations` object. This object shoul
 - `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
 - `mutation`: the mutation function.
 
-#### New Mutation
+### New Mutation
 
 Takes a single `document` argument.
 
-#### Edit Mutation
+### Edit Mutation
 
 Takes three arguments:
 
@@ -133,11 +133,11 @@ Takes three arguments:
 - `set`: the fields to modify (as a list of field name/value pairs, e.g.`{title: 'My New Title', body: 'My new body'}`).
 - `unset`: the fields to remove (as a list of field names/booleans, e.g. `{title: true, body: true}`).
 
-#### Remove Mutation
+### Remove Mutation
 
 Takes a single `documentId` argument.
 
-#### Custom Mutations
+### Custom Mutations
 
 You can also add your own mutations using `GraphQLSchema.addMutation` and `GraphQLSchema.addResolvers`:
 
@@ -156,7 +156,7 @@ const voteResolver = {
 GraphQLSchema.addResolvers(voteResolver);
 ```
 
-#### Boilerplate Operations
+### Boilerplate Operations
 
 Note that even when using the `new`, `edit`, and `remove` mutations, defining the actual operation is up to you.
 
@@ -192,7 +192,7 @@ Callback hooks run with the following arguments:
 
 You can learn more about callbacks in the [Callbacks](callbacks.html) section. 
 
-## Higher-Order Components
+<h2 id="hocs">Higher-Order Components</h2>
 
 To make working with Apollo easier, Nova provides you with a set of higher-order components (HoC). 
 
@@ -264,7 +264,7 @@ Same options as `withNew`. The returned `removeMutation` mutation takes a single
 
 Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you. 
 
-## Fragments
+<h2 id="fragments">Fragments</h2>
 
 A fragment is a piece of schema, usually used to define what data you want to query for. 
 
@@ -303,111 +303,5 @@ const listOptions = {
 export default withList(listOptions)(MoviesList);
 ```
 
-## Terms & Parameters
+## Terms
 
-When you request data, you often want to do it according to specific criteria. For example, you might want to load all posts from a certain category, and order them by score. 
-
-Nova accomplishes this through MongoDB operators such as `find`, `sort`, etc. but because it would be dangerous to let the client specify its own operators, the client instead defines a `terms` object which gets converted into MongoDB-compatible objects using the `collection.getParameters` function. 
-
-For example, given the following `terms`:
-
-```js
-{
-  view: 'top',
-  cat: 'foo',
-  after: '2016-12-01',
-  before: '2016-12-31'
-}
-```
-
-Calling `Posts.getParameters(terms)` would give you the following object:
-
-```js
-{
-  selector: { 
-    status: 2,
-    isFuture: { '$ne': true },
-    postedAt: { 
-      '$gte': Thu Dec 01 2016 00:00:00 GMT+0900 (JST),
-      '$lt': Sat Dec 31 2016 23:59:59 GMT+0900 (JST)
-    },
-    categories: { '$in': ['RmpzcMurbFysAAvhf'] } 
-  },
-  options: { 
-    sort: { 
-      sticky: -1, score: -1, _id: -1 
-    }, 
-    limit: 10 
-  }
-}
-```
-
-As you can see, the resulting object is a mix of default properties (`status`, `isFuture`) and properties calculated from the `terms` object (`postedAt.$gte`, `postedAt.$lt`, `categories`, etc.). 
-
-Behind the scenes the `Posts.getParameters` function iterates through all the functions defined on the `posts.parameters` callback hook until it produces the final `{ selector, options}` object. 
-
-This means you can handle additional `terms` parameters simply by adding your own callback. For example, this is how you would use a `cat` parameter accepting a category slug to fetch the corresponding category when querying the `Posts` collection:
-
-```js
-import { addCallback } from 'meteor/nova:core';
-
-function addCategoryParameter (parameters, terms) {
-  if (terms.cat) {
-    const categoryId = Categories.findOne({slug: terms.cat})._id;
-    parameters.selector.category = {$in: categoryId};
-  }
-  return parameters;
-}
-addCallback('posts.parameters', addCategoryParameter);
-```
-
-Note that in the default `PostsHome` component, the `terms` object is automatically built from the current URL query parameters:
-
-```js
-const PostsHome = (props, context) => {
-  const terms = _.isEmpty(props.location && props.location.query) ? {view: 'top'}: props.location.query;
-  return <Components.PostsList terms={terms}/>
-};
-```
-
-### Posts Views
-
-One of the parameters accepted by the `Posts` collection is `view`, which functions as a shorthand for defining multiple parameters at the same time. For example, this is how the `pending` view is defined in order to only show pending posts, while ordering them by their `createdAt` property:
-
-```js
-Posts.views.add("pending", function (terms) {
-  return {
-    selector: {
-      status: Posts.config.STATUS_PENDING
-    },
-    options: {sort: {createdAt: -1}}
-  };
-});
-```
-
-Since a view is a function that takes the `terms` object as argument, you can make it dynamic. For example, here's how you would show all posts upvoted by a user:
-
-```js
-Posts.views.add("userUpvotedPosts", function (terms) {
-  return {
-    selector: {
-      upvoters: {$in: [terms.userId]},
-    },
-    options: {
-      sort: {
-        postedAt: -1
-      }
-    }
-  };
-});
-```
-
-Note that views currently only work with the `Posts` collection, but this might change in the future. 
-
-### On The Client
-
-Although the primary function of the `terms` object is to figure out the `selector` and `options` to use on the server to fetch data from the database, it's also used on the client to make sure data is kept in a logical state as it gets updated. 
-
-For example, let's imagine you're viewing posts filtered by a specific category. If you were to edit one of these posts to remove its category, we need to make sure the post is removed from the list since it doesn't match the inclusion criteria anymore. 
-
-Instead of refetching the whole list from the server, we can do this transparently using [Mingo](https://github.com/kofrasa/mingo) to resort the data on the client using the same `selector` and `options` objects. 

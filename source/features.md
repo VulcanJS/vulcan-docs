@@ -51,9 +51,9 @@ You can pass a fragment to control what data is loaded for each document.
 
 All of Nova's security and validation is based on your collection's schema. For each field of your schema, you can define the following functions:
 
-- `viewableIf`
-- `insertableIf`
-- `editableIf`
+- `viewableBy`
+- `insertableBy`
+- `editableBy`
 
 They all take the current user as argument (and optionally the document being affected) and check if the user can perform the given action. 
 

@@ -32,14 +32,14 @@ const PostsSchema = new SimpleSchema({
   postedAt: {
     type: Date,
     optional: true
-    // no insertableIf or editableIf means this field won't appear in forms
+    // no insertableBy or editableBy means this field won't appear in forms
   },
   title: {
     type: String,
     optional: false,
     max: 500,
-    insertableIf: isLoggedIn,
-    editableIf: isOwner,
+    insertableBy: isLoggedIn,
+    editableBy: isOwner,
     control: "text",
     order: 1
   },
@@ -47,8 +47,8 @@ const PostsSchema = new SimpleSchema({
     type: String,
     optional: true,
     max: 3000,
-    insertableIf: isLoggedIn,
-    editableIf: isOwner,
+    insertableBy: isLoggedIn,
+    editableBy: isOwner,
     control: BodyFormControl,
     order: 2
   },
@@ -56,8 +56,8 @@ const PostsSchema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
-    insertableIf: isAdmin,
-    editableIf: isAdmin,
+    insertableBy: isAdmin,
+    editableBy: isAdmin,
     control: "checkbox",
     order: 3
   },
