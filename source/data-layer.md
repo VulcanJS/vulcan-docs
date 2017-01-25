@@ -168,7 +168,7 @@ import { newMutation, editMutation, removeMutation } from 'meteor/nova:lib';
 
 They take the following arguments:
 
-- `collection`: the collectin affected.
+- `collection`: the collection affected.
 - `document` (new) or `documentId` (edit, remove): the document or document ID.
 - `set`, `unset` (edit only): the `set` and `unset` objects. 
 - `currentUser`: the user performing the operation.
