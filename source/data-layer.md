@@ -204,7 +204,7 @@ The `withList` HoC is used to display lists of documents. It takes the following
 
 - `queryName`: an arbitrary name for the query.
 - `collection`: the collection on which to look for the `list` resolver.
-- `fragment`: the fragment to use (see below).
+- `fragment` or `fragmentName`: the fragment to use. If you pass `fragmentName` instead of `fragment`, the name you passed will be used to look up a fragment registered with `registerFragment`. 
 
 For example:
 
@@ -246,10 +246,9 @@ This HoC then passes on the following child prop:
 
 ### withNew
 
-This HoC takes the following four options:
+This HoC takes the following two options:
 
 - `collection`: the collection to operate on.
-- `queryName`: the name of the query to update on the client.
 - `fragment`: specifies the data to ask for as a return value.
 
 And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
@@ -260,48 +259,46 @@ Same options as `withNew`. The returned `editMutation` mutation takes three argu
 
 ### withRemove
 
-Same options as `withNew`. The returned `removeMutation` mutation takes a single `documentId` argument. 
+A single `collection` option. The returned `removeMutation` mutation takes a single `documentId` argument. 
 
 Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you. 
 
-<h2 id="fragments">Fragments</h2>
+## Fragments
 
 A fragment is a piece of schema, usually used to define what data you want to query for. 
 
-A good practice is defining the fragment wherever the data will actually be used. Note that this doesn't have to be the component that directly receives this data. 
+### Registering Fragments
 
-For example, you could define a fragment in one component:
+You can use the `registerFragment` to register a fragment (under its fragment name, in this case `PostsList`) to be used at a later date.
 
 ```js
-class MoviesItem extends Component {
-  //...
-};
+import { registerFragment } from 'meteor/nova:lib';
+import gql from 'graphql-tag';
 
-MoviesItem.fragment = gql`
-  fragment moviesItemFragment on Movie {
+registerFragment(gql`
+  fragment PostsList on Post {
     _id
-    name
-    year
-    user {
-      __displayName
-    }
+    title
+    url
   }
-`;
-
-export default MoviesItem;
+`);
 ```
 
-And reuse it in another:
+You can also pass a second `name` argument to `registerFragment` if you'd like to specify the name under which the fragment will be registered explicitly. 
+
+### Using Fragments
+
+You can get a fragment with:
 
 ```js
-const listOptions = {
-  collection: Movies,
-  queryName: 'moviesListQuery',
-  fragment: MoviesItem.fragment,
-};
+import { getFragment } from 'meteor/nova:lib';
 
-export default withList(listOptions)(MoviesList);
+getFragment('PostsList');
 ```
+
+### Replacing Fragments
+
+To replace a fragment, you can just register it again under the same name. 
 
 ## Terms
 

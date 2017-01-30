@@ -30,7 +30,7 @@ The first argument of `registerComponent` is the component's name, the second is
 registerComponent('Logo', Logo, withCurrentUser, withRouter);
 ```
 
-## Components & HoCs
+### Components & HoCs
 
 To understand how theming works in Nova, it's important to understand how components and higher-order components (HoCs) interact. 
 
@@ -42,7 +42,7 @@ In practice, to create a higher-order component you call a **factory function** 
 const WrappedComponent = withCurrentUser(MyComponent);
 ```
 
-Which would result a *new* `WrappedCopmonent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedCopmonent`. 
+Which would result a *new* `WrappedComponent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedCopmonent`. 
 
 For that reason, Nova provides a `getRawComponent` utility that lets you access the unwrapped “raw” component, provided said component has been registered with `registerComponent`:
 
@@ -54,6 +54,22 @@ console.log(getRawComponent(WrappedComponent).foo); // "bar"
 ```
 
 Try to keep this in mind as you work with components.
+
+### "Delayed" HoCs
+
+In some cases, you don't want a HoC function to be executed immediately. For example if you write:
+
+```js
+registerComponent('PostsList', PostsList, withList(options));
+```
+
+The `withList(options)` will be executed immediately, and you will have no way of overriding the `options` object later on (a common use case being overriding a fragment).
+
+To delay the execution until the start of the app, you can use the following alternative syntax:
+
+```js
+registerComponent('PostsList', PostsList, [withList, options]);
+```
 
 ## Replacing Components
 
@@ -102,32 +118,23 @@ replaceComponent('Logo', CustomLogo);
 
 ## Overriding Fragments
 
-In some cases, you'll need to change the fragment used by a component. You can do this using the following pattern:
-
-1. Get the raw component without any HoCs.
-2. Wrap it with `withList` or `withDocument` using the new fragment.
-3. Re-register it using the same name. 
-
-For example:
+In some cases, you'll need to change the fragment used by a component. To do so, you can re-register a new fragment
 
 ```js
-import { Components, getRawComponent, registerComponent } from 'meteor/nova:lib';
-import { withList } from 'meteor/nova:core';
+import { registerFragment } from 'meteor/nova:lib';
 import gql from 'graphql-tag';
 
-const myNewFragment = gql`
-  fragment myNewFragment on Post {
-    ...
+const CustomPostsListFragment = gql`
+  fragment CustomPostsList on Post {
+    _id
+    title
+    url
+    color # new custom property!
   }
 `;
 
-const options = {
-  collection: Posts,
-  queryName: 'postsListQuery',
-  fragment: myNewFragment,
-};
-
-registerComponent('PostsList', getRawComponent('PostsList'), withList(options));
+registerFragment(CustomPostsListFragment, 'PostsList');
+registerFragment(CustomPostsListFragment, 'PostsPage');
 ```
 
-Note that because HoC factory functions (`withList`, `withDocument`, etc.) are called right away at runtime, you can't just replace a fragment by replacing the component it's defined on since that replacement would only take place after the fragment is used. 
+You can learn more about fragments in the [Data Layer](/data-layer.html#fragments) section. 

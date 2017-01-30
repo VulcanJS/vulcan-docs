@@ -70,3 +70,8 @@ Still in the same folder, to deploy your app with your settings file:
 ```
 mup deploy --settings settings.json
 ```
+
+## Troubleshooting
+
+- `meteor npm install --save bcrypt`.
+- Increase `deployCheckWaitTime`.
