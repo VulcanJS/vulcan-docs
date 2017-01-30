@@ -2,7 +2,7 @@
 title: Forms
 ---
 
-The `nova:forms` package provides a `NovaForm` component that lets you easily generate new document and edit document forms. 
+The `nova:forms` package provides a `SmartForm` component that lets you easily generate new document and edit document forms. 
 
 ## Features
 
@@ -67,7 +67,7 @@ const PostsSchema = new SimpleSchema({
 New document form:
 
 ```jsx
-<NovaForm 
+<SmartForm 
   collection={Posts}
 />
 ```
@@ -75,7 +75,7 @@ New document form:
 Edit document form:
 
 ```jsx
-<NovaForm 
+<SmartForm 
   collection={Posts}
   document={post}
 />
@@ -91,7 +91,7 @@ The collection in which to edit or insert a document.
 
 A fragment that defines what data you expect back from the mutation. 
 
-If no fragment is passed, NovaForms will only return fields used in the form, but that might lead to discrepancies when compared with documents already loaded on the client (an example would be a `createdAt` date added automatically on creation even though it's not part of the actual form).  
+If no fragment is passed, SmartForms will only return fields used in the form, but that might lead to discrepancies when compared with documents already loaded on the client (an example would be a `createdAt` date added automatically on creation even though it's not part of the actual form).  
 
 #### `schema`
 
@@ -127,7 +127,7 @@ A set of props to prefill for new documents.
 
 ## Context
 
-The main `NovaForm` components makes the following objects available as context to all its children:
+The main `SmartForm` components makes the following objects available as context to all its children:
 
 #### `autofilledValues`
 

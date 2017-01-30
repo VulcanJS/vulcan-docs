@@ -18,9 +18,11 @@ sidebar_categories:
   Overview:
     - features
     - architecture
+  Tutorials:
+    - tutorial-customizing
+    - tutorial-framework
   API:
     - theming
-    - custom-fields
     - schema
     - data-layer
     - forms
@@ -32,7 +34,11 @@ sidebar_categories:
     - settings
   Resources:
     - learn
+    - examples
     - plugins
+    - themes
+    - tutorials
+    - videos
   Tutorials:
     - tutorial-framework
     - tutorial-customizing

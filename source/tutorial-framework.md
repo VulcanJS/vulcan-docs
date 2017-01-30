@@ -8,7 +8,7 @@ But it's important to understand that you can also use the underlying framework 
 
 So in this tutorial, we'll focus on understanding this framework and seeing how to build a simple paginated list of movies. 
 
-The completed code for this tutorial can be found in the [nova-framework-tutorial branch](https://github.com/TelescopeJS/Telescope/tree/nova-framework-tutorial/packages/my-package), and you can also check out the `framework-demo` package in the regular branch for a more full-featured version of the same example. 
+The completed code for this tutorial can be found in the `framework-demo` package.
 
 ## Intro
 
