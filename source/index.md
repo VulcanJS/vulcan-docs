@@ -15,7 +15,6 @@ Install the latest version of Node and NPM. We recommend the usage of [NVM](http
 Clone the [Nova repo](https://github.com/TelescopeJS/Telescope/) locally, then:
 
 ```
-git checkout devel
 npm install
 meteor
 ```
