@@ -14,12 +14,20 @@ Install the latest version of Node and NPM. We recommend the usage of [NVM](http
 
 Clone the [Nova repo](https://github.com/TelescopeJS/Telescope/) locally, then:
 
-```
+```sh
 npm install
-meteor
+npm start
 ```
 
 And open `http://localhost:3000/` in your browser.
+
+Note that you can also start the app with:
+```sh
+# default setting file: sample_settings.json
+meteor --settings sample_settings.json 
+
+# 'npm start' will create a copy of the sample settings, 'settings.json', and run `meteor` with this file for you.
+```
 
 ## Getting Started
 
