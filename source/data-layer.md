@@ -22,7 +22,7 @@ The server then looks for a **mutation resolver** and executes it.
 
 ## Helper Functions
 
-Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `createCollection` function:
+Nova features a number of helpers to make setting up that data layer fast, most of which are initialized through the `createCollection` function:
 
 ```js
 const Movies = createCollection({
