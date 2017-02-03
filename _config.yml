@@ -18,9 +18,6 @@ sidebar_categories:
   Overview:
     - features
     - architecture
-  Tutorials:
-    - tutorial-customizing
-    - tutorial-framework
   API:
     - theming
     - schema
