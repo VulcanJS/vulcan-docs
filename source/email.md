@@ -21,7 +21,9 @@ Assets.getText("path/to/template/newReply.handlebars")
 You can add a template with:
 
 ```js
-Telescope.email.addTemplates({
+import NovaEmail from 'meteor/nova:email';
+
+NovaEmail.addTemplates({
   newReply: Assets.getText("path/to/template/newReply.handlebars")
 });
 ```
@@ -29,6 +31,8 @@ Telescope.email.addTemplates({
 Or override an existing one with:
 
 ```js
-Telescope.email.templates.newReply = Assets.getText("path/to/template/newReply.handlebars");
+import NovaEmail from 'meteor/nova:email';
+
+NovaEmail.templates.newReply = Assets.getText("path/to/template/newReply.handlebars");
 });
 ```

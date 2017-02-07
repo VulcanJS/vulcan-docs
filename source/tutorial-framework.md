@@ -25,7 +25,6 @@ It should now look like this:
 
 nova:core                       # core components and wrappers
 nova:forms                      # auto-generated forms
-nova:apollo                     # data layer
 nova:routing                    # routing and server-side rendering
 nova:email                      # email
 nova:users                      # user management and permissions
@@ -775,5 +774,3 @@ This is probably a good place to stop, but you can go further simply by going th
 - Define GraphQL “joins” in your schema to decorate objects with more data.
 
 And this is just the start. You can do a lot more with Nova, Apollo, and React, as you'll soon see!
-
-

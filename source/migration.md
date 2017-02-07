@@ -35,9 +35,8 @@ This will probably result in at least a few Git conflicts between the old and ne
 
 For any other file (except those belonging to your own custom packages) you should just use the new version. 
 
-Make sure your `packages` file now contains the following new packages:
+Make sure your `packages` file now contains the following new package:
 
-- `nova:apollo`
 - `nova:routing`
 
 Once you've fixed all Git conflicts, it's time to install any additional NPM packages with `npm install`. You can now try running your app with the usual `meteor` command. If you haven't customized anything, then everything should work more or less fine, and you can stop here!

@@ -96,7 +96,7 @@ The `collection.addField()` function takes either a field object, or an array of
 
 Each field schema supports all of the [SimpleSchema properties](https://github.com/aldeed/meteor-simple-schema#schema-rules), such as `type`, `optional`, etc.
 
-A few special properties (`insertableIf`, `editableIf`, `control`, and `order`) are also supported by the [Forms](forms.html) package.
+A few special properties (`viewableBy`, `insertableBy`, `editableBy`, `control`, and `order`) are also supported by the [Forms](forms.html) package.
 
 You can also remove a field by calling `collection.removeField(fieldName)`. For example:
 
