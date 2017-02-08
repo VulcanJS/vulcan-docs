@@ -78,6 +78,8 @@ A React component that will be inserted just after the form component itself.
 
 #### `hidden`
 
+Can either be a boolean or a function accepting form props as argument and returning a boolean.
+
 Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:
 
 ```js
