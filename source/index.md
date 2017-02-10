@@ -12,6 +12,8 @@ You can get a good overview of what Nova can do in the [Features](features.html)
 
 Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
 
+You can then install [Meteor](https://www.meteor.com/install), which is used as the Nova build tool.
+
 Clone the [Nova repo](https://github.com/TelescopeJS/Telescope/) locally, then:
 
 ```sh
