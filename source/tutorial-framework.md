@@ -922,5 +922,3 @@ This is probably a good place to stop, but you can go further simply by going th
 - Define GraphQL “joins” in your schema to decorate objects with more data.
 
 And this is just the start. You can do a lot more with Nova, Apollo, and React, as you'll soon see!
-
-

@@ -22,7 +22,7 @@ The server then looks for a **mutation resolver** and executes it.
 
 ## Helper Functions
 
-Nova features a number of helpers to make settings up that data layer fast, most of which are initialized through the `createCollection` function:
+Nova features a number of helpers to make setting up that data layer fast, most of which are initialized through the `createCollection` function:
 
 ```js
 const Movies = createCollection({
@@ -220,7 +220,7 @@ export default withList(listOptions)(MoviesList);
 
 The resulting wrapped component also takes in the following options:
 
-- `terms`: an object containing a list of quering, sorting, and filtering terms.
+- `terms`: an object containing a list of querying, sorting, and filtering terms.
 
 Note that `terms` needs to be passed not as an option, but as a prop from the *parent* component.
 

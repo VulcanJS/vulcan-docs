@@ -42,7 +42,6 @@ These are the core packages that make the [Nova framework](tutorial-framework.ht
 - `nova:lib`
 - `nova:core`
 - `nova:forms`
-- `nova:apollo`
 - `nova:routing`
 - `nova:email`
 - `nova:users` 
