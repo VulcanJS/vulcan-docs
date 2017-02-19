@@ -2,13 +2,15 @@
 title: Deployment Guide
 ---
 
-The recommended way to deploy Nova is by using [Mup](https://github.com/kadirahq/meteor-up/), at least v1.0.3.
+## Meteor Up
 
-## Configuration
+This is the recommended way to deploy Nova is by using [Mup](https://github.com/kadirahq/meteor-up/), at least v1.0.3.
+
+### Configuration
 
 You should have a Linux server online, for instance [a Digital Ocean droplet running with Ubuntu](https://www.digitalocean.com).
 
-Install globally the latest `kadirahq/meteor-up`.
+On your local development machine, install globally the latest `kadirahq/meteor-up`.
 
 ```
 npm install -g mup
@@ -56,14 +58,14 @@ meteor: {
 
 You can take inspiration (or copy/paste) on this [`mup.js` example](https://gist.github.com/xavcz/6ddc2bb6f67fe0936c8328ab3314641d).
 
-## Setup your server
+### Setup your server
 
 From this folder, you can now setup Docker & Mongo your server with:
 ```
 mup setup
 ```
 
-## Deploy your app to your server
+### Deploy your app to your server
 
 Still in the same folder, to deploy your app with your settings file:
 
@@ -71,7 +73,142 @@ Still in the same folder, to deploy your app with your settings file:
 mup deploy --settings settings.json
 ```
 
-## Troubleshooting
+### Troubleshooting
 
 - `meteor npm install --save bcrypt`.
 - Increase `deployCheckWaitTime`.
+
+## PM2
+
+Contributed by [adalidda](https://github.com/TelescopeJS/Telescope/issues/1552#issuecomment-276948862).
+
+Deploy Nova GraphQL/Apollo version with PM2
+
+### Server Setup
+
+On Ubuntu 14 or better.
+
+#### Install nvm
+Run the following command
+
+```
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
+bash install_nvm.sh
+source ~/.profile
+nvm install 4.7.3
+nvm alias default 4.7.3
+```
+
+Check that node 4.7.3 is your default node version, with the command `nvm ls`.
+
+#### Install PM2
+
+```
+sudo npm i -g pm2
+```
+
+Check that your PM2 is working with the following commands:
+
+- `pm2 list` => list the process under PM2
+- `pm2 -v` => list PM2 version
+
+#### Install nginx for the management of your host server
+
+```
+sudo apt-get install nginx
+```
+
+Note: I suggest to use the docker version of nginx
+
+### Development Setup
+
+#### Install pm2-meteor on your Development computer
+
+```
+npm i pm2-meteor -g
+```
+
+#### Create a deployment folder with mkdir deploy
+
+```
+Cd deploy
+```
+
+Type the following command to init the default deployment file: `pm2-meteor init`.
+
+pm2-meteor will then create a file `pm2-meteor.json`.
+
+Edit your `pm2-meteor.json` with your own parameters.
+
+Below is my pm2-meteor.json given as reference.
+
+You note that I use the `nvm` command in my `pm2-meteor.json`, because without using the nvm command, pm2 will use Node version on your server that may be not compatible with the one required by Nova GraphQL/Apollo (which is node version 4.7.0 or 4.7.3) and in this case pm2 will generate high use of your CPU around 100% !
+
+```
+{
+  "appName": "myappname",
+  "appLocation": {
+    "local": "~/myappfolder",
+    "branch": "myappbranch"
+  },
+  "meteorSettingsLocation": "~/myappfolder/mysettings.json",
+  "meteorSettingsInRepo": false,
+  "prebuildScript": "meteor add mycustompackage",
+  "meteorBuildFlags": "--architecture os.linux.x86_64",
+  "env": {
+    "ROOT_URL": "https://myurl",
+    "PORT": myport,
+    "MONGO_URL": "mongodb://username:password@ip1:port1,ip2:port2/dbname?authSource=admin&replicaSet=replicasetname",
+    "MONGO_OPLOG_URL": "mongodb://user:password@ip1:port1,ip2:port2/local?authSource=admin&replicaSet=replicasetname"
+  },
+  "server": {
+    "host": "myserverip",
+    "username": "username",
+    "password": "mypassword",
+    "deploymentDir": "/opt/pm2-meteor",
+    "loadProfile": "",
+    "nvm": {
+      "bin": "~/.nvm/nvm.sh",
+      "use": "4.7.2"
+    },
+    "exec_mode": "cluster_mode",
+    "instances": 2
+  }
+}
+```
+
+#### Deploy your app to the host server
+
+Type the following command
+
+```
+cd deploy
+pm2-meteor deploy
+```
+
+### Useful Commands
+
+Type the following command to check the status of your app on the server
+`pm2 list`
+
+To Stop your App, type
+`pm2 stop myappname`
+
+To restart your App, type
+`pm2 restart myappname`
+
+To delete your App, type
+`pm2 delete myappname`
+
+### References
+
+- [How to deploy Meteor Apps with pm2-meteor](http://pm2-meteor.betawerk.co/)
+- [pm2 2.3.1-next](https://libraries.io/npm/pm2)
+- [How To Install Node.js on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04)
+
+## Other Solutions
+
+- [Galaxy](http://galaxy.meteor.com)
+- [Scalingo](https://scalingo.com/)
