@@ -150,25 +150,56 @@ class CustomLogo extends getRawComponent('Logo'){
 replaceComponent('Logo', CustomLogo);
 ```
 
-## Overriding Fragments
+## Core Components
 
-In some cases, you'll need to change the fragment used by a component. To do so, you can re-register a new fragment
+In addition to components that are part of a specific theme package (such as `nova:base-components`), a few components are provided with `nova:core`.
+
+### App
+
+The `App` component takes care of loading data for the current active user and setting up internationalization. Most of the time, you shouldn't need to worry about it. 
+
+### Error404
+
+This is a default “page not found” error component. This ensures Nova has something to show even when you remove all themes and routes. 
+
+### Icon
+
+The icon component is a simple wrapper to display [Font Awesome](http://fontawesome.io/) icons. If you'd like to use a different icon set, you can just replace it using the usual `replaceComponent` technique. 
+
+### Layout
+
+This is a default layout. It'll usually be replaced with each theme's own custom layout.
+
+### Loading
+
+A simple loading spinner component you can use to show loading states. Its corresponding styles currently live in the `nova:base-styles` package. 
+
+### ModalTrigger
+
+A component used to display another component inside a [react-bootstrap](https://react-bootstrap.github.io/) modal popup:
 
 ```js
-import { registerFragment } from 'meteor/nova:lib';
-import gql from 'graphql-tag';
-
-const CustomPostsListFragment = gql`
-  fragment CustomPostsList on Post {
-    _id
-    title
-    url
-    color # new custom property!
-  }
-`;
-
-registerFragment(CustomPostsListFragment, 'PostsList');
-registerFragment(CustomPostsListFragment, 'PostsPage');
+<Components.ModalTrigger size={size} title={context.intl.formatMessage({id: "posts.new_post"})} component={button}>
+  <Components.PostsNewForm />
+</Components.ModalTrigger>
 ```
 
-You can learn more about fragments in the [Data Layer](/data-layer.html#fragments) section. 
+It takes the following props:
+
+- `size`: `large` or `small`, how wide the modal popup should be.
+- `title`: the modal's title.
+- `component`: the component used to trigger the modal when clicked.
+
+### ShowIf
+
+A component that takes a `check` function and an optional `document`, and performs the check on the document for the current user. If the check succeeds, the children are displayed. If not, `failureComponent` is displayed instead. 
+
+```js
+<Components.ShowIf check={Comments.options.mutations.edit.check} document={this.props.comment}>
+  <div>
+    <a className="comment-edit" onClick={this.showEdit}><FormattedMessage id="comments.edit"/></a>
+  </div>
+</Components.ShowIf>
+```
+
+Note that due to the way React works, children component code is executed even if the check fails (the component just won't be displayed).

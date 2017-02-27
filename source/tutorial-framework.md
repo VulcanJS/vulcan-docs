@@ -10,7 +10,7 @@ So in this tutorial, we'll focus on understanding this framework and seeing how 
 
 The completed code for this tutorial can be found in the `framework-demo` package.
 
-## Intro
+## What We're Building
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RzoYVqsD9WI" frameborder="0" allowfullscreen></iframe>
 
@@ -18,15 +18,14 @@ The completed code for this tutorial can be found in the `framework-demo` packag
 
 First, we'll make sure we're only including the Nova features we actually need. We can do that by removing any non-core packages in the `.meteor/packages` file (don't worry, this will only make sure these packages are not loaded, and won't actually remove them from your codebase). 
 
-It should now look like this:
+Delete the contents of your `packages` file, and replace them with this:
 
 ```
-############ Nova Core ############
+############ Core Packages ############
 
 nova:core                       # core components and wrappers
 nova:forms                      # auto-generated forms
 nova:routing                    # routing and server-side rendering
-nova:email                      # email
 nova:users                      # user management and permissions
 
 nova:base-styles        # default styling
@@ -35,13 +34,22 @@ nova:i18n-en-us         # default language translation
 accounts-password@1.3.3
 ```
 
-We'll keep `base-styles` to provide some basic Bootstrap styles for forms and menus, as well as `i18n-en-us` since it contains strings for core UI features. 
+Here's a quick overview of the main packages:
 
-We'll also include the official `accounts-password` package to activate password log in.
+- `nova:core`: Nova's core libraries. 
+- `nova:forms`: the library used for generating and submitting forms. 
+- `nova:routing`: sets up and initializes routing and server-side rendering.
+- `nova:users`: user management (groups, permissions, etc.).
+
+We'll also keep `base-styles` to provide some basic Bootstrap styles for forms and menus, as well as `i18n-en-us` since it contains strings for core UI features. 
+
+We'll also include Meteor's `accounts-password` package to activate password log in.
 
 ## Creating a Package
 
-The next step will be creating a Meteor package to hold our code. Create a new `my-package` directory under `/packages`. We'll use the following file structure:
+The next step will be creating a Meteor package to hold our code. This will be a *local* package, meaning it will live inside your repo, but we'll still have all the advantages of regular, remote packages (easy to enable/disable, restricted scope, ability to specify dependencies, etc.).
+
+Create a new `my-package` directory under `/packages`. We'll use the following file structure:
 
 ```
 my-package
@@ -57,12 +65,12 @@ my-package
   - package.js
 ```
 
-- `package.js` is your package manifest, and it tells Meteor which files to load.
+- `package.js` is your [package manifest](http://docs.meteor.com/api/packagejs.html), and it tells Meteor which files to load.
 - `client/main.js` and `server/main.js` are the client and server entry points.
 - `modules/index.js` lists all the various modules that make up our package. 
 - `style.css` contains all our styles.
 
-Set up all six directories along with five blank files. Once this is done, let's start with the `package.js` file:
+Set up all six directories along with the five blank files. Once this is done, let's start with the `package.js` file:
 
 ```js
 Package.describe({
@@ -133,7 +141,7 @@ meteor add my-package
 
 It may seem like not much happened, but once Meteor restart our custom package will now be active and loaded. 
 
-## Routing
+## Our First Component
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
@@ -159,7 +167,9 @@ const MoviesWrapper = () =>
 registerComponent('MoviesWrapper', MoviesWrapper);
 ```
 
-Since we're using the `registerComponent` function to make it available globally (you can learn more about this in the [Components & Theming](/theming.html) section) we don't actually need to `export` the component, but we do need to import the file. Let's create a new `component.js` file inside `modules`:
+We're using Nova's `registerComponent` function to make the component available globally. You can learn more about this in the [Components & Theming](/theming.html) section, but in a nutshell registering components this way is what makes it possible for other themes or plugins to modify or extend them. 
+
+This means we don't actually need to `export` the component, but we do need to import the actual file. Let's create a new `component.js` file inside `modules`:
 
 ```js
 import '../components/MoviesWrapper.jsx';
@@ -171,13 +181,17 @@ And import it from `index.js`:
 import './components.js';
 ```
 
-Then, create a new `routes.js` file inside `modules`:
+## Routing
+
+Let's create a [route](/routing.html) to display this component. Create a new `routes.js` file inside `modules`:
 
 ```js
 import { addRoute, getComponent } from 'meteor/nova:core';
 
 addRoute({ name: 'movies', path: 'movies', componentName: 'MoviesWrapper' });
 ```
+
+In case you're wondering, `addRoute` is a very thin wrapper over [React Router](https://github.com/ReactTraining/react-router). And since we've already registered our `MoviesWrapper` component using `registerComponent`, we can pass a string as the `componentName` property and let `addRouter` fetch the actual component object.
 
 Note: we're putting our new route at `/movies` to avoid any conflicts in case the index route is already defined. But if you'd rather have your new page at `/`, just write `path: '/'` instead. 
 
@@ -192,7 +206,9 @@ If everything worked properly, you should now be able to head to `http://localho
 
 ## The Schema
 
-We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. Check out the [Schema](/data-layer.html#schema) section if you want to learn more. 
+We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. 
+
+Nova uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Schema](/data-layer.html#schema) section if you want to learn more. 
 
 Create `schema.js` inside `modules`:
 
@@ -237,11 +253,11 @@ const schema = {
 export default schema;
 ```
 
-Note that the `_id` and `_userId` fields will be set automatically, so we set them to `optional: true` so that new documents are able to be submitted without them.
+Note that the `_id` and `_userId` fields will be set automatically on the server, so we set them to `optional: true` so that new documents are able to be submitted without them.
 
 We're also setting up an `autoValue` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
 
-Finally, we're setting `viewableBy: ['guests']` on every field to make sure they're visible to non-logged-in users. By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
+Finally, we're setting `viewableBy: ['guests']` on every field to make sure they're visible to non-logged-in users (who belong to the default `guests` group). By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
 
 ## Setting Up a Collection
 
@@ -264,7 +280,9 @@ const Movies = createCollection({
 export default Movies;
 ```
 
-And, as we did previously, reference it from `index.js`:
+`createCollection` takes in a collection name, type name (in other words, the GraphQL type of documents belonging to this collection), a schema (as well as a few other objecs we'll learn about later) and sets up a fully working GraphQL data layer for you!
+
+As we did previously, reference `collection.js` from `index.js`:
 
 ```js
 import MoviesImport from './collection.js';
@@ -288,9 +306,7 @@ GraphQLSchema.finalSchema
 
 Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Resolvers](/data-layer.html#resolvers) section. 
 
-In this case we want to create two resolvers: one to take in a `terms` object (which will specify the query terms used to select, filter, and sort the results) and return a list of documents, and one that returns the total number of documents matching these query terms. 
-
-Create a new `resolvers.js` file inside `modules` and add:
+Let's start simple. Create a new `resolvers.js` file inside `modules` and add:
 
 ```js
 const resolvers = {
@@ -299,31 +315,18 @@ const resolvers = {
 
     name: 'moviesList',
 
-    resolver(root, {terms = {}}, context, info) {
-      let {selector, options} = context.Movies.getParameters(terms);
-      options.limit = (terms.limit < 1 || terms.limit > 100) ? 100 : terms.limit;
-      options.fields = context.getViewableFields(context.currentUser, context.Movies);
-      return context.Movies.find(selector, options).fetch();
+    resolver(root, args, context) {
+      return context.Movies.find().fetch();
     },
 
   },
 
-  total: {
-    
-    name: 'moviesTotal',
-    
-    resolver(root, {terms = {}}, context) {
-      let {selector, options} = context.Movies.getParameters(terms);
-      return context.Movies.find(selector, options).count();
-    },
-  
-  }
 };
 
 export default resolvers;
 ```
 
-And then import this new file from `collection.js`:
+Then import this new file from `collection.js`:
 
 ```js
 import { createCollection } from 'meteor/nova:core';
@@ -457,11 +460,56 @@ query moviesQuery{
 
 As you can see, the great thing about GraphQL is that you can specify exactly which piece of data you need!
 
+## More Advanced Resolvers
+
+Although our resolver works, it's fairly limited. As it stands, we can't filter, sort, or paginate our data. Even though we might not need these features right away, now is a good time to set things up in a more future-proof way.
+
+Our resolver will accept a [terms](/data-layer.html#Terms-amp-Parameters) object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the `Movies.getParameters()` function. Additionally, we'll add a second resolver that takes in the same `terms`, but returns the *number* of documents matching these terms:
+
+```js
+const resolvers = {
+
+  list: {
+
+    name: 'moviesList',
+
+    resolver(root, {terms = {}}, context) {
+      let {selector, options} = context.Movies.getParameters(terms);
+      options.limit = (terms.limit < 1 || terms.limit > 100) ? 100 : terms.limit;
+      options.fields = context.getViewableFields(context.currentUser, context.Movies);
+      return context.Movies.find(selector, options).fetch();
+    },
+
+  },
+
+  total: {
+    
+    name: 'moviesTotal',
+    
+    resolver(root, {terms = {}}, context) {
+      let {selector, options} = context.Movies.getParameters(terms);
+      return context.Movies.find(selector, options).count();
+    },
+  
+  }
+};
+
+export default resolvers;
+```
+
+Our resolvers take three arguments:
+
+- `root`: a link back to the root of the current GraphQL node. You can safely ignore this for now. 
+- `args`: an object containing the query arguments passed from the client.
+- `context`: an object enabling access to our collections, as well as utilities such as `getViewableFields` (which is used to get a list of all fields viewable for the current user for a given collection). 
+
+Once we've figured out the correct `selector` and `options` object from the `terms` and the current user, all that's left is to make the actual database query using `Movies.find()`. 
+
 ## Displaying Data
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
 
-We'll need two pieces for this: a **container** component that loads the data, and a **presentational** component that displays it. Fortunately, Nova comes with a set of built-in container components which we can use out of the box, so we can focus on the presentational components.
+We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Nova comes with [a set of built-in higher-order container components](/data-layer.html#hocs) which we can use out of the box, so we can focus on the presentational components.
 
 Create a new `MoviesItem` component inside `components`:
 
@@ -483,10 +531,10 @@ class MoviesItem extends Component {
 
 }
 
-registerComponent('MoviesItem', MoviesItem, withCurrentUser);
+registerComponent('MoviesItem', MoviesItem);
 ```
 
-We'll also create a new `MoviesList` component, which will use a GraphQL fragment to specify what data we want to load:
+We'll also create a new `MoviesList` component, which will use a [GraphQL fragment](/data-layer.html#Fragments) (which we'll define in the next section) to specify what data we want to load:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -522,7 +570,11 @@ const options = {
 registerComponent('MoviesList', MoviesList, withList(options), withCurrentUser);
 ```
 
-By now you know the drill. At these two new components to `components.js`:
+The `registerComponent` utility has a nitfy trick: any additional arguments you pass it after the component name and component will be treated as [higher-order components](https://facebook.github.io/react/docs/higher-order-components.html) and wrapped around the component.
+
+Here, we want to provide `MoviesList` with the `results` document list and the `currentUser` property, so we wrap it with `withList` and `withCurrentUser`.
+
+By now you know the drill. Add these two new components to `components.js`:
 
 ```js
 import '../components/MoviesWrapper.jsx';
@@ -646,17 +698,13 @@ Yay! You can now log in and sign up at your own leisure. And you can also refer 
 
 Now that we're logged in, we can start interacting with our data. Let's build a simple form for adding new movies.
 
-Before we can build the user facing part of this feature though, we need to think about how the insertion will be handled server-side, using [Mutations](/data-layer.html#mutations).
+Before we can build the user-facing part of this feature though, we need to think about how the insertion will be handled server-side, using [Mutations](/data-layer.html#mutations).
 
 Create a new `mutations.js` file in `modules`:
 
 ```js
 import { newMutation, Utils } from 'meteor/nova:core';
 import Users from 'meteor/nova:users';
-
-const performCheck = (mutation, user, document) => {
-  if (!mutation.check(user, document)) throw new Error(Utils.encodeIntlError({id: `app.mutation_not_allowed`, value: `"${mutation.name}" on _id "${document._id}"`}));
-}
 
 const mutations = {
 
@@ -671,7 +719,7 @@ const mutations = {
     
     mutation(root, {document}, context) {
       
-      performCheck(this, context.currentUser, document);
+      if (!this.check(context.currentUser, document)) throw new Error('Mutation not allowed!');
 
       return newMutation({
         collection: context.Movies,
@@ -689,7 +737,7 @@ const mutations = {
 export default mutations;
 ```
 
-This mutation performs a simple check for the presence of a logged-in user, and then passes on the `document` property to one of Nova's boilerplate mutations, `newMutation`. 
+This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the `document` property to one of Nova's boilerplate mutations, `newMutation`. 
 
 Let's pass it on to our `createCollection` function in `collection.js`:
 
@@ -716,16 +764,14 @@ const Movies = createCollection({
 export default Movies;
 ```
 
-Note that the mutation's `check` function checks if the user can perform an action named `movies.new`. Let's take care of this by creating a new `permissions.js` file:
+## Actions, Groups, & Permissions
+
+The mutation's `check` function checks if the user can perform an action named `movies.new`. We want all logged-in users (known as the `members` group) to be able to perform this action, so let's take care of this by creating a new `permissions.js` file:
 
 ```js
 import Users from 'meteor/nova:users';
 
-const membersActions = [
-  'movies.new',
-];
-
-Users.groups.members.can(membersActions);
+Users.groups.members.can(['movies.new']);
 ```
 
 And adding it to `index.js` as usual:
@@ -742,7 +788,7 @@ import './permissions.js';
 Movies = MoviesImport;
 ```
 
-You can learn more about all this in the [Groups & Permissions](/groups-permissions.html) section.
+Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Nova, which you can learn more about in the [Groups & Permissions](/groups-permissions.html) section.
 
 One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
@@ -796,13 +842,15 @@ const schema = {
 export default schema;
 ```
 
-While we're at it we'll also specify which fields can be edited via `editableBy`. 
+While we're at it we'll also specify which fields can be edited via `editableBy`. In this case, the three fields we want members to be able to write to are `name`, `year`, and `review`. Finally, we'll also give the `review` field a `textarea` form control. 
 
-In this case, the three fields we want users to be able to write to are `name`, `year`, and `review`. Finally, we'll also give the `review` field a `textarea` form control. 
+At this point it's worth pointing out that for mutations like inserting and editing a document, we have to distinct permission "checkpoints": first, the mutation's `check` function checks if the user can perform the mutation at all. Then, each of the mutated document's fields is checked individually to see if the user should be able to mutate it.
+
+This makes it easy to set up collections with admin-only fields, for example. 
 
 ## Forms
 
-We now have everything we need to create a new `MoviesNewForm.jsx` component:
+We now have everything we need to create a new `MoviesNewForm.jsx` component using the [SmartForm](/forms.html) utility:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -871,9 +919,9 @@ const options = {
 registerComponent('MoviesList', MoviesList, withList(options), withCurrentUser);
 ```
 
-We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the mutation's `check` function to figure this out.
+We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `new` mutation's `check` function to figure this out.
 
-We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component and use the `compose` utility to keep the syntax clean. 
+We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
 Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! 
 
@@ -881,7 +929,7 @@ Now fill out the form and submit it. The query will be updated and the new movie
 
 As it stands, our movie list isn't really sorted. What if we wanted to sort it by movie year?
 
-To do so, create a `parameters.js` file (learn more about parameters [here](/data-layer.html#Terms-Parameters)):
+To do so, create a `parameters.js` file (learn more about parameters [here](/data-layer.html#Terms-amp-Parameters)):
 
 ```js
 import { addCallback } from 'meteor/nova:core';
@@ -913,10 +961,10 @@ Movies = MoviesImport;
 
 ## Going Further
 
-This is probably a good place to stop, but you can go further simply by going through the code of the `framework-demo` package. In it, you'll see how to:
+This is probably a good place to stop, but you can go further simply by going through the full code of the `framework-demo` package. In it, you'll see how to:
 
 - Create a resolver for single documents so you can load more data for a specific movie.
-- Add edit and remove mutations (and forms) so you can manage your list.
+- Add edit and remove mutations (along with their forms) so you can manage your list.
 - Use React helpers for quickly creating modal pop-ups. 
 - Use permission checks to enforce fine-grained security throughout your app.
 - Define GraphQL “joins” in your schema to decorate objects with more data.

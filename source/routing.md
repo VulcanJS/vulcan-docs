@@ -5,19 +5,31 @@ title: Routing
 Here's how you can add child routes to your app (using React Router):
 
 ```js
+import Foo from './foo.jsx';
+
 addRoute({
-  name: "foo",
-  path: "/foo",
+  name: 'foo',
+  path: '/foo',
   component: Foo
 });
 ```
 
-To change the index (`/`) route, you can just do:
+If on the other hand you've previously registered a component with `registerComponent`, you can simply specify the `componentName` property instead:
 
 ```js
 addRoute({
-  name: "foo",
-  path: "/",
+  name: 'foo',
+  path: '/',
+  componentName: 'Foo'
+});
+```
+
+Finally, to change the index (`/`) route, you can just do:
+
+```js
+addRoute({
+  name: 'foo',
+  path: '/',
   component: Foo
 });
 ```
