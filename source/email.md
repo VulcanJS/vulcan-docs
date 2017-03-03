@@ -2,7 +2,7 @@
 title: Email
 ---
 
-<h2 id="customizing-emails">Customizing Emails</h2>
+###Customizing Emails###
 
 Unlike components, emails don't use React but Spacebars, a variant of the Handlebars templating language.
 
@@ -36,3 +36,21 @@ import NovaEmail from 'meteor/nova:email';
 NovaEmail.templates.newReply = Assets.getText("path/to/template/newReply.handlebars");
 });
 ```
+
+### Email Stying
+Some styling of emails can be controlled in `settings.json`:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| secondaryColor | '#444444' | Background of email header
+| accentColor | '#DD3416' | Header and footer text
+| siteName | "Nova" | Use setting key 'title'
+| tagline |  |
+| footer | | Footer text
+| logoUrl | |
+| logoHeight | |
+| logoWidth | | 
+
+### Newsletter
+
+In your local development environment, you can preview your newsletter at `http://localhost:3000/email/newsletter`
