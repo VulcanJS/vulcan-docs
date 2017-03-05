@@ -395,7 +395,7 @@ This two-tiered strategy ensures both that the user doesn't need to spell out ev
 
 Every Nova collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. For example, this is how the `framework-demo` implements a sort by `createdAt` on the `Movies` collection:
 
-```
+```js
 import { addCallback } from 'meteor/nova:core';
 
 function sortByCreatedAt (parameters, terms) {
@@ -409,3 +409,36 @@ addCallback('movies.parameters', sortByCreatedAt);
 ```
 
 Note that each iteration of the callback takes in the `parameters` and the original `terms` object received from the client, and should return a new augmented `parameters` object.
+
+### Using Views
+
+You've seen above how to manually create a `sortByCreatedAt` callback, but Nova also provides a built-in `view` shortcut you can use to achieve the same thing more easily (available on all collections created via `createCollection`). By defining a named view, you can then reference all the view's properties at once by specifying the `view: myViewName` option in your `terms`.
+
+For example, this is how the `best` view is defined:
+
+```js
+import { Posts } from 'meteor/nova:posts';
+
+Posts.addView('best', terms => ({
+  options: {
+    sort: {sticky: -1, baseScore: -1}
+  }
+}));
+```
+
+Instead of creating a dedicated `sortByStickyAndBaseScore` callback, you can simply specify `view: 'best'` in your `terms`.
+
+If you'd like to specify some default options for all your views, you can also use `collection.addDefaultView`.
+
+In this case, we want all Posts views to only show posts that are approved and not scheduled in the future (unless explicitly specified).
+
+```js
+Posts.addDefaultView(terms => ({
+  selector: {
+    status: Posts.config.STATUS_APPROVED,
+    isFuture: {$ne: true} // match both false and undefined
+  }
+}));
+```
+
+Note that views work by extending one another. In other words, the default view is extended by the view specified by the view option, which is is then extended by any additional parameter callbacks. 

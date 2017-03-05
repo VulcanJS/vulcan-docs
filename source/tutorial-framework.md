@@ -670,6 +670,15 @@ const AccountsForm = ({client}) => {
 registerComponent('AccountsForm', AccountsForm, withApollo);
 ```
 
+Add it to `components.js`:
+
+```js
+import '../components/MoviesWrapper.jsx';
+import '../components/MoviesItem.jsx';
+import '../components/MoviesList.jsx';
+import '../components/AccountsForm.jsx';
+```
+
 And hook it up inside `MoviesWrapper`:
 
 ```js

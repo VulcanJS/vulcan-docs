@@ -9,17 +9,21 @@ Nova uses a system of hooks and callbacks for many of its operations.
 For example, here's how you would add a callback to `posts.edit.sync` to give posts an `editedAt` date every time they are modified:
 
 ```js
+import { addCallback } from 'meteor/nova:core';
+
 function setEditedAt (post, user) {
   post.editedAt = new Date();
   return post;
 }
-Callbacks.add("posts.edit.sync", setEditedAt);
+addCallback("posts.edit.sync", setEditedAt);
 ```
 
 If the callback function is named (i.e. declared using the `function foo () {}` syntax), you can also remove it from the callback using:
 
 ```js
-Callbacks.remove("posts.edit.sync", "setEditedAt");
+import { removeCallback } from 'meteor/nova:core';
+
+removeCallback("posts.edit.sync", "setEditedAt");
 ```
 
 Methods support three distinct types of callbacks, each with their own hook:
