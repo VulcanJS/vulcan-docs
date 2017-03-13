@@ -150,6 +150,10 @@ class CustomLogo extends getRawComponent('Logo'){
 replaceComponent('Logo', CustomLogo);
 ```
 
+#### Alternative Approach
+
+The main purpose behind the components API is to enable extending and replacing components defined in third-party themes and plug-ins. However, if this is not a concern for you, you can use the standard `export default Foo` and `import Foo from './foo.jsx'` approach without any trouble. 
+
 ## Core Components
 
 In addition to components that are part of a specific theme package (such as `nova:base-components`), a few components are provided with `nova:core`.

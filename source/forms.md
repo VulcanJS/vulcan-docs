@@ -6,7 +6,7 @@ The `nova:forms` package provides a `SmartForm` component that lets you easily g
 
 ## Features
 
-This package can generate new document and edit document forms from a [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) schema. Features include:
+This package can generate new document and edit document forms from a [schema](schema.html). Features include:
 
 - Error handling.
 - Bootstrap-compatible.
@@ -168,3 +168,7 @@ getChildContext() {
   };
 }
 ```
+
+#### Alternative Approach
+
+If you prefer, you can also code your own forms from scratch, either using `withNew`, `withEdit`, and `withRemove`, or with your own custom mutation HoCs. 

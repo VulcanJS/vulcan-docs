@@ -2,7 +2,9 @@
 title: Routing
 ---
 
-Here's how you can add child routes to your app (using React Router):
+### Adding Routes
+
+Here's how you can add routes to your app (using React Router):
 
 ```js
 import Foo from './foo.jsx';
@@ -34,7 +36,19 @@ addRoute({
 });
 ```
 
-For more complex router customizations, you can also disable the `nova:routing` package altogether and replace it with your own React Router code. 
+### Update Callbacks
+
+A common pattern with React Router is running callbacks after the route update (to enable things like custom scrolling behavior, for example).
+
+You can use the `router.onUpdate` callback hook to add your own callbacks:
+
+```js
+addCallback('router.onUpdate', sendGoogleAnalyticsRequest);
+```
+
+#### Alternative Approach
+
+React Router is initialized in the `nova:routing` package, and the routing API lets you add routes without having to modify the package's code. However, for more complex router customizations you can also disable the `nova:routing` package altogether and replace it with your own React Router code. 
 
 ### Using React Router In Your Components
 

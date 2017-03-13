@@ -100,4 +100,19 @@ I learned a lot about making development more approachable by writing [Discover 
 
 Vulcan is open source and we're always looking for new contributors, no matter if you're a JavaScript guru or coding newbie. Come say hello in [our Slack channel](http://slack.vulcanjs.org)!
 
+## Future Goals
+
+### Migrate from Meteor (if needed)
+
+### Extract tools
+
+### become db-agnostic? 
+
+### 
+
+
+
+
+
 ### "Hack Learn Make"
+

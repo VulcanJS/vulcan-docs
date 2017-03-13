@@ -165,7 +165,7 @@ Context is not used to access the current user anymore. Instead, use the `withCu
 
 ## Methods & Mutations
 
-Meteor methods are now replaced with Apollo mutations. Check out the [data layer](data-layer.html) section for more info, and make sure to check out the `withMutation` HoC to take care of simple, one-off mutations. 
+Meteor methods are now replaced with Apollo mutations. Check out the [mutations](mutations.html) section for more info, and make sure to check out the `withMutation` HoC to take care of simple, one-off mutations. 
 
 ## Forms
 

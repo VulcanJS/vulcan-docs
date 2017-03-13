@@ -44,6 +44,10 @@ Once you've done that, depending on which path you're interested in you can refe
 
 If you're not sure which one is for you, I recommend starting with the first tutorial, as the second one covers more advanced concepts.
 
+## Alternative Approach
+
+Throughout the documentation, you'll find “Alternative Approach” sections that explain what a feature does, and how to achieve the same results without using Nova (typically, with standard React and/or Apollo code). This is useful if you've hit the limits of what Nova offers, and want to refactor parts of your app to use lower-level APIs. 
+
 ## Roadmap
 
 You can find the [Nova roadmap on Trello](https://trello.com/b/dwPR0LTz/nova-roadmap).

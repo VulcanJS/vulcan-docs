@@ -1,12 +1,67 @@
 ---
-title: Schema
+title: Collections & Schemas
 ---
 
-## Default Properties
+
+## Creating Collections
+
+Nova features a number of helpers to make setting up your layer faster, most of which are initialized through the `createCollection` function:
+
+```js
+const Movies = createCollection({
+
+  collectionName: 'movies',
+
+  typeName: 'Movie',
+
+  schema,
+  
+  resolvers,
+
+  mutations,
+
+});
+```
+
+The function takes the following arguments:
+
+- `collectionName`: the name of the collection in your MongoDB database.
+- `typeName`: the name of the GraphQL type that will be generated for the collection.
+- `schema`, `resolvers`, `mutations`: see below.
+- `generateGraphQLSchema`: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to `true`). 
+
+#### Alternative Approach
+
+Passing a schema, resolvers, and mutations to `createCollection` enables a lot of Nova's internal synergy. That being said, you can also set `generateGraphQLSchema` to `false` and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer. 
+
+## Schemas
+
+The first piece of any GraphQL API is the **schema**, which defines what data is made available to the client. 
+
+In Nova, this GraphQL schema can be generated automatically from your collection's JSON schema, so you don't have to type things twice. Just pass a [SimpleSchema](https://github.com/aldeed/meteor-simple-schema)-compatible JSON schema as `createCollection`'s `schema` property.
+
+### Custom Schemas
+
+If you need to manually add a schema, you can also do so using the `GraphQLSchema.addSchema` function:
+
+```js
+const customSchema = `
+  input Custom {
+    _id: String
+    userId: String
+    title: String
+  }
+`;
+GraphQLSchema.addSchema(customSchema);
+```
+
+## Schema Properties
+
+### Default Properties
 
 See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-schema#schema-rules).
 
-## Data Layer Properties
+### Data Layer Properties
 
 #### `viewableBy`
 
@@ -26,7 +81,7 @@ Can either be an array of group names or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
 
-## Forms Properties
+### Forms Properties
 
 #### `label`
 
@@ -88,6 +143,11 @@ this.context.updateCurrentValues({foo: 'bar'});
 
 As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.
 
+### Other Properties
+
+#### `required` (`Users` only)
+
+You can mark a field as `required: true` to indicate that it should be completed when the user signs up. If you're using the `nova:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
 
 ## Custom Fields
 

@@ -18,13 +18,18 @@ sidebar_categories:
   Overview:
     - features
     - architecture
+  Data Layer:
+    - schemas
+    - data-loading
+    - fragments
+    - terms-parameters
+    - mutations
   API:
     - theming
-    - schema
-    - data-layer
     - forms
     - callbacks
     - email
+    - users
     - groups-permissions
     - routing
     - internationalization
@@ -32,6 +37,7 @@ sidebar_categories:
   Resources:
     - learn
     - examples
+    - debugging
     - plugins
     - themes
     - tutorials

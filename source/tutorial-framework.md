@@ -208,7 +208,7 @@ If everything worked properly, you should now be able to head to `http://localho
 
 We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. 
 
-Nova uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Schema](/data-layer.html#schema) section if you want to learn more. 
+Nova uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
 
 Create `schema.js` inside `modules`:
 
@@ -304,7 +304,7 @@ GraphQLSchema.finalSchema
 
 ## Query Resolvers
 
-Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Resolvers](/data-layer.html#resolvers) section. 
+Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Data Loading](/data-loading.html) section. 
 
 Let's start simple. Create a new `resolvers.js` file inside `modules` and add:
 
@@ -464,7 +464,7 @@ As you can see, the great thing about GraphQL is that you can specify exactly wh
 
 Although our resolver works, it's fairly limited. As it stands, we can't filter, sort, or paginate our data. Even though we might not need these features right away, now is a good time to set things up in a more future-proof way.
 
-Our resolver will accept a [terms](/data-layer.html#Terms-amp-Parameters) object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the `Movies.getParameters()` function. Additionally, we'll add a second resolver that takes in the same `terms`, but returns the *number* of documents matching these terms:
+Our resolver will accept a [terms](terms-parameters.html) object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the `Movies.getParameters()` function. Additionally, we'll add a second resolver that takes in the same `terms`, but returns the *number* of documents matching these terms:
 
 ```js
 const resolvers = {
@@ -509,7 +509,7 @@ Once we've figured out the correct `selector` and `options` object from the `ter
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
 
-We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Nova comes with [a set of built-in higher-order container components](/data-layer.html#hocs) which we can use out of the box, so we can focus on the presentational components.
+We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Nova comes with [a set of built-in higher-order container components](data-loading.html) which we can use out of the box, so we can focus on the presentational components.
 
 Create a new `MoviesItem` component inside `components`:
 
@@ -534,7 +534,7 @@ class MoviesItem extends Component {
 registerComponent('MoviesItem', MoviesItem);
 ```
 
-We'll also create a new `MoviesList` component, which will use a [GraphQL fragment](/data-layer.html#Fragments) (which we'll define in the next section) to specify what data we want to load:
+We'll also create a new `MoviesList` component, which will use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -707,7 +707,7 @@ Yay! You can now log in and sign up at your own leisure. And you can also refer 
 
 Now that we're logged in, we can start interacting with our data. Let's build a simple form for adding new movies.
 
-Before we can build the user-facing part of this feature though, we need to think about how the insertion will be handled server-side, using [Mutations](/data-layer.html#mutations).
+Before we can build the user-facing part of this feature though, we need to think about how the insertion will be handled server-side, using [Mutations](mutations.html).
 
 Create a new `mutations.js` file in `modules`:
 
@@ -938,7 +938,7 @@ Now fill out the form and submit it. The query will be updated and the new movie
 
 As it stands, our movie list isn't really sorted. What if we wanted to sort it by movie year?
 
-To do so, create a `parameters.js` file (learn more about parameters [here](/data-layer.html#Terms-amp-Parameters)):
+To do so, create a `parameters.js` file (learn more about parameters [here](terms-parameters.html)):
 
 ```js
 import { addCallback } from 'meteor/nova:core';

@@ -4,7 +4,7 @@ title: Deployment Guide
 
 ## Meteor Up
 
-This is the recommended way to deploy Nova is by using [Mup](https://github.com/kadirahq/meteor-up/), at least v1.0.3.
+The recommended way to deploy Nova is by using [Meteor Up](https://github.com/zodern/meteor-up).
 
 ### Configuration
 

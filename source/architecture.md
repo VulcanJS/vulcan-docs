@@ -100,6 +100,17 @@ Editing Nova's code makes it harder to keep it up to date when things change in 
 
 Instead, Nova includes many hooks and patterns that enable you to tweak and extend core features from your *own* packages without having to actually modify their code. 
 
+## Register & Execute
+
+Many Nova objects (such as fragments, routes, components, etc.) follow a “register and execute” pattern, in which:
+
+1. All items are first registered in a centralized array.
+2. The items are then all executed at runtime. 
+
+This two-tiered approach has two benefits. First, it means items can be overriden in between registration and execution. For example if a theme registers a component, your custom code can then extend it and the final component object that is created at runtime will be the extended version.
+
+Second, things like React Router or the app's GraphQL schema can only be initialized once. By having you register items first, Nova is able to centralize objects from various sources, and then combine them all in a single initialization call. 
+
 ## The Nova Core Package
 
 Unless mentioned otherwise, all Nova utilities function are imported from the `nova:core` Meteor package:
