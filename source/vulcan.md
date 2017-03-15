@@ -1,8 +1,8 @@
 ---
-title: VulcanJS
+title: Vulcan
 ---
 
-**VulcanJS** is the name of the next big evolution of the Telescope project. 
+**Vulcan** is the name of the next big evolution of the Telescope project. 
 
 Over the years, we've realized that Telescope could be used to do a lot more than simply build Product Hunt clones. That's why we've decided to focus our energy on building a more flexible and more generic platform, and we thought this new approach deserved a new name. 
 

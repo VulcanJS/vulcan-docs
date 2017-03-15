@@ -1,10 +1,10 @@
 logo:
   #nav_mobile: images/logo-apollo-space-left.svg
   #subbrand: images/logo-apollo-subbrands-developers-space.svg
-  title: Nova Documentation
-  subtitle: Nova Documentation
-  url: http://nova-docs.telescopeapp.org/
-#favicon: images/favicon.png
+  title: Vulcan Documentation
+  subtitle: Vulcan Documentation
+  url: http://docs.vulcanjs.org/
+favicon: images/favicon.ico
 
 nav_links:
   'GitHub':

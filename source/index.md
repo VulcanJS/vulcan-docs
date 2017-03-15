@@ -8,7 +8,7 @@ Vulcan is a framework that gives you a set of tools for quickly building React-b
 
 You can get a good overview of what Vulcan can do in the [Features](features.html) section. 
 
-**Vulcan is the new name of Telescope Nova. [Learn more](vulcan.html)**
+**Note: Vulcan is the new name of Telescope Nova. [Learn more](vulcan.html)**
 
 ## Install
 

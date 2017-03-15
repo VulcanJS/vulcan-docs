@@ -3,10 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Nova Docs
-propertytitle: Nova Docs
-subtitle: Nova Docs
-description: Nova Docs
+title: Vulcan Docs
+propertytitle: Vulcan Docs
+subtitle: Vulcan Docs
+description: Vulcan Docs
+logo: '/images/vulcan-logo-border-2.svg'
 author:
 language:
 timezone:
@@ -63,7 +64,7 @@ apis:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://nova-docs.telescopeapp.org/
+url: http://docs.vulcanjs.org/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

@@ -11,7 +11,8 @@
     </div>
     <div class="nav-item">
       <a class="logo-wrapper" href="<%- theme.logo.url %>" title="<%- theme.logo.title %> <%- theme.logo.subtitle %>" <%- theme.logo.target && 'target=' + theme.logo.target %> >
-        <%- theme.logo.title %>
+        <img src="<%- config.logo %>" alt="<%- theme.logo.title %>" class="logo"/>
+        <span><%- theme.logo.title %></span>
       </a>
     </div>
   </div>
