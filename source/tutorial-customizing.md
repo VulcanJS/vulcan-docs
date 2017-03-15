@@ -1,10 +1,10 @@
 ---
-title: Customizing & Extending Nova
+title: Customizing & Extending Vulcan
 ---
 
-Nova was made to be extensible from the ground up. This means that you can tweak and adapt many existing features to your needs without having to rewrite them from scratch. 
+Vulcan was made to be extensible from the ground up. This means that you can tweak and adapt many existing features to your needs without having to rewrite them from scratch. 
 
-In this tutorial, we'll look at the `customization-demo` code file by file to see how we can easily extend Nova with minimal work. 
+In this tutorial, we'll look at the `customization-demo` code file by file to see how we can easily extend Vulcan with minimal work. 
 
 ## Intro
 
@@ -12,7 +12,7 @@ In this tutorial, we'll look at the `customization-demo` code file by file to se
 
 ## Custom Packages
 
-In Nova, everything is a package, so the first thing you'll need to do is to create a new directory in `/packages` to hold your code, and a `package.js` file inside that:
+In Vulcan, everything is a package, so the first thing you'll need to do is to create a new directory in `/packages` to hold your code, and a `package.js` file inside that:
 
 ```js
 Package.describe({
@@ -93,7 +93,7 @@ Protip: a good way to make sure that your CSS file is getting properly bundled u
 
 ## Replacing Components
 
-A really cool feature of Nova's theming system is the ability to replace a specific component without having to overwrite the entire theme.
+A really cool feature of Vulcan's theming system is the ability to replace a specific component without having to overwrite the entire theme.
 
 For example, let's consider the `base-components` theme's `Logo` component:
 
@@ -195,7 +195,7 @@ You can learn more about replacing and extending components in the [Components &
 
 ## Strings & Internationalization
 
-Another common need is changing the wording of a specific string. Nova uses the [react-intl](https://github.com/yahoo/react-intl) library to make every string in the default components customizable and translatable.
+Another common need is changing the wording of a specific string. Vulcan uses the [react-intl](https://github.com/yahoo/react-intl) library to make every string in the default components customizable and translatable.
 
 ```js
 import { addStrings } from 'meteor/nova:core';
@@ -292,7 +292,7 @@ Learn more about adding your own custom fields in the [Custom Fields](custom-fie
 
 ## Callbacks
 
-Callbacks let you insert your own server-side logic at key points in Nova's code. For example, the `callbacks.js` file shows you how you can insert random emojis in a post title whenever a new post is inserted:
+Callbacks let you insert your own server-side logic at key points in Vulcan's code. For example, the `callbacks.js` file shows you how you can insert random emojis in a post title whenever a new post is inserted:
 
 ```js
 import { addCallback } from 'meteor/nova:core';
@@ -310,7 +310,7 @@ You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 
 ## Groups
 
-Out of the box, Nova considers three kind of users: guests (users without an account), members (users with a normal account), and admins. Let's add a fourth kind, mods, in `groups.js`:
+Out of the box, Vulcan considers three kind of users: guests (users without an account), members (users with a normal account), and admins. Let's add a fourth kind, mods, in `groups.js`:
 
 ```js
 import Users from 'meteor/nova:users';
@@ -356,9 +356,9 @@ api.addAssets([
 Finally, we retrieve these two assets and assign them to email templates in `lib/server/templates.js`:
 
 ```js
-import NovaEmail from 'meteor/nova:email';
+import VulcanEmail from 'meteor/nova:email';
 
-NovaEmail.addTemplates({
+VulcanEmail.addTemplates({
   newPost: Assets.getText("lib/server/emails/customNewPost.handlebars"),
   customEmail: Assets.getText("lib/server/emails/customEmail.handlebars")
 });
@@ -368,6 +368,6 @@ You can learn more about customizing emails in the [Email](email.html) section.
 
 ## Conclusion
 
-By going through this sample package's code, you've learned how to customize most aspects of Nova without having to modify any of Nova's original code. 
+By going through this sample package's code, you've learned how to customize most aspects of Vulcan without having to modify any of Vulcan's original code. 
 
-You can now use that newfound knowledge to build your app, or even create new themes and plugins to add to the Nova ecosystem. The rest is up to you!
+You can now use that newfound knowledge to build your app, or even create new themes and plugins to add to the Vulcan ecosystem. The rest is up to you!

@@ -2,22 +2,22 @@
 title: Features
 ---
 
-Core Nova features include:
+Core Vulcan features include:
 
 ## GraphQL Schema Generation
 
-Nova will automatically generate GraphQL schemas for your collections based on their [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) JSON schema. 
+Vulcan will automatically generate GraphQL schemas for your collections based on their [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) JSON schema. 
 
 This prevents you from having to specify your schema twice in two different formats. Although please note that this feature is completely optional, and that you can also specify your schema manually if you prefer. 
 
 ## Automated Forms
 
-Nova will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation. 
+Vulcan will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation. 
 
 For example, here's how you would display a form to edit a single movie:
 
 ```js
-<NovaForm 
+<VulcanForm 
   collection={Movies} 
   documentId={props.documentId}
   queryName="moviesListQuery"
@@ -25,13 +25,13 @@ For example, here's how you would display a form to edit a single movie:
 />
 ```
 
-The `queryName` option tells NovaForm which query should be automatically updated once the operation is done, while the `showRemove` option add a “Delete Movie” button to the form. 
+The `queryName` option tells VulcanForm which query should be automatically updated once the operation is done, while the `showRemove` option add a “Delete Movie” button to the form. 
 
-Note that NovaForm will also take care of loading the document to edit, if it's not already loaded in the client store. 
+Note that VulcanForm will also take care of loading the document to edit, if it's not already loaded in the client store. 
 
 ## Easy Data Loading
 
-Nova features a set of data loading helpers to make loading Apollo data easier, `withList` (to load a list of documents) and `withDocument` (to load a single document). 
+Vulcan features a set of data loading helpers to make loading Apollo data easier, `withList` (to load a list of documents) and `withDocument` (to load a single document). 
 
 For example, here's how you would use `withList` to pass a `results` prop containing all movies to your `MoviesList` component:
 
@@ -49,7 +49,7 @@ You can pass a fragment to control what data is loaded for each document.
 
 ## Schema-based Security & Validation
 
-All of Nova's security and validation is based on your collection's schema. For each field of your schema, you can define the following functions:
+All of Vulcan's security and validation is based on your collection's schema. For each field of your schema, you can define the following functions:
 
 - `viewableBy`
 - `insertableBy`
@@ -59,7 +59,7 @@ They all take the current user as argument (and optionally the document being af
 
 ## Groups & Permissions
 
-Nova features a simple system to handle user groups and permissions. For example, here's how you would define that all users can create new movies and edit/remove their own, but only admins can edit or remove other user's movies:
+Vulcan features a simple system to handle user groups and permissions. For example, here's how you would define that all users can create new movies and edit/remove their own, but only admins can edit or remove other user's movies:
 
 ```js
 const defaultActions = [
@@ -80,7 +80,7 @@ You can then reference these actions in your mutation checks.
 
 ## Other Features
 
-Out of the box, Nova also includes many other time-saving features, such as:
+Out of the box, Vulcan also includes many other time-saving features, such as:
 
 - Internationalization
 - Server-side rendering
@@ -88,4 +88,4 @@ Out of the box, Nova also includes many other time-saving features, such as:
 - Email and email templates handling
 - Preset boilerplate mutations
 
-And of course, using Nova also means you get access to all the non-core Nova packages, such as `nova:posts`, `nova:comments`, `nova:newsletter`, `nova:search` etc.
+And of course, using Vulcan also means you get access to all the non-core Vulcan packages, such as `nova:posts`, `nova:comments`, `nova:newsletter`, `nova:search` etc.

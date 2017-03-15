@@ -12,7 +12,7 @@ These settings are defined on the `public` property, meaning they will be shared
 
 | Setting | Example | Description |
 | --- | --- | --- |
-| title | "My Nova Site" | Your site's title |
+| title | "My Vulcan Site" | Your site's title |
 | siteUrl | "http://mysite.com" | Your site's main URL |
 | tagline | "The best site ever!" | Your site's tagline or description |
 | language | "en" | Your site's language |

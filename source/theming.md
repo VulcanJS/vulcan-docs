@@ -13,7 +13,7 @@ The advantage of calling the `getComponent` function instead of using `Component
 
 ## Registering Components
 
-Nova components are all listed in `nova:core`'s `Components` object. You can add new ones with the 'registerComponent` method:
+Vulcan components are all listed in `nova:core`'s `Components` object. You can add new ones with the 'registerComponent` method:
 
 ```js
 import { registerComponent } from 'meteor/nova:core';
@@ -50,7 +50,7 @@ const Header = props => {
 
 ## Components & HoCs
 
-To understand how theming works in Nova, it's important to understand how components and higher-order components (HoCs) interact. 
+To understand how theming works in Vulcan, it's important to understand how components and higher-order components (HoCs) interact. 
 
 A higher-order component's role is to wrap a regular component to pass it a specific prop (such as a list of posts, the current user, the `Router` object, etc.). You can think of HoCs as specialized assistants that each hand the component a tool it needs to do its job. 
 
@@ -62,7 +62,7 @@ const WrappedComponent = withCurrentUser(MyComponent);
 
 Which would result a *new* `WrappedComponent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedComponent`. 
 
-For that reason, Nova provides a `getRawComponent` utility that lets you access the unwrapped “raw” component, provided said component has been registered with `registerComponent`:
+For that reason, Vulcan provides a `getRawComponent` utility that lets you access the unwrapped “raw” component, provided said component has been registered with `registerComponent`:
 
 ```
 MyComponent.foo = "bar";
@@ -91,7 +91,7 @@ registerComponent('PostsList', PostsList, [withList, options]);
 
 ## Replacing Components
 
-Apart from a couple exceptions, almost all React components in Nova live inside the `nova:base-components` package. 
+Apart from a couple exceptions, almost all React components in Vulcan live inside the `nova:base-components` package. 
 
 If you only need to modify a single component, you can simply override it with a new one without having to touch the `nova:base-components` package.
 
@@ -164,7 +164,7 @@ The `App` component takes care of loading data for the current active user and s
 
 ### Error404
 
-This is a default “page not found” error component. This ensures Nova has something to show even when you remove all themes and routes. 
+This is a default “page not found” error component. This ensures Vulcan has something to show even when you remove all themes and routes. 
 
 ### Icon
 

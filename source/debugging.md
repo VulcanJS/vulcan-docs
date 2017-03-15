@@ -2,7 +2,7 @@
 title: Debugging
 ---
 
-Sometimes, things just go wrong. Here are a few tips to debug your Nova app. 
+Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app. 
 
 ## Finding Errors
 

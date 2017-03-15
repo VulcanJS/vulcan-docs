@@ -4,7 +4,7 @@ title: Groups & Permissions
 
 ## Groups & Actions
 
-When it comes to controlling who can do what in your Nova app, it's important to understand two concepts, **groups** and **actions**. 
+When it comes to controlling who can do what in your Vulcan app, it's important to understand two concepts, **groups** and **actions**. 
 
 A **group** (such as `admins` or `mods`) represents a list of users which can perform specific actions (such as `posts.edit` or `posts.remove`). 
 
@@ -18,11 +18,11 @@ If, instead, we test if the user has permissions to perform the *action* `posts.
 
 ## Documents & Fields
 
-Nova has two levels of permission checks: the document level, and the field level. 
+Vulcan has two levels of permission checks: the document level, and the field level. 
 
 Consider a scenario where a user can edit their own posts, but an admin can edit anybody's post. Now let's add the requirement that a user can only edit a post's `title` property, but an admin can also edit a post's `status`. 
 
-First, we'll need a **document-level** check to see if the current user can edit a given document. In Nova, this check lives, appropriately enough, next to the relevant mutation:
+First, we'll need a **document-level** check to see if the current user can edit a given document. In Vulcan, this check lives, appropriately enough, next to the relevant mutation:
 
 ```js
 edit: {

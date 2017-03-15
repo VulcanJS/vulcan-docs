@@ -1,8 +1,8 @@
 ---
-title: Understanding the Nova Framework
+title: Understanding the Vulcan Framework
 ---
 
-Out of the box, Nova comes with many features such as handling posts and comments, generating a newsletter, and much more. 
+Out of the box, Vulcan comes with many features such as handling posts and comments, generating a newsletter, and much more. 
 
 But it's important to understand that you can also use the underlying framework powering these features directly and build a completely different type of app. 
 
@@ -16,7 +16,7 @@ The completed code for this tutorial can be found in the `framework-demo` packag
 
 ## Set Up
 
-First, we'll make sure we're only including the Nova features we actually need. We can do that by removing any non-core packages in the `.meteor/packages` file (don't worry, this will only make sure these packages are not loaded, and won't actually remove them from your codebase). 
+First, we'll make sure we're only including the Vulcan features we actually need. We can do that by removing any non-core packages in the `.meteor/packages` file (don't worry, this will only make sure these packages are not loaded, and won't actually remove them from your codebase). 
 
 Delete the contents of your `packages` file, and replace them with this:
 
@@ -36,7 +36,7 @@ accounts-password@1.3.3
 
 Here's a quick overview of the main packages:
 
-- `nova:core`: Nova's core libraries. 
+- `nova:core`: Vulcan's core libraries. 
 - `nova:forms`: the library used for generating and submitting forms. 
 - `nova:routing`: sets up and initializes routing and server-side rendering.
 - `nova:users`: user management (groups, permissions, etc.).
@@ -167,7 +167,7 @@ const MoviesWrapper = () =>
 registerComponent('MoviesWrapper', MoviesWrapper);
 ```
 
-We're using Nova's `registerComponent` function to make the component available globally. You can learn more about this in the [Components & Theming](/theming.html) section, but in a nutshell registering components this way is what makes it possible for other themes or plugins to modify or extend them. 
+We're using Vulcan's `registerComponent` function to make the component available globally. You can learn more about this in the [Components & Theming](/theming.html) section, but in a nutshell registering components this way is what makes it possible for other themes or plugins to modify or extend them. 
 
 This means we don't actually need to `export` the component, but we do need to import the actual file. Let's create a new `component.js` file inside `modules`:
 
@@ -208,7 +208,7 @@ If everything worked properly, you should now be able to head to `http://localho
 
 We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. 
 
-Nova uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
+Vulcan uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
 
 Create `schema.js` inside `modules`:
 
@@ -509,7 +509,7 @@ Once we've figured out the correct `selector` and `options` object from the `ter
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
 
-We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Nova comes with [a set of built-in higher-order container components](data-loading.html) which we can use out of the box, so we can focus on the presentational components.
+We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Vulcan comes with [a set of built-in higher-order container components](data-loading.html) which we can use out of the box, so we can focus on the presentational components.
 
 Create a new `MoviesItem` component inside `components`:
 
@@ -746,7 +746,7 @@ const mutations = {
 export default mutations;
 ```
 
-This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the `document` property to one of Nova's boilerplate mutations, `newMutation`. 
+This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the `document` property to one of Vulcan's boilerplate mutations, `newMutation`. 
 
 Let's pass it on to our `createCollection` function in `collection.js`:
 
@@ -797,7 +797,7 @@ import './permissions.js';
 Movies = MoviesImport;
 ```
 
-Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Nova, which you can learn more about in the [Groups & Permissions](/groups-permissions.html) section.
+Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Vulcan, which you can learn more about in the [Groups & Permissions](/groups-permissions.html) section.
 
 One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
@@ -978,4 +978,4 @@ This is probably a good place to stop, but you can go further simply by going th
 - Use permission checks to enforce fine-grained security throughout your app.
 - Define GraphQL “joins” in your schema to decorate objects with more data.
 
-And this is just the start. You can do a lot more with Nova, Apollo, and React, as you'll soon see!
+And this is just the start. You can do a lot more with Vulcan, Apollo, and React, as you'll soon see!

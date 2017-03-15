@@ -4,7 +4,7 @@ title: Deployment Guide
 
 ## Meteor Up
 
-The recommended way to deploy Nova is by using [Meteor Up](https://github.com/zodern/meteor-up).
+The recommended way to deploy Vulcan is by using [Meteor Up](https://github.com/zodern/meteor-up).
 
 ### Configuration
 
@@ -82,7 +82,7 @@ mup deploy --settings settings.json
 
 Contributed by [adalidda](https://github.com/TelescopeJS/Telescope/issues/1552#issuecomment-276948862).
 
-Deploy Nova GraphQL/Apollo version with PM2
+Deploy Vulcan GraphQL/Apollo version with PM2
 
 ### Server Setup
 
@@ -144,7 +144,7 @@ Edit your `pm2-meteor.json` with your own parameters.
 
 Below is my pm2-meteor.json given as reference.
 
-You note that I use the `nvm` command in my `pm2-meteor.json`, because without using the nvm command, pm2 will use Node version on your server that may be not compatible with the one required by Nova GraphQL/Apollo (which is node version 4.7.0 or 4.7.3) and in this case pm2 will generate high use of your CPU around 100% !
+You note that I use the `nvm` command in my `pm2-meteor.json`, because without using the nvm command, pm2 will use Node version on your server that may be not compatible with the one required by Vulcan GraphQL/Apollo (which is node version 4.7.0 or 4.7.3) and in this case pm2 will generate high use of your CPU around 100% !
 
 ```
 {

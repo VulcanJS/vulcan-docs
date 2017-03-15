@@ -15,7 +15,7 @@ While you could hard-code said selector and options on the server and always ret
 
 You *could* simply let users specify their own selectors and options, but that would open the door to users accessing *any* document in your database, and is generally regarded as an anti-pattern. 
 
-Instead, Nova adopts a two-tiered approach: first, the user defines query **terms** that specify the data they want. Then, these terms go through a set of successive callbacks that “translate” them into a Mongo-compatible `{selector, options}` object known as the **parameters** object (in the process catching any potential security issues).
+Instead, Vulcan adopts a two-tiered approach: first, the user defines query **terms** that specify the data they want. Then, these terms go through a set of successive callbacks that “translate” them into a Mongo-compatible `{selector, options}` object known as the **parameters** object (in the process catching any potential security issues).
 
 To give a practical example, the `nova:posts` package translates the following terms:
 
@@ -49,7 +49,7 @@ The generic `withList` component is hard-coded to send a `terms` argument, but i
 
 ### Parameter Callbacks
 
-Every Nova collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. For example, this is how the `framework-demo` implements a sort by `createdAt` on the `Movies` collection:
+Every Vulcan collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. For example, this is how the `framework-demo` implements a sort by `createdAt` on the `Movies` collection:
 
 ```js
 import { addCallback } from 'meteor/nova:core';
@@ -68,7 +68,7 @@ Note that each iteration of the callback takes in the `parameters` and the origi
 
 ### Using Views
 
-You've seen above how to manually create a `sortByCreatedAt` callback, but Nova also provides a built-in `view` shortcut you can use to achieve the same thing more easily (available on all collections created via `createCollection`). By defining a named view, you can then reference all the view's properties at once by specifying the `view: myViewName` option in your `terms`.
+You've seen above how to manually create a `sortByCreatedAt` callback, but Vulcan also provides a built-in `view` shortcut you can use to achieve the same thing more easily (available on all collections created via `createCollection`). By defining a named view, you can then reference all the view's properties at once by specifying the `view: myViewName` option in your `terms`.
 
 For example, this is how the `best` view is defined:
 

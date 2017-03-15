@@ -2,7 +2,7 @@
 title: Users
 ---
 
-Nova uses the standard [Meteor user accounts system](https://guide.meteor.com/accounts.html), along with the [`std:accounts-ui`](https://github.com/studiointeract/accounts-ui) package for the front-end. 
+Vulcan uses the standard [Meteor user accounts system](https://guide.meteor.com/accounts.html), along with the [`std:accounts-ui`](https://github.com/studiointeract/accounts-ui) package for the front-end. 
 
 ### Preloaded Properties
 

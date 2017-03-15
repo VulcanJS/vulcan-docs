@@ -75,7 +75,7 @@ GraphQLSchema.addQuery(`currentUser: User`);
 ## Higher-Order Components
 
 
-To make working with Apollo easier, Nova provides you with a set of higher-order components (HoC). 
+To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoC). 
 
 An HoC is simply a function you can call on a React component to give it additional props.
 
@@ -139,4 +139,4 @@ At this time, it's only possible to benefit from this auto-updating behavior if 
 
 #### Alternative Approach
 
-You can replace any of Nova's generic HoCs with your own tailor-made HoCs (whether it's for queries or mutations) using the `graphql` utility. Note that if you do so, you will need to manually [update your queries](http://dev.apollodata.com/react/cache-updates.html) after each mutation. 
+You can replace any of Vulcan's generic HoCs with your own tailor-made HoCs (whether it's for queries or mutations) using the `graphql` utility. Note that if you do so, you will need to manually [update your queries](http://dev.apollodata.com/react/cache-updates.html) after each mutation. 

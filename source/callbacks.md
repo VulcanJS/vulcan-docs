@@ -2,7 +2,7 @@
 title: Callbacks
 ---
 
-Nova uses a system of hooks and callbacks for many of its operations.
+Vulcan uses a system of hooks and callbacks for many of its operations.
 
 ## Adding Callback Functions
 
@@ -18,7 +18,7 @@ function setEditedAt (post, user) {
 addCallback('posts.edit.sync', setEditedAt);
 ```
 
-Nova's boilerplate mutations support three distinct types of callback functions, each with their own hook:
+Vulcan's boilerplate mutations support three distinct types of callback functions, each with their own hook:
 
 - `validate` callbacks are called to decide if an operation should run or not. 
 - `sync` callbacks are called in a blocking manner before the database operation.

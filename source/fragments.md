@@ -51,7 +51,7 @@ registerFragment(`
 `);
 ```
 
-Note that in “regular” Apollo code, you need to include any sub-fragment used by a fragment [as tagged template literal](http://dev.apollodata.com/react/fragments.html#reusing-fragments), but Nova takes care of this for you (provided you've previously registered any sub-fragment using `registerFragment`).
+Note that in “regular” Apollo code, you need to include any sub-fragment used by a fragment [as tagged template literal](http://dev.apollodata.com/react/fragments.html#reusing-fragments), but Vulcan takes care of this for you (provided you've previously registered any sub-fragment using `registerFragment`).
 
 ### Extending Fragments
 
@@ -90,4 +90,4 @@ Note that you can replace both “regular” fragments and sub-fragments.
 
 #### Alternative Approach
 
-You can use standard Apollo fragments at any point in your Nova app (passing them as `fragment` instead of `fragmentName`), but be aware that you will lose the ability to extend and replace fragments. You will also need to  [manually specify](http://dev.apollodata.com/react/fragments.html#reusing-fragments) sub-fragments. 
+You can use standard Apollo fragments at any point in your Vulcan app (passing them as `fragment` instead of `fragmentName`), but be aware that you will lose the ability to extend and replace fragments. You will also need to  [manually specify](http://dev.apollodata.com/react/fragments.html#reusing-fragments) sub-fragments. 

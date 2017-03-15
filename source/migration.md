@@ -5,10 +5,10 @@ title: Migration Guide
 As of December 2016, there are three major versions of Telescope:
 
 - The “Legacy” version, which uses Meteor's publications and subscriptions and its Blaze front-end framework.
-- The “Nova Classic” version, which keeps Meteor's publications and subscriptions but uses React on the front-end. 
-- The “Nova Apollo” version, which replaces Meteor's publications and subscriptions with Apollo & GraphQL.  
+- The “Vulcan Classic” version, which keeps Meteor's publications and subscriptions but uses React on the front-end. 
+- The “Vulcan Apollo” version, which replaces Meteor's publications and subscriptions with Apollo & GraphQL.  
 
-This guide focuses on migrating from Nova Classic to Nova Apollo. If you're still on the Legacy version, I'm afraid there isn't really an easy migration path and you're probably best off starting a new codebase from scratch. 
+This guide focuses on migrating from Vulcan Classic to Vulcan Apollo. If you're still on the Legacy version, I'm afraid there isn't really an easy migration path and you're probably best off starting a new codebase from scratch. 
 
 ## Git Merging
 
@@ -49,7 +49,7 @@ The global Telescope namespace (`Telescope.*`) has been deprecated in favor of i
 
 ## Routes
 
-Routes are handled a bit differently in Nova Apollo. Instead of having routes definitions (`addRoute(...)`) and the actual routing code in the same package, route definitions now belong together with themes, while routing code lives in `nova:routing`. 
+Routes are handled a bit differently in Vulcan Apollo. Instead of having routes definitions (`addRoute(...)`) and the actual routing code in the same package, route definitions now belong together with themes, while routing code lives in `nova:routing`. 
 
 This means if you had any routing code (e.g. `ReactRouterSSR.Run()`) in your custom packages, you can now safely remove it and let `nova:routing` handle it. 
 
@@ -169,7 +169,7 @@ Meteor methods are now replaced with Apollo mutations. Check out the [mutations]
 
 ## Forms
 
-The `NovaForms` component now takes care of its own data loading, and accepts a different set of properties. 
+The `VulcanForms` component now takes care of its own data loading, and accepts a different set of properties. 
 
 Also note that the `CanDo` component used to test for permissions has been replace with `ShowIf`. 
 

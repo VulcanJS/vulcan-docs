@@ -8,8 +8,8 @@ X     4. Apollo rewrite (Vulcan)
      
      ## What Is It?
      
-X     A toolkit of components and packages that helps you quickly build web apps, 
-      both on the front-end and back-end. 
+X     A full-stack toolkit of components and packages that helps you quickly build 
+      web apps, both on the fƒront-end and back-end. 
      
 S     Show some projects:
         1. Crater

@@ -2,7 +2,7 @@
 title: Internationalization
 ---
 
-Nova is internationalized using [react-intl](https://github.com/yahoo/react-intl/). To add a new language, you need to:
+Vulcan is internationalized using [react-intl](https://github.com/yahoo/react-intl/). To add a new language, you need to:
 
 1. Create a new package containing the internationalized strings (you can use `nova:i18n-en-us` as a model).
 2. Publish that package to Atmosphere and then add it to your app using `meteor add username:packagename.

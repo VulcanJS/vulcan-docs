@@ -67,7 +67,7 @@ Note that when using the [Forms](forms.html) module, all three mutation HoCs are
 
 ## Boilerplate Mutations
 
-Nova features three standard `newMutation`, `editMutation`, and `removeMutation` mutations that are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`. 
+Vulcan features three standard `newMutation`, `editMutation`, and `removeMutation` mutations that are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`. 
 
 Note that in the context of this section, “mutation” refers to the function that performs the actual server-side database operation, and not to the [GraphQL mutations](mutations.html). 
 
