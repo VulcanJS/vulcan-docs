@@ -6,7 +6,7 @@ The `vulcan:forms` package provides a `SmartForm` component that lets you easily
 
 ## Features
 
-This package can generate new document and edit document forms from a [schema](schema.html). Features include:
+This package can generate new document and edit document forms from a [schema](schemas.html). Features include:
 
 - Error handling.
 - Bootstrap-compatible.
