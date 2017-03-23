@@ -23,74 +23,11 @@ The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it shoul
 
 Apollo is still young, but it's well-documented, evolving quickly, and supported by a great team. 
 
-## Code Architecture
+## Package-Based Architecture
 
 In keeping with this idea of flexibility and modularity, Vulcan's application structure is a bit different than most other Meteor apps. 
 
-In Vulcan, each feature has its own distinct **Meteor package** which can be freely added or removed. For example, if your current theme doesn't use comments, you can get rid of every comments-related back-end feature with:
-
-```
-meteor remove nova:comments
-```
-
-Generally speaking, Vulcan packages fall in one of five categories, and they're all listed in your `.meteor/packages` file.
-
-### Core Packages
-
-These are the core packages that make the [Vulcan framework](tutorial-framework.html):
-
-- `nova:lib`
-- `nova:core`
-- `nova:forms`
-- `nova:routing`
-- `nova:email`
-- `nova:users` 
-
-Every Vulcan app will usually include them, but note that strictly speaking only `nova:core` (which itself depends on `nova:lib`) cannot be removed from Vulcan apps. 
-
-### Feature Packages
-
-These includes all the main Vulcan features:
-
-- `nova:events`
-- `nova:settings`
-- `nova:posts`
-- `nova:newsletter`
-- `nova:search`
-- `nova:notifications`
-- `nova:getting-started`
-- `nova:categories`
-- `nova:voting`
-- `nova:embedly`
-- `nova:api`
-- `nova:rss`
-- `nova:subscribe`
-
-These can all be added and removed, but note that they might have dependencies on each other (for example `nova:comments` depends on `nova:posts`).
-
-Any extra plug-in you install would also fall in this category.
-
-### Theme Packages
-
-These packages are the one that control what your app actually looks and feels like, and they're the ones you'll usually want to replace (or more likely, extend).
-
-- `nova:base-components`
-- `nova:base-styles`
-- `nova:email-templates`
-- `nova:i18n-en-us`
-
-Theme packages can include React components, CSS styles, email templates, or just language strings. 
-
-### Meteor Packages
-
-Sometimes you'll also want to include either official or third-party Meteor packages to add extra features to your app. While this is usually done from within a package's `package.js` file, you can also add packages directly in your `packages` file in some instances, such as for controlling user accounts:
-
-- `accounts-password`
-- `accounts-twitter`
-
-### Custom Packages
-
-Finally, any new package you create to extend Vulcan will fall in the “custom package” category. 
+In Vulcan, each feature has its own distinct **Meteor package** which can be freely added or removed. [Learn more about packages here](packages.html).
 
 ## Extend, Don't Edit
 
@@ -113,12 +50,12 @@ Second, things like React Router or the app's GraphQL schema can only be initial
 
 ## The Vulcan Core Package
 
-Unless mentioned otherwise, all Vulcan utilities function are imported from the `nova:core` Meteor package:
+Unless mentioned otherwise, all Vulcan utilities function are imported from the `vulcan:core` Meteor package:
 
 ```js
-import { createCollection } from 'meteor/nova:core';
+import { createCollection } from 'meteor/vulcan:core';
 
 const Posts = createCollection({...});
 ```
 
-Note that a lot of these utilities actually live in the `nova:lib` package, but they're re-exported from `nova:core` for convenience's sake. 
+Note that a lot of these utilities actually live in the `vulcan:lib` package, but they're re-exported from `vulcan:core` for convenience's sake. 

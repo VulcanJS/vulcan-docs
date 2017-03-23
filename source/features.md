@@ -88,4 +88,4 @@ Out of the box, Vulcan also includes many other time-saving features, such as:
 - Email and email templates handling
 - Preset boilerplate mutations
 
-And of course, using Vulcan also means you get access to all the non-core Vulcan packages, such as `nova:posts`, `nova:comments`, `nova:newsletter`, `nova:search` etc.
+And of course, using Vulcan also means you get access to all the non-core Vulcan packages, such as `vulcan:posts`, `vulcan:comments`, `vulcan:newsletter`, `vulcan:search` etc.

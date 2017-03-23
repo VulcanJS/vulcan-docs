@@ -23,23 +23,23 @@ Delete the contents of your `packages` file, and replace them with this:
 ```
 ############ Core Packages ############
 
-nova:core                       # core components and wrappers
-nova:forms                      # auto-generated forms
-nova:routing                    # routing and server-side rendering
-nova:users                      # user management and permissions
+vulcan:core                       # core components and wrappers
+vulcan:forms                      # auto-generated forms
+vulcan:routing                    # routing and server-side rendering
+vulcan:users                      # user management and permissions
 
-nova:base-styles        # default styling
-nova:i18n-en-us         # default language translation
+vulcan:base-styles        # default styling
+vulcan:i18n-en-us         # default language translation
 
 accounts-password@1.3.3
 ```
 
 Here's a quick overview of the main packages:
 
-- `nova:core`: Vulcan's core libraries. 
-- `nova:forms`: the library used for generating and submitting forms. 
-- `nova:routing`: sets up and initializes routing and server-side rendering.
-- `nova:users`: user management (groups, permissions, etc.).
+- `vulcan:core`: Vulcan's core libraries. 
+- `vulcan:forms`: the library used for generating and submitting forms. 
+- `vulcan:routing`: sets up and initializes routing and server-side rendering.
+- `vulcan:users`: user management (groups, permissions, etc.).
 
 We'll also keep `base-styles` to provide some basic Bootstrap styles for forms and menus, as well as `i18n-en-us` since it contains strings for core UI features. 
 
@@ -80,8 +80,8 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'nova:core',
-    'nova:forms',
+    'vulcan:core',
+    'vulcan:forms',
 
     'std:accounts-ui@1.2.19',
   ]);
@@ -98,7 +98,7 @@ Package.onUse(function (api) {
 });
 ```
 
-The `api.use` block defines our package's dependencies: `nova:core`, `nova:forms`, and `std:accounts-ui`, a package that provides a set of React components for managing log in and sign up. 
+The `api.use` block defines our package's dependencies: `vulcan:core`, `vulcan:forms`, and `std:accounts-ui`, a package that provides a set of React components for managing log in and sign up. 
 
 We then define our two client and server endpoints using `api.mainModule`. Create `lib/client/main.js` and `lib/server/main.js`, and paste in the following line in both:
 
@@ -149,7 +149,7 @@ First, create a new `components` directory inside `lib` if you haven't done so y
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent } from 'meteor/nova:core';
+import { Components, registerComponent } from 'meteor/vulcan:core';
 
 const MoviesWrapper = () => 
   <div className="wrapper framework-demo">
@@ -186,7 +186,7 @@ import './components.js';
 Let's create a [route](/routing.html) to display this component. Create a new `routes.js` file inside `modules`:
 
 ```js
-import { addRoute, getComponent } from 'meteor/nova:core';
+import { addRoute, getComponent } from 'meteor/vulcan:core';
 
 addRoute({ name: 'movies', path: 'movies', componentName: 'MoviesWrapper' });
 ```
@@ -264,7 +264,7 @@ Finally, we're setting `viewableBy: ['guests']` on every field to make sure they
 We're now ready to set up our `Movies` collection. Create a new `collection.js` file inside `modules`:
 
 ```js
-import { createCollection } from 'meteor/nova:core';
+import { createCollection } from 'meteor/vulcan:core';
 import schema from './schema.js';
 
 const Movies = createCollection({
@@ -298,7 +298,7 @@ Although this is completely optional, we're defining `Movies` as a global variab
 At this point it might not look like much has changed, but we now have a functional GraphQL schema! You can see it by opening up the Meteor shell in a terminal window (by typing `meteor shell` from within your app directory) and typing:
 
 ```
-import {GraphQLSchema} from 'meteor/nova:lib'
+import {GraphQLSchema} from 'meteor/vulcan:lib'
 GraphQLSchema.finalSchema
 ```
 
@@ -329,7 +329,7 @@ export default resolvers;
 Then import this new file from `collection.js`:
 
 ```js
-import { createCollection } from 'meteor/nova:core';
+import { createCollection } from 'meteor/vulcan:core';
 import schema from './schema.js';
 import resolvers from './resolvers.js';
 
@@ -352,8 +352,8 @@ We can try out our new query resolver using [GraphiQL](https://github.com/graphq
 
 ```js
 import Movies from '../modules/collection.js';
-import Users from 'meteor/nova:users';
-import { newMutation } from 'meteor/nova:core';
+import Users from 'meteor/vulcan:users';
+import { newMutation } from 'meteor/vulcan:core';
 
 const seedData = [
   {
@@ -515,7 +515,7 @@ Create a new `MoviesItem` component inside `components`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, withCurrentUser } from 'meteor/nova:core';
+import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 import Movies from '../modules/collection.js';
 
 class MoviesItem extends Component {
@@ -539,7 +539,7 @@ We'll also create a new `MoviesList` component, which will use a [GraphQL fragme
 ```js
 import React, { PropTypes, Component } from 'react';
 import Movies from '../modules/collection.js';
-import { Components, registerComponent, withList, withCurrentUser } from 'meteor/nova:core';
+import { Components, registerComponent, withList, withCurrentUser } from 'meteor/vulcan:core';
 
 const LoadMore = props => <a href="#" className="load-more button button--primary" onClick={e => {e.preventDefault(); props.loadMore();}}>Load More ({props.count}/{props.totalCount})</a>
 
@@ -586,7 +586,7 @@ Then call this component inside `MoviesWrapper`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent } from 'meteor/nova:core';
+import { Components, registerComponent } from 'meteor/vulcan:core';
 
 const MoviesWrapper = () => 
   <div className="wrapper framework-demo">
@@ -609,7 +609,7 @@ registerComponent('MoviesWrapper', MoviesWrapper);
 At this stage, we'll probably get an error message saying the fragment we're using is not yet defined. To remedy this, create a new `fragments.js` file inside `modules`:
 
 ```js
-import { registerFragment } from 'meteor/nova:core';
+import { registerFragment } from 'meteor/vulcan:core';
 
 registerFragment(`
   fragment MoviesItemFragment on Movie {
@@ -649,7 +649,7 @@ Create a new `AccountsForm.jsx` component inside `components`:
 import React, { PropTypes, Component } from 'react';
 import { Accounts } from 'meteor/std:accounts-ui';
 import { withApollo } from 'react-apollo';
-import { registerComponent } from 'meteor/nova:core';
+import { registerComponent } from 'meteor/vulcan:core';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL',
@@ -683,7 +683,7 @@ And hook it up inside `MoviesWrapper`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent } from 'meteor/nova:core';
+import { Components, registerComponent } from 'meteor/vulcan:core';
 
 const MoviesWrapper = () => 
   <div className="wrapper framework-demo">
@@ -712,8 +712,8 @@ Before we can build the user-facing part of this feature though, we need to thin
 Create a new `mutations.js` file in `modules`:
 
 ```js
-import { newMutation, Utils } from 'meteor/nova:core';
-import Users from 'meteor/nova:users';
+import { newMutation, Utils } from 'meteor/vulcan:core';
+import Users from 'meteor/vulcan:users';
 
 const mutations = {
 
@@ -751,7 +751,7 @@ This mutation performs a simple check for the presence of a logged-in user and w
 Let's pass it on to our `createCollection` function in `collection.js`:
 
 ```js
-import { createCollection } from 'meteor/nova:core';
+import { createCollection } from 'meteor/vulcan:core';
 import schema from './schema.js';
 import resolvers from './resolvers.js';
 import mutations from './mutations.js';
@@ -778,7 +778,7 @@ export default Movies;
 The mutation's `check` function checks if the user can perform an action named `movies.new`. We want all logged-in users (known as the `members` group) to be able to perform this action, so let's take care of this by creating a new `permissions.js` file:
 
 ```js
-import Users from 'meteor/nova:users';
+import Users from 'meteor/vulcan:users';
 
 Users.groups.members.can(['movies.new']);
 ```
@@ -864,7 +864,7 @@ We now have everything we need to create a new `MoviesNewForm.jsx` component usi
 ```js
 import React, { PropTypes, Component } from 'react';
 import Movies from '../modules/collection.js';
-import { Components, registerComponent, withMessages, getFragment } from 'meteor/nova:core';
+import { Components, registerComponent, withMessages, getFragment } from 'meteor/vulcan:core';
 
 const MoviesNewForm = props =>
   <Components.SmartForm 
@@ -892,7 +892,7 @@ And then call it from `MoviesList.jsx`:
 ```js
 import React, { PropTypes, Component } from 'react';
 import Movies from '../modules/collection.js';
-import { Components, registerComponent, withList, withCurrentUser } from 'meteor/nova:core';
+import { Components, registerComponent, withList, withCurrentUser } from 'meteor/vulcan:core';
 
 const LoadMore = props => <a href="#" className="load-more button button--primary" onClick={e => {e.preventDefault(); props.loadMore();}}>Load More ({props.count}/{props.totalCount})</a>
 
@@ -941,7 +941,7 @@ As it stands, our movie list isn't really sorted. What if we wanted to sort it b
 To do so, create a `parameters.js` file (learn more about parameters [here](terms-parameters.html)):
 
 ```js
-import { addCallback } from 'meteor/nova:core';
+import { addCallback } from 'meteor/vulcan:core';
 
 function sortByCreatedAt (parameters, terms) {
   return {

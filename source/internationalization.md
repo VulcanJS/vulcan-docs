@@ -4,7 +4,7 @@ title: Internationalization
 
 Vulcan is internationalized using [react-intl](https://github.com/yahoo/react-intl/). To add a new language, you need to:
 
-1. Create a new package containing the internationalized strings (you can use `nova:i18n-en-us` as a model).
+1. Create a new package containing the internationalized strings (you can use `vulcan:i18n-en-us` as a model).
 2. Publish that package to Atmosphere and then add it to your app using `meteor add username:packagename.
 3. Set `locale` to the locale name (`fr`, `en`, `ru`, etc.) in your settings.
 

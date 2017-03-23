@@ -2,7 +2,7 @@
 title: Forms
 ---
 
-The `nova:forms` package provides a `SmartForm` component that lets you easily generate new document and edit document forms. 
+The `vulcan:forms` package provides a `SmartForm` component that lets you easily generate new document and edit document forms. 
 
 ## Features
 

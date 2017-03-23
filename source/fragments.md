@@ -10,7 +10,7 @@ A fragment is a piece of schema, usually used to define what data you want to qu
 You can register fragments by passing the fragment string to `registerFragment`:
 
 ```js
-import { registerFragment } from 'meteor/nova:core';
+import { registerFragment } from 'meteor/vulcan:core';
 
 registerFragment(`
   fragment PostsList on Post {
@@ -27,7 +27,7 @@ registerFragment(`
 You can get a fragment with:
 
 ```js
-import { getFragment } from 'meteor/nova:lib';
+import { getFragment } from 'meteor/vulcan:lib';
 
 getFragment('PostsList');
 ```
@@ -39,7 +39,7 @@ When registering a fragment, you'll often want to use sub-fragments to avoid rep
 ```js
 registerFragment(`
   fragment PostsList on Post {
-    # nova:posts
+    # vulcan:posts
     _id
     title
     url
@@ -58,7 +58,7 @@ Note that in “regular” Apollo code, you need to include any sub-fragment use
 You often need to add one or more properties to a fragment without modifying its existing properties. You can do this with `extendFragment`:
 
 ```js
-import { extendFragment } from 'meteor/nova:lib';
+import { extendFragment } from 'meteor/vulcan:lib';
 
 extendFragment('PostsList', `
   color # new custom property!
@@ -72,7 +72,7 @@ This is the same as registering the entire `PostsList` fragment with `color` tac
 To replace a fragment completely, you can just register it again under the same name. 
 
 ```js
-import { registerFragment } from 'meteor/nova:lib';
+import { registerFragment } from 'meteor/vulcan:lib';
 
 registerFragment(`
   fragment UsersMinimumInfo on User {

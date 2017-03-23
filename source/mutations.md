@@ -12,19 +12,39 @@ title: Mutations
 
 ### New Mutation
 
-Takes a single `document` argument.
+Takes an object as argument with a single `document` property and returns a promise:
+
+```js
+this.props.newMutation({
+  document: document
+}).then(/* success */).catch(/* error */);
+```
 
 ### Edit Mutation
 
-Takes three arguments:
+Takes an object with three properties as argument, returns a promise:
 
 - `documentId`: the document to modify.
 - `set`: the fields to modify (as a list of field name/value pairs, e.g.`{title: 'My New Title', body: 'My new body'}`).
 - `unset`: the fields to remove (as a list of field names/booleans, e.g. `{title: true, body: true}`).
 
+```js
+this.props.editMutation({
+  documentId: document._id, 
+  set: set, 
+  unset: unset
+}).then(/* success */).catch(/* error */);
+```
+
 ### Remove Mutation
 
-Takes a single `documentId` argument.
+Takes an object with a single `documentId` property as argument, returns a promise.
+
+```js
+this.props.removeMutation({
+  documentId: documentId
+}).then(/* success */).catch(/* error */);
+```
 
 ### Custom Mutations
 
@@ -102,7 +122,7 @@ You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 For example, here's the `Posts` collection's `new` mutation resolver, using the `newMutation` boilerplate mutation:
 
 ```js
-import { newMutation } from 'meteor/nova:core';
+import { newMutation } from 'meteor/vulcan:core';
 
 const mutations = {
 

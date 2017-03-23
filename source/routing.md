@@ -48,7 +48,7 @@ addCallback('router.onUpdate', sendGoogleAnalyticsRequest);
 
 #### Alternative Approach
 
-React Router is initialized in the `nova:routing` package, and the routing API lets you add routes without having to modify the package's code. However, for more complex router customizations you can also disable the `nova:routing` package altogether and replace it with your own React Router code. 
+React Router is initialized in the `vulcan:routing` package, and the routing API lets you add routes without having to modify the package's code. However, for more complex router customizations you can also disable the `vulcan:routing` package altogether and replace it with your own React Router code. 
 
 ### Using React Router In Your Components
 

@@ -1,0 +1,5 @@
+---
+title: Categories
+---
+
+Coming soon…

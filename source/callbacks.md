@@ -9,7 +9,7 @@ Vulcan uses a system of hooks and callbacks for many of its operations.
 For example, here's how you would add a callback to `posts.edit.sync` to give posts an `editedAt` date every time they are modified:
 
 ```js
-import { addCallback } from 'meteor/nova:core';
+import { addCallback } from 'meteor/vulcan:core';
 
 function setEditedAt (post, user) {
   post.editedAt = new Date();
@@ -29,7 +29,7 @@ Vulcan's boilerplate mutations support three distinct types of callback function
 If the callback function is named (i.e. declared using the `function foo () {}` syntax), you can also remove it from the callback using:
 
 ```js
-import { removeCallback } from 'meteor/nova:core';
+import { removeCallback } from 'meteor/vulcan:core';
 
 removeCallback('posts.edit.sync', "setEditedAt");
 ```

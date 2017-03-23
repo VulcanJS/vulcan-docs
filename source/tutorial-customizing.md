@@ -26,10 +26,10 @@ Package.onUse( function(api) {
   api.use([
     'fourseven:scss',
 
-    'nova:core',
-    'nova:base-components',
-    'nova:posts',
-    'nova:users'
+    'vulcan:core',
+    'vulcan:base-components',
+    'vulcan:posts',
+    'vulcan:users'
   ]);
 
   api.mainModule('server.js', 'server');
@@ -51,7 +51,7 @@ Let's go through this file block by block.
 
 - `Package.describe` is used to set your package's metadata. Only the `name` is required, but you can also add a version, Git repository, etc.
 - `Package.onUse` contains the code used to load our package. 
-- `api.use` declares the package's dependencies on other Meteor packages. These dependencies can be either local (living in `/packages` like `nova:*`) or remote (pulled from Meteor's package server like `fourseven:scss`).
+- `api.use` declares the package's dependencies on other Meteor packages. These dependencies can be either local (living in `/packages` like `vulcan:*`) or remote (pulled from Meteor's package server like `fourseven:scss`).
 - `api.mainModule` is used to declare your package's client and server entry points and should be used to load JavaScript files. 
 - `api.addFiles` is used to add files one by one, usually HTML or CSS. 
 - `api.addAssets` is used to add static assets to your package. Basically, anything that's not a JavaScript, HTML, or CSS file. 
@@ -129,8 +129,8 @@ We'll replace it with a new component that shows a welcome message next to the l
 ```js
 import React from 'react';
 import { IndexLink } from 'react-router';
-import { withCurrentUser, replaceComponent } from 'meteor/nova:core';
-import Users from 'meteor/nova:users';
+import { withCurrentUser, replaceComponent } from 'meteor/vulcan:core';
+import Users from 'meteor/vulcan:users';
 
 const CustomLogo = ({logoUrl, siteTitle, currentUser}) => {
   return (
@@ -159,7 +159,7 @@ Replacing the entire component works for simple components, but sometimes you on
 Take a look look at the `CustomNewsletter` component to see an example of doing just that:
 
 ```js
-import { Components, replaceComponent, getRawComponent } from 'meteor/nova:core';
+import { Components, replaceComponent, getRawComponent } from 'meteor/vulcan:core';
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -198,7 +198,7 @@ You can learn more about replacing and extending components in the [Components &
 Another common need is changing the wording of a specific string. Vulcan uses the [react-intl](https://github.com/yahoo/react-intl) library to make every string in the default components customizable and translatable.
 
 ```js
-import { addStrings } from 'meteor/nova:core';
+import { addStrings } from 'meteor/vulcan:core';
 
 addStrings('en', {
   "posts.color": "Color" // add a new one (collection.field: "Label")
@@ -212,7 +212,7 @@ You can learn more about translating strings in the [Internationalization](inter
 Custom fields let you add extra properties to predefined collections like `Posts` or `Comments`. In the `custom_fields.js` file, we're adding a new `color` property to posts, and making it insertable, editable, and viewable by any member of the `members` user group (in other words, regular users):
 
 ```js
-import Posts from "meteor/nova:posts";
+import Posts from "meteor/vulcan:posts";
 
 Posts.addField(
   {
@@ -243,7 +243,7 @@ Posts.addField(
 We'll then extend the `PostsItem` component to add a CSS class to the `posts-item` div based on this color field:
 
 ```js
-import { replaceComponent, getRawComponent } from 'meteor/nova:core';
+import { replaceComponent, getRawComponent } from 'meteor/vulcan:core';
 
 class CustomPostsItem extends getRawComponent('PostsItem') {
 
@@ -295,7 +295,7 @@ Learn more about adding your own custom fields in the [Custom Fields](custom-fie
 Callbacks let you insert your own server-side logic at key points in Vulcan's code. For example, the `callbacks.js` file shows you how you can insert random emojis in a post title whenever a new post is inserted:
 
 ```js
-import { addCallback } from 'meteor/nova:core';
+import { addCallback } from 'meteor/vulcan:core';
 
 function PostsNewAddRandomEmoji (post, user) {
 
@@ -313,7 +313,7 @@ You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 Out of the box, Vulcan considers three kind of users: guests (users without an account), members (users with a normal account), and admins. Let's add a fourth kind, mods, in `groups.js`:
 
 ```js
-import Users from 'meteor/nova:users';
+import Users from 'meteor/vulcan:users';
 
 Users.createGroup("mods");
 
@@ -330,7 +330,7 @@ You can learn more about user groups in the [Groups & Permissions](groups-permis
 Adding a new route is easy enough. After creating a new `MyCustomPage` component we  just add the following code in `routes.js`: 
 
 ```js
-import { addRoute } from 'meteor/nova:core';
+import { addRoute } from 'meteor/vulcan:core';
 import MyCustomPage from './components/MyCustomPage.jsx';
 
 addRoute({name:"myCustomRoute", path:"/my-custom-route", component:MyCustomPage});
@@ -356,7 +356,7 @@ api.addAssets([
 Finally, we retrieve these two assets and assign them to email templates in `lib/server/templates.js`:
 
 ```js
-import VulcanEmail from 'meteor/nova:email';
+import VulcanEmail from 'meteor/vulcan:email';
 
 VulcanEmail.addTemplates({
   newPost: Assets.getText("lib/server/emails/customNewPost.handlebars"),

@@ -17,7 +17,7 @@ You *could* simply let users specify their own selectors and options, but that w
 
 Instead, Vulcan adopts a two-tiered approach: first, the user defines query **terms** that specify the data they want. Then, these terms go through a set of successive callbacks that “translate” them into a Mongo-compatible `{selector, options}` object known as the **parameters** object (in the process catching any potential security issues).
 
-To give a practical example, the `nova:posts` package translates the following terms:
+To give a practical example, the `vulcan:posts` package translates the following terms:
 
 ```js
 {
@@ -52,7 +52,7 @@ The generic `withList` component is hard-coded to send a `terms` argument, but i
 Every Vulcan collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. For example, this is how the `framework-demo` implements a sort by `createdAt` on the `Movies` collection:
 
 ```js
-import { addCallback } from 'meteor/nova:core';
+import { addCallback } from 'meteor/vulcan:core';
 
 function sortByCreatedAt (parameters, terms) {
   return {
@@ -73,7 +73,7 @@ You've seen above how to manually create a `sortByCreatedAt` callback, but Vulca
 For example, this is how the `best` view is defined:
 
 ```js
-import { Posts } from 'meteor/nova:posts';
+import { Posts } from 'meteor/vulcan:posts';
 
 Posts.addView('best', terms => ({
   options: {

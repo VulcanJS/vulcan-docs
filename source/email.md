@@ -2,11 +2,11 @@
 title: Email
 ---
 
-###Customizing Emails###
+## Customizing Emails
 
 Unlike components, emails don't use React but Spacebars, a variant of the Handlebars templating language.
 
-All email templates live in the `nova:email-templates` package. In order to register a new template or override an existing one, first you must import it as a text asset in your `package.js` file (or store it in your `/public` directory):
+All email templates live in the `vulcan:email-templates` package. In order to register a new template or override an existing one, first you must import it as a text asset in your `package.js` file (or store it in your `/public` directory):
 
 ```js
 api.addAssets(['path/to/template/newReply.handlebars',], ['server']);
@@ -21,7 +21,7 @@ Assets.getText("path/to/template/newReply.handlebars")
 You can add a template with:
 
 ```js
-import VulcanEmail from 'meteor/nova:email';
+import VulcanEmail from 'meteor/vulcan:email';
 
 VulcanEmail.addTemplates({
   newReply: Assets.getText("path/to/template/newReply.handlebars")
@@ -31,13 +31,13 @@ VulcanEmail.addTemplates({
 Or override an existing one with:
 
 ```js
-import VulcanEmail from 'meteor/nova:email';
+import VulcanEmail from 'meteor/vulcan:email';
 
 VulcanEmail.templates.newReply = Assets.getText("path/to/template/newReply.handlebars");
 });
 ```
 
-### Email Stying
+## Email Stying
 Some styling of emails can be controlled in `settings.json`:
 
 | Setting | Default | Description |
@@ -51,6 +51,6 @@ Some styling of emails can be controlled in `settings.json`:
 | logoHeight | |
 | logoWidth | | 
 
-### Newsletter
+## Newsletter
 
 In your local development environment, you can preview your newsletter at `http://localhost:3000/email/newsletter`

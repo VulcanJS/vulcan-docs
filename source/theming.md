@@ -13,10 +13,10 @@ The advantage of calling the `getComponent` function instead of using `Component
 
 ## Registering Components
 
-Vulcan components are all listed in `nova:core`'s `Components` object. You can add new ones with the 'registerComponent` method:
+Vulcan components are all listed in `vulcan:core`'s `Components` object. You can add new ones with the 'registerComponent` method:
 
 ```js
-import { registerComponent } from 'meteor/nova:core';
+import { registerComponent } from 'meteor/vulcan:core';
 
 const Logo = props => {
   return (
@@ -37,7 +37,7 @@ registerComponent('Logo', Logo, withCurrentUser, withRouter);
 Once a component is registered, you can use it with `Components.Foo`. For example:
 
 ```js
-import { Components } from 'meteor/nova:core';
+import { Components } from 'meteor/vulcan:core';
 
 const Header = props => {
   return (
@@ -91,14 +91,14 @@ registerComponent('PostsList', PostsList, [withList, options]);
 
 ## Replacing Components
 
-Apart from a couple exceptions, almost all React components in Vulcan live inside the `nova:base-components` package. 
+Apart from a couple exceptions, almost all React components in Vulcan live inside the `vulcan:base-components` package. 
 
-If you only need to modify a single component, you can simply override it with a new one without having to touch the `nova:base-components` package.
+If you only need to modify a single component, you can simply override it with a new one without having to touch the `vulcan:base-components` package.
 
 For example, if you wanted to use your own `CustomLogo` component you would do:
 
 ```js
-import { replaceComponent } from 'meteor/nova:core';
+import { replaceComponent } from 'meteor/vulcan:core';
 
 const CustomLogo = props => {
   return (
@@ -120,7 +120,7 @@ The `CustomLogo` component will also be wrapped with `withCurrentUser` and `with
 Once you've replaced the `Logo` component with your own `CustomLogo`, `Components.Logo` will now point to `CustomLogo`. If you want an easy way to keep track of which components have been customized, you could add a `custom` attribute when calling the component as a reminder for yourself:
 
 ```js
-import { Components } from 'meteor/nova:core';
+import { Components } from 'meteor/vulcan:core';
 
 const CustomHeader = props => {
   return (
@@ -156,7 +156,7 @@ The main purpose behind the components API is to enable extending and replacing 
 
 ## Core Components
 
-In addition to components that are part of a specific theme package (such as `nova:base-components`), a few components are provided with `nova:core`.
+In addition to components that are part of a specific theme package (such as `vulcan:base-components`), a few components are provided with `vulcan:core`.
 
 ### App
 
@@ -176,7 +176,7 @@ This is a default layout. It'll usually be replaced with each theme's own custom
 
 ### Loading
 
-A simple loading spinner component you can use to show loading states. Its corresponding styles currently live in the `nova:base-styles` package. 
+A simple loading spinner component you can use to show loading states. Its corresponding styles currently live in the `vulcan:base-styles` package. 
 
 ### ModalTrigger
 

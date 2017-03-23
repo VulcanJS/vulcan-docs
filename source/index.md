@@ -35,18 +35,17 @@ meteor --settings sample_settings.json
 
 ## Getting Started
 
-There are two main ways of using Vulcan: you can use the features it provides out of the box such as posts, comments, a newsletter, and so on. Or, you can use the underlying *framework* that powers all these features. 
+You should start by reading the [Architecture](architecture.html) section to understand how Vulcan's codebase is organized. 
 
-In either case, you should start by reading the [Architecture](architecture.html) section to understand how Vulcan's codebase is organized. 
+Then, when you first run Vulcan, you'll see the contents of the `movies-example` package. It is recommended you go through the [Understanding the Vulcan Framework](tutorial-framework.html) tutorial to get a better grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
-Once you've done that, depending on which path you're interested in you can refer to either one of these two tutorials:
+You can then also take a look at the code for the `movies-example-full` package, which takes the same basic example but goes a little further.
 
-1. [Customizing & Extending Vulcan](tutorial-customizing.html) will take you through the code of the included `customization-demo` package and show you how to adapt Vulcan to your needs by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
-2. [Understanding the Vulcan Framework](tutorial-framework.html) on the other hand will teach you how to use Vulcan's core data management features to display a list of movies, complete with pagination and a data insertion form. 
+At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced [Features Packages](packages.html) built around the `vulcan:posts` package. 
 
-If you're not sure which one is for you, I recommend starting with the first tutorial, as the second one covers more advanced concepts.
+If you'd like to use and customize these packages, you can then follow the [Customizing & Extending Vulcan](tutorial-customizing.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan to your needs by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
 
-## Alternative Approach
+## Alternative Approaches
 
 Throughout the documentation, you'll find “Alternative Approach” sections that explain what a feature does, and how to achieve the same results without using Vulcan (typically, with standard React and/or Apollo code). This is useful if you've hit the limits of what Vulcan offers, and want to refactor parts of your app to use lower-level APIs. 
 

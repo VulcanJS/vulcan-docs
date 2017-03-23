@@ -20,6 +20,8 @@ sidebar_categories:
     - features
     - architecture
     - vulcan
+    - packages
+    - features-packages
   Data Layer:
     - schemas
     - data-loading

@@ -201,13 +201,13 @@ As long as a value is in this.state.currentValues it should be submitted with th
 
 #### `required` (`Users` only)
 
-You can mark a field as `required: true` to indicate that it should be completed when the user signs up. If you're using the `nova:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
+You can mark a field as `required: true` to indicate that it should be completed when the user signs up. If you're using the `vulcan:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
 
 ## Custom Fields
 
 Out of the box, Vulcan has three main collections: `Posts`, `Users`, and `Comments`. Each of them has a pre-set schema, but that schema can also be extended with custom fields.
 
-For example, this is how the `nova:newsletter` package extends the `Posts` schema with a `scheduledAt` property that keeps track of when a post was sent out as part of an email newsletter:
+For example, this is how the `vulcan:newsletter` package extends the `Posts` schema with a `scheduledAt` property that keeps track of when a post was sent out as part of an email newsletter:
 
 ```js
 Posts.addField({

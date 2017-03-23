@@ -37,7 +37,7 @@ For any other file (except those belonging to your own custom packages) you shou
 
 Make sure your `packages` file now contains the following new package:
 
-- `nova:routing`
+- `vulcan:routing`
 
 Once you've fixed all Git conflicts, it's time to install any additional NPM packages with `npm install`. You can now try running your app with the usual `meteor` command. If you haven't customized anything, then everything should work more or less fine, and you can stop here!
 
@@ -45,18 +45,18 @@ If however you've built your own custom themes and features, you'll probably hav
 
 ## The Telescope Namespace
 
-The global Telescope namespace (`Telescope.*`) has been deprecated in favor of importing individual functions and objects from `nova:core`. For example, instead of using `Telescope.routes.add`, you would import `{ addRoutes }` from `meteor/nova:core`. 
+The global Telescope namespace (`Telescope.*`) has been deprecated in favor of importing individual functions and objects from `vulcan:core`. For example, instead of using `Telescope.routes.add`, you would import `{ addRoutes }` from `meteor/vulcan:core`. 
 
 ## Routes
 
-Routes are handled a bit differently in Vulcan Apollo. Instead of having routes definitions (`addRoute(...)`) and the actual routing code in the same package, route definitions now belong together with themes, while routing code lives in `nova:routing`. 
+Routes are handled a bit differently in Vulcan Apollo. Instead of having routes definitions (`addRoute(...)`) and the actual routing code in the same package, route definitions now belong together with themes, while routing code lives in `vulcan:routing`. 
 
-This means if you had any routing code (e.g. `ReactRouterSSR.Run()`) in your custom packages, you can now safely remove it and let `nova:routing` handle it. 
+This means if you had any routing code (e.g. `ReactRouterSSR.Run()`) in your custom packages, you can now safely remove it and let `vulcan:routing` handle it. 
 
 Other changes:
 
-- `Telescope.routes.routes` -> `import { Routes } from 'meteor/nova:core'`
-- `Telescope.routes.add` -> `import { addRoute } from 'meteor/nova:core'`
+- `Telescope.routes.routes` -> `import { Routes } from 'meteor/vulcan:core'`
+- `Telescope.routes.add` -> `import { addRoute } from 'meteor/vulcan:core'`
 
 ## Custom Fields
 
@@ -129,7 +129,7 @@ Telescope.components.UsersProfile = MyCustomUsersProfile;
 You now write:
 
 ```js
-import { Components, replaceComponent } from 'meteor/nova:core';
+import { Components, replaceComponent } from 'meteor/vulcan:core';
 
 replaceComponent('UsersProfile', MyCustomUsersProfile);
 ```
@@ -137,7 +137,7 @@ replaceComponent('UsersProfile', MyCustomUsersProfile);
 And to access a component, you now do:
 
 ```js
-import { Components, replaceComponent } from 'meteor/nova:core';
+import { Components, replaceComponent } from 'meteor/vulcan:core';
 
 <Components.UsersProfile/>
 ```
@@ -153,7 +153,7 @@ class MyPostsItem extends Telescope.components.PostsItem {
 You now write:
 
 ```
-import Telescope, { getRawComponent } from 'meteor/nova:core';
+import Telescope, { getRawComponent } from 'meteor/vulcan:core';
 class MyPostsItem extends getRawComponent('PostsItem') {
   ...
 }
@@ -177,25 +177,25 @@ Also note that the `CanDo` component used to test for permissions has been repla
 
 ### Callbacks
 
-- `Telescope.callbacks` -> `import { Callbacks } from 'meteor/nova:core'`
-- `Telescope.callbacks.add` -> `import { addCallback } from 'meteor/nova:core'`
-- `Telescope.callbacks.remove` -> `import { removeCallback } from 'meteor/nova:core'`
-- `Telescope.callbacks.run` -> `import { runCallbacks } from 'meteor/nova:core'`
-- `Telescope.callbacks.runAsync` -> `import { runCallbacksAsync } from 'meteor/nova:core'`
+- `Telescope.callbacks` -> `import { Callbacks } from 'meteor/vulcan:core'`
+- `Telescope.callbacks.add` -> `import { addCallback } from 'meteor/vulcan:core'`
+- `Telescope.callbacks.remove` -> `import { removeCallback } from 'meteor/vulcan:core'`
+- `Telescope.callbacks.run` -> `import { runCallbacks } from 'meteor/vulcan:core'`
+- `Telescope.callbacks.runAsync` -> `import { runCallbacksAsync } from 'meteor/vulcan:core'`
 
 ### Strings
 
-- `Telescope.strings.add` -> `import { addString } from 'meteor/nova:core'`;
+- `Telescope.strings.add` -> `import { addString } from 'meteor/vulcan:core'`;
 
 ### Settings
 
-- `Telescope.settings.get` -> `import { getSetting } from 'meteor/nova:core'`;
+- `Telescope.settings.get` -> `import { getSetting } from 'meteor/vulcan:core'`;
 
-Note that using the `Settings` collection and the `nova:settings` package are deprecated. 
+Note that using the `Settings` collection and the `vulcan:settings` package are deprecated. 
 
 ### Utils
 
-- `Telescope.utils` -> `import { Utils } from 'meteor/nova:core'`
+- `Telescope.utils` -> `import { Utils } from 'meteor/vulcan:core'`
 
 ## Database Migration
 

@@ -10,7 +10,7 @@ In the near future, this will mean two big changes for Telescope:
 
 First, all various assets (repo/documentation/homepage/etc.) will progressively transition to the new VulcanJS name and branding. This might be a bit confusing at first, but we'll get there eventually!
 
-Second, Vulcan will adopt a new “framework-first” approach. Practically speaking, this means you'll start new projects with the `framework-demo` package, and not with the optional `nova:posts`, `nova:comments`, etc. feature packages. Of course, these packages will still be available if you choose to use them. We just think it's important for new users to understand how the underlying framework works before they start using its more advanced capabilities.
+Second, Vulcan will adopt a new “framework-first” approach. Practically speaking, this means you'll start new projects with the `framework-demo` package, and not with the optional `vulcan:posts`, `vulcan:comments`, etc. feature packages. Of course, these packages will still be available if you choose to use them. We just think it's important for new users to understand how the underlying framework works before they start using its more advanced capabilities.
 
 ### Telescope, Nova, & Vulcan
 
