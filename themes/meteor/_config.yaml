@@ -8,6 +8,6 @@ favicon: images/favicon.ico
 
 nav_links:
   'GitHub':
-    url: https://github.com/telescopejs/telescope
+    url: https://github.com/vulcanjs/vulcan
   'Slack':
     url: http://slack.telescopeapp.org

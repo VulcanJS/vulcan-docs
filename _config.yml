@@ -51,14 +51,14 @@ sidebar_categories:
     - tutorial-customizing
     - migration
     - deployment
-github_repo: telescopejs/nova-docs
+github_repo: vulcanjs/nova-docs
 content_root: source
 
 typescript_api_box:
   data_file: docs.json
 
 social_links:
-  github: 'https://github.com/telescopejs/telescope'
+  github: 'https://github.com/vulcanjs/vulcan'
   twitter: '@telescopeapp'
 
 # API keys
@@ -126,5 +126,5 @@ theme: meteor
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/TelescopeJS/nova-docs
+  repository: https://github.com/VulcanJS/nova-docs
   branch: gh-pages

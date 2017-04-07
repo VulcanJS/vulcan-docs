@@ -29,7 +29,7 @@ git pull origin devel
 This will probably result in at least a few Git conflicts between the old and new versions of the same files. Here are some of the most commonly affected files:
 
 - `package.json`: fix any conflicts by keeping the most recent version of each package. You can always use a tool like [depcheck](https://www.npmjs.com/package/depcheck) later to remove unused packages.
-- `packages`: for this file, it's probably easiest to just accept the [new version](https://github.com/TelescopeJS/Telescope/blob/apollo/.meteor/packages) and then manually re-add your own custom packages afterwards. 
+- `packages`: for this file, it's probably easiest to just accept the [new version](https://github.com/VulcanJS/Vulcan/blob/apollo/.meteor/packages) and then manually re-add your own custom packages afterwards. 
 - `release`: just keep the latest Meteor version.
 - `versions`: this file will be re-generated at runtime, so you can safely pick either version or even delete it for now. 
 
