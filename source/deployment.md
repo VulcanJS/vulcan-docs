@@ -80,7 +80,7 @@ mup deploy --settings settings.json
 
 ## PM2
 
-Contributed by [adalidda](https://github.com/TelescopeJS/Telescope/issues/1552#issuecomment-276948862).
+Contributed by [adalidda](https://github.com/VulcanJS/Vulcan/issues/1552#issuecomment-276948862).
 
 Deploy Vulcan GraphQL/Apollo version with PM2
 
