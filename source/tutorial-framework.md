@@ -145,7 +145,7 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet, and inside it a `MoviesWrapper` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet, and inside it a component named `MoviesWrapper.jsx`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
