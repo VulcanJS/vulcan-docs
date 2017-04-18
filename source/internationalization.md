@@ -19,3 +19,4 @@ If you create a new internationalization package, let us know so we can add it h
 - [de-DE](https://atmospherejs.com/fzeidler/nova-i18n-de-de)
 - [pt-BR](https://github.com/lukasag/nova-i18n-pt-br)
 - [zh-CN](https://github.com/qge/nova-i18n-zh-cn)
+- [hu-HU](https://github.com/pal-pinter/vulcan-i18n-hu-hu)
