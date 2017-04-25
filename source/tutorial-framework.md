@@ -820,6 +820,7 @@ const schema = {
   createdAt: {
     type: Date,
     viewableBy: ['guests'],
+    optional: true,
     autoValue: (documentOrModifier) => {
       if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp  
     }
