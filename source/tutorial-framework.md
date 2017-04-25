@@ -758,7 +758,7 @@ import mutations from './mutations.js';
 
 const Movies = createCollection({
 
-  collectionName: 'movies',
+  collectionName: 'Movies',
 
   typeName: 'Movie',
 
