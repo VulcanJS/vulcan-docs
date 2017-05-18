@@ -118,3 +118,10 @@ example-movies
 # example-movies-full
 # example-customization
 ```
+
+Note that custom packages may be added even if they are not located within the Vulcan root directory, by setting the `METEOR_PACKAGE_DIRS` environment variable. For example, the following will allow you to add any package located in the `packages` subdirectory of your home directory:
+
+```
+cat >> $HOME/.profile
+export METEOR_PACKAGE_DIRS=$HOME/packages
+```
