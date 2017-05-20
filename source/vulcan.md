@@ -1,5 +1,5 @@
 ---
-title: Vulcan
+title: From Telescope to Vulcan
 ---
 
 **Vulcan** is the name of the next big evolution of the Telescope project. 

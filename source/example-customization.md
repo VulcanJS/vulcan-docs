@@ -1,10 +1,12 @@
 ---
-title: Customizing & Extending Vulcan
+title: Customization Example
 ---
 
 Vulcan was made to be extensible from the ground up. This means that you can tweak and adapt many existing features to your needs without having to rewrite them from scratch. 
 
-In this tutorial, we'll look at the `customization-demo` code file by file to see how we can easily extend Vulcan with minimal work. 
+In this tutorial, we'll look at the [`example-customization` code](https://github.com/TelescopeJS/Telescope/tree/master/packages/example-customization) file by file to see how we can easily extend Vulcan with minimal work. 
+
+Note that we're mainly talking about customizing [forum packages](packages.html) here.
 
 ## Intro
 

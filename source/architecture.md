@@ -2,19 +2,7 @@
 title: Architecture
 ---
 
-## Vulcan's Building Blocks
-
-Vulcan is built on top of three main open-source technologies: React, GraphQL, and Meteor. 
-
-- [React](https://facebook.github.io/react/) is Vulcan's front-end library.
-- [GraphQL](http://graphql.org) is Vulcan's API layer, used to load data from the server with [Apollo](http://apollostack.com). 
-- [Meteor](http://meteor.com) is Vulcan's back-end layer, used to handle the database as well as server and bundle the app. 
-
-Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we're not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.
-
-The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. 
-
-## A Note About Apollo
+## Apollo
 
 [Apollo](http://apollostack.com) is the set of tools used to manage the GraphQL layer. It consists of two parts, Apollo server and Apollo client. 
 
@@ -59,3 +47,7 @@ const Posts = createCollection({...});
 ```
 
 Note that a lot of these utilities actually live in the `vulcan:lib` package, but they're re-exported from `vulcan:core` for convenience's sake. 
+
+## Alternative Approaches
+
+Throughout the documentation, you'll find “Alternative Approach” sections that explain what a feature does, and how to achieve the same results without using Vulcan (typically, with standard React and/or Apollo code). This is useful if you've hit the limits of what Vulcan offers, and want to refactor parts of your app to use lower-level APIs. 

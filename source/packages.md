@@ -16,86 +16,92 @@ Example: `react`
 
 ### Meteor Core Packages
 
-In addition to NPM, Meteor also features its own package management system used in parallel. Meteor Core Packages are the packages that make up the Meteor framework itself. You can recognize them because they don't follow the usual `username:package` format.
+In addition to NPM, Meteor also features its own package management system used in parallel. Meteor Core Packages are the packages that make up the Meteor framework itself. 
 
 Example: `meteor-base`
 
-### Meteor Third-Party Packages
+### Meteor Remote Packages
 
-These are Meteor packages loaded from Meteor's package server. 
+Meteor can also load packages from its package server. Remote packages must always follow the `username:package` naming convention.
 
 Example: `aldeed:collection2-core`
 
 ### Meteor Local Packages
 
-These are Meteor packages loaded from the local filesystem. Most of Vulcan's packages, as well as your own customizations, belong to this category.
+Finally, Meteor can also load packages from the local file system. These packages can be named whatever you want, and don't need to follow the `username:package` convention. 
 
-Example: `vulcan:posts`
+Example: `example-movies`, `vulcan:forms`
 
-Note that if both a local and remote Meteor package use the same name, Meteor will use the local copy. 
+Note that if both a local and remote Meteor package use the same name, Meteor will use the local copy.
 
 ## Vulcan Packages
 
-Here's a quick overview of the different Vulcan package categories you'll come across. Note that all packages are listed in your `.meteor/packages` file. 
+Different Vulcan packages can play different roles. So here's a quick overview of the different Vulcan package categories you'll come across. 
 
 ### Core Packages
 
-These packages make up the heart of Vulcan. You'll need **all of them** enabled. 
+The `vulcan:core` package contains the heart of Vulcan, and itself depends on a set of core packages:
 
 ```
-vulcan:core                       # core components and wrappers
-vulcan:forms                      # auto-generated forms
-vulcan:routing                    # routing and server-side rendering
-vulcan:users                      # user management and permissions
+vulcan:lib
+vulcan:routing
+vulcan:users
 ```
+
+Note that since `vulcan:core` already includes these dependencies, you only need to make your own package depend on `vulcan:core`. 
 
 ### Features Packages
 
-These optional packages provide specific features made to work together, most of the time using the `vulcan:posts` and `vulcan:comments` packages. These are all **disabled by default** (commented out with a `#`). 
+These optional packages provide additional features for your Vulcan app.
 
 ```
-# vulcan:email
-# vulcan:posts
-# vulcan:comments
-# vulcan:newsletter
-# vulcan:notifications
-# vulcan:getting-started
-# vulcan:categories
-# vulcan:voting
-# vulcan:events
-# vulcan:embedly
-# vulcan:api
-# vulcan:rss
-# vulcan:subscribe
+vulcan:accounts
+vulcan:forms
+vulcan:email
+vulcan:events
 ```
 
-As an example, the `vulcan:newsletter` package can be used to send an email newsletter of your most recent posts and comments. But of course all three packages can also be disabled. 
+### Forum Packages
 
-You can learn more about these in the [Features Packages](features-packages.html) section. 
-
-### Theme Packages
-
-These packages contain components that work with the default features packages (posts, comments, categories, etc.).
+Because Vulcan started its life as Telescope, a Hacker News-like forum app, it still includes quite a few packages that are made specifically to help you build a forum-type community app (enabled through [the `example-forum` package](example-forum.html)). 
 
 ```
-# vulcan:base-components        # default ui components
-# vulcan:base-styles            # default styling
-# vulcan:email-templates        # default email templates for notifications
+vulcan:posts
+vulcan:comments
+vulcan:newsletter
+vulcan:notifications
+vulcan:getting-started
+vulcan:categories
+vulcan:voting
+vulcan:embedly
+vulcan:api
+vulcan:rss
+vulcan:subscribe
 ```
 
-These packages can contain React components, CSS styles, or Handlebars email templates. Since they work with features packages, they're also **disabled by default**. 
+As an example, the `vulcan:newsletter` package can be used to send an email newsletter of your most recent posts and comments. 
+
+In addition, the following three packages contain the components, styles, and templates that make up the basic forum example:
+
+```
+vulcan:base-components
+vulcan:base-styles
+vulcan:email-templates
+```
+
+Note that the majority of the forum packages specifically require the `vulcan:posts` package. For example, the `vulcan:newsletter` can currently only build a newsletter based on the `Posts` collection. That being said, the goal is to eventually transform them into generic features package whenever possible, so that they can work with any Vulcan collection. 
 
 ### Language Packages
 
-These contain the language strings used throughout Vulcan. You need **at least one of them** enabled. 
+These contain the language strings used throughout Vulcan (for the app core, features packages, and forum packages). You need **at least one of them** enabled. 
 
 ```
-vulcan:i18n-en-us               # default language translation
+vulcan:i18n-en-us
 ```
 
 ### Accounts Package
 
-Accounts package contain the authentication logic used by Meteor's account system. You need **at least one of them** enabled.
+Accounts package contain the back-end authentication logic used by Meteor's account system. You need **at least one of them** enabled.
 
 ```
 accounts-password@1.3.4
@@ -107,14 +113,26 @@ accounts-password@1.3.4
 
 Any other package that contains your own logic. 
 
-Out of the box, three example custom packages are provided:
+Out of the box, four example custom packages are provided:
 
 - `example-movies` contains a bare-bones forms and data loading example. 
-- `example-movies-full` goes a little bit further.
-- `example-customization` shows how to customize and extend features packages without having to modify their code directly. 
+- `example-instagram` goes a little bit further with a simple Instagram clone.
+- `example-forum` includes the original Telescope forum app.
+- `example-customization` shows how to customize and extend the forum example packages without having to modify their code directly. 
 
 ```
 example-movies
 # example-movies-full
+# example-forum
 # example-customization
 ```
+
+## Controlling Dependencies
+
+Generally speaking, there are two ways a package can be added to your codebase. It can be a top-level dependency, or one of your packages can itself depend on it. 
+
+For example, the `example-movies` package depends on `vulcan:core`, so adding `example-movies` will automatically add `vulcan:core` as well. This is why `vulcan:core` is not listed in your `.meteor/packages` file. 
+
+But although `example-movies` can use the English text strings stored in `vulcan:i18n-en-us`, it doesn't *depend* on it. This means you can (for example) swap out `vulcan:i18n-en-us` for `vulcan:i18n-fr-fr` in `.meteor/packages` to get French strings. 
+
+A complete list of all Meteor packages currently loaded is stored in the `.meteor/versions` file. 

@@ -85,6 +85,31 @@ A single `collection` option. The returned `removeMutation` mutation takes a sin
 
 Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you. 
 
+#### `withMutation`
+
+The `withMutation` HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers. 
+
+It takes two options: 
+
+- `name`: the name of the mutation to call on the server (will also be the name of the prop passed to the component).
+- `args`: (optional) an object containing the mutation's arguments and types. 
+
+For example, here's how to wrap the `MyComponent` component to pass it an `addEmailNewsletter` function as prop: 
+
+```js
+const mutationOptions = {
+  name: 'addEmailNewsletter',
+  args: {email: 'String'}
+}
+withMutation(mutationOptions)(MyComponent)
+```
+
+You would then call the function with:
+
+```
+this.props.addEmailNewsletter({email: 'foo@bar.com'})
+```
+
 ## Boilerplate Mutations
 
 Vulcan features three standard `newMutation`, `editMutation`, and `removeMutation` mutations that are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`. 

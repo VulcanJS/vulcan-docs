@@ -71,7 +71,7 @@ You can use the settings file to store your oAuth configurations:
     "secret": "bar"
   },
   "facebook": {
-    "clientId": "foo",
+    "appId": "foo",
     "secret": "bar"
   }
 }

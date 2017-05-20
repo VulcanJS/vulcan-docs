@@ -36,6 +36,18 @@ addRoute({
 });
 ```
 
+### Child Routes
+
+You can declare a new route as a child of an existing one using the following syntax:
+
+```js
+addRoute({
+  name: 'foo',
+  path: '/',
+  component: Foo
+}, 'nameOfParentRoute');
+```
+
 ### Update Callbacks
 
 A common pattern with React Router is running callbacks after the route update (to enable things like custom scrolling behavior, for example).

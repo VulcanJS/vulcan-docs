@@ -72,6 +72,33 @@ You can also use `GraphQLSchema.addQuery` to define your own queries:
 GraphQLSchema.addQuery(`currentUser: User`);
 ```
 
+### Caching & Batching
+
+You can optionally use [Dataloader](https://github.com/facebook/dataloader) inside your resolvers to get server-side better performance through caching and batching.
+
+To understand how this works, let's suppose you're displaying five posts on your homepage, each of which has an author. 
+
+Without batching, this would result in one database call to fetch the five posts, then one call per post to fetch the author as each `Post.author` resolver is called, for a total of six database queries. 
+
+With batching enabled, these five calls to the `users` collection are batched together, for a total of two database calls. 
+
+Additionally, with caching enabled, any queries for the same documents (for example, your posts also have `commenters`) won't hit the database at all but instead load data from Dataloader's cache. 
+
+Note that the cache is **per-request**, meaning that it will not persist across multiple reloads or different users (which would otherwise lead to outdated data).
+
+To load data from Dataloader instead of the database, you can use the following two functions:
+
+- `collection.loader.load(_id)`: takes the `_id` of a document.
+- `collection.loader.loadMany(_ids)`: takes an array of `_id`s. 
+
+If the documents requested are not present in the cache, Dataloader will automatically query the database for them. 
+
+Aditionally, you can also manually add documents to the cache with:
+
+- `collection.loader.prime(_id, document)`
+
+Finally, note that `load` and `loadMany` can only take `_id`s, and Mongo selectors. In those cases, you can simply keep querying the database directly with `collection.find()` and   `collection.findOne()`. 
+
 ## Higher-Order Components
 
 

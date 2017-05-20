@@ -26,6 +26,7 @@ npm start
 And open `http://localhost:3000/` in your browser.
 
 Note that you can also start the app with:
+
 ```sh
 # default setting file: sample_settings.json
 meteor --settings sample_settings.json 
@@ -35,19 +36,25 @@ meteor --settings sample_settings.json
 
 ## Getting Started
 
-You should start by reading the [Architecture](architecture.html) section to understand how Vulcan's codebase is organized. 
+When you first run Vulcan, you'll see the contents of the `example-movies` package. It is recommended you go through the [Movies example tutorial](example-movies.html) tutorial to get a better grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
-Then, when you first run Vulcan, you'll see the contents of the `movies-example` package. It is recommended you go through the [Understanding the Vulcan Framework](tutorial-framework.html) tutorial to get a better grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
+You can then enable the `example-instagram` package (which you can do by uncommenting it in `.meteor/packages`, and commenting out `example-movies` in its place), which takes the same basic example but goes a little further, as well as take a look at its code. 
 
-You can then also take a look at the code for the `movies-example-full` package, which takes the same basic example but goes a little further.
+At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced forum features by checking out the [`example-forum`](example-forum.html) package. 
 
-At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced [Features Packages](packages.html) built around the `vulcan:posts` package. 
+And if you'd like to use and customize the forum packages, you can then follow up with the [customization example tutorial](example-customization.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
 
-If you'd like to use and customize these packages, you can then follow the [Customizing & Extending Vulcan](tutorial-customizing.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan to your needs by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
+## Technology
 
-## Alternative Approaches
+Vulcan is built on top of three main open-source technologies: React, GraphQL, and Meteor. 
 
-Throughout the documentation, you'll find “Alternative Approach” sections that explain what a feature does, and how to achieve the same results without using Vulcan (typically, with standard React and/or Apollo code). This is useful if you've hit the limits of what Vulcan offers, and want to refactor parts of your app to use lower-level APIs. 
+- [React](https://facebook.github.io/react/) is Vulcan's front-end library.
+- [GraphQL](http://graphql.org) is Vulcan's API layer, used to load data from the server with [Apollo](http://apollostack.com). 
+- [Meteor](http://meteor.com) is Vulcan's back-end layer, used to handle the database as well as server and bundle the app. 
+
+Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we're not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.
+
+The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. 
 
 ## Roadmap
 

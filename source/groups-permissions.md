@@ -168,8 +168,6 @@ Here's how to create and modify groups.
 ```js
 Users.createGroup(groupName); // create a new group
 
-Users.methods.addGroup(userId, groupName); // add a user to a group (server only)
-
 Users.getGroups(user); // get a list of all the groups a user belongs to
 
 Users.getActions(user); // get a list of all the actions a user can perform

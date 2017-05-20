@@ -25,7 +25,8 @@ const Movies = createCollection({
 
 The function takes the following arguments:
 
-- `collectionName`: the name of the collection in your MongoDB database.
+- `collectionName`: the name of the collection throughout your app (will be lowercased in your MongoDB database).
+- `dbCollectionName`: if you want to use a different name in your database you can specify it here.
 - `typeName`: the name of the GraphQL type that will be generated for the collection.
 - `schema`, `resolvers`, `mutations`: see below.
 - `generateGraphQLSchema`: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to `true`). 

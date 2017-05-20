@@ -21,13 +21,15 @@ sidebar_categories:
     - architecture
     - vulcan
     - packages
-    - features-packages
+    # - features-packages
+    # - forum-packages
   Data Layer:
     - schemas
     - data-loading
     - fragments
     - terms-parameters
     - mutations
+    - redux
   API:
     - theming
     - forms
@@ -38,6 +40,17 @@ sidebar_categories:
     - routing
     - internationalization
     - settings
+  Packages:
+    - newsletter
+  Examples:
+    - example-movies
+    - example-instagram
+    - example-forum
+    - example-customization
+  Tutorials: 
+    - deployment
+    - migration
+    - recipes
   Resources:
     - learn
     - examples
@@ -46,11 +59,6 @@ sidebar_categories:
     - themes
     - tutorials
     - videos
-  Tutorials:
-    - tutorial-framework
-    - tutorial-customizing
-    - migration
-    - deployment
 github_repo: telescopejs/nova-docs
 content_root: source
 

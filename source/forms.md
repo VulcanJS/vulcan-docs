@@ -172,3 +172,7 @@ getChildContext() {
 #### Alternative Approach
 
 If you prefer, you can also code your own forms from scratch, either using `withNew`, `withEdit`, and `withRemove`, or with your own custom mutation HoCs. 
+
+## Form Components
+
+- [Upload](forms-upload.html)
