@@ -136,3 +136,10 @@ For example, the `example-movies` package depends on `vulcan:core`, so adding `e
 But although `example-movies` can use the English text strings stored in `vulcan:i18n-en-us`, it doesn't *depend* on it. This means you can (for example) swap out `vulcan:i18n-en-us` for `vulcan:i18n-fr-fr` in `.meteor/packages` to get French strings. 
 
 A complete list of all Meteor packages currently loaded is stored in the `.meteor/versions` file. 
+
+Note that Meteor packages may be added even if they are not located within the Vulcan root directory, by setting the `METEOR_PACKAGE_DIRS` environment variable. For example, the following commands will allow you to modify your `.profile` file to add any package located in the `packages` subdirectory of your home directory:
+
+```
+cat >> $HOME/.profile
+export METEOR_PACKAGE_DIRS=$HOME/packages
+```

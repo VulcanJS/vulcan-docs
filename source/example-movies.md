@@ -99,7 +99,7 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet, and inside it a `MoviesList` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet, and inside it a new file containing a `MoviesList` component:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -676,7 +676,7 @@ import mutations from './mutations.js';
 
 const Movies = createCollection({
 
-  collectionName: 'movies',
+  collectionName: 'Movies',
 
   typeName: 'Movie',
 
@@ -735,6 +735,7 @@ const schema = {
   createdAt: {
     type: Date,
     viewableBy: ['guests'],
+    optional: true,
     autoValue: (documentOrModifier) => {
       if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp  
     }
