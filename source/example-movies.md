@@ -99,7 +99,7 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet, and inside it a new file containing a `MoviesList` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory. Inside `components/movies` add a new file containing a `MoviesList` component:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -122,7 +122,6 @@ const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalC
         {/* load more placeholder */}
 
       </div>
-    }
 
   </div>
 
@@ -149,6 +148,14 @@ Make sure to also import `routes.js` inside `modules/index.js`:
 import './routes.js';
 ```
 
+In the `main.js` on the client add:
+
+```js
+import Movies from '../modules/index.js';
+
+export default Movies;
+```
+
 If everything worked properly, you should now be able to head to `http://localhost:3000/` and see your `MoviesList` component show up. 
 
 ## The Schema
@@ -157,7 +164,7 @@ We want to display a list of movies, which means querying for data as well as se
 
 Vulcan uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
 
-Create `schema.js` inside `modules`:
+Create `schema.js` inside `modules/movies`:
 
 ```js
 const schema = {
@@ -166,17 +173,20 @@ const schema = {
 
   _id: {
     type: String,
+    optional: true,
     viewableBy: ['guests'],
   },
   createdAt: {
     type: Date,
+    optional: true,
     viewableBy: ['guests'],
-    autoValue: (documentOrModifier) => {
-      if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp  
-    }
+    onInsert: () => {
+      return new Date();
+    },
   },
   userId: {
     type: String,
+    optional: true,
     viewableBy: ['guests'],
     resolveAs: 'user: User',
   },
@@ -207,13 +217,13 @@ const schema = {
 export default schema;
 ```
 
-Note that we're setting up an `autoValue` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
+Note that we're setting up an `onInsert` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
 
 And we're also setting `viewableBy: ['guests']` on every field to make sure they're visible to non-logged-in users (who belong to the default `guests` group). By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
 
 ## Setting Up a Collection
 
-We're now ready to set up our `Movies` collection. Create a new `collection.js` file inside `modules`:
+We're now ready to set up our `Movies` collection. Create a new `collection.js` file inside `modules/movies`:
 
 ```js
 import { createCollection } from 'meteor/vulcan:core';
@@ -221,7 +231,7 @@ import schema from './schema.js';
 
 const Movies = createCollection({
 
-  collectionName: 'movies',
+  collectionName: 'Movies',
 
   typeName: 'Movie',
 
@@ -255,7 +265,7 @@ GraphQLSchema.finalSchema
 
 Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Data Loading](/data-loading.html) section. 
 
-Let's start simple. Create a new `resolvers.js` file inside `modules` and add:
+Let's start simple. Create a new `resolvers.js` file inside `modules/movies` and add:
 
 ```js
 const resolvers = {
@@ -309,30 +319,30 @@ const seedData = [
     name: 'Star Wars',
     year: '1973',
     review: `A classic.`,
-    privateComments: `Actually, I don't really like Star Wars…`
+    privateComments: `Actually, I don't really like Star Wars…`,
   },
   {
     name: 'Die Hard',
     year: '1987',
     review: `A must-see if you like action movies.`,
-    privateComments: `I love Bruce Willis so much!`
+    privateComments: `I love Bruce Willis so much!`,
   },
   {
     name: 'Terminator',
     year: '1983',
     review: `Once again, Schwarzenegger shows why he's the boss.`,
-    privateComments: `Terminator is my favorite movie ever. `
+    privateComments: `Terminator is my favorite movie ever. `,
   },
   {
     name: 'Jaws',
     year: '1971',
     review: 'The original blockbuster.',
-    privateComments: `I'm scared of sharks…`
+    privateComments: `I'm scared of sharks…`,
   },
   {
     name: 'Die Hard II',
     year: '1991',
-    review: `Another classic.`
+    review: `Another classic.`,
   },
   {
     name: 'Rush Hour',
@@ -423,7 +433,7 @@ const resolvers = {
     name: 'moviesList',
 
     resolver(root, {terms = {}}, context, info) {
-      let {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
+      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
       return context.Movies.find(selector, options).fetch();
     },
 
@@ -438,7 +448,7 @@ const resolvers = {
       return context.Movies.find(selector, options).count();
     },
   
-  }
+  },
 };
 
 export default resolvers;
@@ -464,8 +474,6 @@ Create a new `MoviesItem` component inside `components`:
 import React, { PropTypes, Component } from 'react';
 import { registerComponent, ModalTrigger } from 'meteor/vulcan:core';
 
-import Movies from '../../modules/movies/collection.js';
-
 const MoviesItem = ({movie, currentUser}) =>
 
   <div style={{paddingBottom: "15px",marginBottom: "15px", borderBottom: "1px solid #ccc"}}>
@@ -480,7 +488,8 @@ export default MoviesItem;
 
 We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withList` [higher-order component](https://facebook.github.io/react/docs/higher-order-components.html): 
 
-```jsimport React, { PropTypes, Component } from 'react';
+```js
+import React, { PropTypes, Component } from 'react';
 import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
@@ -930,7 +939,7 @@ const MoviesItem = ({movie, currentUser}) =>
     {Movies.options.mutations.edit.check(currentUser, movie) ? 
       <Components.ModalTrigger label="Edit Movie">
         <MoviesEditForm currentUser={currentUser} documentId={movie._id} />
-      </ModalTrigger>
+      </Components.ModalTrigger>
       : null
     }
 
@@ -1028,6 +1037,18 @@ const mutations = {
 };
 
 export default mutations;
+```
+For the `check` function to work properly we need to update the `permissions.js` file.
+
+```js
+import Users from 'meteor/vulcan:users';
+
+const membersActions = [
+  'movies.new',
+  'movies.edit.own',
+  'movies.remove.own',
+];
+Users.groups.members.can(membersActions);
 ```
 
 All done! You should now be able to edit and remove movies. 
