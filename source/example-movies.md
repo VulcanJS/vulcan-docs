@@ -33,7 +33,7 @@ The next step will be creating a Meteor package to hold our code. This will be a
 
 Create a new `my-package` directory under `/packages`. We'll use the following file structure:
 
-``` /my-package/package.js
+```
 my-package
   lib
     client
@@ -56,7 +56,7 @@ my-package
 
 Set up all the directories along with the blank files within. Once this is done, let's start with the `package.js` file:
 
-```js /my-package/package.js
+```js
 Package.describe({
   name: 'my-package',
 });
