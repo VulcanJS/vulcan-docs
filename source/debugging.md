@@ -16,6 +16,18 @@ It's also possible that you've encountered a GraphQL error, which won't be shown
 
 You can also access a query's error message through the Redux or Apollo devtools. In the Redux devtools, click the State tab, drill down to the affected query, and check its `networkError` and `graphQLErrors` properties. 
 
+## GraphQL Schema Issues
+
+Although Vulcan includes features for generating your GraphQL schema automatically from your JSON schema, sometimes you'll run into issues and need to take a look under the hood. 
+
+You can review your final generated schema by opening the Meteor shell with `meteor shell` and then typing:
+
+```
+Vulcan.getGraphQLSchema()
+``` 
+
+You'll probably want to paste in the output in a text editor and replace `\n` with actual line breaks for better formatting. 
+
 ## SSR Warnings
 
 Another common type of problem is server-side rendering (SSR) warnings:

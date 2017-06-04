@@ -177,11 +177,23 @@ Users.canDo(user, action); // check if a user can perform a specific action
 
 Documents can be Posts, Comments, or Users. 
 
-Note that some groups are applied automatically without having to call `addToGroup`:
+Note that some groups are applied automatically:
 
 - `guests`: any non-logged-in user is considered guest. This group is special in that guests users are by definition not part of any other group.
 - `members`: default group for all existing users. Is applied to every user in addition to any other groups. 
 - `admins`: any user with the `isAdmin` flag set to true.
+
+## Adding User to Groups
+
+You can add any group string to a user's `groups` array:
+
+```js
+Users.update(user._id, {$push: {groups: 'mods'}});
+
+// or
+
+user.group = [...user.group, 'mods'];
+```
 
 ## Assigning Actions
 

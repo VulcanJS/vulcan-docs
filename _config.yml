@@ -42,12 +42,12 @@ sidebar_categories:
     - settings
   Packages:
     - newsletter
-  Examples:
+  Tutorials:
     - example-movies
     - example-instagram
     - example-forum
     - example-customization
-  Tutorials: 
+    - sponsorship-tutorial
     - deployment
     - migration
     - recipes

@@ -68,7 +68,7 @@ See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-sch
 
 Can either be an array of group names or a function.
 
-If it's a function, it'll be called on the `user` viewing the document, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user.
+If it's a function, it'll be called on the `user` viewing the document and the `document` itself, and should return `true` or `false`.
 
 #### `insertableBy`
 
@@ -81,6 +81,14 @@ If it's a function, it'll be called on the `user` performing the operation, and 
 Can either be an array of group names or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
+
+#### `onInsert`, `onEdit`, `onRemove`
+
+These three properties can take a callback function that will run during the corresponding operation. 
+
+- `onInsert(document, currentUser)`
+- `onEdit(modifier, document, currentUser)`
+- `onRemove(document, currentUser)`
 
 #### `resolveAs`
 
@@ -200,9 +208,9 @@ As long as a value is in this.state.currentValues it should be submitted with th
 
 ### Other Properties
 
-#### `required` (`Users` only)
+#### `mustComplete` (`Users` only)
 
-You can mark a field as `required: true` to indicate that it should be completed when the user signs up. If you're using the `vulcan:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
+You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the `vulcan:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
 
 ## Custom Fields
 

@@ -18,8 +18,6 @@ The client sends a query that includes the name of the mutation, the mutation ar
 
 The server then looks for a **mutation resolver** and executes it.
 
-
-
 ## Resolvers
 
 You can pass a `resolver` object to `createCollection`. It should include three `list`, `single`, and `total` resolvers.
@@ -66,11 +64,22 @@ Resolvers can be defined on any new or existing type (e.g. `Movie`).
 
 ### Custom Queries
 
-You can also use `GraphQLSchema.addQuery` to define your own queries:
+You can also use `GraphQLSchema.addQuery` to define your own root queries:
 
 ```js
+const currentUserResolver = {
+  Query: {
+    currentUser(root, args, context) {
+      return context.Users.findOne({ _id: args.userId });
+    },
+  },
+};
+GraphQLSchema.addResolvers(currentUserResolver);
+
 GraphQLSchema.addQuery(`currentUser: User`);
 ```
+
+Learn more about resolvers in the [Apollo documentation](http://dev.apollodata.com/tools/graphql-tools/resolvers.html).
 
 ### Caching & Batching
 
