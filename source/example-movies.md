@@ -310,7 +310,7 @@ export default Movies;
 We can try out our new query resolver using [GraphiQL](https://github.com/graphql/graphiql), but first we need some data. Create a new `seed.js` file inside `server`:
 
 ```js
-import Movies from '../modules/collection.js';
+import Movies from '../modules/movies/collection.js';
 import Users from 'meteor/vulcan:users';
 import { newMutation } from 'meteor/vulcan:core';
 
