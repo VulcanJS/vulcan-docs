@@ -654,7 +654,7 @@ const mutations = {
     
     mutation(root, {document}, context) {
       
-      Utils.performCheck(this, context.currentUser, document);
+      Utils.performCheck(this.check, context.currentUser, document);
 
       return newMutation({
         collection: context.Movies,
