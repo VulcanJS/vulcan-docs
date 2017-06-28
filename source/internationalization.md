@@ -20,3 +20,4 @@ If you create a new internationalization package, let us know so we can add it h
 - [pt-BR](https://github.com/lukasag/nova-i18n-pt-br)
 - [zh-CN](https://github.com/qge/nova-i18n-zh-cn)
 - [hu-HU](https://github.com/pal-pinter/vulcan-i18n-hu-hu)
+- [sv-SE](https://atmospherejs.com/klokie/vulcan-strings-i18n-sv-se)
