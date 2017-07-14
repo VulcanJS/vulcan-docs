@@ -46,6 +46,33 @@ this.props.removeMutation({
 }).then(/* success */).catch(/* error */);
 ```
 
+### Default Mutations
+
+Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:
+
+```js
+import { createCollection, getDefaultResolvers, getDefaultMutations } from 'meteor/vulcan:core';
+import schema from './schema.js';
+
+const Movies = createCollection({
+
+  collectionName: 'Movies',
+
+  typeName: 'Movie',
+
+  schema,
+  
+  resolvers: getDefaultResolvers('Movies'),
+
+  mutations: getDefaultMutations('Movies'), 
+
+});
+
+export default Movies;
+```
+
+To learn more about what exactly the default mutations do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js).
+
 ### Custom Mutations
 
 You can also add your own mutations using `GraphQLSchema.addMutation` and `GraphQLSchema.addResolvers`:
@@ -162,7 +189,7 @@ const mutations = {
     
     mutation(root, {document}, context) {
       
-      performCheck(this, context.currentUser, document);
+      performCheck(this.check, context.currentUser, document);
 
       return newMutation({
         collection: context.Posts,

@@ -44,6 +44,8 @@ At this stage, you can either continue using Vulcan's basic building blocks, or 
 
 And if you'd like to use and customize the forum packages, you can then follow up with the [customization example tutorial](example-customization.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
 
+You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
+
 ## Technology
 
 Vulcan is built on top of three main open-source technologies: React, GraphQL, and Meteor. 

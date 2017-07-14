@@ -2,7 +2,6 @@
 title: Collections & Schemas
 ---
 
-
 ## Creating Collections
 
 Vulcan features a number of helpers to make setting up your layer faster, most of which are initialized through the `createCollection` function:
@@ -92,57 +91,7 @@ These three properties can take a callback function that will run during the cor
 
 #### `resolveAs`
 
-Although Vulcan uses your SimpleSchema JSON schema to generate your GraphQL schema, it's important to understand that the two can be different. 
-
-For example, you might have a `userId` property in your `Posts` schema, but want this property to *resolve* as a `user` object in your GraphQL schema (and in turn, in your client store). You can use `resolveAs` to accomplish this:
-
-```
-resolveAs: 'user: User'
-```
-
-Note that in this case the `User` GraphQL type is generated automatically out of the box since `Users` is created using `createCollection`, but you could also add it manually:
-
-```
-const userSchema = `
-  type User {
-    _id: String
-    email: String
-    ...
-  }
-`;
-
-GraphQLSchema.addSchema(userSchema);
-```
-
-You'll also need to write the `Post.user` resolver (where `Post` is the GraphQL type of the current collection) and manually add it to your global schema:
-
-```
-const postResolvers = {
-  Post: {
-    user(post, args, context) {
-      return context.Users.findOne({ _id: post.userId }, { fields: context.getViewableFields(context.currentUser, context.Users) });
-    },
-  },
-};
-
-GraphQLSchema.addResolvers(postResolvers);
-```
-
-Or, maybe you want to resolve a `tagsId` list of IDs in your database as a `tags` array in your GraphQL schema:
-
-```
-resolveAs: 'tags: [Tags]'
-```
-
-Again, make sure that the `Tags` GraphQL type exists, and than you write a `tags` resolver for the current collection type. 
-
-The JSON schema field doesn't even need to actually exist in the database. Let's suppose that every comment has a `postId` property, but that a post doesn't know anything about its own comments. You could create a new `commentsPlaceholder` field in your `Posts` schema and set:
-
-```
-resolveAs: 'comments: [Comments]'
-```
-
-`commentsPlaceholder` will never actually contain anything in your database, but it will still resolve to `comments` in your GraphQL schema. 
+You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section. 
 
 ### Forms Properties
 

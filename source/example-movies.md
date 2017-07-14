@@ -10,9 +10,15 @@ So in this tutorial, we'll focus on understanding this framework and seeing how 
 
 The completed code for this tutorial can be found in [the `example-movies` package](https://github.com/TelescopeJS/Telescope/tree/master/packages/example-movies).
 
-## What We're Building
+## Video Tutorial
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RzoYVqsD9WI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4HidaFce6j0" frameborder="0" allowfullscreen></iframe>
+
+Note: this video differs slightly from the following tutorial when it comes to [defining the `user` resolver on the `userId` field](#The-User-Resolver). Both approaches will work, but make sure you check the tutorial to get the most up-to-date syntax. 
+
+## Short & Long Versions
+
+This tutorial includes a shorter version that uses some of Vulcan's default presets to save you time. If you'd rather to this short version, just skip every section marked with a `*` sign.
 
 ## Set Up
 
@@ -107,7 +113,7 @@ import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:co
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
-  <div style={{maxWidth: '500px', margin: '20px auto'}}>
+  <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
     Hello World!
 
@@ -148,14 +154,6 @@ Make sure to also import `routes.js` inside `modules/index.js`:
 import './routes.js';
 ```
 
-In the `main.js` on the client add:
-
-```js
-import Movies from '../modules/index.js';
-
-export default Movies;
-```
-
 If everything worked properly, you should now be able to head to `http://localhost:3000/` and see your `MoviesList` component show up. 
 
 ## The Schema
@@ -188,7 +186,6 @@ const schema = {
     type: String,
     optional: true,
     viewableBy: ['guests'],
-    resolveAs: 'user: User',
   },
   
   // custom properties
@@ -261,9 +258,45 @@ import {GraphQLSchema} from 'meteor/vulcan:lib'
 GraphQLSchema.finalSchema
 ```
 
-## Query Resolvers
+But even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. 
 
-Even though we have a schema, we can't actually query for a document yet because we don't have any **query resolvers**. In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Data Loading](/data-loading.html) section. 
+## Note: Default Resolvers & Mutations
+
+Vulcan provides a set of [default resolvers](/data-loading.html#Default-Resolvers) to speed things up, but for the sake of learning how things work this tutorial will show you how to write resolvers yourself. 
+
+If you'd rather skip this and use the defaults for now, just use the following code in `collection.js`, and simply ignore any section concerning the `resolvers.js` or `mutations.js` files (they will be marked with a `*` sign):
+
+```js
+import { createCollection, getDefaultResolvers, getDefaultMutations } from 'meteor/vulcan:core';
+import schema from './schema.js';
+import resolvers from './resolvers.js';
+import './fragments.js';
+import mutations from './mutations.js';
+import './permissions.js';
+import './parameters.js';
+
+const Movies = createCollection({
+
+  collectionName: 'Movies',
+
+  typeName: 'Movie',
+
+  schema,
+  
+  resolvers: getDefaultResolvers('Movies'),
+
+  mutations: getDefaultMutations('Movies'),
+
+});
+
+export default Movies;
+```
+
+## Custom Query Resolvers*
+
+*(Note: you can skip this section if you're using default resolvers and mutations)*
+
+In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Data Loading](/data-loading.html) section. 
 
 Let's start simple. Create a new `resolvers.js` file inside `modules/movies` and add:
 
@@ -307,10 +340,12 @@ const Movies = createCollection({
 export default Movies;
 ```
 
+## Seeding The Database
+
 We can try out our new query resolver using [GraphiQL](https://github.com/graphql/graphiql), but first we need some data. Create a new `seed.js` file inside `server`:
 
 ```js
-import Movies from '../modules/collection.js';
+import Movies from '../modules/movies/collection.js';
 import Users from 'meteor/vulcan:users';
 import { newMutation } from 'meteor/vulcan:core';
 
@@ -419,7 +454,9 @@ query moviesQuery{
 
 As you can see, the great thing about GraphQL is that you can specify exactly which piece of data you need!
 
-## More Advanced Resolvers
+## More Advanced Resolvers*
+
+*(Note: you can skip this section if you're using default resolvers and mutations)*
 
 Although our resolver works, it's fairly limited. As it stands, we can't filter, sort, or paginate our data. Even though we might not need these features right away, now is a good time to set things up in a more future-proof way.
 
@@ -462,6 +499,37 @@ Our resolvers take three arguments:
 
 Once we've figured out the correct `selector` and `options` object from the `terms` and the current user, all that's left is to make the actual database query using `Movies.find()`. 
 
+## The User Resolver
+
+If you inspect the collection schema for a movie, you'll notice it contains a `userId` field that contains a string. 
+
+But that string, while useful internally, isn't much use to our app's users. Instead, we'd much rather display the reviewer's name. In order to do so, we'll **resolver** the `userId` field as a `user` object containing all the data we need. 
+
+Go back to your `schema.js` file, and add the following `resolveAs` property to the `userId` field:
+
+```js
+userId: {
+  type: String,
+  optional: true,
+  viewableBy: ['guests'],
+  resolveAs: {
+    fieldName: 'user',
+    typeName: 'User',
+    resolver: (movie, args, context) => {
+      return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
+    }
+  }
+},
+```
+
+We are doing three things here:
+
+1. Specifying that the field should be named `user` in the API.
+2. Specifying that the `user` field returns an object of GraphQL type `User`.
+3. Defining a `resolver` function that indicates how to retrieve that object.
+
+Note that in addition to this new `user` object, the original `userId` field will still be available as well. 
+
 ## Displaying Data
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
@@ -476,7 +544,7 @@ import { registerComponent, ModalTrigger } from 'meteor/vulcan:core';
 
 const MoviesItem = ({movie, currentUser}) =>
 
-  <div style={{paddingBottom: "15px",marginBottom: "15px", borderBottom: "1px solid #ccc"}}>
+  <div style={ { paddingBottom: "15px",marginBottom: "15px", borderBottom: "1px solid #ccc" } }>
 
     <h4>{movie.name} ({movie.year})</h4>
     <p>{movie.review} – {movie.user && movie.user.displayName}</p>
@@ -497,7 +565,7 @@ import MoviesItem from './MoviesItem.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
-  <div style={{maxWidth: '500px', margin: '20px auto'}}>
+  <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
     {/* user accounts placeholder*/}
 
@@ -584,11 +652,11 @@ import MoviesItem from './MoviesItem.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
-  <div style={{maxWidth: '500px', margin: '20px auto'}}>
+  <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
     {/* user accounts */}
 
-    <div style={{padding: '20px 0', marginBottom: '20px', borderBottom: '1px solid #ccc'}}>
+    <div style={ { padding: '20px 0', marginBottom: '20px', borderBottom: '1px solid #ccc' } }>
     
       <Components.AccountsLoginForm />
     
@@ -629,7 +697,9 @@ export default withList(options)(withCurrentUser(MoviesList));
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
 
-## Mutations
+## Mutations*
+
+*(Note: you can skip this section if you're using default resolvers and mutations)*
 
 Now that we're logged in, we can start interacting with our data. Let's build a simple form for adding new movies.
 
@@ -654,7 +724,7 @@ const mutations = {
     
     mutation(root, {document}, context) {
       
-      Utils.performCheck(this, context.currentUser, document);
+      Utils.performCheck(this.check, context.currentUser, document);
 
       return newMutation({
         collection: context.Movies,
@@ -739,20 +809,28 @@ const schema = {
 
   _id: {
     type: String,
+    optional: true,
     viewableBy: ['guests'],
   },
   createdAt: {
     type: Date,
-    viewableBy: ['guests'],
     optional: true,
-    autoValue: (documentOrModifier) => {
-      if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp  
+    viewableBy: ['guests'],
+    onInsert: (document, currentUser) => {
+      return new Date();
     }
   },
   userId: {
     type: String,
+    optional: true,
     viewableBy: ['guests'],
-    resolveAs: 'user: User',
+    resolveAs: {
+      fieldName: 'user',
+      typeName: 'User',
+      resolver: (movie, args, context) => {
+        return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
+      }
+    }
   },
   
   // custom properties
@@ -809,7 +887,7 @@ const MoviesNewForm = ({currentUser}) =>
   <div>
 
     {Movies.options.mutations.new.check(currentUser) ?
-      <div style={{marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc'}}>
+      <div style={ { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc' } }>
         <h4>Insert New Document</h4>
         <Components.SmartForm 
           collection={Movies}
@@ -842,11 +920,11 @@ import MoviesNewForm from './MoviesNewForm.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
-  <div style={{maxWidth: '500px', margin: '20px auto'}}>
+  <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
     {/* user accounts */}
 
-    <div style={{padding: '20px 0', marginBottom: '20px', borderBottom: '1px solid #ccc'}}>
+    <div style={ { padding: '20px 0', marginBottom: '20px', borderBottom: '1px solid #ccc' } }>
     
       <Components.AccountsLoginForm />
     
@@ -916,6 +994,48 @@ export default MoviesEditForm;
 
 Because we're passing a specific `documentId` property to the `SmartForm` component, this form will be an **edit document** form. We're also passing `showRemove` to show a "delete document" option, and a `successCallback` function to close the modal popup inside which the form will be displayed. 
 
+But note that to *edit* a document, we first need to know what that document *is*. In other words, we need to load the document on the client. SmartForms can take care of this for us, but we do need to write a new resolver. After all, the one we have displays a *list* of document, not a *single* document. 
+
+Go back to `resolvers.js` and add a `single` resolver:
+
+```js
+const resolvers = {
+
+  list: {
+
+    name: 'moviesList',
+
+    resolver(root, {terms = {}}, context, info) {
+      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
+      return context.Movies.find(selector, options).fetch();
+    },
+
+  },
+
+  single: {
+
+    name: 'moviesSingle',
+
+    resolver(root, {documentId}, context) {
+      return context.Movies.findOne(documentId);
+    }
+  },
+
+  total: {
+    
+    name: 'moviesTotal',
+    
+    resolver(root, {terms = {}}, context) {
+      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
+      return context.Movies.find(selector, options).count();
+    },
+  
+  },
+};
+
+export default resolvers;
+```
+
 Now let's go back to `MoviesItem` and make use of our form:
 
 ```js
@@ -927,7 +1047,7 @@ import MoviesEditForm from './MoviesEditForm.jsx';
 
 const MoviesItem = ({movie, currentUser}) =>
 
-  <div style={{paddingBottom: "15px",marginBottom: "15px", borderBottom: "1px solid #ccc"}}>
+  <div style={ { paddingBottom: "15px",marginBottom: "15px", borderBottom: "1px solid #ccc" } }>
 
     {/* document properties */}
     
@@ -969,7 +1089,7 @@ const mutations = {
     
     mutation(root, {document}, context) {
       
-      Utils.performCheck(this, context.currentUser, document);
+      Utils.performCheck(this.check, context.currentUser, document);
 
       return newMutation({
         collection: context.Movies,
@@ -994,7 +1114,7 @@ const mutations = {
     mutation(root, {documentId, set, unset}, context) {
 
       const document = context.Movies.findOne(documentId);
-      Utils.performCheck(this, context.currentUser, document);
+      Utils.performCheck(this.check, context.currentUser, document);
 
       return editMutation({
         collection: context.Movies, 
@@ -1021,7 +1141,7 @@ const mutations = {
     mutation(root, {documentId}, context) {
 
       const document = context.Movies.findOne(documentId);
-      Utils.performCheck(this, context.currentUser, document);
+      Utils.performCheck(this.check, context.currentUser, document);
 
       return removeMutation({
         collection: context.Movies, 

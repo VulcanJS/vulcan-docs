@@ -72,80 +72,54 @@ Note that we've talked about editing, but the same principles apply when it come
 
 ## Controlling Viewing
 
-Unlike mutations which only affect a single document, viewing usually concerns a set of documents.
+Unlike mutations which usually only affect a single document, viewing usually concerns a set of documents.
 
-Again, let's make a distinction between field-level and document-level control. Field-level control only (e.g. “only admins can see the `clickCount` field”) is fairly easy to implement thanks to the `getViewableFields()` utility, available on a resolver's `context`. It takes the current user and the current collection, and returns a list of the fields that the user is allowed to access:
+Again, let's make a distinction between field-level and document-level control. If a client requests a list of documents, you need to check two things:
 
-```js
-list: {
+1. Which of these documents the client is allowed to access.
+2. Of the allowed documents, which fields they're allowed to view. 
 
-  name: 'moviesList',
+Note that while GraphQL lets the client *ask* for the fields they want, it's up to you to decide whether or not to accept that request on a per-field basis. 
 
-  resolver(root, {terms, offset, limit}, context, info) {
-    const options = {
-      sort: {createdAt: -1},
-      limit: (limit < 1 || limit > 10) ? 10 : limit,
-      skip: offset,
-      // keep only fields that should be viewable by current user
-      fields: context.getViewableFields(context.currentUser, context.Movies),
-    };
-    return context.Movies.find({}, options).fetch();
-  },
+Practically speaking, controlling access in this manner usually requires four steps:
 
-},
-```
+1. Define a `checkDocument` function that returns whether a user can access a document.
+2. Use that function to iterate over an array and filter out unaccessible documents.
+3. Define a `checkField` function that checks whethere a user can access a *field* of a document. 
+4. Use it to iterate over each document returned at step 2.
 
-`getViewableFields` can also take a third `document` argument for specific document-level control (e.g. “the `privateComments` property of a document is only viewable by its owner”), but this gets trickier as it requires fetching the document first before filtering its fields. 
-
-First, here's how you would define a private field's `viewableBy` property to restrict its visibility to document owners, making use of the fact that `viewableBy` can also take a function called on the user and the document:
+Let's see how the `vulcan:posts` package implements each step. First, a `Posts.checkAccess` function is defined in `collection.js`:
 
 ```js
-privateComments: {
-  type: String,
-  viewableBy: Users.owns,
-  insertableBy: ['members'],
-  editableBy: ['members']
-},
+const Posts.checkAccess = (currentUser, post) => {
+  if (Users.isAdmin(currentUser) || Users.owns(currentUser, post)) {
+    return true;
+  } else if (post.isFuture) {
+    return false;
+  } else { 
+    const status = _.findWhere(Posts.statuses, {value: post.status});
+    return Users.canDo(currentUser, `posts.view.${status.label}`);
+  }
+}
 ```
 
-And here's how to restrict the `single` resolver based on the current document:
+If a user is an admin, or if they're the owner of the document in question, we always give them access. In the opposite case, if the document is scheduled to appear in the future, we always *deny* access. Finally, for non-future documents, we check the post's status and whether the user can perform the relevant action (`posts.view.pending`, `posts.view.approved`, etc.) as defined in `permissions.js`. 
+
+Of course, your own `check` function can also be much simpler depending on your needs.
+
+We can then use this function to filter out any unviewable posts in the `resolvers.js` file, using Underscore's `filter`:
 
 ```js
-single: {
-  
-  name: 'moviesSingle',
-
-  resolver(root, {documentId}, context) {
-    const document = context.Movies.findOne({_id: documentId});
-    return _.pick(document, _.keys(context.getViewableFields(context.currentUser, context.Movies, document)));
-  },
-
-},
+const viewablePosts = _.filter(posts, post => Posts.checkAccess(currentUser, post));
 ```
 
-Here's also a more complex example when filtering the `list` resolver (although in most cases, it will probably acceptable to only show private properties in the `single` view):
+Step 3 and 4 are taken care of together through the `Users.restrictViewableFields` utility which take the current user, the collection, and either a document or an array of documents:
 
 ```js
-list: {
-
-  name: 'moviesList',
-
-  resolver(root, {terms, offset, limit}, context, info) {
-    const options = {
-      sort: {createdAt: -1},
-      limit: (limit < 1 || limit > 10) ? 10 : limit,
-      skip: offset,
-    };
-
-    const movies = context.Movies.find({}, options).fetch();
-    return movies.map(movie => {
-      const editableFields = _.keys(context.getViewableFields(context.currentUser, context.Movies, movie));
-      return _.pick(movie, editableFields);
-    });
-  },
-
-},
+const restrictedPosts = Users.restrictViewableFields(currentUser, Posts, viewablePosts);
 ```
+
+Behind the scenes, this uses each field's `viewableBy` property to either check if the current user is member of the right group (if `viewableBy` is a group string) or passes the viewable check (if `viewableBy` is a function). 
 
 ## Back-End vs Front-End
 

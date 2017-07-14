@@ -42,6 +42,7 @@ sidebar_categories:
     - settings
   Packages:
     - newsletter
+    - payments
   Tutorials:
     - example-movies
     - example-instagram

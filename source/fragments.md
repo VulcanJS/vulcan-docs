@@ -5,7 +5,7 @@ title: Fragments
 
 A fragment is a piece of schema, usually used to define what data you want to query for. 
 
-### Registering Fragments
+## Registering Fragments
 
 You can register fragments by passing the fragment string to `registerFragment`:
 
@@ -22,7 +22,7 @@ registerFragment(`
 `);
 ```
 
-### Using Fragments
+## Using Fragments
 
 You can get a fragment with:
 
@@ -32,7 +32,7 @@ import { getFragment } from 'meteor/vulcan:lib';
 getFragment('PostsList');
 ```
 
-### Sub-Fragments
+## Sub-Fragments
 
 When registering a fragment, you'll often want to use sub-fragments to avoid repeating frequently used properties. For example, the `PostsList` fragment uses the `UserMinimumInfo` fragment:
 
@@ -53,7 +53,7 @@ registerFragment(`
 
 Note that in “regular” Apollo code, you need to include any sub-fragment used by a fragment [as tagged template literal](http://dev.apollodata.com/react/fragments.html#reusing-fragments), but Vulcan takes care of this for you (provided you've previously registered any sub-fragment using `registerFragment`).
 
-### Extending Fragments
+## Extending Fragments
 
 You often need to add one or more properties to a fragment without modifying its existing properties. You can do this with `extendFragment`:
 
@@ -67,7 +67,7 @@ extendFragment('PostsList', `
 
 This is the same as registering the entire `PostsList` fragment with `color` tacked on at the end. 
 
-### Replacing Fragments
+## Replacing Fragments
 
 To replace a fragment completely, you can just register it again under the same name. 
 

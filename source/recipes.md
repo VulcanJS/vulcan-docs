@@ -34,3 +34,36 @@ function checkProfileOnUpdate (unusedItem, store, apolloClient) {
 
 addCallback('router.onUpdate', checkProfileOnUpdate);
 ```
+
+## Load a Random Post
+
+On the server:
+
+```js
+const randomResolver = {
+  Query: {
+    postsRandom(root, args, context) {
+      const postCount = context.Posts.find({status: 2}).count();
+      return context.Posts.find({status: 2}, {limit: 1, skip: _.random(postCount)}).fetch()[0];
+    }
+  }
+};
+
+addGraphQLResolvers(randomResolver);
+addGraphQLQuery(`postsRandom: Post`);
+```
+
+On the client:
+
+```js
+const withRandomPost = graphql(gql`
+  query postsRandom {
+    postsRandom {
+      ...PostsPage
+    }
+  }
+  ${getFragment('PostsPage')}
+`);
+
+export default withRandomPost(PostsItem);
+```

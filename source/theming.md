@@ -4,12 +4,19 @@ title: Components & Theming
 
 ## Using Components
 
-There are two ways to use components.
+Assuming a component is registered, you can use it with `Components.Foo`. For example:
 
-- Outisde a component, you can call `getComponent('Foo')`.
-- Inside a component, you can simply use `<Components.Foo/>`.
+```js
+import { Components } from 'meteor/vulcan:core';
 
-The advantage of calling the `getComponent` function instead of using `Components.Foo` directly, is that you can ensure that the `Foo` component is only resolved when the function is called, which in turns makes it possible to override them anywhere in your code. 
+const Header = props => {
+  return (
+    <div>
+      <Components.Logo />
+    </div>
+  )
+}
+```
 
 ## Registering Components
 
@@ -26,41 +33,52 @@ const Logo = props => {
 registerComponent('Logo', Logo);
 ```
 
-The first argument of `registerComponent` is the component's name, the second is the component itself, and any successive arguments will be interpreted as higher-order components and wrapped around the component:
-
-```js
-registerComponent('Logo', Logo, withCurrentUser, withRouter);
-```
-
-## Using Components
-
-Once a component is registered, you can use it with `Components.Foo`. For example:
-
-```js
-import { Components } from 'meteor/vulcan:core';
-
-const Header = props => {
-  return (
-    <div>
-      <Components.Logo />
-    </div>
-  )
-}
-```
-
-## Components & HoCs
+### Components & HoCs
 
 To understand how theming works in Vulcan, it's important to understand how components and higher-order components (HoCs) interact. 
 
 A higher-order component's role is to wrap a regular component to pass it a specific prop (such as a list of posts, the current user, the `Router` object, etc.). You can think of HoCs as specialized assistants that each hand the component a tool it needs to do its job. 
 
-In practice, to create a higher-order component you call a **factory function** on the component. For example, to give the component access to the current user, you would call:
+The first argument of `registerComponent` is the component's name, the second is the component itself, and any successive arguments will be interpreted as higher-order components and wrapped around the component.
+
+For example, this is how you'd pass the `currentUser` object to the `Logo` component:
+
+```js
+registerComponent('Logo', Logo, withCurrentUser);
+```
+
+### "Delayed" HoCs
+
+There are a few subtle differences between registering a component with `registerComponent` and then calling it with `Components.Foo`; and the more standard `export default Foo` and `import Foo from './Foo.jsx'` ES6 syntax. 
+
+First, you can only override a component if it's been registered using `registerComponent`. This means that if you're building any kind of theme or plugin and would like end users to be able to replace specific components, you shouldn't use import/export. 
+
+Second, both techniques also lead to different results when it comes to higher-order components (more on this below). If you write `export withCurrentUser(Foo)`, the `withCurrentUser` function will be executed immediately, which will trigger an error because the fragment it depends on isn't properly initialized yet. 
+
+On the other hand, `registerComponent('Foo', Foo, withCurrentUser)` *doesn't* execute the function (note that we write `withCurrentUser` and not `withCurrentUser()`), delaying execution until app's initialization. 
+
+But what about HoC functions that take arguments? For example if you were to write:
+
+```js
+registerComponent('PostsList', PostsList, withList(options));
+```
+
+The `withList(options)` would be executed immediately, and you would have no way of overriding the `options` object later on (a common use case being overriding a fragment).
+
+For that reason, to delay the execution until the start of the app, you can use the following alternative syntax:
+
+```js
+registerComponent('PostsList', PostsList, [withList, options]);
+```
+### Accessing Raw Components
+
+Going back to our example:
 
 ```
 const WrappedComponent = withCurrentUser(MyComponent);
 ```
 
-Which would result a *new* `WrappedComponent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedComponent`. 
+This would result a *new* `WrappedComponent` component that has `MyComponent` as a child. This has the consequence that properties and objects you set on `MyComponent` might not exist on `WrappedComponent`. 
 
 For that reason, Vulcan provides a `getRawComponent` utility that lets you access the unwrapped “raw” component, provided said component has been registered with `registerComponent`:
 
@@ -69,24 +87,6 @@ MyComponent.foo = "bar";
 const WrappedComponent = registerComponent(MyComponent, withCurrentUser);
 console.log(WrappedComponent.foo); // undefined
 console.log(getRawComponent(WrappedComponent).foo); // "bar"
-```
-
-Try to keep this in mind as you work with components.
-
-### "Delayed" HoCs
-
-In some cases, you don't want a HoC function to be executed immediately. For example if you write:
-
-```js
-registerComponent('PostsList', PostsList, withList(options));
-```
-
-The `withList(options)` will be executed immediately, and you will have no way of overriding the `options` object later on (a common use case being overriding a fragment).
-
-To delay the execution until the start of the app, you can use the following alternative syntax:
-
-```js
-registerComponent('PostsList', PostsList, [withList, options]);
 ```
 
 ## Replacing Components
