@@ -327,7 +327,7 @@ import resolvers from './resolvers.js';
 
 const Movies = createCollection({
 
-  collectionName: 'movies',
+  collectionName: 'Movies',
 
   typeName: 'Movie',
 
