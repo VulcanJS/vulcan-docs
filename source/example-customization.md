@@ -56,7 +56,7 @@ Let's go through this file block by block.
 - `api.use` declares the package's dependencies on other Meteor packages. These dependencies can be either local (living in `/packages` like `vulcan:*`) or remote (pulled from Meteor's package server like `fourseven:scss`).
 - `api.mainModule` is used to declare your package's client and server entry points and should be used to load JavaScript files. 
 - `api.addFiles` is used to add files one by one, usually HTML or CSS. 
-- `api.addAssets` is used to add static assets to your package. Basically, anything that's not a JavaScript, HTML, or CSS file. 
+- `api.addAssets` is used to add static assets to your package. Basically, anything that's not a JavaScript, HTML, or CSS file. Make sure to declare the files for client side ```['client']``` otherwise you might not see these files. images should come from ```\packages\<package-name>\static\``` the "static" folder name is where you store your images, you can rename this to whatever you want. Beware of storing assets in git.
 
 ## Custom Styles
 
