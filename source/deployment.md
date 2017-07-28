@@ -78,6 +78,56 @@ mup deploy --settings settings.json
 - `meteor npm install --save bcrypt`.
 - Increase `deployCheckWaitTime`.
 
+
+
+## Meteor Now
+
+Another simple option to get your app live for no cost is by using [Meteor Now](https://github.com/jkrup/meteor-now).
+Meteor-now is a tool to let you instantly deploy your Meteor apps with one command using ZEIT's [▲now](http://zeit.co/now) service.
+
+### Configuration
+
+Install the `now` and `meteor-now` packages:
+
+```
+npm install -g now meteor-now
+```
+
+Create now account
+
+```
+$ now --login
+> Enter your email: <your email>
+> Please follow the link sent to <your email> to log in.
+> Verify that the provided security code in the email matches Pragmatic Manta Ray.
+
+✔ Confirmed email address!
+
+> Logged in successfully. Token saved in ~/.now.json
+```
+
+### Deploy
+
+Now on your root folder, run the following command:
+
+```
+meteor-now -d -e ROOT_URL=https://mydomain.now.sh -e NODE_ENV=production`
+```
+
+Change `mydomain` with your custom domain name.
+
+You can also add `-e MONGO_URL=mongodb://<username>:<pass>@....` for persistance storage of data. We recommend you using a service like [mlab](https://mlab.com/).
+
+After your deployment is done, create an alias to the domain you just specified. Just copy the hashed link provided by the now deployment. It should be copied to your clipboad. It usually follows this format: `https://xxxxxxxxx.now.sh`.
+
+```
+now alias set https://xxxxxxxxx.now.sh https://mydomain.now.sh
+```
+
+That's it! now visit `https://mydomain.now.sh`.
+
+For more info, for how to get a custom domain name run `now -h`. You may need a premium [now](http://zeit.co/now)account. 
+
 ## PM2
 
 Contributed by [adalidda](https://github.com/VulcanJS/Vulcan/issues/1552#issuecomment-276948862).
