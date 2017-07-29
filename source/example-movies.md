@@ -517,18 +517,18 @@ userId: {
     typeName: 'User',
     resolver: (movie, args, context) => {
       return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
-    }
+    },
+    addOriginalField: true
   }
 },
 ```
 
-We are doing three things here:
+We are doing four things here:
 
 1. Specifying that the field should be named `user` in the API.
 2. Specifying that the `user` field returns an object of GraphQL type `User`.
 3. Defining a `resolver` function that indicates how to retrieve that object.
-
-Note that in addition to this new `user` object, the original `userId` field will still be available as well. 
+4. Specifying that in addition to this new `user` object, we want the original `userId` field to still be available as well. 
 
 ## Displaying Data
 

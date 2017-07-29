@@ -15,6 +15,12 @@ This package does the following things:
   - Modify a document associated with the charge.
 - The mutation then returns a document associated with the charge to the client.
 
+## Install
+
+```
+yarn add stripe react-stripe-checkout
+```
+
 ## Settings
 
 Stripe requires the following public setting in your `settings.json`. 
@@ -64,9 +70,10 @@ New products are defined using the `addProduct` function, which takes two argume
 import { addProduct } from 'meteor/vulcan:payments';
 
 addProduct('membership', {
-  'amount': 25000,
-  'currency': 'USD',
-  'description': 'Become a paid member.'
+  name: 'VulcanJS Membership',
+  amount: 25000,
+  currency: 'USD',
+  description: 'Become a paid member.'
 });
 ```
 
@@ -76,11 +83,24 @@ Or it can be a function (for "dynamic" products like in an e-commerce site) that
 import { addProduct } from 'meteor/vulcan:payments';
 
 addProduct('book', book => ({
-  'name': book.title,
-  'amount': book.price,
-  'currency': 'USD',
-  'description': book.description
+  name: book.title,
+  amount: book.price,
+  currency: 'USD',
+  description: book.description
 }));
+```
+
+In addition, you can also define coupon codes for your products:
+
+```
+addProduct('membership', {
+  amount: 25000,
+  currency: 'USD',
+  description: 'Become a paid member.',
+  coupons: {
+    VULCAN: 10000,
+  }
+});
 ```
 
 Make sure you define your products in a location accessible to both client and server, in order to access them both on the front-end to configure Stripe Checkout, and in the back-end to perform the actual charge. 
@@ -91,7 +111,7 @@ Make sure you define your products in a location accessible to both client and s
 <Components.Checkout 
     productKey="jobPosting"
     associatedCollection={Jobs}
-    associatedId={job._id}
+    associatedDocument={job}
     callback={setToPaid}
     button={<Button className="buy-job-button" bsStyle="primary">Complete Payment</Button>}
   />

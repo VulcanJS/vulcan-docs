@@ -39,6 +39,7 @@ sidebar_categories:
     - groups-permissions
     - routing
     - internationalization
+    - head-tags
     - settings
   Packages:
     - newsletter
@@ -48,6 +49,7 @@ sidebar_categories:
     - example-instagram
     - example-forum
     - example-customization
+    - example-permissions
     - sponsorship-tutorial
     - deployment
     - migration
