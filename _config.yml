@@ -33,6 +33,7 @@ sidebar_categories:
   API:
     - theming
     - forms
+    - core-components
     - callbacks
     - email
     - users
@@ -45,6 +46,7 @@ sidebar_categories:
     - newsletter
     - payments
   Tutorials:
+    - example-simple
     - example-movies
     - example-instagram
     - example-forum

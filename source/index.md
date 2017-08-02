@@ -36,9 +36,11 @@ meteor --settings sample_settings.json
 
 ## Getting Started
 
-When you first run Vulcan, you'll see the contents of the `example-movies` package. It is recommended you go through the [Movies example tutorial](example-movies.html) tutorial to get a better grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
+When you first run VulcanJS, you'll see the contents of the `example-simple` package. It is recommended you go through the [Simple Example tutorial](example-simple.html) tutorial to get a grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
-You can then enable the `example-instagram` package (which you can do by uncommenting it in `.meteor/packages`, and commenting out `example-movies` in its place), which takes the same basic example but goes a little further, as well as take a look at its code. 
+You can then take the more in-depth [Movies Example tutorial](example-movies.html) to get a better understanding of VulcanJS's internals. You can enable the Movies Example package by uncommenting it in `.meteor/packages`, and commenting out `example-simple` in its place)
+
+Once you've gone through both tutorials, you can enable the `example-instagram` package, which takes the same basic example but goes a little further, as well as take a look at its code. 
 
 At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced forum features by checking out the [`example-forum`](example-forum.html) package. 
 
