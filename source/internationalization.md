@@ -60,3 +60,19 @@ export * from 'react-intl';
 You'll now have two packages named `vulcan:i18n`, but because your newly created `_vulcan-i18n` directory starts with `_`, it will take alphabetical precedence over the default `vulcan-i18n` and be used by your app instead. 
 
 You can keep importing from `vulcan:i18n` as usual, except `vulcan:i18n` will now simply be a clone of `react-intl`. 
+
+##i18n messages in components
+
+In order to have access to i18n functions like `formatMessage` you have to add `intlShape` to you component's context types
+
+```
+class MyComponent extends React.Component {
+  render() {
+    return(<h1>{this.context.intl.formatMessage({id: 'i18n.title'})}</h1>);
+  }
+};
+
+MyComponent.contextTypes = {
+  intl: intlShape
+};
+```
