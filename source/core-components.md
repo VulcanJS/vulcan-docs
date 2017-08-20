@@ -41,7 +41,7 @@ All props are optional, but you should pass at least either `component` or `labe
 Note that the element passed as `component` needs to accept an `onClick` handler. In some cases, it might be necessary to wrap it inside an extra `<div`:
 
 ```js
-<Components.ModalTrigger size={size} title="New Post" component={<div><MyButton/></div>div>}>
+<Components.ModalTrigger size={size} title="New Post" component={<div><MyButton/></div>}>
   <PostsNewForm />
 </Components.ModalTrigger>
 ```
