@@ -1,5 +1,5 @@
 ---
-title: Admin Package
+title: Admin Dashboard
 ---
 
 The `vulcan:admin` package provides a user moderation dashboard accessible to admin users at `/admin`.

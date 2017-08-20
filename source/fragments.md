@@ -88,6 +88,12 @@ registerFragment(`
 
 Note that you can replace both “regular” fragments and sub-fragments.
 
+## Default Fragments
+
+Every collection automatically gets a default fragment associated with it called `FooDefaultFragment` (for example `PostsDefaultFragment`).
+
+This default fragment simply contains all fields where `viewableBy` is defined (in other words, all public fields). Note that it **does not** follow field resolvers, meaning that the default fragment will e.g. include `userId` but not `user`. 
+
 #### Alternative Approach
 
 You can use standard Apollo fragments at any point in your Vulcan app (passing them as `fragment` instead of `fragmentName`), but be aware that you will lose the ability to extend and replace fragments. You will also need to  [manually specify](http://dev.apollodata.com/react/fragments.html#reusing-fragments) sub-fragments. 

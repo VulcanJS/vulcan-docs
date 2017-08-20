@@ -45,6 +45,7 @@ sidebar_categories:
   Packages:
     - newsletter
     - payments
+    - admin
   Tutorials:
     - example-simple
     - example-movies

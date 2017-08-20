@@ -2,6 +2,18 @@
 title: Routing
 ---
 
+## Linking to a Route
+
+To create a link to a route, use React Router's `<Link>` (and not the usual `<a>`):
+
+```js
+import { Link } from 'react-router';
+
+<Link to={`/post/${post._id}`}>{post.title}</Link>
+```
+
+Note that you have to specify the route's full path as the `to` prop, not its name. 
+
 ## Adding Routes
 
 Here's how you can add routes to your app (using React Router):
