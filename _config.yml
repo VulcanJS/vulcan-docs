@@ -35,7 +35,6 @@ sidebar_categories:
     - forms
     - core-components
     - callbacks
-    - email
     - users
     - groups-permissions
     - routing
@@ -43,6 +42,7 @@ sidebar_categories:
     - head-tags
     - settings
   Packages:
+    - email
     - newsletter
     - payments
     - admin

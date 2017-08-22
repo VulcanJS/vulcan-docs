@@ -2,29 +2,111 @@
 title: Email
 ---
 
-## Customizing Emails
+Vulcan includes a simple-yet-powerful email-sending system.
 
-Unlike components, emails don't use React but Spacebars, a variant of the Handlebars templating language.
+## Registering Emails
 
-All email templates live in the `vulcan:email-templates` package. In order to register a new template or override an existing one, first you must import it as a text asset in your `package.js` file (or store it in your `/public` directory):
+Just like components, emails need to be centrally registered with Vulcan.
+
+```js
+import VulcanEmail from 'meteor/vulcan:email';
+
+VulcanEmail.addEmails({
+
+  test: {
+    template: 'test',
+    path: '/email/test',
+    data() {
+      return {date: new Date()};
+    },
+    subject(data) {
+      return 'This is a test';
+    },
+  }
+
+});
+```
+
+The `VulcanEmail.addEmails` function takes an object that itself contains individual objects for each email. Each email object can have the following properties:
+
+#### `template`
+
+The name of the template used to display the email (see below).
+
+#### `subject(data)`
+
+Either a function that takes in the email's `data` as argument and returns the subject, or a string. 
+
+Keep in mind that `data` will be empty in certain cases (such as when listing emails in the Emails dashboard).
+
+#### `data()`
+
+A function that returns an object used to populate the email. 
+
+#### `query`
+
+A string containing a GraphQL query used to populate the email see below). If both `data` and `query` are provided, their results will be merged and passed on to the email.
+
+#### `path`
+
+A path for the route at which the email will be available to preview (when using `vulcan:debug`).
+
+#### `testVariables`
+
+An object containing default variables passed to `query()` when testing the email. If not specified, a blank object will be used. 
+
+## Querying For Data
+
+Just like you can use GraphQL to query for data on the client and populate your React component's contents, you can also use it to query for data on the server and populate your Handlebars templates:
+
+```js
+VulcanEmail.addEmails({
+
+  accountApproved: {
+    template: "accountApproved",
+    path: "/email/account-approved/:_id?",
+    subject(data) {
+      const user = _.isEmpty(data) ? {displayName: '[user]'} : data.UsersSingle;
+      return "Welcome ${user.displayName}! Your account has been approved.";
+    },
+    query: `
+      query UsersSingleQuery($documentId: String){
+        UsersSingle(documentId: $documentId){
+          displayName
+        }
+        SiteData{
+          title
+          url
+        }
+      }
+    `
+  }
+
+});
+```
+
+A few things to note:
+
+- Queries can accept variables, which will be passed by `VulcanEmail.buildAndSend()` (see below); or `testVariables` when testing.
+- A single query can query resolvers for entirely different collections. This lets you mix-and-match different data types in the same email. 
+
+## Email Templates
+
+Unlike components, emails don't use React but the [Handlebars](http://handlebarsjs.com/) templating language. Before you can use a template with Vulcan's email system, you'll need to register it. 
+
+In order to register a new template or override an existing one, first you must import it as a text asset in your `package.js` file (or store it in your `/public` directory):
 
 ```js
 api.addAssets(['path/to/template/newReply.handlebars',], ['server']);
 ```
 
-You'll then be able to load the contents of the file in your code with:
-
-```js
-Assets.getText("path/to/template/newReply.handlebars")
-```
-
-You can add a template with:
+You'll then be able to add a new template with `VulcanEmail.addTemplates`:
 
 ```js
 import VulcanEmail from 'meteor/vulcan:email';
 
 VulcanEmail.addTemplates({
-  newReply: Assets.getText("path/to/template/newReply.handlebars")
+  newReply: Assets.getText('path/to/template/newReply.handlebars')
 });
 ```
 
@@ -33,24 +115,16 @@ Or override an existing one with:
 ```js
 import VulcanEmail from 'meteor/vulcan:email';
 
-VulcanEmail.templates.newReply = Assets.getText("path/to/template/newReply.handlebars");
+VulcanEmail.templates.newReply = Assets.getText('path/to/template/newReply.handlebars');
 });
 ```
 
-## Email Stying
-Some styling of emails can be controlled in `settings.json`:
+## Sending Emails
 
-| Setting | Default | Description |
-| --- | --- | --- |
-| secondaryColor | '#444444' | Background of email header
-| accentColor | '#DD3416' | Header and footer text
-| siteName | "Vulcan" | Use setting key 'title'
-| tagline |  |
-| footer | | Footer text
-| logoUrl | |
-| logoHeight | |
-| logoWidth | | 
+Finally, you can send emails with `VulcanEmail.buildAndSend(options)`. The function takes an `options` object with the following fields:
 
-## Newsletter
+- `to`: an array of addresses to which you want to send the current email.
+- `emailName`: the name of the email as registered using `VulcanEmail.addEmails`.
+- `variables`: the variables to pass to the email's GraphQL `query`.
 
-In your local development environment, you can preview your newsletter at `http://localhost:3000/email/newsletter`
+The template, subject, query, etc. will all be derived from the `emailName` you pass to the function. 
