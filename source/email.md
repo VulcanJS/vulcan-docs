@@ -39,13 +39,15 @@ Either a function that takes in the email's `data` as argument and returns the s
 
 Keep in mind that `data` will be empty in certain cases (such as when listing emails in the Emails dashboard).
 
-#### `data()`
+#### `data(variables)`
 
-A function that returns an object used to populate the email. 
+A function that returns an object used to populate the email. It will either be passed a `variables` object by `VulcanEmail.buildAndSend`, or use `testVariables`.
 
 #### `query`
 
 A string containing a GraphQL query used to populate the email see below). If both `data` and `query` are provided, their results will be merged and passed on to the email.
+
+Similarly to `data()`, the query will either use the `variables` object passed by `VulcanEmail.buildAndSend`, or use `testVariables`.
 
 #### `path`
 

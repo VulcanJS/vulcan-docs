@@ -1,10 +1,22 @@
 ---
-title: Debugging
+title: Common Problems
 ---
 
 Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app. 
 
-## Finding Errors
+## Common Problems
+
+### “Load More” Not Working
+
+If your app initially loads fine but “Load More” doesn't work, this most likely indicates that while server-side rendering is working, data loading isn't. 
+
+The most common cause is a mismatch between your domain and the URL currently being used as your GraphQL endpoint, which is based on the `ROOT_URL` environment variable. 
+
+To double-check which GraphQL endpoint URL is being used, just use your devtools' Network tab and inspect any failed requests. 
+
+## Debugging
+
+### Finding Errors
 
 Locating the source of an issue can be trickier than you think. 
 
@@ -16,7 +28,7 @@ It's also possible that you've encountered a GraphQL error, which won't be shown
 
 You can also access a query's error message through the Redux or Apollo devtools. In the Redux devtools, click the State tab, drill down to the affected query, and check its `networkError` and `graphQLErrors` properties. 
 
-## GraphQL Schema Issues
+### GraphQL Schema Issues
 
 Although Vulcan includes features for generating your GraphQL schema automatically from your JSON schema, sometimes you'll run into issues and need to take a look under the hood. 
 
@@ -28,7 +40,7 @@ Vulcan.getGraphQLSchema()
 
 You'll probably want to paste in the output in a text editor and replace `\n` with actual line breaks for better formatting. 
 
-## SSR Warnings
+### SSR Warnings
 
 Another common type of problem is server-side rendering (SSR) warnings:
 
@@ -38,7 +50,7 @@ This means that the HTML content you've rendered on the server doesn't match up 
 
 Whatever the cause, these warnings shouldn't break your app, but they might slow it down a bit. 
 
-## Data Loading
+### Data Loading
 
 If your data doesn't seem to be loading, this could be due to a few reasons:
 
@@ -47,7 +59,7 @@ If your data doesn't seem to be loading, this could be due to a few reasons:
 - **Arguments issue:** maybe the resolver itself is fine, but it's just not receiving the right arguments from the client. Again, adding `console.log`s to the resolver will usually point you in the right direction.
 - **Database issue:** sometimes your code works, but the data you expect just isn't present in your database. You can check this by taking the query being run by the resolver and running it manually in Mongo directly (using `meteor mongo`).
 
-## Mutations
+### Mutations
 
 Mutations can fail for a number of reasons:
 
@@ -55,6 +67,6 @@ Mutations can fail for a number of reasons:
 - **Resolver issue:** just like queries, mutations can also have resolver problems. 
 - **Permissions issue:** it's also possible that the mutation is failing because you don't have the proper rights. 
 
-## Data Updating
+### Data Updating
 
 If your data isn't updating properly after a mutation, this can often be due to a fragment mismatch. Make sure that `new` mutations use the same fragment as the query they're updating (`edit` mutations on the other hand can safely return partial fragments).

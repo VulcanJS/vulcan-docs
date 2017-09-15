@@ -1,36 +1,24 @@
 ---
-title: Instagram Example
+title: Upload Package
 ---
 
-This is a Vulcan package extending `vulcan:forms` to upload images to Cloudinary from a drop zone.
+This is a Vulcan package extending `vulcan:forms` to support form components for uploading one or more images. 
 
 ![Screenshot](https://res.cloudinary.com/xavcz/image/upload/v1471534203/Capture_d_e%CC%81cran_2016-08-17_14.22.14_ehwv0d.png)
 
-Want to add this to your Vulcan instance? Read below:
+Note: although this package only supports Cloudinary currently, PRs to support additional providers (S3, etc.) are warmly encouraged. 
 
-## Installation
+## Dependencies
 
-### 1. Meteor package
-I would recommend that you clone this repo in your vulcan's `/packages` folder.
-
-Then, open the `.meteor/packages` file and add at the end of the **Optional packages** section:
-`xavcz:nova-forms-upload` 
-
-> **Note:** This is the version for Nova 1.0.0, running with GraphQL. *If you are looking for a version compatible with Nova "classic", you'll need to change the package's branch, like below. Then, refer to [the README for `nova-forms-upload` on Nova Classic](https://github.com/xavcz/nova-forms-upload/blob/nova-classic/README.md#installation)*
-
-```bash
-# only for Nova classic users (v0.27.5)
-cd nova-forms-upload
-git checkout nova-classic
-```
-
-### 2. NPM dependency
 This package depends on the awesome `react-dropzone` ([repo](https://github.com/okonet/react-dropzone)), you need to install the dependency:
 ```
 npm install react-dropzone isomorphic-fetch
 ```
 
-### 3. Cloudinary account
+## With Cloudinary 
+
+### Setup
+
 Create a [Cloudinary account](https://cloudinary.com) if you don't have one.
 
 The upload to Cloudinary relies on **unsigned upload**:
@@ -45,111 +33,35 @@ It may look like this:
 
 ![Screenshot-Cloudinary](https://res.cloudinary.com/xavcz/image/upload/v1471534183/Capture_d_e%CC%81cran_2016-08-18_17.07.52_tr9uoh.png)
 
-### 4. Nova Settings
+### Settings
+
 Edit your `settings.json` and add inside the `public: { ... }` block the following entries with your own credentials:
 
 ```json
-public: {
-
-
-  "cloudinaryCloudName": "YOUR_APP_NAME",
-  "cloudinaryPresets": {
-    "avatar": "YOUR_PRESET_ID",
-    "posts": "THE_SAME_OR_ANOTHER_PRESET_ID"
+"public": {
+  "cloudinary": {
+    "cloudName": "YOUR_APP_NAME",
   }
-
-
 }
 ```
 
-Picture upload in Nova is now enabled! Easy-peasy, right? 👯
+### Specifying a Preset
 
-### 5. Your custom package & custom fields
-
-Make your custom package depends on this package: open `package.js` in your custom package and add `xavcz:nova-forms-upload` as a dependency, near by the other `nova:xxx` packages.
-
-You can now use the `Upload` component as a classic form extension with [custom fields](https://www.youtube.com/watch?v=1yTT48xaSy8) like `nova:forms-tags` or `nova:embedly`.
-
-**⚠️ Note:** Don't forget to update your query fragments wherever needed after defining your custom fields, else they will never be available!
-
-## Image for posts
-Let's say you want to enhance your posts with a custom image. In your custom package, your new custom field could look like this:
+If you'd like to specify a Cloudinary preset to be used to resize, convert, etc. your images, you can do so in the properties of the **form field**:
 
 ```js
-// ... your imports
-import { getComponent, getSetting } from 'meteor/nova:lib';
-import Posts from 'meteor/nova:posts';
-
-// extends Posts schema with a new field: 'image' 🏖
-Posts.addField({
-  fieldName: 'image',
-  fieldSchema: {
-    type: String,
-    optional: true,
-    control: getComponent('Upload'),
+  photos: {
+    label: 'Photos',
+    type: Array,
+    optional: false,
+    viewableBy: ['guests'],
     insertableBy: ['members'],
     editableBy: ['members'],
-    viewableBy: ['guests'],
+    control: FormsUpload, // use the FormsUpload form component
     form: {
       options: {
-        preset: getSetting('cloudinaryPresets').posts // this setting refers to the transformation you want to apply to the image
+        preset: 'myCloudinaryPreset'
       },
-    }
-  }
-});
-```
-
-## Avatar for users
-Let's say you want to enable your users to upload their own avatar. In your custom package, your new custom field could look like this:
-```js
-// ... your imports
-import { getComponent, getSetting } from 'meteor/nova:lib';
-import Users from 'meteor/nova:users';
-
-// extends Users schema with a new field: 'avatar' 👁
-Users.addField({
-  fieldName: 'avatar',
-  fieldSchema: {
-    type: String,
-    optional: true,
-    control: getComponent('Upload'),
-    insertableBy: ['members'],
-    editableBy: ['members'],
-    viewableBy: ['guests'],
-    preload: true, // ⚠️ will preload the field for the current user!
-    form: {
-      options: {
-        preset: getSetting('cloudinaryPresets').avatar // this setting refers to the transformation you want to apply to the image
-      },
-    }
-  }
-});
-```
-
-Adding the opportunity to upload an avatar comes with a trade-off: you also need to extend the behavior of the `Users.avatar` methods. You can do this by adding this snippet, in `custom_fields.js` for instance:
-
-```js
-const originalAvatarConstructor = Users.avatar;
-
-// extends the Users.avatar function
-Users.avatar = {
-  ...originalAvatarConstructor,
-  getUrl(user) {
-    url = originalAvatarConstructor.getUrl(user);
-
-    return !!user && user.avatar ? user.avatar : url;
+    },
   },
-};
 ```
-
-Now, you also need to update the query fragments related to `User` when you want the custom avatar to show up :)
-
-## S3? Google Cloud?
-Feel free to contribute to add new features and flexibility to this package :)
-
-You are welcome to come chat about it [on the Nova Slack chatroom](http://slack.telescopeapp.org)
-
-## What about `nova:cloudinary` ?
-This package and `nova:cloudinary` share a settings in common: `cloudinaryCloudName`. They are fully compatible.
-
-Happy hacking! 🚀

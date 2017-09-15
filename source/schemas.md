@@ -81,17 +81,17 @@ Can either be an array of group names or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
 
-#### `onInsert`, `onEdit`, `onRemove`
+#### `resolveAs`
 
-These three properties can take a callback function that will run during the corresponding operation. 
+You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section. 
+
+### `onInsert`, `onEdit`, `onRemove`
+
+These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. 
 
 - `onInsert(document, currentUser)`
 - `onEdit(modifier, document, currentUser)`
 - `onRemove(document, currentUser)`
-
-#### `resolveAs`
-
-You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section. 
 
 ### Forms Properties
 
