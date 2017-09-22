@@ -117,3 +117,13 @@ Any new provider must implement the following methods:
 ## NewsletterSubscribe Component
 
 This package also exports a `NewsletterSubscribe` custom form field component used to add a subscribe/unsubscribe button to the user account page. 
+
+## Settings
+
+| Setting | Example | Description |
+| --- | --- | --- |
+| enableNewsletter | false | Enable the automated newsletter |
+| enableNewsletterInDev | false | Enable the automated newsletter while in development mode |
+| newsletterFrequency | [1,2,3,4,5,6,7] | The days on which to send the newsletter (1 = Monday, 2 = Tuesday, etc.) |
+| newsletterTime | "07:55" | When to send out the newsletter
+| autoSubscribe | false | Whether new users should be automatically subscribed to the newsletter |
