@@ -18,6 +18,15 @@
   </div>
 
   <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search <%- config.subtitle %>" id="desktop-search-input" />
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
     <% _.each(config.nav_links || theme.nav_links, function (link, title) { %>
       <% active = link.active || config.url === link.url %>
       <div class="nav-item show-desktop <%- active && 'active' %> <%- link.separator && 'separator' %>">

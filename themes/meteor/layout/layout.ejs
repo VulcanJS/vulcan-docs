@@ -25,12 +25,15 @@
     <meta name="google-site-verification" content="" />
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<%= config.root || '/' %>style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+
+
   </head>
   <body class="">
     <%- body %>
     <script src="<%= config.root || '/' %>script/smooth-scroll.min.js"></script>
     <script src="<%= config.root || '/' %>script/main.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
 
 
@@ -59,5 +62,15 @@
         window.onhashchange = redirect;
       <% } %>
     </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
   </body>
 </html>

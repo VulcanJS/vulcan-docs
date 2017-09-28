@@ -60,6 +60,10 @@ You can use the settings file to store your oAuth configurations:
 
 You can optionally register a new setting with `registerSetting(name, defaultValue, description)`. This is optional, but it will let your setting be displayed on the `/settings` route and when calling `Vulcan.showSettings()`. 
 
+Note that `registerSetting` also both works with nested settings objects (e.g. `registerSetting('newsletter.frequency', [1,3,5], 'Newsletter frequency')`).
+
 ## getSetting
 
 To retrieve a setting, just call `getSetting(settingName)`. If no setting has been assigned in `settings.json`, the default value assigned through `registerSetting` will be used (if it exists).
+
+Just like `registerSetting`, `getSetting` also works with nested settings objects (e.g. `getSetting('newsletter.frequency')`).

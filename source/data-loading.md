@@ -213,7 +213,7 @@ Aditionally, you can also manually add documents to the cache with:
 
 - `collection.loader.prime(_id, document)`
 
-Finally, note that `load` and `loadMany` can only take `_id`s, and Mongo selectors. In those cases, you can simply keep querying the database directly with `collection.find()` and   `collection.findOne()`. 
+Finally, note that `load` and `loadMany` can only take `_id`s. If you instead need to query for data using more complex Mongo selectors, you can simply keep querying the database directly with `collection.find()` and `collection.findOne()`. 
 
 Learn more: [Using Dataloader to batch and cache database calls
 ](https://www.youtube.com/watch?v=55Ep5KBTIQE).

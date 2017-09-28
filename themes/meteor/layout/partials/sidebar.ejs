@@ -27,17 +27,6 @@
       <% } %>
     </div>
 
-    <% if (config.apis && config.apis.docsearch) { %>
-    <div class="wrapper-search">
-      <div class="input-symbol small round">
-        <input type="text" placeholder="Search <%- config.subtitle %>" id="desktop-search-input" />
-        <span class="icon-search"></span>
-      </div>
-      <div class="wrapper-desktop-search-results"></div>
-    </div>
-
-    <% } %>
-
     <ul class="toc">
       <% _.each(config.sidebar_categories, function(pages, category) { %>
         <li>
