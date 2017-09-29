@@ -48,6 +48,29 @@ And if you'd like to use and customize the forum packages, you can then follow u
 
 You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
 
+## Two-Repo Install
+
+In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can follow the "two-repo" pattern, with the two repository being: 
+
+1. A clone of [the main Vulcan repo](https://github.com/VulcanJS/Vulcan/). 
+2. Your own Meteor project, using the first repo as its package source.
+
+Follow these steps to get set up:
+
+1. Clone the main [VulcanJS repo](https://github.com/VulcanJS/Vulcan) locally (for example, to `~/Vulcan`).
+2. Create a new Meteor project or clone the [Vulcan starter repo](https://github.com/VulcanJS/Vulcan-Starter) (this will become your project's repo).
+3. Inside your project repo, launch Vulcan with:
+
+```
+METEOR_PACKAGE_DIRS="~/Vulcan/packages" meteor --port 3000 --settings settings.json
+```
+
+Note that if you'd like, you can create an alias for that command in your `.bash_profile` file:
+
+```
+alias runvulcan='METEOR_PACKAGE_DIRS="~/Vulcan/packages" meteor --port 3000 --settings settings.json'
+```
+
 ## Technology
 
 Vulcan is built on top of three main open-source technologies: React, GraphQL, and Meteor. 

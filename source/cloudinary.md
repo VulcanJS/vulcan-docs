@@ -15,12 +15,27 @@ In your **private** settings:
 },
 ```
 
-## Custom Fields
+## makeCloudinary
 
-You can add the following custom fields to store image data:
+You can enable Cloudinary caching on a collection using the `makeCloudinary` function:
 
 ```js
-Posts.addField([
+import { Posts } from 'meteor/example-forum';
+import { makeCloudinary } from 'meteor/vulcan:cloudinary';
+
+makeCloudinary({collection: Posts, fieldName: 'thumbnailUrl'});
+```
+
+The `collection` option indicates which collection you want to use Cloudinary with, while the `fieldName` option indicates which field you want to cache (which should contain an image URL). 
+
+Note that at this time, you can only cache a single image field per collection. 
+
+## Custom Fields
+
+`makeCloudinary` will add the following custom fields to store image data:
+
+```js
+[
   {
     fieldName: 'cloudinaryId',
     fieldSchema: {
@@ -45,45 +60,17 @@ Posts.addField([
       optional: true
     }
   }
-]);
+]
+```
+
+In addition, the `cloudinaryUrl` GraphQL-only field is also available as a shortcut to get a specific image format's URL. 
+
+It optionally takes a `format` argument when used inside a GraphQL query or fragment, for example:
+
+```
+cloudinaryUrl(format: "small")
 ```
 
 ## Callbacks
 
-A common way to make use of the package is through callbacks:
-
-```js
-import { getSetting, addCallback } from 'meteor/vulcan:core';
-import { CloudinaryUtils } from 'meteor/vulcan:cloudinary';
-
-const cloudinarySettings = getSetting('cloudinary');
-
-// post submit callback
-function cachePostThumbnailOnSubmit (post) {
-  if (cloudinarySettings) {
-    if (post.thumbnailUrl) {
-
-      const data = CloudinaryUtils.uploadImage(post.thumbnailUrl);
-      if (data) {
-        post.cloudinaryId = data.cloudinaryId;
-        post.cloudinaryUrls = data.urls;
-      }
-
-    }
-  }
-  return post;
-}
-addCallback('posts.new.sync', cachePostThumbnailOnSubmit);
-
-function cachePostThumbnailOnEdit (modifier, oldPost) {
-  if (cloudinarySettings) {
-    if (modifier.$set.thumbnailUrl && modifier.$set.thumbnailUrl !== oldPost.thumbnailUrl) {
-      const data = CloudinaryUtils.uploadImage(modifier.$set.thumbnailUrl);
-      modifier.$set.cloudinaryId = data.cloudinaryId;
-      modifier.$set.cloudinaryUrls = data.urls;
-    }
-  }
-  return modifier;
-}
-addCallback('posts.edit.sync', cachePostThumbnailOnEdit);
-```
+`makeCloudinary` will also add two callbacks on `collection.new.sync` and `collection.edit.sync` to cache your images. 

@@ -91,6 +91,7 @@ A few things to note:
 
 - Queries can accept variables, which will be passed by `VulcanEmail.buildAndSend()` (see below); or `testVariables` when testing.
 - A single query can query resolvers for entirely different collections. This lets you mix-and-match different data types in the same email. 
+- If the default resolvers (`FooList`, `FooSingle`, etc.) don't return the data you need for a specific email, don't forget you can also create your own custom resolvers with `addGraphQLResolvers` and `addGraphQLQuery`.
 
 ## Email Templates
 
