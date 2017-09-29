@@ -65,3 +65,18 @@ If you'd like to specify a Cloudinary preset to be used to resize, convert, etc.
     },
   },
 ```
+
+### Adding images to Posts (as an example)
+If you want to add images to a certain collection. Add the custom field, make sure to add this in your fragments.js file:
+
+``` extendFragment('PostsList', `
+    image
+  `);
+
+ extendFragment('PostsPage', `
+    image
+  `);```
+
+ You can now use the uploaded image anywhere in your Vulcan app, using this:
+```<img src={post.image} />```
+which will look for the image field from your post.
