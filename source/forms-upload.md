@@ -33,6 +33,8 @@ It may look like this:
 
 ![Screenshot-Cloudinary](https://res.cloudinary.com/xavcz/image/upload/v1471534183/Capture_d_e%CC%81cran_2016-08-18_17.07.52_tr9uoh.png)
 
+Make sure that your **preset** is named the same between Cloudinary and the one you define in the schema. Otherwise, the upload will request will fail. 
+
 ### Settings
 
 Edit your `settings.json` and add inside the `public: { ... }` block the following entries with your own credentials:
