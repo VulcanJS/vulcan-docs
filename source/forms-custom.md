@@ -19,7 +19,7 @@ For example, a useful pattern might be including a hidden Formsy `<Input/>`, and
 ```js
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'formsy-react-component';
+import { Input } from 'formsy-react-components';
 
 class MyCustomFormComponent extends PureComponent {
   
@@ -62,7 +62,7 @@ Another method to achieve the same thing is to call `this.context.updateCurrentV
 ```js
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'formsy-react-component';
+import { Input } from 'formsy-react-components';
 
 class MyCustomFormComponent extends PureComponent {
   
