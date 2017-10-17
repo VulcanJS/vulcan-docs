@@ -27,7 +27,7 @@ class MyCustomFormComponent extends PureComponent {
     super();
     this.toggleMessage = this.toggleMessage.bind(this);
     this.state = {
-      message = 'foo'
+      message: 'foo'
     };
   }
 
@@ -70,7 +70,7 @@ class MyCustomFormComponent extends PureComponent {
     super();
     this.toggleMessage = this.toggleMessage.bind(this);
     this.state = {
-      message = 'foo'
+      message: 'foo'
     };
   }
 
