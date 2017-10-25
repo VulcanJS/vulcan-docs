@@ -117,11 +117,59 @@ import { RoutesTable } from 'meteor/vulcan:core';
 RoutesTable.admin.layoutName = 'AdminLayout';
 ```
 
-## Update Callbacks
+## Callbacks
 
-A common pattern with React Router is running callbacks after the route update (to enable things like custom scrolling behavior, for example).
+Vulcan uses server-side and client-side hooks to allow for manipulation of server rendered markup and state, both before and after rendering. You can access these hooks by calling the [`addCallback`](callbacks.html#Adding-Callback-Functions) function. Some examples:
 
-You can use the `router.onUpdate` callback hook to add your own callbacks:
+#### Wrap the app in a custom container
+```js
+function addWrapper(app, { req, res, store, apolloClient }) {
+  // Wrap the app with a custom container
+  const state = store.getState();
+  return (
+    <CustomContainer theme={state.theme}>
+      {app}
+    </CustomContainer>
+  );
+}
+
+if (Meteor.isServer) {
+  addCallback('router.server.wrapper', addWrapper);
+}
+```
+ 
+#### Initialise a custom state
+```js
+function dehydrate(context, { req }) {
+  const host = req.headers.host;
+  context.apolloClient.store.dispatch({
+    type: 'SUBSITEINIT',
+    payload: Subsites.findOne({ host }),
+  });
+  return context;
+}
+
+function rehydrate(obj) {
+  const { store, initialState } = obj;
+  store.dispatch({
+    type: 'SUBSITEINIT',
+    payload: (initialState && initialState.subsite) ?  initialState.subsite.config : null,
+  });
+  return obj;
+}
+
+if (Meteor.isServer) {
+  addCallback('router.server.dehydrate', dehydrate);
+} else {
+  addCallback('router.client.rehydrate', rehydrate);
+}
+```
+
+Be sure you're receiving and returning the expected values by checking the [server](https://github.com/VulcanJS/Vulcan/blob/master/packages/vulcan-routing/lib/server/routing.jsx) and [client](https://github.com/VulcanJS/Vulcan/blob/master/packages/vulcan-routing/lib/client/routing.jsx) `vulcan:routing` source files (where you can also find the full list of callback strings available).
+
+### Update callbacks
+
+A common pattern with React Router is running callbacks after the route update (to enable things like custom scrolling behavior, for example). You can use the `router.onUpdate` callback hook to add your own callbacks:
 
 ```js
 addCallback('router.onUpdate', sendGoogleAnalyticsRequest);
