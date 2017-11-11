@@ -9,9 +9,19 @@ This package is used to **cache** a image already hosted online using [Cloudinar
 In your **private** settings:
 
 ```
-'cloudinary': {
-  'apiKey': '123foo',
-  'apiSecret': '456bar'
+"cloudinary": {
+  "apiKey": "123foo",
+  "apiSecret": "456bar",
+  "formats": [
+      {
+        "name": "small",
+        "width": 180,
+        "height": 100}
+    , {
+        "name": "medium",
+        "width": 400,
+        "height": 250 }
+    ]
 },
 ```
 
