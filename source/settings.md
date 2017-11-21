@@ -31,7 +31,7 @@ These settings are defined on the `public` property, meaning they will be shared
 
 ### Server Settings
 
-These settings are defined on the `private` property, and kept on the server.
+These settings are defined at the root of the settings object, (or optionally on the `private` property), and kept on the server.
 
 #### Global Settings
 
