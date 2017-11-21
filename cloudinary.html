@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Cloudinary | Vulcan Docs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://docs.vulcanjs.org">
+    <meta property="og:title" content="Cloudinary | Vulcan Docs">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@telescopeapp">
+    <meta name="twitter:title" content="Cloudinary | Vulcan Docs">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+
+
+  </head>
+  <body class="">
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="http://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation"  >
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo"/>
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input" />
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="http://docs.vulcanjs.org/" title="Vulcan Documentation"  >
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item "">
+        <a class="" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item "">
+        <a class="" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Introduction</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Overview</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="features.html" class="sidebar-link ">
+                  <span>Features</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="architecture.html" class="sidebar-link ">
+                  <span>Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="vulcan.html" class="sidebar-link ">
+                  <span>From Telescope to Vulcan</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Data Layer</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Collections & Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="data-loading.html" class="sidebar-link ">
+                  <span>Data Loading</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="terms-parameters.html" class="sidebar-link ">
+                  <span>Terms & Parameters</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="redux.html" class="sidebar-link ">
+                  <span>Using Redux</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="theming.html" class="sidebar-link ">
+                  <span>Components & Theming</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="core-components.html" class="sidebar-link ">
+                  <span>Core Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-upload.html" class="sidebar-link ">
+                  <span>Upload Package</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="newsletter.html" class="sidebar-link ">
+                  <span>Newsletter</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="payments.html" class="sidebar-link ">
+                  <span>Payments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="admin.html" class="sidebar-link ">
+                  <span>Admin Dashboard</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="embed.html" class="sidebar-link ">
+                  <span>Embed</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Cloudinary</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="voting.html" class="sidebar-link ">
+                  <span>Voting</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Tutorials</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="example-simple.html" class="sidebar-link ">
+                  <span>Simple Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-movies.html" class="sidebar-link ">
+                  <span>Movies Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-instagram.html" class="sidebar-link ">
+                  <span>Instagram Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-forum.html" class="sidebar-link ">
+                  <span>Forum Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-customization.html" class="sidebar-link ">
+                  <span>Customization Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-permissions.html" class="sidebar-link ">
+                  <span>Permissions Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="sponsorship-tutorial.html" class="sidebar-link ">
+                  <span>Sponsorship Flow Tutorial</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="deployment.html" class="sidebar-link ">
+                  <span>Deployment Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="migration.html" class="sidebar-link ">
+                  <span>Migration Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
+                  <span>Recipes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Cloudinary</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/cloudinary.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>This package is used to <strong>cache</strong> a image already hosted online using <a href="http://cloudinary.com" target="_blank" rel="noopener">Cloudinary</a>. To <em>upload</em> a local image using Cloudinary check out the <a href="/forms-upload.html">Forms Upload</a> package instead. </p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><p>In your <strong>private</strong> settings:</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'cloudinary'</span>: &#123;</span><br><span class="line">  <span class="string">'apiKey'</span>: <span class="string">'123foo'</span>,</span><br><span class="line">  <span class="string">'apiSecret'</span>: <span class="string">'456bar'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="makeCloudinary"><a href="#makeCloudinary" class="headerlink" title="makeCloudinary"></a>makeCloudinary</h2><p>You can enable Cloudinary caching on a collection using the <code>makeCloudinary</code> function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Posts &#125; <span class="keyword">from</span> <span class="string">'meteor/example-forum'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; makeCloudinary &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:cloudinary'</span>;</span><br><span class="line"></span><br><span class="line">makeCloudinary(&#123;<span class="attr">collection</span>: Posts, <span class="attr">fieldName</span>: <span class="string">'thumbnailUrl'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>The <code>collection</code> option indicates which collection you want to use Cloudinary with, while the <code>fieldName</code> option indicates which field you want to cache (which should contain an image URL). </p>
+<p>Note that at this time, you can only cache a single image field per collection. </p>
+<h2 id="Custom-Fields"><a href="#Custom-Fields" class="headerlink" title="Custom Fields"></a>Custom Fields</h2><p><code>makeCloudinary</code> will add the following custom fields to store image data:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryId'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls.$'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      blackbox: <span class="literal">true</span>,</span><br><span class="line">      optional: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>In addition, the <code>cloudinaryUrl</code> GraphQL-only field is also available as a shortcut to get a specific image format’s URL. </p>
+<p>It optionally takes a <code>format</code> argument when used inside a GraphQL query or fragment, for example:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">cloudinaryUrl</span><span class="params">(format: <span class="string">"small"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Callbacks"><a href="#Callbacks" class="headerlink" title="Callbacks"></a>Callbacks</h2><p><code>makeCloudinary</code> will also add two callbacks on <code>collection.new.sync</code> and <code>collection.edit.sync</code> to cache your images. </p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev"
+          href="embed.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Embed
+        </a>
+      
+      
+        <a class="link primary next"
+          href="voting.html">
+          <span class="subtitle-pagination">Next</span>
+          Voting
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/cloudinary.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Permissions Example | Vulcan Docs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://docs.vulcanjs.org">
+    <meta property="og:title" content="Permissions Example | Vulcan Docs">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@telescopeapp">
+    <meta name="twitter:title" content="Permissions Example | Vulcan Docs">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+
+
+  </head>
+  <body class="">
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="http://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation"  >
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo"/>
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input" />
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="http://docs.vulcanjs.org/" title="Vulcan Documentation"  >
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item "">
+        <a class="" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item "">
+        <a class="" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Introduction</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Overview</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="features.html" class="sidebar-link ">
+                  <span>Features</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="architecture.html" class="sidebar-link ">
+                  <span>Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="vulcan.html" class="sidebar-link ">
+                  <span>From Telescope to Vulcan</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Data Layer</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Collections & Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="data-loading.html" class="sidebar-link ">
+                  <span>Data Loading</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="terms-parameters.html" class="sidebar-link ">
+                  <span>Terms & Parameters</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="redux.html" class="sidebar-link ">
+                  <span>Using Redux</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="theming.html" class="sidebar-link ">
+                  <span>Components & Theming</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="core-components.html" class="sidebar-link ">
+                  <span>Core Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-upload.html" class="sidebar-link ">
+                  <span>Upload Package</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="newsletter.html" class="sidebar-link ">
+                  <span>Newsletter</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="payments.html" class="sidebar-link ">
+                  <span>Payments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="admin.html" class="sidebar-link ">
+                  <span>Admin Dashboard</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="embed.html" class="sidebar-link ">
+                  <span>Embed</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cloudinary.html" class="sidebar-link ">
+                  <span>Cloudinary</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="voting.html" class="sidebar-link ">
+                  <span>Voting</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Tutorials</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="example-simple.html" class="sidebar-link ">
+                  <span>Simple Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-movies.html" class="sidebar-link ">
+                  <span>Movies Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-instagram.html" class="sidebar-link ">
+                  <span>Instagram Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-forum.html" class="sidebar-link ">
+                  <span>Forum Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-customization.html" class="sidebar-link ">
+                  <span>Customization Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Permissions Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="sponsorship-tutorial.html" class="sidebar-link ">
+                  <span>Sponsorship Flow Tutorial</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="deployment.html" class="sidebar-link ">
+                  <span>Deployment Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="migration.html" class="sidebar-link ">
+                  <span>Migration Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
+                  <span>Recipes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Permissions Example</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/example-permissions.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>These videos cover the <a href="https://github.com/VulcanJS/Vulcan/tree/devel/packages/example-permissions/" target="_blank" rel="noopener">Permissions example</a>.</p>
+<h2 id="Basic-Permissions"><a href="#Basic-Permissions" class="headerlink" title="Basic Permissions"></a>Basic Permissions</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/HFrJjDUPWPM" frameborder="0" allowfullscreen></iframe>
+
+<p>Learn how to define custom user groups, and then give them custom permissions on a site-wide basis.</p>
+<h2 id="Advanced-Permissions"><a href="#Advanced-Permissions" class="headerlink" title="Advanced Permissions"></a>Advanced Permissions</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/prQoRaeX-MM" frameborder="0" allowfullscreen></iframe>
+
+<p>Learn how to define permissions related to specific documents. </p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev"
+          href="example-customization.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Customization Example
+        </a>
+      
+      
+        <a class="link primary next"
+          href="sponsorship-tutorial.html">
+          <span class="subtitle-pagination">Next</span>
+          Sponsorship Flow Tutorial
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/example-permissions.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Groups & Permissions | Vulcan Docs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://docs.vulcanjs.org">
+    <meta property="og:title" content="Groups & Permissions | Vulcan Docs">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@telescopeapp">
+    <meta name="twitter:title" content="Groups & Permissions | Vulcan Docs">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+
+
+  </head>
+  <body class="">
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="http://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation"  >
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo"/>
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input" />
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="http://docs.vulcanjs.org/" title="Vulcan Documentation"  >
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item "">
+        <a class="" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item "">
+        <a class="" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Introduction</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Overview</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="features.html" class="sidebar-link ">
+                  <span>Features</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="architecture.html" class="sidebar-link ">
+                  <span>Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="vulcan.html" class="sidebar-link ">
+                  <span>From Telescope to Vulcan</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Data Layer</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Collections & Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="data-loading.html" class="sidebar-link ">
+                  <span>Data Loading</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="terms-parameters.html" class="sidebar-link ">
+                  <span>Terms & Parameters</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="redux.html" class="sidebar-link ">
+                  <span>Using Redux</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="theming.html" class="sidebar-link ">
+                  <span>Components & Theming</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="core-components.html" class="sidebar-link ">
+                  <span>Core Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-upload.html" class="sidebar-link ">
+                  <span>Upload Package</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="newsletter.html" class="sidebar-link ">
+                  <span>Newsletter</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="payments.html" class="sidebar-link ">
+                  <span>Payments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="admin.html" class="sidebar-link ">
+                  <span>Admin Dashboard</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="embed.html" class="sidebar-link ">
+                  <span>Embed</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cloudinary.html" class="sidebar-link ">
+                  <span>Cloudinary</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="voting.html" class="sidebar-link ">
+                  <span>Voting</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Tutorials</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="example-simple.html" class="sidebar-link ">
+                  <span>Simple Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-movies.html" class="sidebar-link ">
+                  <span>Movies Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-instagram.html" class="sidebar-link ">
+                  <span>Instagram Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-forum.html" class="sidebar-link ">
+                  <span>Forum Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-customization.html" class="sidebar-link ">
+                  <span>Customization Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-permissions.html" class="sidebar-link ">
+                  <span>Permissions Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="sponsorship-tutorial.html" class="sidebar-link ">
+                  <span>Sponsorship Flow Tutorial</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="deployment.html" class="sidebar-link ">
+                  <span>Deployment Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="migration.html" class="sidebar-link ">
+                  <span>Migration Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
+                  <span>Recipes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Groups & Permissions</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/groups-permissions.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <h2 id="Groups-amp-Actions"><a href="#Groups-amp-Actions" class="headerlink" title="Groups &amp; Actions"></a>Groups &amp; Actions</h2><p>When it comes to controlling who can do what in your Vulcan app, it’s important to understand two concepts, <strong>groups</strong> and <strong>actions</strong>. </p>
+<p>A <strong>group</strong> (such as <code>admins</code> or <code>mods</code>) represents a list of users which can perform specific actions (such as <code>posts.edit</code> or <code>posts.remove</code>). </p>
+<p>To test if a user can perform an action, we don’t check if they belong to a specific group (e.g. <code>user.isAdmin === true</code>), but instead if <em>at least one of the groups they belong to</em> has the rights to perform the current action.  </p>
+<p>To understand the benefits of this two-tiered approach, let’s consider a common use case: creating a new “mods” group whose members can edit other user’s posts. </p>
+<p>If we had adopted the “obvious” solution of testing if a user belongs to a set of groups before letting them perform an action, this would mean adding the “mods” group to the list everywhere where this action is performed. </p>
+<p>If, instead, we test if the user has permissions to perform the <em>action</em> <code>posts.edit.all</code>, we can now simply add this action to the “mods” group in a single place. </p>
+<h2 id="Documents-amp-Fields"><a href="#Documents-amp-Fields" class="headerlink" title="Documents &amp; Fields"></a>Documents &amp; Fields</h2><p>Vulcan has two levels of permission checks: the document level, and the field level. </p>
+<p>Consider a scenario where a user can edit their own posts, but an admin can edit anybody’s post. Now let’s add the requirement that a user can only edit a post’s <code>title</code> property, but an admin can also edit a post’s <code>status</code>. </p>
+<p>First, we’ll need a <strong>document-level</strong> check to see if the current user can edit a given document. In Vulcan, this check lives, appropriately enough, next to the relevant mutation:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">edit: &#123;</span><br><span class="line">  </span><br><span class="line">  name: <span class="string">'postsEdit'</span>,</span><br><span class="line">  </span><br><span class="line">  check(user, <span class="built_in">document</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!user || !<span class="built_in">document</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> Users.owns(user, <span class="built_in">document</span>) ? Users.canDo(user, <span class="string">'posts.edit.own'</span>) : Users.canDo(user, <span class="string">`posts.edit.all`</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mutation(root, &#123;documentId, set, unset&#125;, context) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">document</span> = context.Posts.findOne(documentId);</span><br><span class="line">    performCheck(<span class="keyword">this</span>, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// perform operation</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>Here, we’re first testing if the current user owns the document (meaning their <code>_id</code> is equal to the document’s <code>userId</code>). If they do, we test if they can perform the <code>posts.edit.own</code> action. If they can’t we test for the <code>posts.edit.all</code> action. </p>
+<p>Now comes the second check: is the user trying to modify fields they don’t have access to? This check lives at the field level, in the schema:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;</span><br><span class="line">  type: <span class="built_in">String</span>,</span><br><span class="line">  viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  insertableBy: [<span class="string">'members'</span>],</span><br><span class="line">  editableBy: [<span class="string">'members'</span>],</span><br><span class="line">&#125;,</span><br><span class="line">status: &#123;</span><br><span class="line">  type: <span class="built_in">Number</span>,</span><br><span class="line">  viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  insertableBy: [<span class="string">'admins'</span>],</span><br><span class="line">  editableBy: [<span class="string">'admins'</span>],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>The <code>editableBy</code> property takes an array of the names of the groups that can edit a given field. This is one of the few places where we test for groups and not actions, because defining new actions for each field (<code>posts.edit.title</code>, <code>posts.edit.status</code>, etc.) would be a bit too time consuming. </p>
+<p>Optionally, for more fine-grained permissions <code>viewableBy</code>, <code>insertableBy</code>, and <code>editableBy</code> can also take a function that returns a boolean as argument. That function takes the current user as first argument (and, for <code>viewableBy</code> and <code>editableBy</code>, the current document as second argument).</p>
+<p>Note that we’ve talked about editing, but the same principles apply when it comes to inserting, or removing documents (although there is no field-level check for the <code>remove</code> operation).</p>
+<h2 id="Controlling-Viewing"><a href="#Controlling-Viewing" class="headerlink" title="Controlling Viewing"></a>Controlling Viewing</h2><p>Unlike mutations which usually only affect a single document, viewing usually concerns a set of documents.</p>
+<p>Again, let’s make a distinction between field-level and document-level control. If a client requests a list of documents, you need to check two things:</p>
+<ol>
+<li>Which of these documents the client is allowed to access.</li>
+<li>Of the allowed documents, which fields they’re allowed to view. </li>
+</ol>
+<p>Note that while GraphQL lets the client <em>ask</em> for the fields they want, it’s up to you to decide whether or not to accept that request on a per-field basis. </p>
+<p>Practically speaking, controlling access in this manner usually requires four steps:</p>
+<ol>
+<li>Define a <code>checkDocument</code> function that returns whether a user can access a document.</li>
+<li>Use that function to iterate over an array and filter out unaccessible documents.</li>
+<li>Define a <code>checkField</code> function that checks whethere a user can access a <em>field</em> of a document. </li>
+<li>Use it to iterate over each document returned at step 2.</li>
+</ol>
+<p>Let’s see how the <code>vulcan:posts</code> package implements each step. First, a <code>Posts.checkAccess</code> function is defined in <code>collection.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Posts.checkAccess = <span class="function">(<span class="params">currentUser, post</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (Users.isAdmin(currentUser) || Users.owns(currentUser, post)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (post.isFuture) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    <span class="keyword">const</span> status = _.findWhere(Posts.statuses, &#123;<span class="attr">value</span>: post.status&#125;);</span><br><span class="line">    <span class="keyword">return</span> Users.canDo(currentUser, <span class="string">`posts.view.<span class="subst">$&#123;status.label&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If a user is an admin, or if they’re the owner of the document in question, we always give them access. In the opposite case, if the document is scheduled to appear in the future, we always <em>deny</em> access. Finally, for non-future documents, we check the post’s status and whether the user can perform the relevant action (<code>posts.view.pending</code>, <code>posts.view.approved</code>, etc.) as defined in <code>permissions.js</code>. </p>
+<p>Of course, your own <code>check</code> function can also be much simpler depending on your needs.</p>
+<p>We can then use this function to filter out any unviewable posts in the <code>resolvers.js</code> file, using Underscore’s <code>filter</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> viewablePosts = _.filter(posts, post =&gt; Posts.checkAccess(currentUser, post));</span><br></pre></td></tr></table></figure>
+<p>Step 3 and 4 are taken care of together through the <code>Users.restrictViewableFields</code> utility which take the current user, the collection, and either a document or an array of documents:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> restrictedPosts = Users.restrictViewableFields(currentUser, Posts, viewablePosts);</span><br></pre></td></tr></table></figure>
+<p>Behind the scenes, this uses each field’s <code>viewableBy</code> property to either check if the current user is member of the right group (if <code>viewableBy</code> is a group string) or passes the viewable check (if <code>viewableBy</code> is a function). </p>
+<h2 id="Back-End-vs-Front-End"><a href="#Back-End-vs-Front-End" class="headerlink" title="Back-End vs Front-End"></a>Back-End vs Front-End</h2><p>It’s important to remember that you can never really control what the client can do: just because you hide a form on the client doesn’t mean a smart user can’t figure out a way to trigger its operation; unless of course you disallow said operation on the server. </p>
+<p>That being said, it’s still good practice to match your front-end’s permissions later to your back-end’s, so users don’t run into errors. In practice, this means reusing the same checks you use on the server in your React components.</p>
+<p>For example, before showing a user an “edit post” link, you can call the edit mutation’s <code>check</code> function to make sure they’re allowed to perform the operation:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=<span class="string">"posts-item-meta"</span>&gt;</span><br><span class="line">  &#123;Posts.options.mutations.edit.check(<span class="keyword">this</span>.props.currentUser, post) ? <span class="keyword">this</span>.renderEditLink() : <span class="literal">null</span>&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Permissions-API"><a href="#Permissions-API" class="headerlink" title="Permissions API"></a>Permissions API</h2><p>Here’s how to create and modify groups.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Users.createGroup(groupName); <span class="comment">// create a new group</span></span><br><span class="line"></span><br><span class="line">Users.getGroups(user); <span class="comment">// get a list of all the groups a user belongs to</span></span><br><span class="line"></span><br><span class="line">Users.getActions(user); <span class="comment">// get a list of all the actions a user can perform</span></span><br><span class="line"></span><br><span class="line">Users.canDo(user, action); <span class="comment">// check if a user can perform a specific action</span></span><br></pre></td></tr></table></figure>
+<p>Documents can be Posts, Comments, or Users. </p>
+<p>Note that some groups are applied automatically:</p>
+<ul>
+<li><code>guests</code>: any non-logged-in user is considered guest. This group is special in that guests users are by definition not part of any other group.</li>
+<li><code>members</code>: default group for all existing users. Is applied to every user in addition to any other groups. </li>
+<li><code>admins</code>: any user with the <code>isAdmin</code> flag set to true.</li>
+</ul>
+<h2 id="Adding-User-to-Groups"><a href="#Adding-User-to-Groups" class="headerlink" title="Adding User to Groups"></a>Adding User to Groups</h2><p>You can add any group string to a user’s <code>groups</code> array:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Users.update(user._id, &#123;<span class="attr">$push</span>: &#123;<span class="attr">groups</span>: <span class="string">'mods'</span>&#125;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line">user.group = [...user.group, <span class="string">'mods'</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="Assigning-Actions"><a href="#Assigning-Actions" class="headerlink" title="Assigning Actions"></a>Assigning Actions</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// assuming we've created a new "mods" group</span></span><br><span class="line">Users.groups.mods.can(<span class="string">"posts.edit.all"</span>); <span class="comment">// mods can edit anybody's posts</span></span><br><span class="line">Users.groups.mods.can(<span class="string">"posts.remove.all"</span>); <span class="comment">// mods can delete anybody's posts</span></span><br></pre></td></tr></table></figure>
+<p>You can also define your own custom actions:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Users.groups.mods.can(<span class="string">"invite"</span>); <span class="comment">// new custom action</span></span><br></pre></td></tr></table></figure>
+<p>Here’s a list of all out-of-the-box permissions:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// guests actions</span></span><br><span class="line">posts.view.approved.own</span><br><span class="line">posts.view.approved.all</span><br><span class="line">comments.view.own</span><br><span class="line">comments.view.all</span><br><span class="line">categories.view.all</span><br><span class="line"></span><br><span class="line"><span class="comment">// members actions</span></span><br><span class="line">posts.view.approved.own</span><br><span class="line">posts.view.approved.all</span><br><span class="line">posts.view.pending.own</span><br><span class="line">posts.view.rejected.own</span><br><span class="line">posts.view.spam.own</span><br><span class="line">posts.view.deleted.own</span><br><span class="line">posts.new</span><br><span class="line">posts.edit.own</span><br><span class="line">posts.remove.own</span><br><span class="line">posts.upvote</span><br><span class="line">posts.cancelUpvote</span><br><span class="line">posts.downvote</span><br><span class="line">posts.cancelDownvote</span><br><span class="line">comments.view.own</span><br><span class="line">comments.view.all</span><br><span class="line">comments.new</span><br><span class="line">comments.edit.own</span><br><span class="line">comments.remove.own</span><br><span class="line">comments.upvote</span><br><span class="line">comments.cancelUpvote</span><br><span class="line">comments.downvote</span><br><span class="line">comments.cancelDownvote</span><br><span class="line">users.edit.own</span><br><span class="line">users.remove.own</span><br><span class="line">categories.view.all</span><br><span class="line"></span><br><span class="line"><span class="comment">// admin actions</span></span><br><span class="line">posts.view.pending.all</span><br><span class="line">posts.view.rejected.all</span><br><span class="line">posts.view.spam.all</span><br><span class="line">posts.view.deleted.all</span><br><span class="line">posts.new.approved</span><br><span class="line">posts.edit.all</span><br><span class="line">posts.remove.all</span><br><span class="line">comments.edit.all</span><br><span class="line">comments.remove.all</span><br><span class="line">users.edit.all</span><br><span class="line">users.remove.all</span><br><span class="line">categories.view.all</span><br><span class="line">categories.new</span><br><span class="line">categories.edit.all</span><br><span class="line">categories.remove.all</span><br></pre></td></tr></table></figure>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev"
+          href="users.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Users
+        </a>
+      
+      
+        <a class="link primary next"
+          href="routing.html">
+          <span class="subtitle-pagination">Next</span>
+          Routing
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/groups-permissions.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

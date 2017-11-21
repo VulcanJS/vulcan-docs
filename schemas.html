@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Collections & Schemas | Vulcan Docs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://docs.vulcanjs.org">
+    <meta property="og:title" content="Collections & Schemas | Vulcan Docs">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@telescopeapp">
+    <meta name="twitter:title" content="Collections & Schemas | Vulcan Docs">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+
+
+  </head>
+  <body class="">
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="http://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation"  >
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo"/>
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input" />
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="http://docs.vulcanjs.org/" title="Vulcan Documentation"  >
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item "">
+        <a class="" href="https://github.com/vulcanjs/vulcan"  >
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item "">
+        <a class="" href="http://slack.telescopeapp.org"  >
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Introduction</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Overview</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="features.html" class="sidebar-link ">
+                  <span>Features</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="architecture.html" class="sidebar-link ">
+                  <span>Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="vulcan.html" class="sidebar-link ">
+                  <span>From Telescope to Vulcan</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Data Layer</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Collections & Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="data-loading.html" class="sidebar-link ">
+                  <span>Data Loading</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="terms-parameters.html" class="sidebar-link ">
+                  <span>Terms & Parameters</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="redux.html" class="sidebar-link ">
+                  <span>Using Redux</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="theming.html" class="sidebar-link ">
+                  <span>Components & Theming</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="core-components.html" class="sidebar-link ">
+                  <span>Core Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-upload.html" class="sidebar-link ">
+                  <span>Upload Package</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="newsletter.html" class="sidebar-link ">
+                  <span>Newsletter</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="payments.html" class="sidebar-link ">
+                  <span>Payments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="admin.html" class="sidebar-link ">
+                  <span>Admin Dashboard</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="embed.html" class="sidebar-link ">
+                  <span>Embed</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cloudinary.html" class="sidebar-link ">
+                  <span>Cloudinary</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="voting.html" class="sidebar-link ">
+                  <span>Voting</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Tutorials</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="example-simple.html" class="sidebar-link ">
+                  <span>Simple Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-movies.html" class="sidebar-link ">
+                  <span>Movies Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-instagram.html" class="sidebar-link ">
+                  <span>Instagram Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-forum.html" class="sidebar-link ">
+                  <span>Forum Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-customization.html" class="sidebar-link ">
+                  <span>Customization Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="example-permissions.html" class="sidebar-link ">
+                  <span>Permissions Example</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="sponsorship-tutorial.html" class="sidebar-link ">
+                  <span>Sponsorship Flow Tutorial</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="deployment.html" class="sidebar-link ">
+                  <span>Deployment Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="migration.html" class="sidebar-link ">
+                  <span>Migration Guide</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
+                  <span>Recipes</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Collections & Schemas</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schemas.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <h2 id="Creating-Collections"><a href="#Creating-Collections" class="headerlink" title="Creating Collections"></a>Creating Collections</h2><p>Vulcan features a number of helpers to make setting up your layer faster, most of which are initialized through the <code>createCollection</code> function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line">  </span><br><span class="line">  resolvers,</span><br><span class="line"></span><br><span class="line">  mutations,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The function takes the following arguments:</p>
+<ul>
+<li><code>collectionName</code>: the name of the collection throughout your app (will be lowercased in your MongoDB database).</li>
+<li><code>dbCollectionName</code>: if you want to use a different name in your database you can specify it here.</li>
+<li><code>typeName</code>: the name of the GraphQL type that will be generated for the collection.</li>
+<li><code>schema</code>, <code>resolvers</code>, <code>mutations</code>: see below.</li>
+<li><code>generateGraphQLSchema</code>: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to <code>true</code>). </li>
+</ul>
+<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>Passing a schema, resolvers, and mutations to <code>createCollection</code> enables a lot of Vulcan’s internal synergy. That being said, you can also set <code>generateGraphQLSchema</code> to <code>false</code> and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer. </p>
+<h2 id="Schemas"><a href="#Schemas" class="headerlink" title="Schemas"></a>Schemas</h2><p>The first piece of any GraphQL API is the <strong>schema</strong>, which defines what data is made available to the client. </p>
+<p>In Vulcan, this GraphQL schema can be generated automatically from your collection’s JSON schema, so you don’t have to type things twice. Just pass a <a href="https://github.com/aldeed/node-simple-schema" target="_blank" rel="noopener">SimpleSchema</a>-compatible JSON schema as <code>createCollection</code>‘s <code>schema</code> property.</p>
+<h3 id="Custom-Schemas"><a href="#Custom-Schemas" class="headerlink" title="Custom Schemas"></a>Custom Schemas</h3><p>If you need to manually add a schema, you can also do so using the <code>GraphQLSchema.addSchema</code> function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> customSchema = <span class="string">`</span></span><br><span class="line"><span class="string">  input Custom &#123;</span></span><br><span class="line"><span class="string">    _id: String</span></span><br><span class="line"><span class="string">    userId: String</span></span><br><span class="line"><span class="string">    title: String</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">GraphQLSchema.addSchema(customSchema);</span><br></pre></td></tr></table></figure>
+<h2 id="Schema-Properties"><a href="#Schema-Properties" class="headerlink" title="Schema Properties"></a>Schema Properties</h2><h3 id="Default-Properties"><a href="#Default-Properties" class="headerlink" title="Default Properties"></a>Default Properties</h3><p>See the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema documentation</a>.</p>
+<h3 id="Data-Layer-Properties"><a href="#Data-Layer-Properties" class="headerlink" title="Data Layer Properties"></a>Data Layer Properties</h3><h4 id="viewableBy"><a href="#viewableBy" class="headerlink" title="viewableBy"></a><code>viewableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> viewing the document and the <code>document</code> itself, and should return <code>true</code> or <code>false</code>.</p>
+<h4 id="insertableBy"><a href="#insertableBy" class="headerlink" title="insertableBy"></a><code>insertableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and should return <code>true</code> or <code>false</code>. When generating a form for inserting new documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
+<h4 id="editableBy"><a href="#editableBy" class="headerlink" title="editableBy"></a><code>editableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and the <code>document</code> being operated on, and should return <code>true</code> or <code>false</code>. When generating a form for editing existing documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
+<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/data-loading.html#Field-Resolvers">Field Resolvers</a> section. </p>
+<h3 id="onInsert-onEdit-onRemove"><a href="#onInsert-onEdit-onRemove" class="headerlink" title="onInsert, onEdit, onRemove"></a><code>onInsert</code>, <code>onEdit</code>, <code>onRemove</code></h3><p>These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. </p>
+<ul>
+<li><code>onInsert(document, currentUser)</code></li>
+<li><code>onEdit(modifier, document, currentUser)</code></li>
+<li><code>onRemove(document, currentUser)</code></li>
+</ul>
+<h3 id="Forms-Properties"><a href="#Forms-Properties" class="headerlink" title="Forms Properties"></a>Forms Properties</h3><h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
+<h4 id="control"><a href="#control" class="headerlink" title="control"></a><code>control</code></h4><p>Either a text string (one of <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>checkboxgroup</code>, <code>radiogroup</code>, or <code>select</code>) or a React component.</p>
+<h4 id="order"><a href="#order" class="headerlink" title="order"></a><code>order</code></h4><p>A number corresponding to the position of the property’s field inside the form.</p>
+<h4 id="group"><a href="#group" class="headerlink" title="group"></a><code>group</code></h4><p>An optional object containing the group/section/fieldset in which to include the form element. Groups have <code>name</code>, <code>label</code>, and <code>order</code> properties.</p>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">postedAt: &#123;</span><br><span class="line">  type: <span class="built_in">Date</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  insertableBy: Users.isAdmin,</span><br><span class="line">  editableBy: Users.isAdmin,</span><br><span class="line">  publish: <span class="literal">true</span>,</span><br><span class="line">  control: <span class="string">"datetime"</span>,</span><br><span class="line">  group: &#123;</span><br><span class="line">    name: <span class="string">"admin"</span>,</span><br><span class="line">    label: <span class="string">"Admin Options"</span>,</span><br><span class="line">    order: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>Note that fields with no groups are always rendered first in the form.</p>
+<h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a><code>placeholder</code></h4><p>A placeholder value for the form field.</p>
+<h4 id="beforeComponent"><a href="#beforeComponent" class="headerlink" title="beforeComponent"></a><code>beforeComponent</code></h4><p>A React component that will be inserted just before the form component itself.</p>
+<h4 id="afterComponent"><a href="#afterComponent" class="headerlink" title="afterComponent"></a><code>afterComponent</code></h4><p>A React component that will be inserted just after the form component itself.</p>
+<h4 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a><code>hidden</code></h4><p>Can either be a boolean or a function accepting form props as argument and returning a boolean.</p>
+<p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.</p>
+<h3 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h3><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the <code>vulcan:base-components</code> theme, a form will then pop up prompting the user to complete their profile with the missing fields. </p>
+<h2 id="Custom-Fields"><a href="#Custom-Fields" class="headerlink" title="Custom Fields"></a>Custom Fields</h2><p>Out of the box, Vulcan has three main collections: <code>Posts</code>, <code>Users</code>, and <code>Comments</code>. Each of them has a pre-set schema, but that schema can also be extended with custom fields.</p>
+<p>For example, this is how the <code>vulcan:newsletter</code> package extends the <code>Posts</code> schema with a <code>scheduledAt</code> property that keeps track of when a post was sent out as part of an email newsletter:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Posts.addField(&#123;</span><br><span class="line">  fieldName: <span class="string">'scheduledAt'</span>,</span><br><span class="line">  fieldSchema: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The <code>collection.addField()</code> function takes either a field object, or an array of fields. Each field has a <code>fieldName</code> property, and a <code>fieldSchema</code> property.</p>
+<p>Each field schema supports all of the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema properties</a>, such as <code>type</code>, <code>optional</code>, etc.</p>
+<p>A few special properties (<code>viewableBy</code>, <code>insertableBy</code>, <code>editableBy</code>, <code>control</code>, and <code>order</code>) are also supported by the <a href="forms.html">Forms</a> package.</p>
+<p>You can also remove a field by calling <code>collection.removeField(fieldName)</code>. For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Posts.removeField(<span class="string">'scheduledAt'</span>);</span><br></pre></td></tr></table></figure>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev"
+          href="common-problems.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Common Problems
+        </a>
+      
+      
+        <a class="link primary next"
+          href="data-loading.html">
+          <span class="subtitle-pagination">Next</span>
+          Data Loading
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schemas.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>
