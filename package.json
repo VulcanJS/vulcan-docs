@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "3.2.0"
+    "version": "3.4.1"
   },
   "dependencies": {
+    "global": "^4.3.2",
     "handlebars": "^4.0.5",
-    "hexo": "3.2.0",
+    "hexo": "^3.4.1",
     "hexo-deployer-git": "^0.2.0",
     "hexo-generator-archive": "^0.1.2",
     "hexo-generator-category": "^0.1.2",
@@ -20,9 +21,6 @@
     "hexo-server": "^0.1.2",
     "lodash": "^4.13.1",
     "showdown": "^1.4.2"
-  },
-  "devDependencies": {
-    "hexo-s3-deploy": "^1.2.1"
   },
   "scripts": {
     "start": "hexo serve",

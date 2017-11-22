@@ -362,6 +362,8 @@ const user = await Users.queryOne(userId, {
 
 If you use complex GraphQL queries and resolvers a lot, you might notice some slow loading times. Here's a few things you can try to speed things up.
 
+- [Video Case Study: GraphQL Performance Optimization](https://www.youtube.com/watch?v=M8Jmz8q2sUk)
+
 #### Add Mongo Indexes
 
 Make sure you're adding indexes for any frequently used Mongo selectors. For example, if you're often looking up all posts associated with a specific user ID, you'll want to add an index for that:

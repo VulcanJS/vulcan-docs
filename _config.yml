@@ -71,7 +71,7 @@ sidebar_categories:
     - themes
     - tutorials
     - videos
-github_repo: vulcanjs/nova-docs
+github_repo: vulcanjs/vulcan-docs
 content_root: source
 
 typescript_api_box:
@@ -146,5 +146,5 @@ theme: meteor
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/VulcanJS/nova-docs
+  repository: https://github.com/VulcanJS/vulcan-docs/
   branch: gh-pages

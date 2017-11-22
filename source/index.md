@@ -12,6 +12,8 @@ You can get a good overview of what Vulcan can do in the [Features](features.htm
 
 ## Install
 
+- [Full video tutorial](https://www.youtube.com/watch?v=aCjR9UrNqVk)
+
 Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
 
 You can then install [Meteor](https://www.meteor.com/install), which is used as the Vulcan build tool.
@@ -49,6 +51,8 @@ And if you'd like to use and customize the forum packages, you can then follow u
 You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
 
 ## Two-Repo Install
+
+- [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
 
 In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can follow the "two-repo" pattern, with the two repository being: 
 
