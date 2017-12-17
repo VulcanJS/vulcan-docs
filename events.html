@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Callbacks | Vulcan Docs</title>
+    <title>Analytics & Event Tracking | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Callbacks | Vulcan Docs">
+    <meta property="og:title" content="Analytics & Event Tracking | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Callbacks | Vulcan Docs">
+    <meta name="twitter:title" content="Analytics & Event Tracking | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -235,8 +235,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
                   <span>Callbacks</span>
                 </a>
               </li>
@@ -372,8 +372,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="events.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Analytics & Event Tracking</span>
                 </a>
               </li>
@@ -518,34 +518,36 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Callbacks</h1>
+      <h1 class="title-page">Analytics & Event Tracking</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/callbacks.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/events.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Vulcan uses a system of hooks and callbacks for many of its operations.</p>
-<h2 id="Adding-Callback-Functions"><a href="#Adding-Callback-Functions" class="headerlink" title="Adding Callback Functions"></a>Adding Callback Functions</h2><p>For example, here’s how you would add a callback to <code>posts.edit.sync</code> to give posts an <code>editedAt</code> date every time they are modified:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setEditedAt</span> (<span class="params">post, user</span>) </span>&#123;</span><br><span class="line">  post.editedAt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">return</span> post;</span><br><span class="line">&#125;</span><br><span class="line">addCallback(<span class="string">'posts.edit.sync'</span>, setEditedAt);</span><br></pre></td></tr></table></figure>
-<p>Vulcan’s boilerplate mutations support three distinct types of callback functions, each with their own hook:</p>
-<ul>
-<li><code>validate</code> callbacks are called to decide if an operation should run or not. </li>
-<li><code>sync</code> callbacks are called in a blocking manner before the database operation.</li>
-<li><code>async</code> callbacks are called in a non-blocking manner, after the database operation. </li>
+      <p>Vulcan provides an API to add support for multiple analytics and event tracking providers. </p>
+<h2 id="Tracking-Events"><a href="#Tracking-Events" class="headerlink" title="Tracking Events"></a>Tracking Events</h2><p>You can track events using the <code>track</code> function:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; track &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line">track(<span class="string">'clickedSignUp'</span>, &#123;<span class="attr">time</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>track</code> takes two argument: the name of the event (as a string), and an optional properties object. </p>
+<h2 id="Providers"><a href="#Providers" class="headerlink" title="Providers"></a>Providers</h2><ul>
+<li><code>vulcan:events-ga</code>: Google Analytics</li>
+<li><code>vulcan:events-segment</code>: Segment</li>
+<li><code>vulcan:events-mongo</code>: Internal MongoDB event tracking</li>
 </ul>
-<h2 id="Removing-Callback-Functions"><a href="#Removing-Callback-Functions" class="headerlink" title="Removing Callback Functions"></a>Removing Callback Functions</h2><p>If the callback function is named (i.e. declared using the <code>function foo () {}</code> syntax), you can also remove it from the callback using:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; removeCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">removeCallback(<span class="string">'posts.edit.sync'</span>, <span class="string">"setEditedAt"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="Running-Callback-Hooks"><a href="#Running-Callback-Hooks" class="headerlink" title="Running Callback Hooks"></a>Running Callback Hooks</h2><p>Callbacks are run using the <code>Callbacks.runSync</code> and <code>Callbacks.runAsync</code> functions:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modifier = Callbacks.run(<span class="string">`movies.edit.sync`</span>, modifier, <span class="built_in">document</span>, currentUser)</span><br></pre></td></tr></table></figure>
-<p>In each case, the <strong>first</strong> argument is the name of the callback hook, the <strong>second</strong> argument is the one iterated on by each callback function on the hook, while any remaining arguments are just passed along from one iteration to the next.</p>
-<p>Note that for <em>sync</em> callbacks, each callback function should return the main argument to pass it on to the next function, while <em>async</em> callbacks don’t need to return anything.</p>
-<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>Creating new callback hooks is useful to make your own code extendable by other developers, but it’s entirely optional. </p>
+<h2 id="Adding-Providers"><a href="#Adding-Providers" class="headerlink" title="Adding Providers"></a>Adding Providers</h2><p>To add a provider, you can use the following methods (applied here to <a href="https://segment.com/" target="_blank" rel="noopener">Segment</a>‘s client-side JavaScript API): </p>
+<h4 id="addInitFunction"><a href="#addInitFunction" class="headerlink" title="addInitFunction"></a><code>addInitFunction</code></h4><p>Pass a function that will be called immediately to initialize the provider. For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addInitFunction, getSetting &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentInit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  !(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> analytics = (<span class="built_in">window</span>.analytics = <span class="built_in">window</span>.analytics || []);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    snippet code</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    analytics.SNIPPET_VERSION = <span class="string">'4.0.0'</span>;</span><br><span class="line">    analytics.load(getSetting(<span class="string">'segment.clientKey'</span>));</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;</span><br><span class="line">addInitFunction(segmentInit);</span><br></pre></td></tr></table></figure>
+<h4 id="addPageFunction"><a href="#addPageFunction" class="headerlink" title="addPageFunction"></a><code>addPageFunction</code></h4><p>Pass a function taking the current <code>route</code> as argument that will be used to track navigation to a new page:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addPageFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentTrackPage</span>(<span class="params">route</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name, path &#125; = route;</span><br><span class="line">  <span class="keyword">const</span> properties = &#123;</span><br><span class="line">    url: Utils.getSiteUrl().slice(<span class="number">0</span>, <span class="number">-1</span>) + path,</span><br><span class="line">    path,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">window</span>.analytics.page(<span class="literal">null</span>, name, properties);</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">addPageFunction(segmentTrackPage);</span><br></pre></td></tr></table></figure>
+<h4 id="addIdentifyFunction"><a href="#addIdentifyFunction" class="headerlink" title="addIdentifyFunction"></a><code>addIdentifyFunction</code></h4><p>Pass a function taking the current <code>currentUser</code> as argument that will be used to identify users:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addIdentifyFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentIdentify</span>(<span class="params">currentUser</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.analytics.identify(currentUser.userId, &#123;</span><br><span class="line">    email: currentUser.email,</span><br><span class="line">    pageUrl: currentUser.pageUrl,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">addIdentifyFunction(segmentIdentify);</span><br></pre></td></tr></table></figure>
+<h4 id="addTrackFunction"><a href="#addTrackFunction" class="headerlink" title="addTrackFunction"></a><code>addTrackFunction</code></h4><p>Pass a function that takes an event name and event properties:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addTrackFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentTrack</span>(<span class="params">eventName, eventProperties</span>) </span>&#123;</span><br><span class="line">  analytics.track(eventName, eventProperties);</span><br><span class="line">&#125;</span><br><span class="line">addTrackFunction(segmentTrack);</span><br></pre></td></tr></table></figure>
 
     </div>
   </div>
@@ -555,17 +557,17 @@
       
       
         <a class="link primary prev"
-          href="core-components.html">
+          href="voting.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Core Components
+          Voting
         </a>
       
       
         <a class="link primary next"
-          href="users.html">
+          href="example-simple.html">
           <span class="subtitle-pagination">Next</span>
-          Users
+          Simple Example
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -573,7 +575,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/callbacks.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/events.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
