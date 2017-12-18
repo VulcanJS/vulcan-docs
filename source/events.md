@@ -2,15 +2,15 @@
 title: Analytics & Event Tracking
 ---
 
-Vulcan provides an API to add support for multiple analytics and event tracking providers. 
+Vulcan provides an API to add support for multiple analytics and event tracking providers.
 
 ## Automated Analytics
 
 The following events will happen automatically for every analytics provider (assuming they are supported):
 
-- `init`: initialize the provider's code snippet. 
-- `identify`: identify the current user, if they exists.
-- `page`: track any page changes. 
+* `init` (client only): initialize the provider's code snippet.
+* `identify` (client/server): identify the current user, if they exists.
+* `page` (client only): track any page changes.
 
 ## Manual Event Tracking
 
@@ -19,22 +19,24 @@ Additionally, you can also manually track specific events using the `track` func
 ```js
 import { track } from 'meteor/vulcan:events';
 
-track('clickedSignUp', {time: new Date(), foo: 'bar'});
+track('clickedSignUp', { time: new Date(), foo: 'bar' });
 ```
 
-`track` takes two argument: the name of the event (as a string), and an optional properties object. 
+`track` takes three argument: the name of the event (as a string), an optional properties object, and an optional `currentUser` object which will be used if the current user can't be inferred from the context (for example, you're calling `track` on the server).
 
-## Providers
+You can call `track` on either client or server (assuming both versions have been implemented), but note that even though both versions have the same API, they might work differently behind the scenes (see below). 
 
-- `vulcan:events-ga`: Google Analytics
-- `vulcan:events-segment`: Segment
-- `vulcan:events-internal`: Internal database-stored event tracking
+## Built-in Providers
+
+* `vulcan:events-ga`: Google Analytics (note: currently client-only)
+* `vulcan:events-segment`: Segment
+* `vulcan:events-internal`: Internal database-stored event tracking
 
 ## Adding Providers
 
-To add a provider, you can use the following methods (applied here to [Segment](https://segment.com/)'s client-side JavaScript API): 
+To add a provider, you can use the following methods (applied here to [Segment](https://segment.com/)'s client-side JavaScript API):
 
-#### `addInitFunction`
+#### `addInitFunction` (client only)
 
 Pass a function that will be called immediately to initialize the provider. For example:
 
@@ -54,7 +56,9 @@ function segmentInit() {
 addInitFunction(segmentInit);
 ```
 
-#### `addPageFunction`
+Note that on the server, initialization will typically happen inside the provider package's own code, which means you don't need to use `addInitFunction`. 
+
+#### `addPageFunction`  (client only)
 
 Pass a function taking the current `route` as argument that will be used to track navigation to a new page:
 
@@ -73,7 +77,9 @@ function segmentTrackPage(route) {
 addPageFunction(segmentTrackPage);
 ```
 
-#### `addIdentifyFunction`
+In a single-page web app, the concept of "page" only makes sense on the client which is why the `addPageFunction` function doesn't do anything on the server. 
+
+#### `addIdentifyFunction` (client and server)
 
 Pass a function taking the current `currentUser` as argument that will be used to identify users:
 
@@ -89,7 +95,7 @@ function segmentIdentify(currentUser) {
 addIdentifyFunction(segmentIdentify);
 ```
 
-#### `addTrackFunction`
+#### `addTrackFunction` (client and server)
 
 Pass a function that takes an event name and event properties:
 
@@ -101,3 +107,6 @@ function segmentTrack(eventName, eventProperties) {
 }
 addTrackFunction(segmentTrack);
 ```
+
+Note that `track` can have different implementations on the client and server. For example, the `vulcan:events-internal` package's client version of `track` will trigger a GraphQL mutation, while the server version will mutate the data directly. Or, the client version of `vulcan:events-segment` will use an in-browser JavaScript snippet while the server version will use Segment's Node API via an NPM package.
+
