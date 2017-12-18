@@ -4,9 +4,17 @@ title: Analytics & Event Tracking
 
 Vulcan provides an API to add support for multiple analytics and event tracking providers. 
 
-## Tracking Events
+## Automated Analytics
 
-You can track events using the `track` function:
+The following events will happen automatically for every analytics provider (assuming they are supported):
+
+- `init`: initialize the provider's code snippet. 
+- `identify`: identify the current user, if they exists.
+- `page`: track any page changes. 
+
+## Manual Event Tracking
+
+Additionally, you can also manually track specific events using the `track` function:
 
 ```js
 import { track } from 'meteor/vulcan:events';
@@ -20,7 +28,7 @@ track('clickedSignUp', {time: new Date(), foo: 'bar'});
 
 - `vulcan:events-ga`: Google Analytics
 - `vulcan:events-segment`: Segment
-- `vulcan:events-mongo`: Internal MongoDB event tracking
+- `vulcan:events-internal`: Internal database-stored event tracking
 
 ## Adding Providers
 
