@@ -531,13 +531,19 @@
 
     <div class="document-formatting">
       <p>Vulcan provides an API to add support for multiple analytics and event tracking providers. </p>
-<h2 id="Tracking-Events"><a href="#Tracking-Events" class="headerlink" title="Tracking Events"></a>Tracking Events</h2><p>You can track events using the <code>track</code> function:</p>
+<h2 id="Automated-Analytics"><a href="#Automated-Analytics" class="headerlink" title="Automated Analytics"></a>Automated Analytics</h2><p>The following events will happen automatically for every analytics provider (assuming they are supported):</p>
+<ul>
+<li><code>init</code>: initialize the provider’s code snippet. </li>
+<li><code>identify</code>: identify the current user, if they exists.</li>
+<li><code>page</code>: track any page changes. </li>
+</ul>
+<h2 id="Manual-Event-Tracking"><a href="#Manual-Event-Tracking" class="headerlink" title="Manual Event Tracking"></a>Manual Event Tracking</h2><p>Additionally, you can also manually track specific events using the <code>track</code> function:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; track &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line">track(<span class="string">'clickedSignUp'</span>, &#123;<span class="attr">time</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p><code>track</code> takes two argument: the name of the event (as a string), and an optional properties object. </p>
 <h2 id="Providers"><a href="#Providers" class="headerlink" title="Providers"></a>Providers</h2><ul>
 <li><code>vulcan:events-ga</code>: Google Analytics</li>
 <li><code>vulcan:events-segment</code>: Segment</li>
-<li><code>vulcan:events-mongo</code>: Internal MongoDB event tracking</li>
+<li><code>vulcan:events-internal</code>: Internal database-stored event tracking</li>
 </ul>
 <h2 id="Adding-Providers"><a href="#Adding-Providers" class="headerlink" title="Adding Providers"></a>Adding Providers</h2><p>To add a provider, you can use the following methods (applied here to <a href="https://segment.com/" target="_blank" rel="noopener">Segment</a>‘s client-side JavaScript API): </p>
 <h4 id="addInitFunction"><a href="#addInitFunction" class="headerlink" title="addInitFunction"></a><code>addInitFunction</code></h4><p>Pass a function that will be called immediately to initialize the provider. For example:</p>
