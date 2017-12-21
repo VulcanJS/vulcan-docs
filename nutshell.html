@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Email | Vulcan Docs</title>
+    <title>Vulcan in a Nutshell | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Email | Vulcan Docs">
+    <meta property="og:title" content="Vulcan in a Nutshell | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Email | Vulcan Docs">
+    <meta name="twitter:title" content="Vulcan in a Nutshell | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -126,8 +126,8 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc ">
-                <a href="nutshell.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Vulcan in a Nutshell</span>
                 </a>
               </li>
@@ -330,8 +330,8 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
                   <span>Email</span>
                 </a>
               </li>
@@ -525,52 +525,36 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Email</h1>
+      <h1 class="title-page">Vulcan in a Nutshell</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/email.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/nutshell.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Vulcan includes a simple-yet-powerful email-sending system.</p>
-<h2 id="Registering-Emails"><a href="#Registering-Emails" class="headerlink" title="Registering Emails"></a>Registering Emails</h2><p>Just like components, emails need to be centrally registered with Vulcan.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  test: &#123;</span><br><span class="line">    template: <span class="string">'test'</span>,</span><br><span class="line">    path: <span class="string">'/email/test'</span>,</span><br><span class="line">    data() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'This is a test'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>The <code>VulcanEmail.addEmails</code> function takes an object that itself contains individual objects for each email. Each email object can have the following properties:</p>
-<h4 id="template"><a href="#template" class="headerlink" title="template"></a><code>template</code></h4><p>The name of the template used to display the email (see below).</p>
-<h4 id="subject-data"><a href="#subject-data" class="headerlink" title="subject(data)"></a><code>subject(data)</code></h4><p>Either a function that takes in the email’s <code>data</code> as argument and returns the subject, or a string. </p>
-<p>Keep in mind that <code>data</code> will be empty in certain cases (such as when listing emails in the Emails dashboard).</p>
-<h4 id="data-variables"><a href="#data-variables" class="headerlink" title="data(variables)"></a><code>data(variables)</code></h4><p>A function that returns an object used to populate the email. It will either be passed a <code>variables</code> object by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
-<h4 id="query"><a href="#query" class="headerlink" title="query"></a><code>query</code></h4><p>A string containing a GraphQL query used to populate the email see below). If both <code>data</code> and <code>query</code> are provided, their results will be merged and passed on to the email.</p>
-<p>Similarly to <code>data()</code>, the query will either use the <code>variables</code> object passed by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
-<h4 id="path"><a href="#path" class="headerlink" title="path"></a><code>path</code></h4><p>A path for the route at which the email will be available to preview (when using <code>vulcan:debug</code>).</p>
-<h4 id="testVariables"><a href="#testVariables" class="headerlink" title="testVariables"></a><code>testVariables</code></h4><p>An object containing default variables passed to <code>query()</code> when testing the email. If not specified, a blank object will be used. </p>
-<h2 id="Querying-For-Data"><a href="#Querying-For-Data" class="headerlink" title="Querying For Data"></a>Querying For Data</h2><p>Just like you can use GraphQL to query for data on the client and populate your React component’s contents, you can also use it to query for data on the server and populate your Handlebars templates:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  accountApproved: &#123;</span><br><span class="line">    template: <span class="string">"accountApproved"</span>,</span><br><span class="line">    path: <span class="string">"/email/account-approved/:_id?"</span>,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">const</span> user = _.isEmpty(data) ? &#123;<span class="attr">displayName</span>: <span class="string">'[user]'</span>&#125; : data.UsersSingle;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"Welcome $&#123;user.displayName&#125;! Your account has been approved."</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    query: <span class="string">`</span></span><br><span class="line"><span class="string">      query UsersSingleQuery($documentId: String)&#123;</span></span><br><span class="line"><span class="string">        UsersSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        SiteData&#123;</span></span><br><span class="line"><span class="string">          title</span></span><br><span class="line"><span class="string">          url</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>A few things to note:</p>
-<ul>
-<li>Queries can accept variables, which will be passed by <code>VulcanEmail.buildAndSend()</code> (see below); or <code>testVariables</code> when testing.</li>
-<li>A single query can query resolvers for entirely different collections. This lets you mix-and-match different data types in the same email. </li>
-<li>If the default resolvers (<code>FooList</code>, <code>FooSingle</code>, etc.) don’t return the data you need for a specific email, don’t forget you can also create your own custom resolvers with <code>addGraphQLResolvers</code> and <code>addGraphQLQuery</code>.</li>
-</ul>
-<h2 id="Email-Templates"><a href="#Email-Templates" class="headerlink" title="Email Templates"></a>Email Templates</h2><p>Unlike components, emails don’t use React but the <a href="http://handlebarsjs.com/" target="_blank" rel="noopener">Handlebars</a> templating language. Before you can use a template with Vulcan’s email system, you’ll need to register it. </p>
-<p>In order to register a new template or override an existing one, first you must import it as a text asset in your <code>package.js</code> file (or store it in your <code>/public</code> directory):</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">api.addAssets([<span class="string">'path/to/template/newReply.handlebars'</span>,], [<span class="string">'server'</span>]);</span><br></pre></td></tr></table></figure>
-<p>You’ll then be able to add a new template with <code>VulcanEmail.addTemplates</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addTemplates(&#123;</span><br><span class="line">  newReply: Assets.getText(<span class="string">'path/to/template/newReply.handlebars'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>Or override an existing one with:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.templates.newReply = Assets.getText(<span class="string">'path/to/template/newReply.handlebars'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="Sending-Emails"><a href="#Sending-Emails" class="headerlink" title="Sending Emails"></a>Sending Emails</h2><p>Finally, you can send emails with <code>VulcanEmail.buildAndSend(options)</code>. The function takes an <code>options</code> object with the following fields:</p>
-<ul>
-<li><code>to</code>: an array of addresses to which you want to send the current email.</li>
-<li><code>emailName</code>: the name of the email as registered using <code>VulcanEmail.addEmails</code>.</li>
-<li><code>variables</code>: the variables to pass to the email’s GraphQL <code>query</code>.</li>
-</ul>
-<p>The template, subject, query, etc. will all be derived from the <code>emailName</code> you pass to the function. </p>
+      <p>The best way to understand how Vulcan works is to consider its three main aspects: the role of the schema, how Vulcan reads data, and how Vulcan writes data. </p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><a href="https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&amp;v=800b76aa" target="_blank" rel="noopener"><img src="https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&amp;v=800b76aa" alt="https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&amp;v=800b76aa"></a></p>
+<h2 id="The-Schema"><a href="#The-Schema" class="headerlink" title="The Schema"></a>The Schema</h2><p>At its core, a Vulcan schema is just a JavaScript object containing a list of fields such as <code>name</code>, <code>_id</code>, <code>createdAt</code>, <code>description</code>, etc. describing a <strong>type of document</strong> (a movie, a post, a photo, a review, and so on).</p>
+<p>The schema is what defines how a <a href="/schemas.html">Collection</a> (a.k.a. a Model) behaves, and it fulfills many important functions:</p>
+<ol>
+<li>It’s used to generate your GraphQL schema, which in turn controls your app’s GraphQL API.</li>
+<li>It’s used to <a href="http://docs.vulcanjs.org/groups-permissions.html">control permissions</a>.</li>
+<li>It’s used to <a href="http://docs.vulcanjs.org/forms.html">generate forms</a>.</li>
+</ol>
+<h2 id="Reading-Data"><a href="#Reading-Data" class="headerlink" title="Reading Data"></a>Reading Data</h2><p>Reading data basically means getting data from your database all the way to the user’s browser.</p>
+<p>Let’s assume you have a <code>Movies.jsx</code> component ready to take a <code>results</code> prop and display its contents as a list of movies. </p>
+<p>In order to pass that prop, you’ll wrap your component with the <a href="http://docs.vulcanjs.org/data-loading.html#withList"><code>withList</code> higher-order component</a>. You just need to specify the appropriate <a href="/schemas.html">Collection</a>, and optionally also specify a <a href="/fragments.html">fragment</a> to define which document fields to load. </p>
+<p>The <code>withList</code> HoC will then query your GraphQL endpoint’s corresponding <a href="/data-loading.html#List-Resolver"><code>MoviesList</code> resolver</a>, which can be generated automatically using Vulcan’s <a href="/data-loading.html#Default-Resolvers">default resolvers</a>.</p>
+<p>The <code>MoviesList</code> resolver will optionally check the query’s <code>terms</code> argument and <a href="/terms-parameters.html">feed it through a set of callbacks</a> in order to generate a valid MongoDB query, whose result it will return to <code>withList</code> and from there back to your <code>Movies</code> component. </p>
+<h2 id="Writing-Data"><a href="#Writing-Data" class="headerlink" title="Writing Data"></a>Writing Data</h2><p>Now let’s consider the opposite operation: writing data, such as editing a movie’s description. </p>
+<p>First, you should know that the movie edit form can be <a href="/forms.html">automatically generated from your schema</a>, meaning you don’t actually need to code it or worry about hooking it up to your GraphQL API. </p>
+<p>That form is wrapped with the <a href="/mutations.html#Higher-Order-Components"><code>withEdit</code> HoC</a>, which in turn will call the <code>EditMovies</code> mutation on the server (which again can be <a href="/mutations.html#Default-Mutations">automatically generated from default mutations</a>).</p>
+<p><code>EditMovies</code> will then call a <a href="/mutations.html#Boilerplate-Mutations">boilerplate mutator</a> which will perform <strong>validation</strong> based on your schema, and finally modify the document inside your database. </p>
 
     </div>
   </div>
@@ -580,17 +564,17 @@
       
       
         <a class="link primary prev"
-          href="forms-upload.html">
+          href="index.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Upload Package
+          Introduction
         </a>
       
       
         <a class="link primary next"
-          href="newsletter.html">
+          href="features.html">
           <span class="subtitle-pagination">Next</span>
-          Newsletter
+          Features
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -598,7 +582,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/email.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/nutshell.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
