@@ -4,6 +4,10 @@ title: Callbacks
 
 Vulcan uses a system of hooks and callbacks for many of its operations.
 
+## Debugging
+
+**If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://0.0.0.0:3000/callbacks](http://0.0.0.0:3000/callbacks).**
+
 ## Adding Callback Functions
 
 For example, here's how you would add a callback to `posts.edit.sync` to give posts an `editedAt` date every time they are modified:

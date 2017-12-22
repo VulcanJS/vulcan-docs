@@ -2,7 +2,7 @@
 title: Terms & Parameters
 ---
 
-## Terms & Parameters
+## Overview
 
 When querying for data, you can do two basic operations:
 

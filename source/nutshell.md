@@ -6,7 +6,7 @@ The best way to understand how Vulcan works is to consider its three main aspect
 
 ## Overview
 
-[![https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&v=800b76aa](https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&v=800b76aa)](https://d3vv6lp55qjaqc.cloudfront.net/items/1v203s2o2t3T2U3E2M1k/how-vulcan-works.png?X-CloudApp-Visitor-Id=43642&v=800b76aa)
+[![/images/how-vulcan-works.svg](/images/how-vulcan-works.svg)](/images/how-vulcan-works.svg)
 
 ## The Schema
 

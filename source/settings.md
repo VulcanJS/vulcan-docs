@@ -4,6 +4,10 @@ title: Settings
 
 You can configure the following settings in your `settings.json` file.
 
+## Debugging
+
+**If you've got the [debug package](/debug.html) enabled, a settings debugging UI is available at [http://0.0.0.0:3000/settings](http://0.0.0.0:3000/settings).**
+
 ## Overview
 
 You can call Vulcan.showSettings() in your meteor shell to get a quick overview of all settings, or go to `/settings` if you have the `vulcan:debug` package enabled. 

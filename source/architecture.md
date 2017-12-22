@@ -2,14 +2,8 @@
 title: Architecture
 ---
 
-## Apollo
+Here's what you need to know about Vulcan's architecture. 
 
-[Apollo](http://apollostack.com) is the set of tools used to manage the GraphQL layer. It consists of two parts, Apollo server and Apollo client. 
-
-- **Apollo server** is used to create the GraphQL API endpoint on the server.
-- **Apollo client** (together with the `react-apollo` package) is used to query that endpoint and load data on the client. 
-
-Apollo is still young, but it's well-documented, evolving quickly, and supported by a great team. 
 
 ## Package-Based Architecture
 

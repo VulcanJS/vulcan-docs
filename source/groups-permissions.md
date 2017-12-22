@@ -2,6 +2,9 @@
 title: Groups & Permissions
 ---
 
+## Debugging
+
+**If you've got the [debug package](/debug.html) enabled, a groups debugging UI is available at [http://0.0.0.0:3000/groups](http://0.0.0.0:3000/groups).**
 ## Groups & Actions
 
 When it comes to controlling who can do what in your Vulcan app, it's important to understand two concepts, **groups** and **actions**. 

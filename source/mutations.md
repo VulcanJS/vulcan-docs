@@ -2,6 +2,8 @@
 title: Mutations
 ---
 
+A mutation is very similar to a query, in that it receives a GraphQL request, decides what to do with it, and then returns some data. But because mutations can result in *changes* to your data, they have their own special `Mutation` type to differentiate them. 
+
 ## GraphQL Mutations
 
 `createCollection` also accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
@@ -91,7 +93,7 @@ const voteResolver = {
 GraphQLSchema.addResolvers(voteResolver);
 ```
 
-### Higher-Order Components
+## Higher-Order Components
 
 #### `withNew`
 
@@ -137,11 +139,11 @@ You would then call the function with:
 this.props.addEmailNewsletter({email: 'foo@bar.com'})
 ```
 
-## Boilerplate Mutations
+## Mutators
 
-Vulcan features three standard `newMutation`, `editMutation`, and `removeMutation` mutations that are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`. 
+A **mutator** is the function that actually does the work of mutating data on your server. As opposed to the *mutation*, which is usually a fairly light function called directly through your GraphQL API, a *mutator* will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.
 
-Note that in the context of this section, “mutation” refers to the function that performs the actual server-side database operation, and not to the [GraphQL mutations](mutations.html). 
+Vulcan features three standard `newMutator`, `editMutator`, and `removeMutator` mutators that are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`. 
 
 These mutation functions should be defined *outside* your GraphQL mutation resolvers, so that you're able to call them from outside a GraphQL context (for example, to seed your database through a server script).
 

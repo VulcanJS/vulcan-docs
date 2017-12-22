@@ -3,6 +3,9 @@ title: Email
 ---
 
 Vulcan includes a simple-yet-powerful email-sending system.
+## Debugging
+
+**If you've got the [debug package](/debug.html) enabled, an email debugging UI is available at [http://0.0.0.0:3000/callbacks](http://0.0.0.0:3000/emails).**
 
 ## Registering Emails
 

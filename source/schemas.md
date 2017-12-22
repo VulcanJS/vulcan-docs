@@ -1,6 +1,90 @@
 ---
-title: Collections & Schemas
+title: Overview
 ---
+
+
+The role of the schema is to serve as a central source of truth that will be used to generate or populate many of Vulcan's other components. 
+
+![/images/vulcan-schemas.svg](/images/vulcan-schemas.svg)
+
+Based on your schema, Vulcan can: 
+
+- Generate a GraphQL equivalent of your schema to control your GraphQL API. 
+- [Control permissions](/groups-permissions.html) for accessing and modifying data.
+- [Generate forms](/forms.html) on the client. 
+- Validate form contents on submission. 
+- Auto-generate [paginated, searchable datatables](/core-components.html#Datatable).
+- Auto-generate [smart cards](/core-components.html#Card) for displaying individual documents. 
+- Add callbacks on document insert or edit. 
+
+## Example
+
+Here is a schema example, taken from the [Movies tutorial](/example-movies.html):
+
+```js
+const schema = {
+
+  // default properties
+
+  _id: {
+    type: String,
+    optional: true,
+    viewableBy: ['guests'],
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    viewableBy: ['guests'],
+    onInsert: (document, currentUser) => {
+      return new Date();
+    }
+  },
+  userId: {
+    type: String,
+    optional: true,
+    viewableBy: ['guests'],
+    resolveAs: {
+      fieldName: 'user',
+      type: 'User',
+      resolver: (movie, args, context) => {
+        return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
+      },
+      addOriginalField: true
+    }
+  },
+  
+  // custom properties
+
+  name: {
+    label: 'Name',
+    type: String,
+    optional: true,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members'],
+  },
+  year: {
+    label: 'Year',
+    type: String,
+    optional: true,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members'],
+  },
+  review: {
+    label: 'Review',
+    type: String,
+    optional: true,
+    control: 'textarea',
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members']
+  },
+
+};
+```
+
+As you can see, a schema is a JavaScript object containing a list of fields, each of which is defined using a range of special properties. 
 
 ## Creating Collections
 
@@ -34,138 +118,11 @@ The function takes the following arguments:
 
 Passing a schema, resolvers, and mutations to `createCollection` enables a lot of Vulcan's internal synergy. That being said, you can also set `generateGraphQLSchema` to `false` and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer. 
 
-## Schemas
+## Extending Schemas
 
-The first piece of any GraphQL API is the **schema**, which defines what data is made available to the client. 
+Sometimes, you'll want to extend an existing schema. For example Vulcan's [Forum example](/example-forum.html) has three main collections: `Posts`, `Users`, and `Comments`. Each of them has a pre-set schema, but that schema can also be extended with custom fields.
 
-In Vulcan, this GraphQL schema can be generated automatically from your collection's JSON schema, so you don't have to type things twice. Just pass a [SimpleSchema](https://github.com/aldeed/node-simple-schema)-compatible JSON schema as `createCollection`'s `schema` property.
-
-### Custom Schemas
-
-If you need to manually add a schema, you can also do so using the `GraphQLSchema.addSchema` function:
-
-```js
-const customSchema = `
-  input Custom {
-    _id: String
-    userId: String
-    title: String
-  }
-`;
-GraphQLSchema.addSchema(customSchema);
-```
-
-## Schema Properties
-
-### Default Properties
-
-See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-schema#schema-rules).
-
-### Data Layer Properties
-
-#### `viewableBy`
-
-Can either be an array of group names or a function.
-
-If it's a function, it'll be called on the `user` viewing the document and the `document` itself, and should return `true` or `false`.
-
-#### `insertableBy`
-
-Can either be an array of group names or a function.
-
-If it's a function, it'll be called on the `user` performing the operation, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user.
-
-#### `editableBy`
-
-Can either be an array of group names or a function.
-
-If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
-
-#### `resolveAs`
-
-You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section. 
-
-### `onInsert`, `onEdit`, `onRemove`
-
-These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. 
-
-- `onInsert(document, currentUser)`
-- `onEdit(modifier, document, currentUser)`
-- `onRemove(document, currentUser)`
-
-### Forms Properties
-
-#### `label`
-
-The form label. If not provided, the label will be generated based on the field name and the available language strings data.
-
-#### `control`
-
-Either a text string (one of `text`, `textarea`, `checkbox`, `checkboxgroup`, `radiogroup`, or `select`) or a React component.
-
-#### `order`
-
-A number corresponding to the position of the property's field inside the form.
-
-#### `group`
-
-An optional object containing the group/section/fieldset in which to include the form element. Groups have `name`, `label`, and `order` properties.
-
-For example:
-
-```js
-postedAt: {
-  type: Date,
-  optional: true,
-  insertableBy: Users.isAdmin,
-  editableBy: Users.isAdmin,
-  publish: true,
-  control: "datetime",
-  group: {
-    name: "admin",
-    label: "Admin Options",
-    order: 2
-  }
-},
-```
-
-Note that fields with no groups are always rendered first in the form.
-
-#### `placeholder`
-
-A placeholder value for the form field.
-
-#### `beforeComponent`
-
-A React component that will be inserted just before the form component itself.
-
-#### `afterComponent`
-
-A React component that will be inserted just after the form component itself.
-
-#### `hidden`
-
-Can either be a boolean or a function accepting form props as argument and returning a boolean.
-
-Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:
-
-```js
-this.context.updateCurrentValues({foo: 'bar'});
-```
-
-As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.
-
-### Other Properties
-
-#### `mustComplete` (`Users` only)
-
-You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the `vulcan:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
-
-## Custom Fields
-
-Out of the box, Vulcan has three main collections: `Posts`, `Users`, and `Comments`. Each of them has a pre-set schema, but that schema can also be extended with custom fields.
-
-For example, this is how the `vulcan:newsletter` package extends the `Posts` schema with a `scheduledAt` property that keeps track of when a post was sent out as part of an email newsletter:
+This is how the `vulcan:newsletter` package extends the `Posts` schema with a `scheduledAt` property that keeps track of when a post was sent out as part of an email newsletter:
 
 ```js
 Posts.addField({

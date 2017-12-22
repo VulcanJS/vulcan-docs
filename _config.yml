@@ -21,17 +21,22 @@ sidebar_categories:
     - features
     - architecture
     - vulcan
-    - packages
     - common-problems
     # - features-packages
     # - forum-packages
-  Data Layer:
+  Schemas:
     - schemas
-    - data-loading
+    - graphql-schema
+    - field-resolvers
+    - schema-properties
+  Data Layer:
+    - resolvers
+    - mutations
     - fragments
     - terms-parameters
-    - mutations
+    - server-queries
     - redux
+    - performance
   API:
     - theming
     - core-components
@@ -47,6 +52,7 @@ sidebar_categories:
     - forms-custom
     - forms-upload
   Packages:
+    - packages
     - email
     - newsletter
     - payments

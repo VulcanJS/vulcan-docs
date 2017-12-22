@@ -14,6 +14,8 @@ This prevents you from having to specify your schema twice in two different form
 
 Vulcan will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation. 
 
+![https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&v=8fc5164f](https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&v=8fc5164f)
+
 For example, here's how you would display a form to edit a single movie:
 
 ```js
@@ -89,3 +91,31 @@ Out of the box, Vulcan also includes many other time-saving features, such as:
 - Preset boilerplate mutations
 
 And of course, using Vulcan also means you get access to all the non-core Vulcan packages, such as `vulcan:posts`, `vulcan:comments`, `vulcan:newsletter`, `vulcan:search` etc.
+
+## Technology
+
+Vulcan is built on top of four main open-source technologies: React, GraphQL, Apollo, and Meteor. 
+
+### React
+
+[React](https://facebook.github.io/react/) is Vulcan's front-end library.
+
+### GraphQL
+
+[GraphQL](http://graphql.org) is Vulcan's API layer, used to load data from the server with [Apollo](http://apollostack.com). 
+### Apollo
+
+[Apollo](http://apollostack.com) is the set of tools used to manage the GraphQL layer. It consists of two parts, Apollo server and Apollo client. 
+
+- **Apollo server** is used to create the GraphQL API endpoint on the server.
+- **Apollo client** (together with the `react-apollo` package) is used to query that endpoint and load data on the client. 
+
+Apollo is still young, but it's well-documented, evolving quickly, and supported by a great team. 
+
+### Meteor
+
+[Meteor](http://meteor.com) is Vulcan's back-end layer, used to handle the database as well as server and bundle the app. Note that although Meteor also provides its own data layer features, those features are not used except for user accounts. 
+
+Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we're not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.
+
+The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. 
