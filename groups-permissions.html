@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -537,7 +581,8 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="Groups-amp-Actions"><a href="#Groups-amp-Actions" class="headerlink" title="Groups &amp; Actions"></a>Groups &amp; Actions</h2><p>When it comes to controlling who can do what in your Vulcan app, it’s important to understand two concepts, <strong>groups</strong> and <strong>actions</strong>. </p>
+      <h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a groups debugging UI is available at <a href="http://0.0.0.0:3000/groups" target="_blank" rel="noopener">http://0.0.0.0:3000/groups</a>.</strong></p>
+<h2 id="Groups-amp-Actions"><a href="#Groups-amp-Actions" class="headerlink" title="Groups &amp; Actions"></a>Groups &amp; Actions</h2><p>When it comes to controlling who can do what in your Vulcan app, it’s important to understand two concepts, <strong>groups</strong> and <strong>actions</strong>. </p>
 <p>A <strong>group</strong> (such as <code>admins</code> or <code>mods</code>) represents a list of users which can perform specific actions (such as <code>posts.edit</code> or <code>posts.remove</code>). </p>
 <p>To test if a user can perform an action, we don’t check if they belong to a specific group (e.g. <code>user.isAdmin === true</code>), but instead if <em>at least one of the groups they belong to</em> has the rights to perform the current action.  </p>
 <p>To understand the benefits of this two-tiered approach, let’s consider a common use case: creating a new “mods” group whose members can edit other user’s posts. </p>

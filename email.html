@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc  current">
@@ -538,6 +582,7 @@
 
     <div class="document-formatting">
       <p>Vulcan includes a simple-yet-powerful email-sending system.</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, an email debugging UI is available at <a href="http://0.0.0.0:3000/emails" target="_blank" rel="noopener">http://0.0.0.0:3000/callbacks</a>.</strong></p>
 <h2 id="Registering-Emails"><a href="#Registering-Emails" class="headerlink" title="Registering Emails"></a>Registering Emails</h2><p>Just like components, emails need to be centrally registered with Vulcan.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  test: &#123;</span><br><span class="line">    template: <span class="string">'test'</span>,</span><br><span class="line">    path: <span class="string">'/email/test'</span>,</span><br><span class="line">    data() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'This is a test'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>The <code>VulcanEmail.addEmails</code> function takes an object that itself contains individual objects for each email. Each email object can have the following properties:</p>
@@ -580,10 +625,10 @@
       
       
         <a class="link primary prev"
-          href="forms-upload.html">
+          href="packages.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Upload Package
+          Packages Types
         </a>
       
       

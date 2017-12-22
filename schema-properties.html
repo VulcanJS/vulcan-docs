@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Recipes | Vulcan Docs</title>
+    <title>Schema Properties | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Recipes | Vulcan Docs">
+    <meta property="og:title" content="Schema Properties | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Recipes | Vulcan Docs">
+    <meta name="twitter:title" content="Schema Properties | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -191,8 +191,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="schema-properties.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Schema Properties</span>
                 </a>
               </li>
@@ -502,8 +502,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
               </li>
@@ -569,26 +569,49 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Recipes</h1>
+      <h1 class="title-page">Schema Properties</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schema-properties.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Short code snippets teaching you how to do various things in Vulcan.</p>
-<h2 id="Using-Router-Hooks"><a href="#Using-Router-Hooks" class="headerlink" title="Using Router Hooks"></a>Using Router Hooks</h2><p>The router exposes an <code>onUpdate</code> hook that triggers every time the route changes (including when the initial route is triggered).</p>
-<p>Here’s how you’d use it in conjunction with Apollo’s <a href="http://dev.apollodata.com/core/read-and-write.html" target="_blank" rel="noopener">imperative API</a> to check if the current user has completed their profile:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback, getFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkProfileOnUpdate</span> (<span class="params">unusedItem, store, apolloClient</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">    query getCurrentUser &#123;</span></span><br><span class="line"><span class="string">      currentUser &#123;</span></span><br><span class="line"><span class="string">        ...UsersCurrent</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;getFragment(<span class="string">'UsersCurrent'</span>)&#125;</span></span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> currentUser = apolloClient.readQuery(&#123;query&#125;).currentUser;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentUser &amp;&amp; !Users.hasCompletedProfile(currentUser)) &#123;</span><br><span class="line">    alert(<span class="string">`Current user hasn't completed their profile!`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="string">'router.onUpdate'</span>, checkProfileOnUpdate);</span><br></pre></td></tr></table></figure>
-<h2 id="Load-a-Random-Post"><a href="#Load-a-Random-Post" class="headerlink" title="Load a Random Post"></a>Load a Random Post</h2><p>On the server:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    postsRandom(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> postCount = context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;).count();</span><br><span class="line">      <span class="keyword">return</span> context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;, &#123;<span class="attr">limit</span>: <span class="number">1</span>, <span class="attr">skip</span>: _.random(postCount)&#125;).fetch()[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addGraphQLResolvers(randomResolver);</span><br><span class="line">addGraphQLQuery(<span class="string">`postsRandom: Post`</span>);</span><br></pre></td></tr></table></figure>
-<p>On the client:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withRandomPost = graphql(gql<span class="string">`</span></span><br><span class="line"><span class="string">  query postsRandom &#123;</span></span><br><span class="line"><span class="string">    postsRandom &#123;</span></span><br><span class="line"><span class="string">      ...PostsPage</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;getFragment(<span class="string">'PostsPage'</span>)&#125;</span></span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRandomPost(PostsItem);</span><br></pre></td></tr></table></figure>
+      <p>A range of special properties are available to control the behavior of each document field. </p>
+<h2 id="SimpleSchema-Properties"><a href="#SimpleSchema-Properties" class="headerlink" title="SimpleSchema Properties"></a>SimpleSchema Properties</h2><p>See the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema documentation</a>.</p>
+<h2 id="Data-Layer-Properties"><a href="#Data-Layer-Properties" class="headerlink" title="Data Layer Properties"></a>Data Layer Properties</h2><h4 id="viewableBy"><a href="#viewableBy" class="headerlink" title="viewableBy"></a><code>viewableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> viewing the document and the <code>document</code> itself, and should return <code>true</code> or <code>false</code>.</p>
+<h4 id="insertableBy"><a href="#insertableBy" class="headerlink" title="insertableBy"></a><code>insertableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and should return <code>true</code> or <code>false</code>. When generating a form for inserting new documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
+<h4 id="editableBy"><a href="#editableBy" class="headerlink" title="editableBy"></a><code>editableBy</code></h4><p>Can either be an array of group names or a function.</p>
+<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and the <code>document</code> being operated on, and should return <code>true</code> or <code>false</code>. When generating a form for editing existing documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
+<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/data-loading.html#Field-Resolvers">Field Resolvers</a> section. </p>
+<h3 id="onInsert-onEdit-onRemove"><a href="#onInsert-onEdit-onRemove" class="headerlink" title="onInsert, onEdit, onRemove"></a><code>onInsert</code>, <code>onEdit</code>, <code>onRemove</code></h3><p>These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. </p>
+<ul>
+<li><code>onInsert(document, currentUser)</code></li>
+<li><code>onEdit(modifier, document, currentUser)</code></li>
+<li><code>onRemove(document, currentUser)</code></li>
+</ul>
+<h2 id="Forms-Properties"><a href="#Forms-Properties" class="headerlink" title="Forms Properties"></a>Forms Properties</h2><h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
+<h4 id="control"><a href="#control" class="headerlink" title="control"></a><code>control</code></h4><p>Either a text string (one of <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>checkboxgroup</code>, <code>radiogroup</code>, or <code>select</code>) or a React component.</p>
+<h4 id="order"><a href="#order" class="headerlink" title="order"></a><code>order</code></h4><p>A number corresponding to the position of the property’s field inside the form.</p>
+<h4 id="group"><a href="#group" class="headerlink" title="group"></a><code>group</code></h4><p>An optional object containing the group/section/fieldset in which to include the form element. Groups have <code>name</code>, <code>label</code>, and <code>order</code> properties.</p>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">postedAt: &#123;</span><br><span class="line">  type: <span class="built_in">Date</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  insertableBy: Users.isAdmin,</span><br><span class="line">  editableBy: Users.isAdmin,</span><br><span class="line">  publish: <span class="literal">true</span>,</span><br><span class="line">  control: <span class="string">"datetime"</span>,</span><br><span class="line">  group: &#123;</span><br><span class="line">    name: <span class="string">"admin"</span>,</span><br><span class="line">    label: <span class="string">"Admin Options"</span>,</span><br><span class="line">    order: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>Note that fields with no groups are always rendered first in the form.</p>
+<h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a><code>placeholder</code></h4><p>A placeholder value for the form field.</p>
+<h4 id="beforeComponent"><a href="#beforeComponent" class="headerlink" title="beforeComponent"></a><code>beforeComponent</code></h4><p>A React component that will be inserted just before the form component itself.</p>
+<h4 id="afterComponent"><a href="#afterComponent" class="headerlink" title="afterComponent"></a><code>afterComponent</code></h4><p>A React component that will be inserted just after the form component itself.</p>
+<h4 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a><code>hidden</code></h4><p>Can either be a boolean or a function accepting form props as argument and returning a boolean.</p>
+<p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.</p>
+<h2 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h2><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the <code>vulcan:base-components</code> theme, a form will then pop up prompting the user to complete their profile with the missing fields. </p>
+
     </div>
   </div>
 
@@ -597,17 +620,17 @@
       
       
         <a class="link primary prev"
-          href="migration.html">
+          href="field-resolvers.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Migration Guide
+          Field Resolvers
         </a>
       
       
         <a class="link primary next"
-          href="learn.html">
+          href="resolvers.html">
           <span class="subtitle-pagination">Next</span>
-          Learn More
+          Resolvers
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -615,7 +638,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schema-properties.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

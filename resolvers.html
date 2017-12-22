@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Recipes | Vulcan Docs</title>
+    <title>Resolvers | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Recipes | Vulcan Docs">
+    <meta property="og:title" content="Resolvers | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Recipes | Vulcan Docs">
+    <meta name="twitter:title" content="Resolvers | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -207,8 +207,8 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc ">
-                <a href="resolvers.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Resolvers</span>
                 </a>
               </li>
@@ -502,8 +502,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
               </li>
@@ -569,26 +569,97 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Recipes</h1>
+      <h1 class="title-page">Resolvers</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/resolvers.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Short code snippets teaching you how to do various things in Vulcan.</p>
-<h2 id="Using-Router-Hooks"><a href="#Using-Router-Hooks" class="headerlink" title="Using Router Hooks"></a>Using Router Hooks</h2><p>The router exposes an <code>onUpdate</code> hook that triggers every time the route changes (including when the initial route is triggered).</p>
-<p>Here’s how you’d use it in conjunction with Apollo’s <a href="http://dev.apollodata.com/core/read-and-write.html" target="_blank" rel="noopener">imperative API</a> to check if the current user has completed their profile:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback, getFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkProfileOnUpdate</span> (<span class="params">unusedItem, store, apolloClient</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">    query getCurrentUser &#123;</span></span><br><span class="line"><span class="string">      currentUser &#123;</span></span><br><span class="line"><span class="string">        ...UsersCurrent</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;getFragment(<span class="string">'UsersCurrent'</span>)&#125;</span></span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> currentUser = apolloClient.readQuery(&#123;query&#125;).currentUser;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentUser &amp;&amp; !Users.hasCompletedProfile(currentUser)) &#123;</span><br><span class="line">    alert(<span class="string">`Current user hasn't completed their profile!`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="string">'router.onUpdate'</span>, checkProfileOnUpdate);</span><br></pre></td></tr></table></figure>
-<h2 id="Load-a-Random-Post"><a href="#Load-a-Random-Post" class="headerlink" title="Load a Random Post"></a>Load a Random Post</h2><p>On the server:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    postsRandom(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> postCount = context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;).count();</span><br><span class="line">      <span class="keyword">return</span> context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;, &#123;<span class="attr">limit</span>: <span class="number">1</span>, <span class="attr">skip</span>: _.random(postCount)&#125;).fetch()[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addGraphQLResolvers(randomResolver);</span><br><span class="line">addGraphQLQuery(<span class="string">`postsRandom: Post`</span>);</span><br></pre></td></tr></table></figure>
-<p>On the client:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withRandomPost = graphql(gql<span class="string">`</span></span><br><span class="line"><span class="string">  query postsRandom &#123;</span></span><br><span class="line"><span class="string">    postsRandom &#123;</span></span><br><span class="line"><span class="string">      ...PostsPage</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;getFragment(<span class="string">'PostsPage'</span>)&#125;</span></span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRandomPost(PostsItem);</span><br></pre></td></tr></table></figure>
+      <p>A resolver is the function on your server that receives a GraphQL query, decides what to do with it (how to <em>resolve</em> it), and then returns some data. </p>
+<p>Each level of a GraphQL query (in other words, each field) can have its own custom resolver; or if no resolver exists the field will default to looking for a value on its parent object. </p>
+<h2 id="Data-Flow"><a href="#Data-Flow" class="headerlink" title="Data Flow"></a>Data Flow</h2><p>When you connect to a GraphQL-powered site, the client makes an API request to load the data it needs. </p>
+<p>Unlike traditional REST APIs, the client doesn’t just hit an API endpoint but actually sends a list of <em>what data it needs</em> to the server. The specific document properties needed by the client are defined in a <a href="/fragments.html">fragment</a>. </p>
+<p>Upon receiving that query, the server checks that the main query exists in the <a href="/graphql-schema.html">GraphQL schema</a>, and also validates the fragment against it.</p>
+<p>If that validation passes, the server then looks for a <strong>query resolver function</strong> that will specify how to actually retrieve the data (presumably through some kind of database <code>find()</code> operation).</p>
+<p>It will then take that data, strip any fields not specified in your fragment, and return the result to the client. </p>
+<h3 id="Implicit-Resolvers"><a href="#Implicit-Resolvers" class="headerlink" title="Implicit Resolvers"></a>Implicit Resolvers</h3><p>Technically speaking, every single field in your fragment has to resolve to <em>something</em>. But if for example you’ve specified a <code>Post</code> resolver and you’re asking for a post’s <code>title</code> and <code>createdAt</code> properties, GraphQL will be smart enough to look for <code>post.title</code> and <code>post.createdAt</code> without you needing to define additional resolvers for these two fields. </p>
+<p>That being said if you wanted <code>createdAt</code> to resolve to, say, <code>formatDate(post.createdAt)</code> instead of just <code>post.createdAt</code>, then you could write a custom resolver <a href="/field-resolvers.html">just for that specific field</a>.  </p>
+<h2 id="Collection-Resolvers"><a href="#Collection-Resolvers" class="headerlink" title="Collection Resolvers"></a>Collection Resolvers</h2><p>As a time-saving convention, Vulcan makes the assumption that you’ll provide it with three “default” resolvers:</p>
+<ul>
+<li><code>list</code>: used to return a list of documents matching a set of arguments</li>
+<li><code>total</code>: used to return the <em>total number</em> of documents matching a set of arguments</li>
+<li><code>single</code>: used to return a single document matching an <code>_id</code> or <code>slug</code></li>
+</ul>
+<p>You can pass a <code>resolver</code> object to <code>createCollection</code> when initializing your collection. It should include these three <code>list</code>, <code>single</code>, and <code>total</code> resolvers.</p>
+<p>Each resolver should have the following properties:</p>
+<ul>
+<li><code>name</code>: the resolver’s name.</li>
+<li><code>resolver</code>: the resolver function.</li>
+</ul>
+<p>Note that if your collections include private data, you’ll have to implement your own security layer inside each resolver to prevent unwanted access. Check out the <a href="/groups-permissions.html#Controlling-Viewing">Controlling Viewing</a> section for more details. </p>
+<h3 id="List-Resolver"><a href="#List-Resolver" class="headerlink" title="List Resolver"></a>List Resolver</h3><p>The <code>list</code> resolver is used to display lists of documents. It takes the following arguments:</p>
+<ul>
+<li><code>terms</code>: a JSON object containing a list of terms used to filter and sort the list.</li>
+<li><code>offset</code>: how many documents to offset the list by (used for paginating requests).</li>
+<li><code>limit</code>: how many documents to return.</li>
+</ul>
+<p>It should return an array of documents.</p>
+<h3 id="Single-Resolver"><a href="#Single-Resolver" class="headerlink" title="Single Resolver"></a>Single Resolver</h3><p>The <code>single</code> resolver takes a <code>documentId</code> argument, and should return a single document.</p>
+<h3 id="List-Total-Resolver"><a href="#List-Total-Resolver" class="headerlink" title="List Total Resolver"></a>List Total Resolver</h3><p>The <code>total</code> resolver takes a <code>terms</code> argument and should return the total count of results matching these terms in the database. </p>
+<h3 id="Default-Resolvers"><a href="#Default-Resolvers" class="headerlink" title="Default Resolvers"></a>Default Resolvers</h3><p>Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling <code>getDefaultResolvers(collectionName)</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection, getDefaultResolvers, getDefaultMutations &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line">  </span><br><span class="line">  resolvers: getDefaultResolvers(<span class="string">'Movies'</span>),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(<span class="string">'Movies'</span>), </span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+<p>To learn more about what exactly the default resolvers do, you can <a href="https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_resolvers.js" target="_blank" rel="noopener">find their code here</a>.</p>
+<h2 id="Custom-Resolvers"><a href="#Custom-Resolvers" class="headerlink" title="Custom Resolvers"></a>Custom Resolvers</h2><p>In some cases, you’ll want to go beyond the three default resolvers. For example, you might want to create a resolver that returns a single random post, or the current user. You can do so by using <code>addGraphQLResolvers</code> and <code>addGraphQLQuery</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers, addGraphQLQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    currentUser(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: args.userId &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(currentUserResolver);</span><br><span class="line"></span><br><span class="line">addGraphQLQuery(<span class="string">`currentUser: User`</span>);</span><br></pre></td></tr></table></figure>
+<p><code>addGraphQLResolvers</code> adds the actual resolver function, while <code>addGraphQLQuery</code> adds the corresponding <strong>query type</strong> (if your new resolver is not mentioned in your GraphQL schema, you won’t be able to query it).</p>
+<p>Learn more about resolvers in the <a href="http://dev.apollodata.com/tools/graphql-tools/resolvers.html" target="_blank" rel="noopener">Apollo documentation</a>.</p>
+<h2 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h2><p>To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs). </p>
+<p>An HoC is simply a function you can call on a React component to give it additional props. Think of it as a mechanic’s assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time. </p>
+<h3 id="withList"><a href="#withList" class="headerlink" title="withList"></a>withList</h3><p>The <code>withList</code> HoC is used to display lists of documents. It takes the following options:</p>
+<ul>
+<li><code>queryName</code>: an arbitrary name for the query.</li>
+<li><code>collection</code>: the collection on which to look for the <code>list</code> resolver.</li>
+<li><code>fragment</code> or <code>fragmentName</code>: the fragment to use. If you pass <code>fragmentName</code> instead of <code>fragment</code>, the name you passed will be used to look up a fragment registered with <code>registerFragment</code>. </li>
+</ul>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  queryName: <span class="string">'moviesListQuery'</span>,</span><br><span class="line">  fragment: MoviesItem.fragment,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withList(listOptions)(MoviesList);</span><br></pre></td></tr></table></figure>
+<p>The resulting wrapped component also takes in the following options:</p>
+<ul>
+<li><code>terms</code>: an object containing a list of querying, sorting, and filtering terms.</li>
+</ul>
+<p>Note that <code>terms</code> needs to be passed not as an option, but as a prop from the <em>parent</em> component.</p>
+<p>The HoC then passes on the following props:</p>
+<ul>
+<li><code>loading</code>: <code>true</code> while the data is loading.</li>
+<li><code>results</code>: the loaded array of documents.</li>
+<li><code>totalCount</code>: the total count of results.</li>
+<li><code>count</code>: the number of current results (i.e. <code>results.length</code>).</li>
+<li><code>refetch</code>: a function that can be called to trigger a query refetch.</li>
+<li><code>loadMore</code>: a function that can be called to load more data. </li>
+</ul>
+<h3 id="withDocument"><a href="#withDocument" class="headerlink" title="withDocument"></a>withDocument</h3><p>The <code>withDocument</code> HoC displays a single document. It takes the same options as <code>withList</code>, but takes a <code>documentId</code> <strong>prop</strong>. </p>
+<p>Like <code>terms</code> for <code>withList</code>, <code>documentId</code> needs to be passed not as an option, but as a prop from the <em>parent</em> component.</p>
+<p>This HoC then passes on the following child prop:</p>
+<ul>
+<li><code>loading</code>: <code>true</code> while the data is loading.</li>
+<li><code>document</code>: the loaded document.</li>
+</ul>
+<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>As long as you use <code>withList</code> in conjunction with <code>withNew</code>, <code>withEdit</code>, and <code>withRemove</code>, your lists will automatically be updated after any mutation. This includes:</p>
+<ul>
+<li>Inserting new items in lists after they’re inserted.</li>
+<li>Removing items when they’re removed.</li>
+<li>Reordering lists when an item is edited in a way that changes a sort.</li>
+<li>Removing an item after it’s been edited when it doesn’t match a list’s filters anymore. </li>
+</ul>
+<p>At this time, it’s only possible to benefit from this auto-updating behavior if you’re using the three built-in mutation HoCs, although making <code>withList</code> more flexible towards custom mutations is on the roadmap (PRs welcome!).</p>
+<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>You can replace any of Vulcan’s generic HoCs with your own tailor-made HoCs (whether it’s for queries or mutations) using the <code>graphql</code> utility. Note that if you do so, you will need to manually <a href="http://dev.apollodata.com/react/cache-updates.html" target="_blank" rel="noopener">update your queries</a> after each mutation. </p>
+
     </div>
   </div>
 
@@ -597,17 +668,17 @@
       
       
         <a class="link primary prev"
-          href="migration.html">
+          href="schema-properties.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Migration Guide
+          Schema Properties
         </a>
       
       
         <a class="link primary next"
-          href="learn.html">
+          href="mutations.html">
           <span class="subtitle-pagination">Next</span>
-          Learn More
+          Mutations
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -615,7 +686,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/resolvers.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

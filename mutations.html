@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
-              <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -205,9 +235,9 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
-                  <span>Mutations</span>
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -537,7 +581,8 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="GraphQL-Mutations"><a href="#GraphQL-Mutations" class="headerlink" title="GraphQL Mutations"></a>GraphQL Mutations</h2><p><code>createCollection</code> also accepts a <code>mutations</code> object. This object should include three mutations, <code>new</code>, <code>edit</code>, and <code>remove</code>, each of which has the following properties:</p>
+      <p>A mutation is very similar to a query, in that it receives a GraphQL request, decides what to do with it, and then returns some data. But because mutations can result in <em>changes</em> to your data, they have their own special <code>Mutation</code> type to differentiate them. </p>
+<h2 id="GraphQL-Mutations"><a href="#GraphQL-Mutations" class="headerlink" title="GraphQL Mutations"></a>GraphQL Mutations</h2><p><code>createCollection</code> also accepts a <code>mutations</code> object. This object should include three mutations, <code>new</code>, <code>edit</code>, and <code>remove</code>, each of which has the following properties:</p>
 <ul>
 <li><code>name</code>: the name of the mutation.</li>
 <li><code>check</code>: a function that takes the current user and (optionally) the document being operated on, and return <code>true</code> or <code>false</code> based on whether the user can perform the operation.</li>
@@ -559,7 +604,7 @@
 <p>To learn more about what exactly the default mutations do, you can <a href="https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js" target="_blank" rel="noopener">find their code here</a>.</p>
 <h3 id="Custom-Mutations"><a href="#Custom-Mutations" class="headerlink" title="Custom Mutations"></a>Custom Mutations</h3><p>You can also add your own mutations using <code>GraphQLSchema.addMutation</code> and <code>GraphQLSchema.addResolvers</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GraphQLSchema.addMutation(<span class="string">'postsVote(documentId: String, voteType: String) : Post'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> voteResolver = &#123;</span><br><span class="line">  Mutation: &#123;</span><br><span class="line">    postsVote(root, &#123;documentId, voteType&#125;, context) &#123;</span><br><span class="line">      <span class="comment">// do mutation</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">GraphQLSchema.addResolvers(voteResolver);</span><br></pre></td></tr></table></figure>
-<h3 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h3><h4 id="withNew"><a href="#withNew" class="headerlink" title="withNew"></a><code>withNew</code></h4><p>This HoC takes the following two options:</p>
+<h2 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h2><h4 id="withNew"><a href="#withNew" class="headerlink" title="withNew"></a><code>withNew</code></h4><p>This HoC takes the following two options:</p>
 <ul>
 <li><code>collection</code>: the collection to operate on.</li>
 <li><code>fragment</code>: specifies the data to ask for as a return value.</li>
@@ -578,8 +623,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutationOptions = &#123;</span><br><span class="line">  name: <span class="string">'addEmailNewsletter'</span>,</span><br><span class="line">  args: &#123;<span class="attr">email</span>: <span class="string">'String'</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">withMutation(mutationOptions)(MyComponent)</span><br></pre></td></tr></table></figure>
 <p>You would then call the function with:</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">this</span><span class="selector-class">.props</span><span class="selector-class">.addEmailNewsletter</span>(&#123;<span class="attribute">email</span>: <span class="string">'foo@bar.com'</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="Boilerplate-Mutations"><a href="#Boilerplate-Mutations" class="headerlink" title="Boilerplate Mutations"></a>Boilerplate Mutations</h2><p>Vulcan features three standard <code>newMutation</code>, <code>editMutation</code>, and <code>removeMutation</code> mutations that are in essence thin wrappers around the standard Mongo <code>insert</code>, <code>update</code>, and <code>remove</code>. </p>
-<p>Note that in the context of this section, “mutation” refers to the function that performs the actual server-side database operation, and not to the <a href="mutations.html">GraphQL mutations</a>. </p>
+<h2 id="Mutators"><a href="#Mutators" class="headerlink" title="Mutators"></a>Mutators</h2><p>A <strong>mutator</strong> is the function that actually does the work of mutating data on your server. As opposed to the <em>mutation</em>, which is usually a fairly light function called directly through your GraphQL API, a <em>mutator</em> will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.</p>
+<p>Vulcan features three standard <code>newMutator</code>, <code>editMutator</code>, and <code>removeMutator</code> mutators that are in essence thin wrappers around the standard Mongo <code>insert</code>, <code>update</code>, and <code>remove</code>. </p>
 <p>These mutation functions should be defined <em>outside</em> your GraphQL mutation resolvers, so that you’re able to call them from outside a GraphQL context (for example, to seed your database through a server script).</p>
 <p>They take the following arguments:</p>
 <ul>
@@ -617,17 +662,17 @@
       
       
         <a class="link primary prev"
-          href="terms-parameters.html">
+          href="resolvers.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Terms & Parameters
+          Resolvers
         </a>
       
       
         <a class="link primary next"
-          href="redux.html">
+          href="fragments.html">
           <span class="subtitle-pagination">Next</span>
-          Using Redux
+          Fragments
           <span class="icon-arrow-right-alt"></span>
         </a>
       

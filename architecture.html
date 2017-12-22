@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -537,12 +581,7 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="Apollo"><a href="#Apollo" class="headerlink" title="Apollo"></a>Apollo</h2><p><a href="http://apollostack.com" target="_blank" rel="noopener">Apollo</a> is the set of tools used to manage the GraphQL layer. It consists of two parts, Apollo server and Apollo client. </p>
-<ul>
-<li><strong>Apollo server</strong> is used to create the GraphQL API endpoint on the server.</li>
-<li><strong>Apollo client</strong> (together with the <code>react-apollo</code> package) is used to query that endpoint and load data on the client. </li>
-</ul>
-<p>Apollo is still young, but it’s well-documented, evolving quickly, and supported by a great team. </p>
+      <p>Here’s what you need to know about Vulcan’s architecture. </p>
 <h2 id="Package-Based-Architecture"><a href="#Package-Based-Architecture" class="headerlink" title="Package-Based Architecture"></a>Package-Based Architecture</h2><p>In keeping with this idea of flexibility and modularity, Vulcan’s application structure is a bit different than most other Meteor apps. </p>
 <p>In Vulcan, each feature has its own distinct <strong>Meteor package</strong> which can be freely added or removed. <a href="packages.html">Learn more about packages here</a>.</p>
 <h2 id="Extend-Don’t-Edit"><a href="#Extend-Don’t-Edit" class="headerlink" title="Extend, Don’t Edit"></a>Extend, Don’t Edit</h2><p>Another key point of Vulcan’s philosophy is to never edit the core codebase (i.e. what you get from the Vulcan repo) directly if you can avoid it. </p>

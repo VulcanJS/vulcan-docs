@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Recipes | Vulcan Docs</title>
+    <title>Field Resolvers | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Recipes | Vulcan Docs">
+    <meta property="og:title" content="Field Resolvers | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Recipes | Vulcan Docs">
+    <meta name="twitter:title" content="Field Resolvers | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -184,8 +184,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="field-resolvers.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Field Resolvers</span>
                 </a>
               </li>
@@ -502,8 +502,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
               </li>
@@ -569,26 +569,42 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Recipes</h1>
+      <h1 class="title-page">Field Resolvers</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/field-resolvers.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Short code snippets teaching you how to do various things in Vulcan.</p>
-<h2 id="Using-Router-Hooks"><a href="#Using-Router-Hooks" class="headerlink" title="Using Router Hooks"></a>Using Router Hooks</h2><p>The router exposes an <code>onUpdate</code> hook that triggers every time the route changes (including when the initial route is triggered).</p>
-<p>Here’s how you’d use it in conjunction with Apollo’s <a href="http://dev.apollodata.com/core/read-and-write.html" target="_blank" rel="noopener">imperative API</a> to check if the current user has completed their profile:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback, getFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkProfileOnUpdate</span> (<span class="params">unusedItem, store, apolloClient</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">    query getCurrentUser &#123;</span></span><br><span class="line"><span class="string">      currentUser &#123;</span></span><br><span class="line"><span class="string">        ...UsersCurrent</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;getFragment(<span class="string">'UsersCurrent'</span>)&#125;</span></span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> currentUser = apolloClient.readQuery(&#123;query&#125;).currentUser;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentUser &amp;&amp; !Users.hasCompletedProfile(currentUser)) &#123;</span><br><span class="line">    alert(<span class="string">`Current user hasn't completed their profile!`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="string">'router.onUpdate'</span>, checkProfileOnUpdate);</span><br></pre></td></tr></table></figure>
-<h2 id="Load-a-Random-Post"><a href="#Load-a-Random-Post" class="headerlink" title="Load a Random Post"></a>Load a Random Post</h2><p>On the server:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    postsRandom(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> postCount = context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;).count();</span><br><span class="line">      <span class="keyword">return</span> context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;, &#123;<span class="attr">limit</span>: <span class="number">1</span>, <span class="attr">skip</span>: _.random(postCount)&#125;).fetch()[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addGraphQLResolvers(randomResolver);</span><br><span class="line">addGraphQLQuery(<span class="string">`postsRandom: Post`</span>);</span><br></pre></td></tr></table></figure>
-<p>On the client:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withRandomPost = graphql(gql<span class="string">`</span></span><br><span class="line"><span class="string">  query postsRandom &#123;</span></span><br><span class="line"><span class="string">    postsRandom &#123;</span></span><br><span class="line"><span class="string">      ...PostsPage</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;getFragment(<span class="string">'PostsPage'</span>)&#125;</span></span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRandomPost(PostsItem);</span><br></pre></td></tr></table></figure>
+      <p>Although Vulcan uses your SimpleSchema JSON schema to generate your GraphQL schema, it’s important to understand that the two can be very different. </p>
+<p>Note: this section will make more sense if you’ve already read the <a href="/resolvers.html">Resolvers</a> section.</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>For example, you might have a <code>userId</code> property in your <code>Movie</code> schema, but want this property to <em>resolve</em> as a <code>user</code> object in your GraphQL schema (and in turn, in your client store). You can use <code>resolveAs</code> to accomplish this:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userId:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">String,</span></span><br><span class="line"><span class="attr">  optional:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line"><span class="attr">  viewableBy:</span> <span class="string">['guests'],</span></span><br><span class="line"><span class="attr">  resolveAs:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    fieldName:</span> <span class="string">'user'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    arguments:</span> <span class="string">'foo: Int = 10'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">'User'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    resolver:</span> <span class="string">(movie,</span> <span class="string">args,</span> <span class="string">context)</span> <span class="string">=&gt;</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="string">return</span> <span class="string">context.Users.findOne(&#123;</span> <span class="attr">_id:</span> <span class="string">movie.userId</span> <span class="string">&#125;,</span> <span class="string">&#123;</span> <span class="attr">fields:</span> <span class="string">context.Users.getViewableFields(context.currentUser,</span> <span class="string">context.Users)</span> <span class="string">&#125;);</span></span><br><span class="line">    <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">    addOriginalField:</span> <span class="literal">true</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure>
+<p>We are doing five things here:</p>
+<ol>
+<li>Specifying that the field should be named <code>user</code> in the API.</li>
+<li>Specifying that the field can take a <code>foo</code> argument that defaults to <code>10</code>.</li>
+<li>Specifying that the <code>user</code> field returns an object of GraphQL type <code>User</code>.</li>
+<li>Defining a <code>resolver</code> function that indicates how to retrieve that object.</li>
+<li>Specifying that the original field (<code>userId</code>, with type <code>String</code>) should also be added to our GraphQL schema. </li>
+</ol>
+<h2 id="Custom-Types"><a href="#Custom-Types" class="headerlink" title="Custom Types"></a>Custom Types</h2><p>Creating a collection with <code>createCollection</code> will automatically create the associated GraphQL type, but in some case you might want to resolve a field to a GraphQL type that doesn’t correspond to any existing collection. </p>
+<p>Here’s how the <code>vulcan:voting</code> package defines a new <code>Vote</code> GraphQL type:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const voteSchema = `</span><br><span class="line"> <span class="built_in"> type </span>Vote &#123;</span><br><span class="line">    itemId: String</span><br><span class="line">    power: Float</span><br><span class="line">    votedAt: String</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  union Votable = Post | Comment</span><br><span class="line">`;</span><br><span class="line"></span><br><span class="line">addGraphQLSchema(voteSchema);</span><br></pre></td></tr></table></figure>
+<p>Which can then be used as the value for <code>type</code> in a <code>resolveAs</code> field. </p>
+<h2 id="GraphQL-Only-Fields"><a href="#GraphQL-Only-Fields" class="headerlink" title="GraphQL-Only Fields"></a>GraphQL-Only Fields</h2><p>Note that a field doesn’t have to “physically” exist in your database to be able to generate a corresponding GraphQL field. </p>
+<p>For example, you might want to query the Facebook API to get the number of likes associated with a post’s URL:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">likesNumber</span>: &#123;</span><br><span class="line">  <span class="attribute">type</span>: Number,</span><br><span class="line">  optional: true,</span><br><span class="line">  viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  resolveAs: &#123;</span><br><span class="line">    fieldName: <span class="string">'likesNumber'</span>,</span><br><span class="line">    type: <span class="string">'Number'</span>,</span><br><span class="line">    resolver: async (post, args, context) =&gt; &#123;</span><br><span class="line">      return await <span class="built_in">getFacebookLikes</span>(post.url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>This will create a <code>likesNumber</code> field in your GraphQL schema (and your Apollo store) even though no such field exist in your database. </p>
+<h2 id="Legacy-String-Syntax-deprecated"><a href="#Legacy-String-Syntax-deprecated" class="headerlink" title="Legacy String Syntax (deprecated)"></a>Legacy String Syntax (deprecated)</h2><p>Alternatively, you can also use the legacy syntax and specify a string value for <code>resolveAs</code> (in this case, <code>user: User</code>). You’ll then need to use <code>addGraphQLResolvers</code> to define the resolver object yourself:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> movieResolver = &#123;</span><br><span class="line">  Movie: &#123;</span><br><span class="line">    user(movie, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: movie.userId &#125;, &#123; <span class="attr">fields</span>: context.getViewableFields(context.currentUser, context.Users) &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(movieResolver);</span><br></pre></td></tr></table></figure>
+<p>Resolvers can be defined on any new or existing type (e.g. <code>Movie</code>).</p>
+
     </div>
   </div>
 
@@ -597,17 +613,17 @@
       
       
         <a class="link primary prev"
-          href="migration.html">
+          href="graphql-schema.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Migration Guide
+          GraphQL Schema
         </a>
       
       
         <a class="link primary next"
-          href="learn.html">
+          href="schema-properties.html">
           <span class="subtitle-pagination">Next</span>
-          Learn More
+          Schema Properties
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -615,7 +631,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/field-resolvers.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

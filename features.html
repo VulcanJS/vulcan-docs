@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -541,6 +585,7 @@
 <h2 id="GraphQL-Schema-Generation"><a href="#GraphQL-Schema-Generation" class="headerlink" title="GraphQL Schema Generation"></a>GraphQL Schema Generation</h2><p>Vulcan will automatically generate GraphQL schemas for your collections based on their <a href="https://github.com/aldeed/meteor-simple-schema" target="_blank" rel="noopener">SimpleSchema</a> JSON schema. </p>
 <p>This prevents you from having to specify your schema twice in two different formats. Although please note that this feature is completely optional, and that you can also specify your schema manually if you prefer. </p>
 <h2 id="Automated-Forms"><a href="#Automated-Forms" class="headerlink" title="Automated Forms"></a>Automated Forms</h2><p>Vulcan will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation. </p>
+<p><img src="https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&amp;v=8fc5164f" alt="https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&amp;v=8fc5164f"></p>
 <p>For example, here’s how you would display a form to edit a single movie:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VulcanForm </span><br><span class="line">  collection=&#123;Movies&#125; </span><br><span class="line">  documentId=&#123;props.documentId&#125;</span><br><span class="line">  queryName=<span class="string">"moviesListQuery"</span></span><br><span class="line">  showRemove=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
 <p>The <code>queryName</code> option tells VulcanForm which query should be automatically updated once the operation is done, while the <code>showRemove</code> option add a “Delete Movie” button to the form. </p>
@@ -568,6 +613,18 @@
 <li>Preset boilerplate mutations</li>
 </ul>
 <p>And of course, using Vulcan also means you get access to all the non-core Vulcan packages, such as <code>vulcan:posts</code>, <code>vulcan:comments</code>, <code>vulcan:newsletter</code>, <code>vulcan:search</code> etc.</p>
+<h2 id="Technology"><a href="#Technology" class="headerlink" title="Technology"></a>Technology</h2><p>Vulcan is built on top of four main open-source technologies: React, GraphQL, Apollo, and Meteor. </p>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p><a href="https://facebook.github.io/react/" target="_blank" rel="noopener">React</a> is Vulcan’s front-end library.</p>
+<h3 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h3><p><a href="http://graphql.org" target="_blank" rel="noopener">GraphQL</a> is Vulcan’s API layer, used to load data from the server with <a href="http://apollostack.com" target="_blank" rel="noopener">Apollo</a>. </p>
+<h3 id="Apollo"><a href="#Apollo" class="headerlink" title="Apollo"></a>Apollo</h3><p><a href="http://apollostack.com" target="_blank" rel="noopener">Apollo</a> is the set of tools used to manage the GraphQL layer. It consists of two parts, Apollo server and Apollo client. </p>
+<ul>
+<li><strong>Apollo server</strong> is used to create the GraphQL API endpoint on the server.</li>
+<li><strong>Apollo client</strong> (together with the <code>react-apollo</code> package) is used to query that endpoint and load data on the client. </li>
+</ul>
+<p>Apollo is still young, but it’s well-documented, evolving quickly, and supported by a great team. </p>
+<h3 id="Meteor"><a href="#Meteor" class="headerlink" title="Meteor"></a>Meteor</h3><p><a href="http://meteor.com" target="_blank" rel="noopener">Meteor</a> is Vulcan’s back-end layer, used to handle the database as well as server and bundle the app. Note that although Meteor also provides its own data layer features, those features are not used except for user accounts. </p>
+<p>Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we’re not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.</p>
+<p>The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. </p>
 
     </div>
   </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Recipes | Vulcan Docs</title>
+    <title>Querying on the Server | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Recipes | Vulcan Docs">
+    <meta property="og:title" content="Querying on the Server | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Recipes | Vulcan Docs">
+    <meta name="twitter:title" content="Querying on the Server | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -235,8 +235,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="server-queries.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Querying on the Server</span>
                 </a>
               </li>
@@ -502,8 +502,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
               </li>
@@ -569,26 +569,31 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Recipes</h1>
+      <h1 class="title-page">Querying on the Server</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Short code snippets teaching you how to do various things in Vulcan.</p>
-<h2 id="Using-Router-Hooks"><a href="#Using-Router-Hooks" class="headerlink" title="Using Router Hooks"></a>Using Router Hooks</h2><p>The router exposes an <code>onUpdate</code> hook that triggers every time the route changes (including when the initial route is triggered).</p>
-<p>Here’s how you’d use it in conjunction with Apollo’s <a href="http://dev.apollodata.com/core/read-and-write.html" target="_blank" rel="noopener">imperative API</a> to check if the current user has completed their profile:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback, getFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"><span class="keyword">import</span> gql <span class="keyword">from</span> <span class="string">'graphql-tag'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkProfileOnUpdate</span> (<span class="params">unusedItem, store, apolloClient</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> query = gql<span class="string">`</span></span><br><span class="line"><span class="string">    query getCurrentUser &#123;</span></span><br><span class="line"><span class="string">      currentUser &#123;</span></span><br><span class="line"><span class="string">        ...UsersCurrent</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;getFragment(<span class="string">'UsersCurrent'</span>)&#125;</span></span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> currentUser = apolloClient.readQuery(&#123;query&#125;).currentUser;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentUser &amp;&amp; !Users.hasCompletedProfile(currentUser)) &#123;</span><br><span class="line">    alert(<span class="string">`Current user hasn't completed their profile!`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="string">'router.onUpdate'</span>, checkProfileOnUpdate);</span><br></pre></td></tr></table></figure>
-<h2 id="Load-a-Random-Post"><a href="#Load-a-Random-Post" class="headerlink" title="Load a Random Post"></a>Load a Random Post</h2><p>On the server:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    postsRandom(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> postCount = context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;).count();</span><br><span class="line">      <span class="keyword">return</span> context.Posts.find(&#123;<span class="attr">status</span>: <span class="number">2</span>&#125;, &#123;<span class="attr">limit</span>: <span class="number">1</span>, <span class="attr">skip</span>: _.random(postCount)&#125;).fetch()[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addGraphQLResolvers(randomResolver);</span><br><span class="line">addGraphQLQuery(<span class="string">`postsRandom: Post`</span>);</span><br></pre></td></tr></table></figure>
-<p>On the client:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withRandomPost = graphql(gql<span class="string">`</span></span><br><span class="line"><span class="string">  query postsRandom &#123;</span></span><br><span class="line"><span class="string">    postsRandom &#123;</span></span><br><span class="line"><span class="string">      ...PostsPage</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;getFragment(<span class="string">'PostsPage'</span>)&#125;</span></span></span><br><span class="line"><span class="string">`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRandomPost(PostsItem);</span><br></pre></td></tr></table></figure>
+      <p>Most of this section’s contents applies to the client. After all, if you’re on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?</p>
+<p>But the truth is that connecting to the database directly can lead to problems. For example, let’s assume you have a <code>user</code> resolver on your <code>Post</code> type that gives you access to the post’s author. On the client, you could write:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> authorName = post.user.displayName;</span><br></pre></td></tr></table></figure>
+<p>On the server, it’s easy enough to obtain that post document:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> post = Posts.findOne(documentId);</span><br></pre></td></tr></table></figure>
+<p>But the document you fetch directly from MongoDB won’t have a <code>user</code> property, let alone a <code>user.displayName</code> (since those are provided by the GraphQL resolver).</p>
+<p>Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL <em>on the server</em></p>
+<h3 id="runQuery-query-variables"><a href="#runQuery-query-variables" class="headerlink" title="runQuery(query, variables)"></a>runQuery(query, variables)</h3><p><code>runQuery</code> lets you execute any GraphQL query against your schema and get its result back on the server. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runQuery(email.query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(Note that you’ll need to be inside an <code>async</code> context to use the <code>await</code> keyword)</p>
+<h3 id="collection-queryOne-documentId-options"><a href="#collection-queryOne-documentId-options" class="headerlink" title="collection.queryOne(documentId, options)"></a>collection.queryOne(documentId, options)</h3><p>A common need on the server is fetching a single document by its <code>_id</code>. You can do so with <code>collection.queryOne</code>. It takes an <code>options</code> object with a <code>fragmentText</code> property. If no fragment is provided, the query will use the collection’s <code>defaultFragment</code>. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId, &#123;</span><br><span class="line">  fragmentText: <span class="string">`</span></span><br><span class="line"><span class="string">    fragment MyUsersFragment on User &#123;</span></span><br><span class="line"><span class="string">      _id</span></span><br><span class="line"><span class="string">      username</span></span><br><span class="line"><span class="string">      createdAt</span></span><br><span class="line"><span class="string">      posts&#123;</span></span><br><span class="line"><span class="string">        _id</span></span><br><span class="line"><span class="string">        title</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
     </div>
   </div>
 
@@ -597,17 +602,17 @@
       
       
         <a class="link primary prev"
-          href="migration.html">
+          href="terms-parameters.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Migration Guide
+          Terms & Parameters
         </a>
       
       
         <a class="link primary next"
-          href="learn.html">
+          href="redux.html">
           <span class="subtitle-pagination">Next</span>
-          Learn More
+          Using Redux
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -615,7 +620,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/recipes.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

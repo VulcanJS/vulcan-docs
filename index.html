@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Introduction | Vulcan Docs</title>
+    <title>Read Me | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Introduction | Vulcan Docs">
+    <meta property="og:title" content="Read Me | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Introduction | Vulcan Docs">
+    <meta name="twitter:title" content="Read Me | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -112,7 +112,7 @@
               
               <li class="item-toc  current">
                 <a href="" class="sidebar-link  current">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -178,15 +208,15 @@
             
               
               <li class="item-toc ">
-                <a href="schemas.html" class="sidebar-link ">
-                  <span>Collections & Schemas</span>
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -525,7 +569,7 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Introduction</h1>
+      <h1 class="title-page">Read Me</h1>
       
 
       <div class="page-actions">
@@ -537,9 +581,8 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="What’s-Vulcan"><a href="#What’s-Vulcan" class="headerlink" title="What’s Vulcan?"></a>What’s Vulcan?</h2><p>Vulcan is a framework that gives you a set of tools for quickly building React-based web applications. Out of the box, it can handle data loading, automatically generate forms, handle email notifications, and much more. </p>
+      <h2 id="What’s-Vulcan"><a href="#What’s-Vulcan" class="headerlink" title="What’s Vulcan?"></a>What’s Vulcan?</h2><p>Vulcan is a framework that gives you a set of tools for quickly building React &amp; GraphQL-based web applications. Out of the box, it can handle data loading, automatically generate forms, handle email notifications, and much more. </p>
 <p>You can get a good overview of what Vulcan can do in the <a href="features.html">Features</a> section. </p>
-<p><strong>Note: Vulcan is the new name of Telescope Nova. <a href="vulcan.html">Learn more</a></strong></p>
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=aCjR9UrNqVk" target="_blank" rel="noopener">Full video tutorial</a></li>
 </ul>
@@ -550,16 +593,10 @@
 <p>And open <code>http://localhost:3000/</code> in your browser.</p>
 <p>Note that you can also start the app with:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default setting file: sample_settings.json</span></span><br><span class="line">meteor --settings sample_settings.json </span><br><span class="line"></span><br><span class="line"><span class="comment"># 'npm start' will create a copy of the sample settings, 'settings.json', and run `meteor` with this file for you.</span></span><br></pre></td></tr></table></figure>
-<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>When you first run VulcanJS, you’ll see the contents of the <code>example-simple</code> package. It is recommended you go through the <a href="example-simple.html">Simple Example tutorial</a> to get a grasp of how Vulcan’s building blocks (data loading, forms, etc.) work. </p>
-<p>You can then take the more in-depth <a href="example-movies.html">Movies Example tutorial</a> to get a better understanding of VulcanJS’s internals. You can enable the Movies Example package by uncommenting it in <code>.meteor/packages</code>, and commenting out <code>example-simple</code> in its place)</p>
-<p>Once you’ve gone through both tutorials, you can enable the <code>example-instagram</code> package, which takes the same basic example but goes a little further, as well as take a look at its code. </p>
-<p>At this stage, you can either continue using Vulcan’s basic building blocks, or enable the more advanced forum features by checking out the <a href="example-forum.html"><code>example-forum</code></a> package. </p>
-<p>And if you’d like to use and customize the forum packages, you can then follow up with the <a href="example-customization.html">customization example tutorial</a> tutorial, which will take you through the code of the included <code>example-customization</code> package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan’s back-end. </p>
-<p>You can also check out <a href="https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA" target="_blank" rel="noopener">Vulcan’s YouTube channel</a> to learn more about the framework. </p>
-<h2 id="Two-Repo-Install"><a href="#Two-Repo-Install" class="headerlink" title="Two-Repo Install"></a>Two-Repo Install</h2><ul>
+<h2 id="Two-Repo-Install-Optional"><a href="#Two-Repo-Install-Optional" class="headerlink" title="Two-Repo Install (Optional)"></a>Two-Repo Install (Optional)</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=mEemOReAw5Y" target="_blank" rel="noopener">Full video tutorial</a></li>
 </ul>
-<p>In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can follow the “two-repo” pattern, with the two repository being: </p>
+<p>In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the “two-repo” pattern, with the two repository being: </p>
 <ol>
 <li>A clone of <a href="https://github.com/VulcanJS/Vulcan/" target="_blank" rel="noopener">the main Vulcan repo</a>. </li>
 <li>Your own Meteor project, using the first repo as its package source.</li>
@@ -570,17 +607,20 @@
 <li>Create a new Meteor project or clone the <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan starter repo</a> (this will become your project’s repo).</li>
 <li>Inside your project repo, launch Vulcan with:</li>
 </ol>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">METEOR_PACKAGE_DIRS=</span><span class="string">"~/Vulcan/packages"</span> <span class="string">meteor </span><span class="built_in">--port</span> <span class="string">3000 </span><span class="built_in">--settings</span> <span class="string">settings.</span><span class="string">json</span></span><br></pre></td></tr></table></figure>
-<p>Note that if you’d like, you can create an alias for that command in your <code>.bash_profile</code> file:</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alias</span> runvulcan='METEOR_PACKAGE_DIRS=<span class="string">"~/Vulcan/packages"</span> meteor <span class="params">--port</span> 3000 <span class="params">--settings</span> settings.json'</span><br></pre></td></tr></table></figure>
-<h2 id="Technology"><a href="#Technology" class="headerlink" title="Technology"></a>Technology</h2><p>Vulcan is built on top of three main open-source technologies: React, GraphQL, and Meteor. </p>
-<ul>
-<li><a href="https://facebook.github.io/react/" target="_blank" rel="noopener">React</a> is Vulcan’s front-end library.</li>
-<li><a href="http://graphql.org" target="_blank" rel="noopener">GraphQL</a> is Vulcan’s API layer, used to load data from the server with <a href="http://apollostack.com" target="_blank" rel="noopener">Apollo</a>. </li>
-<li><a href="http://meteor.com" target="_blank" rel="noopener">Meteor</a> is Vulcan’s back-end layer, used to handle the database as well as server and bundle the app. </li>
-</ul>
-<p>Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we’re not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.</p>
-<p>The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. </p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">METEOR_PACKAGE_DIRS=</span><span class="string">"/Users/sacha/Vulcan/packages"</span> <span class="string">meteor </span><span class="built_in">--port</span> <span class="string">3000 </span><span class="built_in">--settings</span> <span class="string">settings.</span><span class="string">json</span></span><br></pre></td></tr></table></figure>
+<p>(Taking care to adapt the <code>/Users/sacha/Vulcan/packages</code> path to point to your Vulcan core repo’s <code>/packages</code> directory)</p>
+<p>If you’d like, you can also export <code>METEOR_PACKAGE_DIRS</code> as a global variable for all your Meteor apps. In your <code>.bash_profile</code> file or equivalent, just add:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">METEOR_PACKAGE_DIRS</span>=<span class="string">"/Users/sacha/Vulcan/packages"</span></span><br></pre></td></tr></table></figure>
+<p>If you’d like to add more than one source directory (for example, one for Vulcan packages, and one for other Meteor packages), you can separate them with a <code>:</code>:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">METEOR_PACKAGE_DIRS</span>=<span class="string">"/Users/sacha/Vulcan/packages:/Users/sacha/meteor-packages"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Git-Based-Deploys"><a href="#Git-Based-Deploys" class="headerlink" title="Git-Based Deploys"></a>Git-Based Deploys</h3><p>I you follow this install method, your Vulcan core files will <em>not</em> be included in the same Git repository as your “main” app. This can cause issues when using Git-based deploy methods such as Heroku. Either use deploy methods that bundle the whole app first (such as Meteor Up or Galaxy), or else add your core files as a Git submodule instead.</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>When you first run VulcanJS, you’ll see the contents of the <code>example-simple</code> package. It is recommended you go through the <a href="example-simple.html">Simple Example tutorial</a> to get a grasp of how Vulcan’s building blocks (data loading, forms, etc.) work. </p>
+<p>You can then take the more in-depth <a href="example-movies.html">Movies Example tutorial</a> to get a better understanding of VulcanJS’s internals. You can enable the Movies Example package by uncommenting it in <code>.meteor/packages</code>, and commenting out <code>example-simple</code> in its place)</p>
+<p>Once you’ve gone through both tutorials, you can enable the <code>example-instagram</code> package, which takes the same basic example but goes a little further, as well as take a look at its code. </p>
+<p>At this stage, you can either continue using Vulcan’s basic building blocks, or enable the more advanced forum features by checking out the <a href="example-forum.html"><code>example-forum</code></a> package. </p>
+<p>And if you’d like to use and customize the forum packages, you can then follow up with the <a href="example-customization.html">customization example tutorial</a> tutorial, which will take you through the code of the included <code>example-customization</code> package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan’s back-end. </p>
+<p>You can also check out <a href="https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA" target="_blank" rel="noopener">Vulcan’s YouTube channel</a> to learn more about the framework. </p>
+<h2 id="Slack-Channel"><a href="#Slack-Channel" class="headerlink" title="Slack Channel"></a>Slack Channel</h2><p>Vulcan has a pretty active <a href="http://slack.vulcanjs.org/" target="_blank" rel="noopener">Slack channel</a> where you can ask for support, share ideas, and get tips. </p>
 <h2 id="Roadmap"><a href="#Roadmap" class="headerlink" title="Roadmap"></a>Roadmap</h2><p>You can find the <a href="https://trello.com/b/dwPR0LTz/nova-roadmap" target="_blank" rel="noopener">Vulcan roadmap on Trello</a>.</p>
 <h2 id="Contribute"><a href="#Contribute" class="headerlink" title="Contribute"></a>Contribute</h2><p>We’re looking for contributors! If you’re interested in this project, come say hello in the <a href="http://slack.telescopeapp.org" target="_blank" rel="noopener">Vulcan Slack chatroom</a>.</p>
 

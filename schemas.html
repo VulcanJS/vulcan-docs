@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Collections & Schemas | Vulcan Docs</title>
+    <title>Overview | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Collections & Schemas | Vulcan Docs">
+    <meta property="og:title" content="Overview | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@telescopeapp">
-    <meta name="twitter:title" content="Collections & Schemas | Vulcan Docs">
+    <meta name="twitter:title" content="Overview | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -112,7 +112,7 @@
               
               <li class="item-toc ">
                 <a href="index.html" class="sidebar-link ">
-                  <span>Introduction</span>
+                  <span>Read Me</span>
                 </a>
               </li>
             
@@ -155,15 +155,45 @@
             
               
               <li class="item-toc ">
-                <a href="packages.html" class="sidebar-link ">
-                  <span>Packages</span>
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Overview</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
                 </a>
               </li>
             
@@ -177,16 +207,16 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
-                  <span>Collections & Schemas</span>
+              <li class="item-toc ">
+                <a href="resolvers.html" class="sidebar-link ">
+                  <span>Resolvers</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="data-loading.html" class="sidebar-link ">
-                  <span>Data Loading</span>
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
                 </a>
               </li>
             
@@ -206,8 +236,8 @@
             
               
               <li class="item-toc ">
-                <a href="mutations.html" class="sidebar-link ">
-                  <span>Mutations</span>
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
                 </a>
               </li>
             
@@ -215,6 +245,13 @@
               <li class="item-toc ">
                 <a href="redux.html" class="sidebar-link ">
                   <span>Using Redux</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
                 </a>
               </li>
             
@@ -328,6 +365,13 @@
             <div class="heading-toc">Packages</div>
           
           <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
             
               
               <li class="item-toc ">
@@ -525,7 +569,7 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Collections & Schemas</h1>
+      <h1 class="title-page">Overview</h1>
       
 
       <div class="page-actions">
@@ -537,7 +581,22 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="Creating-Collections"><a href="#Creating-Collections" class="headerlink" title="Creating Collections"></a>Creating Collections</h2><p>Vulcan features a number of helpers to make setting up your layer faster, most of which are initialized through the <code>createCollection</code> function:</p>
+      <p>The role of the schema is to serve as a central source of truth that will be used to generate or populate many of Vulcan’s other components. </p>
+<p><img src="/images/vulcan-schemas.svg" alt="/images/vulcan-schemas.svg"></p>
+<p>Based on your schema, Vulcan can: </p>
+<ul>
+<li>Generate a GraphQL equivalent of your schema to control your GraphQL API. </li>
+<li><a href="/groups-permissions.html">Control permissions</a> for accessing and modifying data.</li>
+<li><a href="/forms.html">Generate forms</a> on the client. </li>
+<li>Validate form contents on submission. </li>
+<li>Auto-generate <a href="/core-components.html#Datatable">paginated, searchable datatables</a>.</li>
+<li>Auto-generate <a href="/core-components.html#Card">smart cards</a> for displaying individual documents. </li>
+<li>Add callbacks on document insert or edit. </li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Here is a schema example, taken from the <a href="/example-movies.html">Movies tutorial</a>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// default properties</span></span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  createdAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    onInsert: <span class="function">(<span class="params"><span class="built_in">document</span>, currentUser</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    resolveAs: &#123;</span><br><span class="line">      fieldName: <span class="string">'user'</span>,</span><br><span class="line">      type: <span class="string">'User'</span>,</span><br><span class="line">      resolver: <span class="function">(<span class="params">movie, args, context</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: movie.userId &#125;, &#123; <span class="attr">fields</span>: context.Users.getViewableFields(context.currentUser, context.Users) &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">      addOriginalField: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// custom properties</span></span><br><span class="line"></span><br><span class="line">  name: &#123;</span><br><span class="line">    label: <span class="string">'Name'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    insertableBy: [<span class="string">'members'</span>],</span><br><span class="line">    editableBy: [<span class="string">'members'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  year: &#123;</span><br><span class="line">    label: <span class="string">'Year'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    insertableBy: [<span class="string">'members'</span>],</span><br><span class="line">    editableBy: [<span class="string">'members'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  review: &#123;</span><br><span class="line">    label: <span class="string">'Review'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    control: <span class="string">'textarea'</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    insertableBy: [<span class="string">'members'</span>],</span><br><span class="line">    editableBy: [<span class="string">'members'</span>]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>As you can see, a schema is a JavaScript object containing a list of fields, each of which is defined using a range of special properties. </p>
+<h2 id="Creating-Collections"><a href="#Creating-Collections" class="headerlink" title="Creating Collections"></a>Creating Collections</h2><p>Vulcan features a number of helpers to make setting up your layer faster, most of which are initialized through the <code>createCollection</code> function:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line">  </span><br><span class="line">  resolvers,</span><br><span class="line"></span><br><span class="line">  mutations,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>The function takes the following arguments:</p>
 <ul>
@@ -548,41 +607,8 @@
 <li><code>generateGraphQLSchema</code>: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to <code>true</code>). </li>
 </ul>
 <h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>Passing a schema, resolvers, and mutations to <code>createCollection</code> enables a lot of Vulcan’s internal synergy. That being said, you can also set <code>generateGraphQLSchema</code> to <code>false</code> and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer. </p>
-<h2 id="Schemas"><a href="#Schemas" class="headerlink" title="Schemas"></a>Schemas</h2><p>The first piece of any GraphQL API is the <strong>schema</strong>, which defines what data is made available to the client. </p>
-<p>In Vulcan, this GraphQL schema can be generated automatically from your collection’s JSON schema, so you don’t have to type things twice. Just pass a <a href="https://github.com/aldeed/node-simple-schema" target="_blank" rel="noopener">SimpleSchema</a>-compatible JSON schema as <code>createCollection</code>‘s <code>schema</code> property.</p>
-<h3 id="Custom-Schemas"><a href="#Custom-Schemas" class="headerlink" title="Custom Schemas"></a>Custom Schemas</h3><p>If you need to manually add a schema, you can also do so using the <code>GraphQLSchema.addSchema</code> function:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> customSchema = <span class="string">`</span></span><br><span class="line"><span class="string">  input Custom &#123;</span></span><br><span class="line"><span class="string">    _id: String</span></span><br><span class="line"><span class="string">    userId: String</span></span><br><span class="line"><span class="string">    title: String</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">GraphQLSchema.addSchema(customSchema);</span><br></pre></td></tr></table></figure>
-<h2 id="Schema-Properties"><a href="#Schema-Properties" class="headerlink" title="Schema Properties"></a>Schema Properties</h2><h3 id="Default-Properties"><a href="#Default-Properties" class="headerlink" title="Default Properties"></a>Default Properties</h3><p>See the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema documentation</a>.</p>
-<h3 id="Data-Layer-Properties"><a href="#Data-Layer-Properties" class="headerlink" title="Data Layer Properties"></a>Data Layer Properties</h3><h4 id="viewableBy"><a href="#viewableBy" class="headerlink" title="viewableBy"></a><code>viewableBy</code></h4><p>Can either be an array of group names or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> viewing the document and the <code>document</code> itself, and should return <code>true</code> or <code>false</code>.</p>
-<h4 id="insertableBy"><a href="#insertableBy" class="headerlink" title="insertableBy"></a><code>insertableBy</code></h4><p>Can either be an array of group names or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and should return <code>true</code> or <code>false</code>. When generating a form for inserting new documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
-<h4 id="editableBy"><a href="#editableBy" class="headerlink" title="editableBy"></a><code>editableBy</code></h4><p>Can either be an array of group names or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and the <code>document</code> being operated on, and should return <code>true</code> or <code>false</code>. When generating a form for editing existing documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
-<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/data-loading.html#Field-Resolvers">Field Resolvers</a> section. </p>
-<h3 id="onInsert-onEdit-onRemove"><a href="#onInsert-onEdit-onRemove" class="headerlink" title="onInsert, onEdit, onRemove"></a><code>onInsert</code>, <code>onEdit</code>, <code>onRemove</code></h3><p>These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. </p>
-<ul>
-<li><code>onInsert(document, currentUser)</code></li>
-<li><code>onEdit(modifier, document, currentUser)</code></li>
-<li><code>onRemove(document, currentUser)</code></li>
-</ul>
-<h3 id="Forms-Properties"><a href="#Forms-Properties" class="headerlink" title="Forms Properties"></a>Forms Properties</h3><h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
-<h4 id="control"><a href="#control" class="headerlink" title="control"></a><code>control</code></h4><p>Either a text string (one of <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>checkboxgroup</code>, <code>radiogroup</code>, or <code>select</code>) or a React component.</p>
-<h4 id="order"><a href="#order" class="headerlink" title="order"></a><code>order</code></h4><p>A number corresponding to the position of the property’s field inside the form.</p>
-<h4 id="group"><a href="#group" class="headerlink" title="group"></a><code>group</code></h4><p>An optional object containing the group/section/fieldset in which to include the form element. Groups have <code>name</code>, <code>label</code>, and <code>order</code> properties.</p>
-<p>For example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">postedAt: &#123;</span><br><span class="line">  type: <span class="built_in">Date</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  insertableBy: Users.isAdmin,</span><br><span class="line">  editableBy: Users.isAdmin,</span><br><span class="line">  publish: <span class="literal">true</span>,</span><br><span class="line">  control: <span class="string">"datetime"</span>,</span><br><span class="line">  group: &#123;</span><br><span class="line">    name: <span class="string">"admin"</span>,</span><br><span class="line">    label: <span class="string">"Admin Options"</span>,</span><br><span class="line">    order: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>Note that fields with no groups are always rendered first in the form.</p>
-<h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a><code>placeholder</code></h4><p>A placeholder value for the form field.</p>
-<h4 id="beforeComponent"><a href="#beforeComponent" class="headerlink" title="beforeComponent"></a><code>beforeComponent</code></h4><p>A React component that will be inserted just before the form component itself.</p>
-<h4 id="afterComponent"><a href="#afterComponent" class="headerlink" title="afterComponent"></a><code>afterComponent</code></h4><p>A React component that will be inserted just after the form component itself.</p>
-<h4 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a><code>hidden</code></h4><p>Can either be a boolean or a function accepting form props as argument and returning a boolean.</p>
-<p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
-<p>As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.</p>
-<h3 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h3><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the <code>vulcan:base-components</code> theme, a form will then pop up prompting the user to complete their profile with the missing fields. </p>
-<h2 id="Custom-Fields"><a href="#Custom-Fields" class="headerlink" title="Custom Fields"></a>Custom Fields</h2><p>Out of the box, Vulcan has three main collections: <code>Posts</code>, <code>Users</code>, and <code>Comments</code>. Each of them has a pre-set schema, but that schema can also be extended with custom fields.</p>
-<p>For example, this is how the <code>vulcan:newsletter</code> package extends the <code>Posts</code> schema with a <code>scheduledAt</code> property that keeps track of when a post was sent out as part of an email newsletter:</p>
+<h2 id="Extending-Schemas"><a href="#Extending-Schemas" class="headerlink" title="Extending Schemas"></a>Extending Schemas</h2><p>Sometimes, you’ll want to extend an existing schema. For example Vulcan’s <a href="/example-forum.html">Forum example</a> has three main collections: <code>Posts</code>, <code>Users</code>, and <code>Comments</code>. Each of them has a pre-set schema, but that schema can also be extended with custom fields.</p>
+<p>This is how the <code>vulcan:newsletter</code> package extends the <code>Posts</code> schema with a <code>scheduledAt</code> property that keeps track of when a post was sent out as part of an email newsletter:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Posts.addField(&#123;</span><br><span class="line">  fieldName: <span class="string">'scheduledAt'</span>,</span><br><span class="line">  fieldSchema: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>The <code>collection.addField()</code> function takes either a field object, or an array of fields. Each field has a <code>fieldName</code> property, and a <code>fieldSchema</code> property.</p>
 <p>Each field schema supports all of the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema properties</a>, such as <code>type</code>, <code>optional</code>, etc.</p>
@@ -606,9 +632,9 @@
       
       
         <a class="link primary next"
-          href="data-loading.html">
+          href="graphql-schema.html">
           <span class="subtitle-pagination">Next</span>
-          Data Loading
+          GraphQL Schema
           <span class="icon-arrow-right-alt"></span>
         </a>
       
