@@ -86,8 +86,8 @@ typescript_api_box:
   data_file: docs.json
 
 social_links:
-  github: 'https://github.com/vulcanjs/vulcan'
-  twitter: '@telescopeapp'
+  github: 'https://github.com/VulcanJS/vulcan-docs'
+  twitter: '@vulcanjs'
 
 # API keys
 apis:

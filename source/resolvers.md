@@ -61,7 +61,7 @@ The `total` resolver takes a `terms` argument and should return the total count 
 
 ### Default Resolvers
 
-Vulcan provides a set of default List, Single and Total resolvers you can use to save time:
+Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling `getDefaultResolvers(collectionName)`:
 
 ```js
 import { createCollection, getDefaultResolvers, getDefaultMutations } from 'meteor/vulcan:core';
@@ -86,7 +86,7 @@ export default Movies;
 
 To learn more about what exactly the default resolvers do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_resolvers.js).
 
-### Custom Queries
+## Custom Resolvers
 
 In some cases, you'll want to go beyond the three default resolvers. For example, you might want to create a resolver that returns a single random post, or the current user. You can do so by using `addGraphQLResolvers` and `addGraphQLQuery`:
 

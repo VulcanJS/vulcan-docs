@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Packages Types
 ---
 
 Vulcan uses a package-based architecture, meaning that the entirety of its codebase resides in packages.
