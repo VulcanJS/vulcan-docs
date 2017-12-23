@@ -17,6 +17,8 @@ You *could* simply let users specify their own selectors and options, but that w
 
 Instead, Vulcan adopts a two-tiered approach: first, the user defines query **terms** that specify the data they want. Then, these terms go through a set of successive callbacks that “translate” them into a Mongo-compatible `{selector, options}` object known as the **parameters** object (in the process catching any potential security issues).
 
+![/images/terms-parameters.svg](/images/terms-parameters.svg)
+
 To give a practical example, the `vulcan:posts` package translates the following terms:
 
 ```js
