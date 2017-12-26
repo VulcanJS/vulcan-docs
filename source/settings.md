@@ -43,6 +43,12 @@ These settings are defined at the root of the settings object, (or optionally on
 | --- | --- | --- |
 | mailUrl | "smtp://username:password@smtp.mailgun.org:587/" | The SMTP URL used by your email provider |
 
+**MailGun** Note:
+For `username` use your **Default SMTP Login**  and for `password` use **Default Password**. 
+See screenshot below.
+
+![](https://i.imgur.com/pRwaQzX.png)
+
 #### OAuth Settings
 
 You can use the settings file to store your oAuth configurations:
