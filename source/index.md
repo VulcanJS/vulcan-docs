@@ -16,7 +16,9 @@ Install the latest version of Node and NPM. We recommend the usage of [NVM](http
 
 You can then install [Meteor](https://www.meteor.com/install), which is used as the Vulcan build tool.
 
-Clone the [Vulcan Starter repo](https://github.com/VulcanJS/Vulcan-Starter) locally, then:
+Clone the [Vulcan Starter repo](https://github.com/VulcanJS/Vulcan-Starter) locally.
+
+Rename your `sample_settings.json` file to `settings.json`, then:
 
 ```sh
 npm install
