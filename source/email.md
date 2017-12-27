@@ -7,6 +7,12 @@ Vulcan includes a simple-yet-powerful email-sending system.
 
 **If you've got the [debug package](/debug.html) enabled, an email debugging UI is available at [http://0.0.0.0:3000/callbacks](http://0.0.0.0:3000/emails).**
 
+## Setup
+
+In order to send emails, you'll need to set up an email provider. You can do so by providing an SMTP URL (e.g. `smtp://username:password@smtp.mailgun.org:587/`) in your `settings.json` file under the `mailUrl` property.
+
+Note: if your username contains an `@` make sure to replace it with `%40` to escape it. 
+
 ## Registering Emails
 
 Just like components, emails need to be centrally registered with Vulcan.

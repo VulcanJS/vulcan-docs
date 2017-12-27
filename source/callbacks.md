@@ -50,6 +50,27 @@ In each case, the **first** argument is the name of the callback hook, the **sec
 
 Note that for *sync* callbacks, each callback function should return the main argument to pass it on to the next function, while *async* callbacks don't need to return anything.
 
-#### Alternative Approach
+## Registering Callbacks
 
-Creating new callback hooks is useful to make your own code extendable by other developers, but it's entirely optional. 
+While you don't need to register new callback hooks to use them (as long as you do run them), registering a callback makes it easier to document and use it:
+
+```js
+
+import { registerCallback } from 'meteor/vulcan:lib';
+
+registerCallback({
+  name: `posts.new.validate`, 
+  description: `Validate a document before insertion (can be skipped when inserting directly on server).`,  
+  arguments: [{document: 'The document being inserted'}, {currentUser: 'The current user'}, {validationErrors: 'An object that can be used to accumulate validation errors'}], 
+  runs: 'sync', 
+  returns: 'document',
+});
+```
+
+It takes the following arguments: 
+
+- `name`: the name of the callback.
+- `description`: a description of what the callback does. 
+- `arguments`: an array of `{name: description}` objects describing the callback functions' arguments. 
+- `runs`: whether the callback runs in a `sync` or `async` manner. 
+- `returns`: what the callback is expected to return (for `sync` callbacks).

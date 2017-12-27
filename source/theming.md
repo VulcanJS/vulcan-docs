@@ -91,9 +91,7 @@ console.log(getRawComponent(WrappedComponent).foo); // "bar"
 
 ## Replacing Components
 
-Apart from a couple exceptions, almost all React components in Vulcan live inside the `vulcan:base-components` package. 
-
-If you only need to modify a single component, you can simply override it with a new one without having to touch the `vulcan:base-components` package.
+If you only need to modify a single component, you can simply override it with a new one without having to touch the original package.code
 
 For example, if you wanted to use your own `CustomLogo` component you would do:
 
@@ -156,7 +154,7 @@ The main purpose behind the components API is to enable extending and replacing 
 
 ## Core Components
 
-In addition to components that are part of a specific theme package (such as `vulcan:base-components`), a few components are provided with `vulcan:core`.
+In addition to components that are part of a specific theme or example package, a few components are provided with `vulcan:core`.
 
 ### App
 

@@ -11,6 +11,7 @@ The following events will happen automatically for every analytics provider (ass
 * `init` (client only): initialize the provider's code snippet.
 * `identify` (client/server): identify the current user, if they exists.
 * `page` (client only): track any page changes.
+* `user` (server only): track new user creations.
 
 ## Manual Event Tracking
 
@@ -110,3 +111,22 @@ addTrackFunction(segmentTrack);
 
 Note that `track` can have different implementations on the client and server. For example, the `vulcan:events-internal` package's client version of `track` will trigger a GraphQL mutation, while the server version will mutate the data directly. Or, the client version of `vulcan:events-segment` will use an in-browser JavaScript snippet while the server version will use Segment's Node API via an NPM package.
 
+#### `addUserFunction` (server)
+
+Pass a function that takes a user object:
+
+```js
+import { addUserFunction } from 'meteor/vulcan:events';
+
+function intercomNewUser(user) {
+  intercomClient.users.create({
+    email: user.email,
+    custom_attributes: {
+      name: user.displayName,
+      profileUrl: Users.getProfileUrl(user, true),
+      _id: user._id,
+    }
+  });
+}
+addUserFunction(intercomNewUser);
+```

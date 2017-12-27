@@ -79,18 +79,6 @@ vulcan:rss
 vulcan:subscribe
 ```
 
-As an example, the `vulcan:newsletter` package can be used to send an email newsletter of your most recent posts and comments. 
-
-In addition, the following three packages contain the components, styles, and templates that make up the basic forum example:
-
-```
-vulcan:base-components
-vulcan:base-styles
-vulcan:email-templates
-```
-
-Note that the majority of the forum packages specifically require the `vulcan:posts` package. For example, the `vulcan:newsletter` can currently only build a newsletter based on the `Posts` collection. That being said, the goal is to eventually transform them into generic features package whenever possible, so that they can work with any Vulcan collection. 
-
 ### Language Packages
 
 These contain the language strings used throughout Vulcan (for the app core, features packages, and forum packages). You need **at least one of them** enabled. 

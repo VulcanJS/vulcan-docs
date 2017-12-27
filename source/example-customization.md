@@ -29,7 +29,7 @@ Package.onUse( function(api) {
     'fourseven:scss',
 
     'vulcan:core',
-    'vulcan:base-components',
+    'vulcan:',
     'vulcan:posts',
     'vulcan:users'
   ]);
@@ -97,7 +97,7 @@ Protip: a good way to make sure that your CSS file is getting properly bundled u
 
 A really cool feature of Vulcan's theming system is the ability to replace a specific component without having to overwrite the entire theme.
 
-For example, let's consider the `base-components` theme's `Logo` component:
+For example, let's consider the Forum example's `Logo` component:
 
 ```js
 import React from 'react';

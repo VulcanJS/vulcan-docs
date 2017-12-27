@@ -106,4 +106,4 @@ As long as a value is in this.state.currentValues it should be submitted with th
 
 #### `mustComplete` (`Users` only)
 
-You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the `vulcan:base-components` theme, a form will then pop up prompting the user to complete their profile with the missing fields. 
+You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields. 
