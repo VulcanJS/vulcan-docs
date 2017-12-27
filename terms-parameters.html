@@ -496,13 +496,6 @@
             
               
               <li class="item-toc ">
-                <a href="migration.html" class="sidebar-link ">
-                  <span>Migration Guide</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
@@ -590,6 +583,7 @@
 <p>While you could hard-code said selector and options on the server and always return the same subset of data to the client, this is not very practical if you want your users to be able to search, filter, sort, or manipulate your data in any way. </p>
 <p>You <em>could</em> simply let users specify their own selectors and options, but that would open the door to users accessing <em>any</em> document in your database, and is generally regarded as an anti-pattern. </p>
 <p>Instead, Vulcan adopts a two-tiered approach: first, the user defines query <strong>terms</strong> that specify the data they want. Then, these terms go through a set of successive callbacks that “translate” them into a Mongo-compatible <code>{selector, options}</code> object known as the <strong>parameters</strong> object (in the process catching any potential security issues).</p>
+<p><img src="/images/terms-parameters.svg" alt="/images/terms-parameters.svg"></p>
 <p>To give a practical example, the <code>vulcan:posts</code> package translates the following terms:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  view: <span class="string">'top'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Into these parameters:</p>

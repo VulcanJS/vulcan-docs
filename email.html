@@ -496,13 +496,6 @@
             
               
               <li class="item-toc ">
-                <a href="migration.html" class="sidebar-link ">
-                  <span>Migration Guide</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
@@ -583,6 +576,8 @@
     <div class="document-formatting">
       <p>Vulcan includes a simple-yet-powerful email-sending system.</p>
 <h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, an email debugging UI is available at <a href="http://0.0.0.0:3000/emails" target="_blank" rel="noopener">http://0.0.0.0:3000/callbacks</a>.</strong></p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>In order to send emails, you’ll need to set up an email provider. You can do so by providing an SMTP URL (e.g. <code>smtp://username:password@smtp.mailgun.org:587/</code>) in your <code>settings.json</code> file under the <code>mailUrl</code> property.</p>
+<p>Note: if your username contains an <code>@</code> make sure to replace it with <code>%40</code> to escape it. </p>
 <h2 id="Registering-Emails"><a href="#Registering-Emails" class="headerlink" title="Registering Emails"></a>Registering Emails</h2><p>Just like components, emails need to be centrally registered with Vulcan.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  test: &#123;</span><br><span class="line">    template: <span class="string">'test'</span>,</span><br><span class="line">    path: <span class="string">'/email/test'</span>,</span><br><span class="line">    data() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'This is a test'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>The <code>VulcanEmail.addEmails</code> function takes an object that itself contains individual objects for each email. Each email object can have the following properties:</p>

@@ -496,13 +496,6 @@
             
               
               <li class="item-toc ">
-                <a href="migration.html" class="sidebar-link ">
-                  <span>Migration Guide</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
@@ -610,7 +603,7 @@
 <p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.</p>
-<h2 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h2><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the <code>vulcan:base-components</code> theme, a form will then pop up prompting the user to complete their profile with the missing fields. </p>
+<h2 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h2><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields. </p>
 
     </div>
   </div>

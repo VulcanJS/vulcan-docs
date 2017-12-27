@@ -496,13 +496,6 @@
             
               
               <li class="item-toc ">
-                <a href="migration.html" class="sidebar-link ">
-                  <span>Migration Guide</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="recipes.html" class="sidebar-link ">
                   <span>Recipes</span>
                 </a>
@@ -597,7 +590,16 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modifier = Callbacks.run(<span class="string">`movies.edit.sync`</span>, modifier, <span class="built_in">document</span>, currentUser)</span><br></pre></td></tr></table></figure>
 <p>In each case, the <strong>first</strong> argument is the name of the callback hook, the <strong>second</strong> argument is the one iterated on by each callback function on the hook, while any remaining arguments are just passed along from one iteration to the next.</p>
 <p>Note that for <em>sync</em> callbacks, each callback function should return the main argument to pass it on to the next function, while <em>async</em> callbacks don’t need to return anything.</p>
-<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>Creating new callback hooks is useful to make your own code extendable by other developers, but it’s entirely optional. </p>
+<h2 id="Registering-Callbacks"><a href="#Registering-Callbacks" class="headerlink" title="Registering Callbacks"></a>Registering Callbacks</h2><p>While you don’t need to register new callback hooks to use them (as long as you do run them), registering a callback makes it easier to document and use it:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; registerCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:lib'</span>;</span><br><span class="line"></span><br><span class="line">registerCallback(&#123;</span><br><span class="line">  name: <span class="string">`posts.new.validate`</span>, </span><br><span class="line">  description: <span class="string">`Validate a document before insertion (can be skipped when inserting directly on server).`</span>,  </span><br><span class="line">  <span class="built_in">arguments</span>: [&#123;<span class="attr">document</span>: <span class="string">'The document being inserted'</span>&#125;, &#123;<span class="attr">currentUser</span>: <span class="string">'The current user'</span>&#125;, &#123;<span class="attr">validationErrors</span>: <span class="string">'An object that can be used to accumulate validation errors'</span>&#125;], </span><br><span class="line">  runs: <span class="string">'sync'</span>, </span><br><span class="line">  returns: <span class="string">'document'</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>It takes the following arguments: </p>
+<ul>
+<li><code>name</code>: the name of the callback.</li>
+<li><code>description</code>: a description of what the callback does. </li>
+<li><code>arguments</code>: an array of <code>{name: description}</code> objects describing the callback functions’ arguments. </li>
+<li><code>runs</code>: whether the callback runs in a <code>sync</code> or <code>async</code> manner. </li>
+<li><code>returns</code>: what the callback is expected to return (for <code>sync</code> callbacks).</li>
+</ul>
 
     </div>
   </div>
