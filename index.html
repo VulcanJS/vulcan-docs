@@ -579,21 +579,28 @@
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=aCjR9UrNqVk" target="_blank" rel="noopener">Full video tutorial</a></li>
 </ul>
-<p>Install the latest version of Node and NPM. We recommend the usage of <a href="http://nvm.sh" target="_blank" rel="noopener">NVM</a>.</p>
-<p>You can then install <a href="https://www.meteor.com/install" target="_blank" rel="noopener">Meteor</a>, which is used as the Vulcan build tool.</p>
-<p>Clone the <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan Starter repo</a> locally.</p>
-<p>Rename your <code>sample_settings.json</code> file to <code>settings.json</code>, then:</p>
+<ol>
+<li><p>Install the latest version of Node and NPM. We recommend the usage of <a href="http://nvm.sh" target="_blank" rel="noopener">NVM</a>.</p>
+</li>
+<li><p>You can then install <a href="https://www.meteor.com/install" target="_blank" rel="noopener">Meteor</a>, which is used as the Vulcan build tool.</p>
+</li>
+<li><p>Clone the <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan Starter repo</a> locally.</p>
+</li>
+<li><p>Run:</p>
+</li>
+</ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
 <p>And open <code>http://localhost:3000/</code> in your browser.</p>
 <p>Note that you can also start the app with:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default setting file: sample_settings.json</span></span><br><span class="line">meteor --settings sample_settings.json </span><br><span class="line"></span><br><span class="line"><span class="comment"># 'npm start' will create a copy of the sample settings, 'settings.json', and run `meteor` with this file for you.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor --settings sample_settings.json</span><br></pre></td></tr></table></figure>
+<p>All <code>npm start</code> does is run the above command, while also checking for the presence of <code>settings.json</code> first and creating it for you if missing. </p>
 <h2 id="Two-Repo-Install-Optional"><a href="#Two-Repo-Install-Optional" class="headerlink" title="Two-Repo Install (Optional)"></a>Two-Repo Install (Optional)</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=mEemOReAw5Y" target="_blank" rel="noopener">Full video tutorial</a></li>
 </ul>
-<p>In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the “two-repo” pattern, with the two repository being: </p>
+<p>In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the more complicated “two-repo” pattern, with the two repository being: </p>
 <ol>
-<li>A clone of <a href="https://github.com/VulcanJS/Vulcan/" target="_blank" rel="noopener">the main Vulcan repo</a>. </li>
-<li>Your own Meteor project, using the first repo as its package source.</li>
+<li>Your own Vulcan project (for example, a clone of the Vulcan Starter project as outlined above).</li>
+<li>A clone of <a href="https://github.com/VulcanJS/Vulcan/" target="_blank" rel="noopener">the main Vulcan repo</a>, which the first repo will use as the source for the Vulcan core code. </li>
 </ol>
 <p>Follow these steps to get set up:</p>
 <ol>
