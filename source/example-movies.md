@@ -109,9 +109,9 @@ First, create a new `components` directory inside `lib` if you haven't done so y
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { registerComponent } from 'meteor/vulcan:core';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const MoviesList = () => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -131,7 +131,13 @@ const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalC
 
   </div>
 
-export default MoviesList;
+registerComponent('MoviesList', MoviesList);
+```
+
+We'll also create a new `components.js` file inside `modules` so we can import our new component and make it available globally: 
+
+```js
+import '../components/MoviesList.jsx';
 ```
 
 ## Routing
@@ -141,9 +147,7 @@ We can now create a [route](/routing.html) to display this component. Create a n
 ```js
 import { addRoute } from 'meteor/vulcan:core';
 
-import MoviesList from '../components/movies/MoviesList.jsx';
-
-addRoute({ name: 'movies', path: '/', component: MoviesList });
+addRoute({ name: 'movies', path: '/', componentName: 'MoviesList' });
 ```
 
 In case you're wondering, `addRoute` is a very thin wrapper over [React Router](https://github.com/ReactTraining/react-router). 
@@ -540,7 +544,7 @@ Create a new `MoviesItem` component inside `components`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { registerComponent, ModalTrigger } from 'meteor/vulcan:core';
+import { registerComponent, Components } from 'meteor/vulcan:core';
 
 const MoviesItem = ({movie, currentUser}) =>
 
@@ -551,17 +555,22 @@ const MoviesItem = ({movie, currentUser}) =>
 
   </div>
 
-export default MoviesItem;
+registerComponent('MoviesItem', MoviesItem);
 ```
 
-We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withList` [higher-order component](https://facebook.github.io/react/docs/higher-order-components.html): 
+Don't forget to import our new component in `components.js`: 
+
+```js
+import '../components/MoviesItem.js';
+```
+
+We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withList` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
-import MoviesItem from './MoviesItem.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
@@ -579,7 +588,7 @@ const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalC
 
         {/* documents list */}
 
-        {results.map(movie => <MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
+        {results.map(movie => <Components.MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
         
         {/* load more */}
 
@@ -599,7 +608,7 @@ const options = {
   limit: 5
 };
 
-export default withList(options)(withCurrentUser(MoviesList))
+registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
 ```
 
 We want to provide `MoviesList` with the `results` document list and the `currentUser` property, so we wrap it with `withList` and `withCurrentUser`.
@@ -645,10 +654,9 @@ So far so good, but we can't yet do a lot with our app. In order to give it a li
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
-import MoviesItem from './MoviesItem.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
@@ -672,7 +680,7 @@ const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalC
 
         {/* documents list */}
 
-        {results.map(movie => <MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
+        {results.map(movie => <Components.MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
         
         {/* load more */}
 
@@ -692,7 +700,7 @@ const options = {
   limit: 5
 };
 
-export default withList(options)(withCurrentUser(MoviesList));
+registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
 ```
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
@@ -899,7 +907,13 @@ const MoviesNewForm = ({currentUser}) =>
 
   </div>
 
-export default withCurrentUser(MoviesNewForm);
+registerComponent('MoviesNewForm', MoviesNewForm, withCurrentUser);
+```
+
+And import it in `components.js`: 
+
+```js
+import '../components/MoviesNewForm.jsx';
 ```
 
 A few things to note: 
@@ -908,15 +922,13 @@ A few things to note:
 - We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `new` mutation's `check` function to figure this out.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
-Let's import the form component from `MoviesList.jsx`:
+Let's add the form component to `MoviesList.jsx`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
 import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
-import MoviesItem from './MoviesItem.jsx';
-import MoviesNewForm from './MoviesNewForm.jsx';
 
 const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
@@ -938,11 +950,11 @@ const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalC
         
         {/* new document form */}
 
-        <MoviesNewForm />
+        <Components.MoviesNewForm />
 
         {/* documents list */}
 
-        {results.map(movie => <MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
+        {results.map(movie => <Components.MoviesItem key={movie._id} movie={movie} currentUser={currentUser} />)}
         
         {/* load more */}
 
@@ -962,7 +974,7 @@ const options = {
   limit: 5
 };
 
-export default withList(options)(withCurrentUser(MoviesList));
+registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
 ```
 
 Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! 
@@ -989,7 +1001,13 @@ const MoviesEditForm = ({documentId, closeModal}) =>
     }}
   />
 
-export default MoviesEditForm;
+registerComponent('MoviesEditForm', MoviesEditForm);
+```
+
+And in `components.js`: 
+
+```js
+import '../components/MoviesEditForm.jsx';
 ```
 
 Because we're passing a specific `documentId` property to the `SmartForm` component, this form will be an **edit document** form. We're also passing `showRemove` to show a "delete document" option, and a `successCallback` function to close the modal popup inside which the form will be displayed. 
@@ -1043,7 +1061,6 @@ import React, { PropTypes, Component } from 'react';
 import { Components, registerComponent } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
-import MoviesEditForm from './MoviesEditForm.jsx';
 
 const MoviesItem = ({movie, currentUser}) =>
 
@@ -1058,14 +1075,14 @@ const MoviesItem = ({movie, currentUser}) =>
 
     {Movies.options.mutations.edit.check(currentUser, movie) ? 
       <Components.ModalTrigger label="Edit Movie">
-        <MoviesEditForm currentUser={currentUser} documentId={movie._id} />
+        <Components.MoviesEditForm currentUser={currentUser} documentId={movie._id} />
       </Components.ModalTrigger>
       : null
     }
 
   </div>
 
-export default MoviesItem;
+registerComponent('MoviesItem', MoviesItem);
 ```
 
 This time we're using the `<Components.ModalTrigger />` Vulcan component to show our form inside a popup (assuming the current user can perform an edit, of course).

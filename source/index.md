@@ -12,13 +12,13 @@ You can get a good overview of what Vulcan can do in the [Features](features.htm
 
 - [Full video tutorial](https://www.youtube.com/watch?v=aCjR9UrNqVk)
 
-Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
+1. Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
 
-You can then install [Meteor](https://www.meteor.com/install), which is used as the Vulcan build tool.
+2. You can then install [Meteor](https://www.meteor.com/install), which is used as the Vulcan build tool.
 
-Clone the [Vulcan Starter repo](https://github.com/VulcanJS/Vulcan-Starter) locally.
+3. Clone the [Vulcan Starter repo](https://github.com/VulcanJS/Vulcan-Starter) locally.
 
-Rename your `sample_settings.json` file to `settings.json`, then:
+4. Run:
 
 ```sh
 npm install
@@ -30,20 +30,19 @@ And open `http://localhost:3000/` in your browser.
 Note that you can also start the app with:
 
 ```sh
-# default setting file: sample_settings.json
 meteor --settings sample_settings.json 
-
-# 'npm start' will create a copy of the sample settings, 'settings.json', and run `meteor` with this file for you.
 ```
+
+All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if missing. 
 
 ## Two-Repo Install (Optional)
 
 - [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
 
-In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the "two-repo" pattern, with the two repository being: 
+In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the more complicated "two-repo" pattern, with the two repository being: 
 
-1. A clone of [the main Vulcan repo](https://github.com/VulcanJS/Vulcan/). 
-2. Your own Meteor project, using the first repo as its package source.
+1. Your own Vulcan project (for example, a clone of the Vulcan Starter project as outlined above).
+2. A clone of [the main Vulcan repo](https://github.com/VulcanJS/Vulcan/), which the first repo will use as the source for the Vulcan core code. 
 
 Follow these steps to get set up:
 
