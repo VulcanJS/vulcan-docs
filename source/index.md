@@ -6,6 +6,12 @@ title: Read Me
 
 Vulcan is a framework that gives you a set of tools for quickly building React & GraphQL-based web applications. Out of the box, it can handle data loading, automatically generate forms, handle email notifications, and much more. 
 
+## Why Vulcan?
+
+Vulcan is unique in that it spans the full stack, from the database to the browser. While there exists many excellent back-end frameworks or backend-as-a-service providers, these all still require you to handle your front-end code yourself, including building a set of components to read, write, and display data. 
+
+But because Vulcan is full-stack, it's able to speed up these repetitive tasks by providing a whole range of helper components that are fine-tuned to the Vulcan back-end, and as a result just work out of the box. 
+
 You can get a good overview of what Vulcan can do in the [Features](features.html) section. 
 
 ## Install
