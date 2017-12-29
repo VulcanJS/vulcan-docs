@@ -35,6 +35,8 @@ We are doing five things here:
 4. Defining a `resolver` function that indicates how to retrieve that object.
 5. Specifying that the original field (`userId`, with type `String`) should also be added to our GraphQL schema. 
 
+Note that it is recommended that you pick a **different** name for the "real" database field (`userId`) and the field in your schema (`user`), especially if you set `addOriginalField` to `true`. This way, you will be able to unambiguously require either the `_id` or the full user object just by specifying which field you need. 
+
 ## Custom Types
 
 Creating a collection with `createCollection` will automatically create the associated GraphQL type, but in some case you might want to resolve a field to a GraphQL type that doesn't correspond to any existing collection. 
@@ -69,7 +71,6 @@ likesNumber: {
   optional: true,
   viewableBy: ['guests'],
   resolveAs: {
-    fieldName: 'likesNumber',
     type: 'Number',
     resolver: async (post, args, context) => {
       return await getFacebookLikes(post.url);
@@ -78,7 +79,9 @@ likesNumber: {
 },
 ```
 
-This will create a `likesNumber` field in your GraphQL schema (and your Apollo store) even though no such field exist in your database. 
+This will create a `likesNumber` field in your GraphQL schema (and your Apollo store) even though no such field has to exist in your database. 
+
+Note that for GraphQL-only fields, it's ok to leave out the `fieldName` property (which will default to using the same name as the schema field) since there is no actual database field of the same name. 
 
 ## Legacy String Syntax (deprecated)
 

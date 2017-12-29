@@ -12,6 +12,8 @@ You can get a good overview of what Vulcan can do in the [Features](features.htm
 
 - [Full video tutorial](https://www.youtube.com/watch?v=aCjR9UrNqVk)
 
+In order to run a Vulcan project, we'll need to first install [Node](https://nodejs.org/en/) and [Meteor](https://www.meteor.com/):
+
 1. Install the latest version of Node and NPM. We recommend the usage of [NVM](http://nvm.sh).
 
 2. You can then install [Meteor](https://www.meteor.com/install), which is used as the Vulcan build tool.

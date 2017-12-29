@@ -64,7 +64,11 @@ const PostsSchema = new SimpleSchema({
 }
 ```
 
-New document form:
+## Creating Forms
+
+### New Document
+
+Just pass the `collection` props top the `SmartForm` component:
 
 ```jsx
 <SmartForm 
@@ -72,16 +76,22 @@ New document form:
 />
 ```
 
-Edit document form:
+### Edit Document
+
+Same as the New Document form, but also passing the `documentId` to edit. 
 
 ```jsx
 <SmartForm 
   collection={Posts}
-  document={post}
+  documentId={post._id}
 />
 ```
 
 ## Props
+
+Here are all the props accepted by the `SmartForm` component:
+
+### Basic Props
 
 #### `collection`
 
@@ -91,41 +101,98 @@ The collection in which to edit or insert a document.
 
 If present, the document to edit. If not present, the form will be a “new document” form. 
 
+#### `fields`
+
+An array of field names, if you want to restrict the form to a specific set of fields.
+
+#### `layout`
+
+A layout property used to control how the form fields are displayed. Defaults to `horizontal`. 
+
+#### `showRemove`
+
+Whether to show a "delete document" link on edit forms. 
+
+#### `prefilledProps`
+
+A set of props used to prefill the form. 
+
+### Callbacks
+
 #### `submitCallback(data)`
 
 A callback called on form submission on the form data. Should return the `data` object as well.
 
 #### `successCallback(document)`
 
-A callback called on method success.
+A callback called on mutation success.
 
 #### `errorCallback(document, error)`
 
-A callback called on method failure.
+A callback called on mutation failure.
 
-#### `cancelCallback()`
+#### `cancelCallback(document)`
 
-If provided, will show a "cancel" link next to the form's submit button. 
+If a `cancelCallback` function is provided, a "cancel" link will be shown next to the form's submit button and the callback will be called on click. 
 
-#### `prefilledProps`
+#### `removeSuccessCallback(document)`
 
-A set of props to prefill for new documents. 
+A callback to call when a document is successfully removed (deleted).
 
-#### `fields`
-
-An array of field names, if you want to restrict the form to a specific set of fields.
+### Fragments
 
 #### `queryFragment`
 
 A GraphQL fragment used to specify the data to fetch to populate `edit` forms. 
 
-If no fragment is passed, SmartForms will do its best to figure out what data to load based on the fields included in the form.
+If no fragment is passed, SmartForm will do its best to figure out what data to load based on the fields included in the form.
 
 #### `mutationFragment`
 
 A GraphQL fragment used to specify the data to return once a mutation is complete. 
 
-If no fragment is passed, SmartForms will only return fields used in the form, but note that this might sometimes lead to discrepancies when compared with documents already loaded on the client (an example would be a `createdAt` date added automatically on creation even though it's not part of the actual form).  
+If no fragment is passed, SmartForm will only return fields used in the form, but note that this might sometimes lead to discrepancies when compared with documents already loaded on the client. 
+
+An example would be a `createdAt` date added automatically on creation even though it's not part of the actual form. If you'd like that field to be returned after the mutation, you can define a custom `mutationFragment` that includes it explicitely.   
+
+## Field-Specific Data Loading
+
+Sometimes, a specific field will need specific data in addition to its own value. For example, you might have a `category` field on a `Post` that stores a category's `_id`, but simply showing users an empty text-field where they can manually type in that `_id` isn't very user-friendly. 
+
+Instead, you'll probably want to populate a dropdown with all your existing categories' names (and maybe also images, descriptions, etc.) to make it easier to pick the right one. This in turns means you need a way to *load* all these categories in the first place. 
+
+This is where field-level data loading comes in. This gives you an easy way to tell Vulcan Forms that you need an extra bit of data whenever that field is displayed:
+
+```js
+categoryId: {
+  type: String,
+  control: 'checkboxgroup',
+  optional: true,
+  insertableBy: ['members'],
+  editableBy: ['members'],
+  viewableBy: ['guests'],
+  query: `
+    CategoriesList{
+      _id
+      name
+      slug
+      order
+    }
+  `,
+  options: props => props.data.CategoriesList.map(category => ({
+      value: category._id,
+      label: category.name,
+    }))
+  },
+  resolveAs: ...
+}
+```
+
+We're doing two things here. First, we're setting the `query` property and passing it an additional bit of GraphQL query code that will be executed when the form is loaded. 
+
+Because the extra query code calls the `CategoriesList` resolver, whatever the resolver returns will then be available on `props.data` once our data is done loading. 
+
+This lets us set the `options` property in order to populate our dropdown. Essentially, we're just translating a list of categories into a list of `{ value, label }` pairs.
 
 ## Context
 
