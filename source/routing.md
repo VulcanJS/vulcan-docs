@@ -201,7 +201,29 @@ React Router is initialized in the `vulcan:routing` package, and the routing API
 
 Authentication and redirection rely on having access to the current user object; and since data loading is handled at the component level in Vulcan, so are they.
 
-For example, here is how you would redirect non-logged-in users to the `/sign-up` route when they try to access the `/dashboard` component: 
+To make things easier, Vulcan provides a `withAccess` HoC:
+
+```js
+import { withAccess } from 'meteor/vulcan:core';
+
+const Dashboard = () => <div className="dashboard">...</div>
+
+const accessOptions = {
+  groups: ['admins'],
+  redirect: '/sign-up'
+}
+
+registerComponent('Dashboard', Dashboard, [withAccess, accessOptions]);
+```
+
+The HoC takes two options: 
+
+- `groups`: an array of group names to limit who can access the component. If not specified, will default to requiring any logged-in user. 
+- `redirect`: an optional path to redirect the user to if the `groups` check fails. 
+
+### Manual Redirects
+
+Behind the scenes, this is equivalent to using `withCurrentUser` and `withRouter` to access `currentUser` and `router` inside a component's `constructor`. For example, here is how you would redirect non-logged-in users to the `/sign-up` route when they try to access the `/dashboard` component: 
 
 ```js
 import React, { PureComponent } from 'react';
