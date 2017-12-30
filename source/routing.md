@@ -191,7 +191,7 @@ class SearchForm extends Component{
 }
 
 export default withRouter(SearchForm);
-``` 
+```
 
 #### Alternative Approach
 
