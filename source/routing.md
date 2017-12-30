@@ -175,7 +175,7 @@ A common pattern with React Router is running callbacks after the route update (
 addCallback('router.onUpdate', sendGoogleAnalyticsRequest);
 ```
 
-## Using React Router In Your Components
+## Accessing React Router
 
 If you need to access router properties (such as the current route, path, or query parameters) inside a component, you'll need to wrap that component with the `withRouter` HoC (higher-order component):
 
@@ -196,3 +196,36 @@ export default withRouter(SearchForm);
 #### Alternative Approach
 
 React Router is initialized in the `vulcan:routing` package, and the routing API lets you add routes without having to modify the package's code. However, for more complex router customizations you can also disable the `vulcan:routing` package altogether and replace it with your own React Router code. 
+
+## Authentication & Redirection
+
+Authentication and redirection rely on having access to the current user object; and since data loading is handled at the component level in Vulcan, so are they.
+
+For example, here is how you would redirect non-logged-in users to the `/sign-up` route when they try to access the `/dashboard` component: 
+
+```js
+import React, { PureComponent } from 'react';
+
+import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
+import { withRouter } from 'react-router';
+
+class Dashboard extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    if(!props.currentUser) {
+      props.router.push('/sign-up');
+    }
+  }
+
+  render() {
+    return (
+      <div className="dashboard">
+        ...
+      </div>
+    )
+  }
+}
+
+registerComponent('Dashboard', Dashboard, withCurrentUser, withRouter);
+```
