@@ -140,6 +140,12 @@ We'll also create a new `components.js` file inside `modules` so we can import o
 import '../components/MoviesList.jsx';
 ```
 
+Then we need to import the `components.js` inside of our `modules/index.js` before going to the next step.
+
+```js
+import './components.js';
+```
+
 ## Routing
 
 We can now create a [route](/routing.html) to display this component. Create a new `routes.js` file inside `modules`:
