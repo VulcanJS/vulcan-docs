@@ -546,7 +546,7 @@ Now that we know we can access data from the client, let's see how to actually l
 
 We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Vulcan comes with [a set of built-in higher-order container components](data-loading.html) which we can use out of the box, so we can focus on the presentational components.
 
-Create a new `MoviesItem` component inside `components/movies`:
+Create a new `MoviesItem` component inside `components`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -567,14 +567,14 @@ registerComponent('MoviesItem', MoviesItem);
 Don't forget to import our new component in `components.js`: 
 
 ```js
-import '../components/movies/MoviesItem.js';
+import '../components/MoviesItem.js';
 ```
 
 We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withList` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
@@ -660,7 +660,7 @@ So far so good, but we can't yet do a lot with our app. In order to give it a li
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
@@ -919,7 +919,7 @@ registerComponent('MoviesNewForm', MoviesNewForm, withCurrentUser);
 And import it in `components.js`: 
 
 ```js
-import '../components/movies/MoviesNewForm.jsx';
+import '../components/MoviesNewForm.jsx';
 ```
 
 A few things to note: 
@@ -1013,7 +1013,7 @@ registerComponent('MoviesEditForm', MoviesEditForm);
 And in `components.js`: 
 
 ```js
-import '../components/movies/MoviesEditForm.jsx';
+import '../components/MoviesEditForm.jsx';
 ```
 
 Because we're passing a specific `documentId` property to the `SmartForm` component, this form will be an **edit document** form. We're also passing `showRemove` to show a "delete document" option, and a `successCallback` function to close the modal popup inside which the form will be displayed. 
