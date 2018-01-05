@@ -574,7 +574,7 @@ We'll also come back to the `MoviesList` component and use a [GraphQL fragment](
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
@@ -660,7 +660,7 @@ So far so good, but we can't yet do a lot with our app. In order to give it a li
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
