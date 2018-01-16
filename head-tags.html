@@ -250,6 +250,13 @@
             
               
               <li class="item-toc ">
+                <a href="security.html" class="sidebar-link ">
+                  <span>Security</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="performance.html" class="sidebar-link ">
                   <span>Performance</span>
                 </a>
@@ -593,6 +600,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Head, Utils &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">Head.link.push(&#123;</span><br><span class="line">  name: <span class="string">'rss'</span>,</span><br><span class="line">  rel: <span class="string">'alternate'</span>, </span><br><span class="line">  type: <span class="string">'application/rss+xml'</span>,</span><br><span class="line">  href: <span class="string">`<span class="subst">$&#123;Utils.getSiteUrl()&#125;</span>feed.xml`</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>You can also remove a tag using <code>removeFromHeadTags</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; removeFromHeadTags &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">removeFromHeadTags(<span class="string">'link'</span>, <span class="string">'rss'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Head-Components"><a href="#Head-Components" class="headerlink" title="Head Components"></a>Head Components</h3><p>You can also use the <code>Head</code> object to add React components to every page of your app (this can be useful for adding analytics integrations wrapped inside React components, for example). Just push the components to <code>Head.components</code>. </p>
+<p>If you push an array (such as <code>[myComponent, withCurrentUser]</code>) the array will be interpreted as a component + HoC array similar to the arguments of <code>registerComponent</code>. </p>
+
     </div>
   </div>
 

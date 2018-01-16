@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Analytics & Event Tracking | Vulcan Docs</title>
+    <title>Security | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Analytics & Event Tracking | Vulcan Docs">
+    <meta property="og:title" content="Security | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Analytics & Event Tracking | Vulcan Docs">
+    <meta name="twitter:title" content="Security | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -249,8 +249,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="security.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Security</span>
                 </a>
               </li>
@@ -430,8 +430,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
                   <span>Analytics & Event Tracking</span>
                 </a>
               </li>
@@ -569,49 +569,54 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Analytics & Event Tracking</h1>
+      <h1 class="title-page">Security</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/events.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/security.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Vulcan provides an API to add support for multiple analytics and event tracking providers.</p>
-<h2 id="Automated-Analytics"><a href="#Automated-Analytics" class="headerlink" title="Automated Analytics"></a>Automated Analytics</h2><p>The following events will happen automatically for every analytics provider (assuming they are supported):</p>
+      <p>Security is an important concern for any web app, and Vulcan offers a couple strategies you can pick and choose from. </p>
+<p>Note that this page contains a general overview of the different aspects of security in Vulcan, but if you want more details about implementation be sure check out the <a href="/groups-permissions.html">Groups &amp; Permissions</a> section.</p>
+<h2 id="Manual-Approach"><a href="#Manual-Approach" class="headerlink" title="Manual Approach"></a>Manual Approach</h2><p>At its core, all a GraphQL endpoint does is receive queries and dispatch them to the appropriate resolvers or mutations. What these resolvers do is entirely up to you. </p>
+<p>In other words, the GraphQL endpoint itself has no direct access to your data unless you yourself write the lines of code that provide on that data.</p>
+<p>Of course, part of the appeal of Vulcan is that it lets you avoid writing boilerplate resolvers and mutations with smart defaults. So let’s see how these defaults handle security. </p>
+<h2 id="Reading-Data"><a href="#Reading-Data" class="headerlink" title="Reading Data"></a>Reading Data</h2><p>If you’re making use of Vulcan’s <a href="/resolvers.html#Default-Resolvers">default resolvers</a>, you have a few security mechanisms available to you, depending on whether you’re trying to control access at the <strong>document level</strong> (”only these users can access these documents”) or at the <strong>field level</strong> (“only these users can access these fields on these documents”).</p>
+<h3 id="Document-Level-Access"><a href="#Document-Level-Access" class="headerlink" title="Document-Level Access"></a>Document-Level Access</h3><p>First, you’ll want to control which document any given user can access. For example, a common practice for sensitive data is to only let users access their own documents. </p>
+<p>You can do this using the <a href="/groups-permissions.html#Controlling-Viewing">collection’s global <code>checkAccess</code> function</a>, which is called by the default <code>list</code> and <code>single</code> resolvers every time a document is requested.</p>
+<p>Note that if you are <em>not</em> using the default resolvers, specifying <code>checkAccess</code> won’t do anything unless you manually call it yourself.</p>
+<h3 id="Field-Level-Access"><a href="#Field-Level-Access" class="headerlink" title="Field-Level Access"></a>Field-Level Access</h3><p>Another way of looking at security is field by field. For example, maybe you want to limit the visibility of a hidden <code>score</code> field to admins to make it harder to game your voting system. </p>
+<p>You can do this through <a href="/schema-properties.html#Data-Layer-Properties">the <code>isViewable</code> property</a> as defined on a field’s schema. </p>
+<p><code>isViewable</code> either takes a function that takes in the current user and current document and return <code>true</code> or <code>false</code>; or an array of strings corresponding to the names of the <a href="/groups-permissions.html#Groups-amp-Actions">user groups</a> who can view the document. </p>
+<h4 id="Visibility-vs-Accessibility"><a href="#Visibility-vs-Accessibility" class="headerlink" title="Visibility vs Accessibility"></a>Visibility vs Accessibility</h4><p>Note that in order to be included in the GraphQL schema at all, a field needs either an <code>isViewable</code>, <code>isInsertable</code>, or <code>isEditable</code> property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all no matter what. </p>
+<p>If one of these properties <em>does</em> exist the field will be added to the schema, but that doesn’t necessarily mean querying it will actually return a value; that all depends on the contents of <code>isViewable</code>.</p>
+<h2 id="Writing-Data"><a href="#Writing-Data" class="headerlink" title="Writing Data"></a>Writing Data</h2><p>Even more important than controlling who can <em>read</em> data is controlling who can <em>write</em> it. And Vulcan’s <a href="/mutations.html#Default-Mutations">default mutations</a> also have a few tricks up their sleeves. </p>
+<p>Again, we need to make a distinction between <strong>document-level checks</strong> (“only these users can edit this document”) and <strong>field-level checks</strong> (“only these users can edit these fields of this document”).</p>
+<h3 id="Document-Level-Checks"><a href="#Document-Level-Checks" class="headerlink" title="Document-Level Checks"></a>Document-Level Checks</h3><p>The first step in securing your mutations is deciding who can perform them, and on which documents. Vulcan’s default mutations offer two different approaches.</p>
+<h4 id="Group-Based-Checks"><a href="#Group-Based-Checks" class="headerlink" title="Group-Based Checks"></a>Group-Based Checks</h4><p>Out of the box, the three default mutations will first check if a current user exists. If it does, they will then check if that user can perform the <code>collectionName.operationName</code> action. Depending on the current action, this action could be named (using the <code>Posts</code> collection as an example):</p>
 <ul>
-<li><code>init</code> (client only): initialize the provider’s code snippet.</li>
-<li><code>identify</code> (client/server): identify the current user, if they exists.</li>
-<li><code>page</code> (client only): track any page changes.</li>
-<li><code>user</code> (server only): track new user creations.</li>
+<li><code>posts.new</code></li>
+<li><code>posts.edit.own</code></li>
+<li><code>posts.edit.all</code></li>
+<li><code>posts.remove.own</code></li>
+<li><code>posts.remove.all</code></li>
 </ul>
-<h2 id="Manual-Event-Tracking"><a href="#Manual-Event-Tracking" class="headerlink" title="Manual Event Tracking"></a>Manual Event Tracking</h2><p>Additionally, you can also manually track specific events using the <code>track</code> function:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; track &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line">track(<span class="string">'clickedSignUp'</span>, &#123; <span class="attr">time</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;);</span><br></pre></td></tr></table></figure>
-<p><code>track</code> takes three argument: the name of the event (as a string), an optional properties object, and an optional <code>currentUser</code> object which will be used if the current user can’t be inferred from the context (for example, you’re calling <code>track</code> on the server).</p>
-<p>You can call <code>track</code> on either client or server (assuming both versions have been implemented), but note that even though both versions have the same API, they might work differently behind the scenes (see below). </p>
-<h2 id="Built-in-Providers"><a href="#Built-in-Providers" class="headerlink" title="Built-in Providers"></a>Built-in Providers</h2><ul>
-<li><code>vulcan:events-ga</code>: Google Analytics (note: currently client-only)</li>
-<li><code>vulcan:events-segment</code>: Segment</li>
-<li><code>vulcan:events-internal</code>: Internal database-stored event tracking</li>
-</ul>
-<h2 id="Adding-Providers"><a href="#Adding-Providers" class="headerlink" title="Adding Providers"></a>Adding Providers</h2><p>To add a provider, you can use the following methods (applied here to <a href="https://segment.com/" target="_blank" rel="noopener">Segment</a>‘s client-side JavaScript API):</p>
-<h4 id="addInitFunction-client-only"><a href="#addInitFunction-client-only" class="headerlink" title="addInitFunction (client only)"></a><code>addInitFunction</code> (client only)</h4><p>Pass a function that will be called immediately to initialize the provider. For example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addInitFunction, getSetting &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentInit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  !(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> analytics = (<span class="built_in">window</span>.analytics = <span class="built_in">window</span>.analytics || []);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    snippet code</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    analytics.SNIPPET_VERSION = <span class="string">'4.0.0'</span>;</span><br><span class="line">    analytics.load(getSetting(<span class="string">'segment.clientKey'</span>));</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;</span><br><span class="line">addInitFunction(segmentInit);</span><br></pre></td></tr></table></figure>
-<p>Note that on the server, initialization will typically happen inside the provider package’s own code, which means you don’t need to use <code>addInitFunction</code>. </p>
-<h4 id="addPageFunction-client-only"><a href="#addPageFunction-client-only" class="headerlink" title="addPageFunction  (client only)"></a><code>addPageFunction</code>  (client only)</h4><p>Pass a function taking the current <code>route</code> as argument that will be used to track navigation to a new page:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addPageFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentTrackPage</span>(<span class="params">route</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name, path &#125; = route;</span><br><span class="line">  <span class="keyword">const</span> properties = &#123;</span><br><span class="line">    url: Utils.getSiteUrl().slice(<span class="number">0</span>, <span class="number">-1</span>) + path,</span><br><span class="line">    path,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="built_in">window</span>.analytics.page(<span class="literal">null</span>, name, properties);</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">addPageFunction(segmentTrackPage);</span><br></pre></td></tr></table></figure>
-<p>In a single-page web app, the concept of “page” only makes sense on the client which is why the <code>addPageFunction</code> function doesn’t do anything on the server. </p>
-<h4 id="addIdentifyFunction-client-and-server"><a href="#addIdentifyFunction-client-and-server" class="headerlink" title="addIdentifyFunction (client and server)"></a><code>addIdentifyFunction</code> (client and server)</h4><p>Pass a function taking the current <code>currentUser</code> as argument that will be used to identify users:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addIdentifyFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentIdentify</span>(<span class="params">currentUser</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.analytics.identify(currentUser.userId, &#123;</span><br><span class="line">    email: currentUser.email,</span><br><span class="line">    pageUrl: currentUser.pageUrl,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">addIdentifyFunction(segmentIdentify);</span><br></pre></td></tr></table></figure>
-<h4 id="addTrackFunction-client-and-server"><a href="#addTrackFunction-client-and-server" class="headerlink" title="addTrackFunction (client and server)"></a><code>addTrackFunction</code> (client and server)</h4><p>Pass a function that takes an event name and event properties:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addTrackFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentTrack</span>(<span class="params">eventName, eventProperties</span>) </span>&#123;</span><br><span class="line">  analytics.track(eventName, eventProperties);</span><br><span class="line">&#125;</span><br><span class="line">addTrackFunction(segmentTrack);</span><br></pre></td></tr></table></figure>
-<p>Note that <code>track</code> can have different implementations on the client and server. For example, the <code>vulcan:events-internal</code> package’s client version of <code>track</code> will trigger a GraphQL mutation, while the server version will mutate the data directly. Or, the client version of <code>vulcan:events-segment</code> will use an in-browser JavaScript snippet while the server version will use Segment’s Node API via an NPM package.</p>
-<h4 id="addUserFunction-server"><a href="#addUserFunction-server" class="headerlink" title="addUserFunction (server)"></a><code>addUserFunction</code> (server)</h4><p>Pass a function that takes a user object:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addUserFunction &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">intercomNewUser</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">  intercomClient.users.create(&#123;</span><br><span class="line">    email: user.email,</span><br><span class="line">    custom_attributes: &#123;</span><br><span class="line">      name: user.displayName,</span><br><span class="line">      profileUrl: Users.getProfileUrl(user, <span class="literal">true</span>),</span><br><span class="line">      _id: user._id,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">addUserFunction(intercomNewUser);</span><br></pre></td></tr></table></figure>
+<p>So an easy way to enable a user to perform a given mutation is to <a href="/groups-permissions.html#Assigning-Actions">enable the corresponding action</a> for a group they belong to. </p>
+<p>Note that for <code>edit</code> and <code>remove</code> operations, two distinct actions are checked (<code>*.all</code> and <code>*.own</code>) based on whether the current user owns the current document or not. This makes it easy to let one group (for example, <code>mods</code>) edit all documents in a collection while another one can only edit their own. </p>
+<p>When writing your own back-end logic, you’re welcome to also add your own new action names (<code>posts.edit.drafts</code>, <code>posts.remove.archived</code>, etc.) if that helps set up your permissions structure. </p>
+<h4 id="Manual-Checks"><a href="#Manual-Checks" class="headerlink" title="Manual Checks"></a>Manual Checks</h4><p>Sometimes you need finer-grained control over mutations, or maybe you’re just not using groups at all. In that case, when calling <code>getDefaultMutations(collectionName)</code> inside <code>createCollection</code> you can also pass a second <code>options</code> object to define <code>check</code> functions for the three default mutations:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutations = getDefaultMutations(<span class="string">'Posts'</span>, &#123;</span><br><span class="line">  newCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;,</span><br><span class="line">  editCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;,</span><br><span class="line">  removeCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>This is useful when a mutation check has to depend on a specific document. For example, you can imagine a scenario where documents can only be edited if their <code>status</code> is set to <code>draft</code>. In this case, simply checking for groups wouldn’t be dynamic enough, and you’ll need to pass an <code>editCheck</code> function instead. </p>
+<p>Note that if you specify manual checks for a mutation, the afore-mentioned group checks will be bypassed.</p>
+<h3 id="Field-Level-Checks"><a href="#Field-Level-Checks" class="headerlink" title="Field-Level Checks"></a>Field-Level Checks</h3><p>Just like you can control field-level access with <code>isViewable</code>, you can control field-level data writes with <code>isInsertable</code> and <code>isEditable</code>. </p>
+<p>For example, maybe you only want admin users to be able to reassign a post to a different user. In which case you could a post’s <code>userId</code> only be editable by users belonging to the <code>admins</code> group.</p>
+<p>And just like <code>isViewable</code>, both <code>isInsertable</code> and <code>isEditable</code> can also take functions in addition to an array of group names. </p>
+<h2 id="Other-Resolvers-amp-Mutations"><a href="#Other-Resolvers-amp-Mutations" class="headerlink" title="Other Resolvers &amp; Mutations"></a>Other Resolvers &amp; Mutations</h2><p>If you work with other resolvers and mutations beyond the defaults (for example, maybe you need to create a dedicated mutation for voting on a post), security will be left up to you to implement. That being said, you can still piggy-back on top of the existing Vulcan security infrastructure and reuse some of the same helpers and functions. </p>
 
     </div>
   </div>
@@ -621,17 +626,17 @@
       
       
         <a class="link primary prev"
-          href="voting.html">
+          href="redux.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Voting
+          Using Redux
         </a>
       
       
         <a class="link primary next"
-          href="example-simple.html">
+          href="performance.html">
           <span class="subtitle-pagination">Next</span>
-          Simple Example
+          Performance
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -639,7 +644,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/events.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/security.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
