@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Querying on the Server | Vulcan Docs</title>
+    <title>Database Layer | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Querying on the Server | Vulcan Docs">
+    <meta property="og:title" content="Database Layer | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Querying on the Server | Vulcan Docs">
+    <meta name="twitter:title" content="Database Layer | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -235,8 +235,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
                 </a>
               </li>
@@ -263,8 +263,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="database.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Database Layer</span>
                 </a>
               </li>
@@ -576,30 +576,36 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Querying on the Server</h1>
+      <h1 class="title-page">Database Layer</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/database.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Most of this section’s contents applies to the client. After all, if you’re on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?</p>
-<p>But the truth is that connecting to the database directly can lead to problems. For example, let’s assume you have a <code>user</code> resolver on your <code>Post</code> type that gives you access to the post’s author. On the client, you could write:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> authorName = post.user.displayName;</span><br></pre></td></tr></table></figure>
-<p>On the server, it’s easy enough to obtain that post document:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> post = Posts.findOne(documentId);</span><br></pre></td></tr></table></figure>
-<p>But the document you fetch directly from MongoDB won’t have a <code>user</code> property, let alone a <code>user.displayName</code> (since those are provided by the GraphQL resolver).</p>
-<p>Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL <em>on the server</em></p>
-<h3 id="runQuery-query-variables"><a href="#runQuery-query-variables" class="headerlink" title="runQuery(query, variables)"></a>runQuery(query, variables)</h3><p><code>runQuery</code> lets you execute any GraphQL query against your schema and get its result back on the server. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runQuery(email.query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(Note that you’ll need to be inside an <code>async</code> context to use the <code>await</code> keyword)</p>
-<h3 id="collection-queryOne-documentId-options"><a href="#collection-queryOne-documentId-options" class="headerlink" title="collection.queryOne(documentId, options)"></a>collection.queryOne(documentId, options)</h3><p>A common need on the server is fetching a single document by its <code>_id</code>. You can do so with <code>collection.queryOne</code>. It takes an <code>options</code> object with a <code>fragmentText</code> property. If no fragment is provided, the query will use the collection’s <code>defaultFragment</code>. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId, &#123;</span><br><span class="line">  fragmentText: <span class="string">`</span></span><br><span class="line"><span class="string">    fragment MyUsersFragment on User &#123;</span></span><br><span class="line"><span class="string">      _id</span></span><br><span class="line"><span class="string">      username</span></span><br><span class="line"><span class="string">      createdAt</span></span><br><span class="line"><span class="string">      posts&#123;</span></span><br><span class="line"><span class="string">        _id</span></span><br><span class="line"><span class="string">        title</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      <p>Vulcan includes its own full-featured data layer (consiting of default resolvers and default mutations) that will let you avoid writing any database code most of the time. </p>
+<p>That being said, there will still be cases where you’ll need to access your database directly. </p>
+<h2 id="Non-Database-Methods"><a href="#Non-Database-Methods" class="headerlink" title="Non-Database Methods"></a>Non-Database Methods</h2><p>Before addressing how to make database calls, it’s worth asking if you should be calling the database directly in the first place. Vulcan features two indirect ways to query for data from the server that, while they still call the database behind the scenes, let you make your app more “database-agnostic” by helping you limit any database-specific code to a few specific places. </p>
+<h3 id="Server-Queries"><a href="#Server-Queries" class="headerlink" title="Server Queries"></a>Server Queries</h3><p>Before discussing databases, it’s important to remember that a document extracted from your database will often be different from the same document as provided by the GraphQL API; since the latter can feature <a href="/field-resolvers.html#GraphQL-Only-Fields">special GraphQL-only fields</a>.</p>
+<p>For that reason, Vulcan also offers <a href="/server-queries.html">server-side GraphQL queries</a> you can use to fetch the “GraphQL version” of a document, even on the server. </p>
+<p>This will in turn call the same GraphQL resolvers that would be normally called when receiving a query from the client. </p>
+<p>As server-side queries rely on the same resolvers as normal GraphQL queries, you can’t use them inside any resolver (or you’d risk an infinite loop). </p>
+<h3 id="Using-Dataloder"><a href="#Using-Dataloder" class="headerlink" title="Using Dataloder"></a>Using Dataloder</h3><p>Instead, inside GraphQL resolvers you’ll usually want to go through Vulcan’s <a href="/performance.html#Caching-amp-Batching">Dataloader layer</a> instead of calling the database directly to make sure you don’t make extra database calls.</p>
+<h2 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h2><h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><p>Vulcan is powered by Meteor, which itself comes bundled with MongoDB. </p>
+<p>Meteor collections (and by extension Vulcan collections) support all common MongoDB operations, such as:</p>
+<ul>
+<li><code>collection.find()</code></li>
+<li><code>collection.findOne()</code></li>
+<li><code>collection.update()</code></li>
+<li><code>collection.remove()</code></li>
+</ul>
+<h3 id="Other-Databases"><a href="#Other-Databases" class="headerlink" title="Other Databases"></a>Other Databases</h3><p>Vulcan does not currently include out-of-the-box support for other databases. That being said, just like you can make a Mongo call in your resolver, you can also call SQL or any other data source as you normally would in any Node app. </p>
+<p>In that regard, Vulcan is fairly database-agnostic, although it’s true that the default resolvers and mutations only currently work with MongoDB. </p>
 
     </div>
   </div>
@@ -609,17 +615,17 @@
       
       
         <a class="link primary prev"
-          href="terms-parameters.html">
+          href="performance.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Terms & Parameters
+          Performance
         </a>
       
       
         <a class="link primary next"
-          href="redux.html">
+          href="theming.html">
           <span class="subtitle-pagination">Next</span>
-          Using Redux
+          Components & Theming
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -627,7 +633,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/database.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
