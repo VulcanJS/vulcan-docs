@@ -14,15 +14,13 @@ Before addressing how to make database calls, it's worth asking if you should be
 
 Before discussing databases, it's important to remember that a document extracted from your database will often be different from the same document as provided by the GraphQL API; since the latter can feature [special GraphQL-only fields](/field-resolvers.html#GraphQL-Only-Fields).
 
-For that reason, Vulcan also offers [server-side GraphQL queries](/server-queries.html) you can use to fetch the “GraphQL version” of a document, even on the server. 
-
-This will in turn call the same GraphQL resolvers that would be normally called when receiving a query from the client. 
+For that reason, Vulcan also offers [server-side GraphQL queries](/server-queries.html) you can use to fetch the “GraphQL version” of a document, even on the server. This will in turn call the same GraphQL resolvers that would be normally called when receiving a query from the client. 
 
 As server-side queries rely on the same resolvers as normal GraphQL queries, you can't use them inside any resolver (or you'd risk an infinite loop). 
 
 ### Using Dataloder
 
-Instead, inside GraphQL resolvers you'll usually want to go through Vulcan's [Dataloader layer](/performance.html#Caching-amp-Batching) instead of calling the database directly to make sure you don't make extra database calls.
+Instead, inside GraphQL resolvers you'll usually want to go through Vulcan's [Dataloader layer](/performance.html#Caching-amp-Batching) instead of calling the database directly, to make sure you don't make extra database calls.
 
 ## Databases
 

@@ -2,7 +2,7 @@
 title: Querying on the Server
 ---
 
-Most of this section's contents applies to the client. After all, if you're on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?
+Most of the Data Layer section's contents applies to the client. After all, if you're on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?
 
 But the truth is that connecting to the database directly can lead to problems. For example, let's assume you have a `user` resolver on your `Post` type that gives you access to the post's author. On the client, you could write:
 
@@ -71,3 +71,11 @@ const user = await Users.queryOne(userId, {
   `
 });
 ```
+
+### `queryOne` vs `load`
+
+It might seem like `queryOne` does the same thing as the [Dataloader layer](/performance.html#Caching-amp-Batching)'s `load`, but there's a crucial difference in how they're used. 
+
+`queryOne` uses your existing GraphQL resolvers behind the scenes, which means it itself can't be used *inside* a resolver (or you'd risk an infinite loop). It's thus meant to be used from outside of your GraphQL resolver tree, from a server script, cron job, migration, etc. or any kind of server code unrelated to the client. 
+
+`load` on the other hand is specifically made to be used inside resolvers and add a caching and batching layer to them. 
