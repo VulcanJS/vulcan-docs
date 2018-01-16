@@ -36,6 +36,7 @@ sidebar_categories:
     - terms-parameters
     - server-queries
     - redux
+    - security
     - performance
   API:
     - theming

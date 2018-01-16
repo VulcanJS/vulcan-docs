@@ -117,6 +117,10 @@ Whether to show a "delete document" link on edit forms.
 
 A set of props used to prefill the form. 
 
+#### `repeatErrors`
+
+Whether to repeat validation errors at the bottom of the form. 
+
 ### Callbacks
 
 #### `submitCallback(data)`
@@ -182,8 +186,7 @@ categoryId: {
   options: props => props.data.CategoriesList.map(category => ({
       value: category._id,
       label: category.name,
-    }))
-  },
+  })),
   resolveAs: ...
 }
 ```

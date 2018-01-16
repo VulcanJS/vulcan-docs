@@ -76,3 +76,9 @@ import { removeFromHeadTags } from 'meteor/vulcan:core';
 
 removeFromHeadTags('link', 'rss');
 ```
+
+### Head Components
+
+You can also use the `Head` object to add React components to every page of your app (this can be useful for adding analytics integrations wrapped inside React components, for example). Just push the components to `Head.components`. 
+
+If you push an array (such as `[myComponent, withCurrentUser]`) the array will be interpreted as a component + HoC array similar to the arguments of `registerComponent`. 
