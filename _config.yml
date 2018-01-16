@@ -38,6 +38,7 @@ sidebar_categories:
     - redux
     - security
     - performance
+    - database
   API:
     - theming
     - core-components
