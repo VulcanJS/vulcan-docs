@@ -272,7 +272,7 @@ But even though we have a schema, we can't actually query for a document yet bec
 
 ## Note: Default Resolvers & Mutations
 
-Vulcan provides a set of [default resolvers](/data-loading.html#Default-Resolvers) to speed things up, but for the sake of learning how things work this tutorial will show you how to write resolvers yourself. 
+Vulcan provides a set of [default resolvers](/resolvers.html#Default-Resolvers) to speed things up, but for the sake of learning how things work this tutorial will show you how to write resolvers yourself. 
 
 If you'd rather skip this and use the defaults for now, just use the following code in `collection.js`, and simply ignore any section concerning the `resolvers.js` or `mutations.js` files (they will be marked with a `*` sign):
 
@@ -306,7 +306,7 @@ export default Movies;
 
 *(Note: you can skip this section if you're using default resolvers and mutations)*
 
-In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Data Loading](/data-loading.html) section. 
+In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the [Resolvers](/resolvers.html) section. 
 
 Let's start simple. Create a new `resolvers.js` file inside `modules/movies` and add:
 
@@ -544,7 +544,7 @@ We are doing four things here:
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
 
-We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Vulcan comes with [a set of built-in higher-order container components](data-loading.html) which we can use out of the box, so we can focus on the presentational components.
+We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Vulcan comes with [a set of built-in higher-order container components](resolvers.html#Higher-Order-Components) which we can use out of the box, so we can focus on the presentational components.
 
 Create a new `MoviesItem` component inside `components/movies`:
 
