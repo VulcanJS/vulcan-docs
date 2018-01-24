@@ -33,11 +33,14 @@ Note: this package requires using a third-party email provider ([MailChimp](http
 ## Settings
 
 ```
-"enableNewsletter":false,
-"enableNewsletterInDev":false,
-"newsletterFrequency": [1,2,3,4,5,6,7],
-"newsletterTime": "07:55",
-"newsletterProvider": "sendy",
+"newsletter": {
+  "enabled":true,
+  "enabledInDev":false,
+  "autoSubscribe":false,
+  "frequency": [1,2,3,4,5,6,7],
+  "time": "00:00",
+  "provider": "mailchimp"
+},
 "sendy": {
   "server": "http://sendy.myapp.com/",
   "apiKey": "123foo",
@@ -54,11 +57,12 @@ Note: this package requires using a third-party email provider ([MailChimp](http
 },
 ```
 
-- `enableNewsletter`: enable/disable automated newsletter sending.
-- `enableNewsletterInDev`: enable/disable newsletter while in development mode. 
-- `newsletterFrequency`: which days the newsletter should go out. `1` is Monday, `2` is Tuesday, etc.
-- `newsletterTime`: what time the newsletter should go out.
-- `newsletterProvider`: the name of your newsletter provider.
+- `enabled`: enable/disable automated newsletter sending.
+- `enabledInDev`: enable/disable newsletter while in development mode. 
+- `autoSubscribe`: automatically subscribe every new user to your newsletter.
+- `frequency`: which days the newsletter should go out. `1` is Monday, `2` is Tuesday, etc.
+- `time`: what time the newsletter should go out.
+- `provider`: the name of your newsletter provider.
 
 #### Sendy Settings
 
@@ -78,8 +82,8 @@ Note: this package requires using a third-party email provider ([MailChimp](http
 
 If you want to preview your email templates, you can do so at the following routes: 
 
-- **Campaign**: [http://localhost:3000/email/campaign](http://localhost:3000/email/campaign)
-- **Confirmation**: [http://localhost:3000/email/digest-confirmation](http://localhost:3000/email/digest-confirmation)
+- **Campaign**: [http://localhost:3000/email/newsletter](http://localhost:3000/email/newsletter)
+- **Confirmation**: [http://localhost:3000/email/newsletter-confirmation](http://localhost:3000/email/newsletter-confirmation)
 
 (Replace `http://localhost:3000` with your app's URL)
 
@@ -122,8 +126,8 @@ This package also exports a `NewsletterSubscribe` custom form field component us
 
 | Setting | Example | Description |
 | --- | --- | --- |
-| enableNewsletter | false | Enable the automated newsletter |
-| enableNewsletterInDev | false | Enable the automated newsletter while in development mode |
-| newsletterFrequency | [1,2,3,4,5,6,7] | The days on which to send the newsletter (1 = Monday, 2 = Tuesday, etc.) |
-| newsletterTime | "07:55" | When to send out the newsletter
+| enabled | false | Enable the automated newsletter |
+| enabledInDev | false | Enable the automated newsletter while in development mode |
+| frequency | [1,2,3,4,5,6,7] | The days on which to send the newsletter (1 = Monday, 2 = Tuesday, etc.) |
+| time | "07:55" | When to send out the newsletter
 | autoSubscribe | false | Whether new users should be automatically subscribed to the newsletter |
