@@ -102,6 +102,31 @@ this.context.updateCurrentValues({foo: 'bar'});
 
 As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.
 
+#### `form`
+
+An object defining the props that will be passed to the `control` component to customize it.
+You can also access the current `props` or provide a dynamic value by passing a function instead of a value.
+
+```
+form:{
+  locale: 'fr',
+  defaultValue: () => new Date(), // will be evaluated each time a form is generated
+  two: (props) => { return props.one * 2}
+},
+control: 'datetime'
+```
+
+You may sometimes want to pass a function or a React component in the form. Since all functions in the `form` object will be evaluated before rendering the form, you'll need to pass a closure return the desired function or component instead.
+```
+form:{
+  renderOption: () => MyCustomComponent,
+  sortValues: () => mySortingFunction,
+},
+control: 'MyCustomSelect'
+```
+When the form is generated, the closure is evaluated and return your component or function. Thus in `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
+
+
 ## Other Properties
 
 #### `mustComplete` (`Users` only)
