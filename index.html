@@ -165,14 +165,14 @@
       
         <li>
           
-            <div class="heading-toc">Schemas</div>
+            <div class="heading-toc">Collections</div>
           
           <ul class="list-toc">
             
               
               <li class="item-toc ">
                 <a href="schemas.html" class="sidebar-link ">
-                  <span>Overview</span>
+                  <span>Schemas & Collections</span>
                 </a>
               </li>
             
@@ -607,7 +607,7 @@
 </li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
-<p>And open <code>http://localhost:3000/</code> in your browser.</p>
+<p>And open <code>http://localhost:3000/</code> in your browser. You’ll then be presented with the first step of the “Getting Started” tutorial. </p>
 <p>Note that you can also start the app with:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor --settings sample_settings.json</span><br></pre></td></tr></table></figure>
 <p>All <code>npm start</code> does is run the above command, while also checking for the presence of <code>settings.json</code> first and creating it for you if missing. </p>
@@ -632,9 +632,10 @@
 <p>If you’d like to add more than one source directory (for example, one for Vulcan packages, and one for other Meteor packages), you can separate them with a <code>:</code>:</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">METEOR_PACKAGE_DIRS</span>=<span class="string">"/Users/sacha/Vulcan/packages:/Users/sacha/meteor-packages"</span></span><br></pre></td></tr></table></figure>
 <h3 id="Git-Based-Deploys"><a href="#Git-Based-Deploys" class="headerlink" title="Git-Based Deploys"></a>Git-Based Deploys</h3><p>I you follow this install method, your Vulcan core files will <em>not</em> be included in the same Git repository as your “main” app. This can cause issues when using Git-based deploy methods such as Heroku. Either use deploy methods that bundle the whole app first (such as Meteor Up or Galaxy), or else add your core files as a Git submodule instead.</p>
-<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>When you first run VulcanJS, you’ll see the contents of the <code>example-simple</code> package. It is recommended you go through the <a href="example-simple.html">Simple Example tutorial</a> to get a grasp of how Vulcan’s building blocks (data loading, forms, etc.) work. </p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>When you first run the Vulcan starter repo, you’ll see the “Getting Started” tutorial, and you should be able to follow along from there. </p>
+<p>After that, you can also go through the <a href="example-simple.html">Simple Example tutorial</a> to get a grasp of how Vulcan’s building blocks (data loading, forms, etc.) work. </p>
 <p>You can then take the more in-depth <a href="example-movies.html">Movies Example tutorial</a> to get a better understanding of VulcanJS’s internals. You can enable the Movies Example package by uncommenting it in <code>.meteor/packages</code>, and commenting out <code>example-simple</code> in its place)</p>
-<p>Once you’ve gone through both tutorials, you can enable the <code>example-instagram</code> package, which takes the same basic example but goes a little further, as well as take a look at its code. </p>
+<p>Once you’ve gone through these tutorials, you can enable the <code>example-instagram</code> package, which takes the same basic example but goes a little further, as well as take a look at its code. </p>
 <p>At this stage, you can either continue using Vulcan’s basic building blocks, or enable the more advanced forum features by checking out the <a href="example-forum.html"><code>example-forum</code></a> package. </p>
 <p>And if you’d like to use and customize the forum packages, you can then follow up with the <a href="example-customization.html">customization example tutorial</a> tutorial, which will take you through the code of the included <code>example-customization</code> package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan’s back-end. </p>
 <p>You can also check out <a href="https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA" target="_blank" rel="noopener">Vulcan’s YouTube channel</a> to learn more about the framework. </p>
