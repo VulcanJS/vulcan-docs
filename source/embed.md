@@ -17,11 +17,18 @@ In your **private** settings:
 },
 ```
 
+```
+"embedProvider": "embedAPI",
+"embedAPI": {
+   "apiKey": "123foo"
+}
+```
+
 Possible providers include:
 
 - `builtin`: a built-in function.
 - `embedly`: [Embedly](http://embed.ly/)
-- `embedapi`: [EmbedAPI](http://embedapi.com/)
+- `embedAPI`: [EmbedAPI](http://embedapi.com/)
 
 ## Form Component
 
