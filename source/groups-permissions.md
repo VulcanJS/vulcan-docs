@@ -81,38 +81,12 @@ Notice the use of `User.owns` in the previous example and in the default mutatio
 userId: {
   type: String,
   hidden: true,
+  optional: true
 }
 ```
-By default, Vulcan will add an `onInsert` callback that sets `userId` to `currentUser._id`, as expected. But you still need to define this field in order to activate this behaviour.
+By default, Vulcan will set this `userId` to `currentUser._id` before it calls the `onInsert` callbacks. However, you still need to define this `userId` field in your schema in order to activate this behaviour.
 
-You can also set the `userId` to another value, for example if you are a manager assigning tasks to some people:
-
-```js
-{
-    taskName:{
-      type: String,
-      label: 'Task to accomplish',
-      optional: false
-    },
-    employeeId:{
-      type: String,
-      label: 'Employee unique ID',
-      optional: false
-    },
-    userId: {
-        type: String,
-        hidden: true,
-        optional: true,
-        onInsert(document, currentUser){
-            document.userId = document.employeeId
-        },
-        onEdit(document, currentUser){
-            document.userId = document.employeeId
-        },
-    }
-```
-Note that `userId` being a purely technical convention, it is better to define another field for your abstract data, like `employeeId`, although you could rely only on `userId` instead.
-
+Of course you can also set the `userId` to another value as you would do for any other field, for example if you are an admin that need to assign documents to other users.
 
 ## Controlling Viewing
 
