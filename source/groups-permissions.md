@@ -73,6 +73,47 @@ Optionally, for more fine-grained permissions `viewableBy`, `insertableBy`, and 
 
 Note that we've talked about editing, but the same principles apply when it comes to inserting, or removing documents (although there is no field-level check for the `remove` operation).
 
+## Ownership
+
+Notice the use of `User.owns` in the previous example and in the default mutations provided by Vulcan. `User.owns` relies on the `userId` field of the object to define ownership. It means that in order for the default check to work, **you'll need to specify an `userId` field in your schema.**
+
+```js
+userId: {
+  type: String,
+  hidden: true,
+}
+```
+By default, Vulcan will add an `onInsert` callback that sets `userId` to `currentUser._id`, as expected. But you still need to define this field in order to activate this behaviour.
+
+You can also set the `userId` to another value, for example if you are a manager assigning tasks to some people:
+
+```js
+{
+    taskName:{
+      type: String,
+      label: 'Task to accomplish',
+      optional: false
+    },
+    employeeId:{
+      type: String,
+      label: 'Employee unique ID',
+      optional: false
+    },
+    userId: {
+        type: String,
+        hidden: true,
+        optional: true,
+        onInsert(document, currentUser){
+            document.userId = document.employeeId
+        },
+        onEdit(document, currentUser){
+            document.userId = document.employeeId
+        },
+    }
+```
+Note that `userId` being a purely technical convention, it is better to define another field for your abstract data, like `employeeId`, although you could rely only on `userId` instead.
+
+
 ## Controlling Viewing
 
 Unlike mutations which usually only affect a single document, viewing usually concerns a set of documents.
