@@ -126,7 +126,7 @@ now alias set https://xxxxxxxxx.now.sh https://mydomain.now.sh
 
 That's it! now visit `https://mydomain.now.sh`.
 
-For more info, for how to get a custom domain name run `now -h`. You may need a premium [now](http://zeit.co/now)account. 
+For more info, for how to get a custom domain name run `now -h`. You may need a premium [now](http://zeit.co/now) account. 
 
 ## PM2
 

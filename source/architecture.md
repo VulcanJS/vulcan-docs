@@ -13,7 +13,7 @@ In Vulcan, each feature has its own distinct **Meteor package** which can be fre
 
 ## Extend, Don't Edit
 
-Another key point of Vulcan's philosophy is to never edit the core codebase (i.e. what you get from the Vulcan repo) directly if you can avoid it. 
+Another key point of Vulcan's philosophy is to never edit the core codebase (i.e. what you get from the Vulcan repo) directly. 
 
 Editing Vulcan's code makes it harder to keep it up to date when things change in the main Vulcan repo, as your modifications might conflict with a new updated version. 
 
