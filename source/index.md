@@ -47,7 +47,7 @@ All `npm start` does is run the above command, while also checking for the prese
 
 - [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
 
-In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the more complicated "two-repo" pattern, with the two repository being: 
+In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the more complicated "two-repo" pattern, with the two repositories being: 
 
 1. Your own Vulcan project (for example, a clone of the Vulcan Starter project as outlined above).
 2. A clone of [the main Vulcan repo](https://github.com/VulcanJS/Vulcan/), which the first repo will use as the source for the Vulcan core code. 
@@ -78,7 +78,7 @@ export METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages:/Users/sacha/meteor-pac
 
 ### Git-Based Deploys
 
-I you follow this install method, your Vulcan core files will *not* be included in the same Git repository as your "main" app. This can cause issues when using Git-based deploy methods such as Heroku. Either use deploy methods that bundle the whole app first (such as Meteor Up or Galaxy), or else add your core files as a Git submodule instead.
+If you follow this install method, your Vulcan core files will *not* be included in the same Git repository as your "main" app. This can cause issues when using Git-based deploy methods such as Heroku. Either use deploy methods that bundle the whole app first (such as Meteor Up or Galaxy), or else add your core files as a Git submodule instead.
 
 ## Getting Started
 
