@@ -116,6 +116,6 @@ Apollo is still young, but it's well-documented, evolving quickly, and supported
 
 [Meteor](http://meteor.com) is Vulcan's back-end layer, used to handle the database as well as server and bundle the app. Note that although Meteor also provides its own data layer features, those features are not used except for user accounts. 
 
-Each layer is independent from the other two: you can take your React components and use them with a completely different stack, and – although we're not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.
+Each layer is independent from the other two. You can take your React components and use them with a completely different stack, and – although we're not quite there yet – ultimately we also hope to make it easy to migrate out of Meteor.
 
-The goal is to avoid getting stuck: if at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. 
+The goal is to avoid getting stuck. If at any point you outgrow Vulcan, it should be possible to leave it with minimal refactoring. 
