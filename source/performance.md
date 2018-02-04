@@ -6,7 +6,7 @@ GraphQL makes it easy to create rich schemas with multiple nested layers, but th
 
 ## Caching & Batching
 
-You can optionally use [Dataloader](https://github.com/facebook/dataloader) inside your resolvers to get server-side better performance through caching and batching.
+You can optionally use [Dataloader](https://github.com/facebook/dataloader) inside your resolvers to get better server-side performance through caching and batching.
 
 To understand how this works, let's suppose you're displaying five posts on your homepage, each of which has an author. 
 
@@ -31,8 +31,7 @@ Aditionally, you can also manually add documents to the cache with:
 
 Finally, note that `load` and `loadMany` can only take `_id`s. If you instead need to query for data using more complex Mongo selectors, you can simply keep querying the database directly with `collection.find()` and `collection.findOne()`. 
 
-Learn more: [Using Dataloader to batch and cache database calls
-](https://www.youtube.com/watch?v=55Ep5KBTIQE).
+Learn more: [Using Dataloader to batch and cache database calls](https://www.youtube.com/watch?v=55Ep5KBTIQE).
 
 
 ## Performance Optimization
@@ -83,7 +82,7 @@ Although GraphQL makes it possible to keep data normalized inside your database 
 
 For example, let's imagine you want to know how many comments a user has made. You could definitely have a `commentCount` property with its own custom resolver that counts all comments with the right `userId`. 
 
-But on the other hand, it would be far better from a performance point of view to simply store that information as a field on each user document and increment/decrement it every time a user creates or delete a comment. 
+But on the other hand, it would be far better from a performance point of view to simply store that information as a field on each user document and increment/decrement it every time a user creates or deletes a comment. 
 
 #### Ensure Fast Server-DB Speeds
 
