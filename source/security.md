@@ -36,9 +36,9 @@ You can do this through [the `isViewable` property](/schema-properties.html#Data
 
 #### Visibility vs Accessibility
 
-Note that in order to be included in the GraphQL schema at all, a field needs either an `isViewable`, `isInsertable`, or `isEditable` property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all no matter what. 
+Note that in order to be included in the GraphQL schema at all, a field needs either an `isViewable`, `isInsertable`, or `isEditable` property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all, no matter what. 
 
-If one of these properties *does* exist the field will be added to the schema, but that doesn't necessarily mean querying it will actually return a value; that all depends on the contents of `isViewable`.
+If one of these properties *does* exist, the field will be added to the schema, but that doesn't necessarily mean querying it will actually return a value; that all depends on the contents of `isViewable`.
 
 ## Writing Data
 
@@ -80,13 +80,13 @@ const mutations = getDefaultMutations('Posts', {
 
 This is useful when a mutation check has to depend on a specific document. For example, you can imagine a scenario where documents can only be edited if their `status` is set to `draft`. In this case, simply checking for groups wouldn't be dynamic enough, and you'll need to pass an `editCheck` function instead. 
 
-Note that if you specify manual checks for a mutation, the afore-mentioned group checks will be bypassed.
+Note that if you specify manual checks for a mutation, the aforementioned group checks will be bypassed.
 
 ### Field-Level Checks
 
 Just like you can control field-level access with `isViewable`, you can control field-level data writes with `isInsertable` and `isEditable`. 
 
-For example, maybe you only want admin users to be able to reassign a post to a different user. In which case you could a post's `userId` only be editable by users belonging to the `admins` group.
+For example, maybe you only want admin users to be able to reassign a post to a different user. In which case you could make a post's `userId` only be editable by users belonging to the `admins` group.
 
 And just like `isViewable`, both `isInsertable` and `isEditable` can also take functions in addition to an array of group names. 
 
