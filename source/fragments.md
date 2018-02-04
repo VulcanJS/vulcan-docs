@@ -2,8 +2,7 @@
 title: Fragments
 ---
 
-
-A fragment is a piece of schema, usually used to define what data you want to query for. 
+A fragment is a piece of schema, usually used to define what data you want to query for.
 
 ## Registering Fragments
 
@@ -60,16 +59,19 @@ You often need to add one or more properties to a fragment without modifying its
 ```js
 import { extendFragment } from 'meteor/vulcan:lib';
 
-extendFragment('PostsList', `
+extendFragment(
+  'PostsList',
+  `
   color # new custom property!
-`);
+`
+);
 ```
 
-This is the same as registering the entire `PostsList` fragment with `color` tacked on at the end. 
+This is the same as registering the entire `PostsList` fragment with `color` tacked on at the end.
 
 ## Replacing Fragments
 
-To replace a fragment completely, you can just register it again under the same name. 
+To replace a fragment completely, you can just register it again under the same name.
 
 ```js
 import { registerFragment } from 'meteor/vulcan:lib';
@@ -92,8 +94,8 @@ Note that you can replace both “regular” fragments and sub-fragments.
 
 Every collection automatically gets a default fragment associated with it called `FooDefaultFragment` (for example `PostsDefaultFragment`).
 
-This default fragment simply contains all fields where `viewableBy` is defined (in other words, all public fields). Note that it **does not** follow field resolvers, meaning that the default fragment will e.g. include `userId` but not `user`. 
+This default fragment simply contain all fields where `viewableBy` is defined (in other words, all public fields). Note that it **does not** follow field resolvers, meaning that the default fragment will e.g. include `userId` but not `user`.
 
 #### Alternative Approach
 
-You can use standard Apollo fragments at any point in your Vulcan app (passing them as `fragment` instead of `fragmentName`), but be aware that you will lose the ability to extend and replace fragments. You will also need to  [manually specify](http://dev.apollodata.com/react/fragments.html#reusing-fragments) sub-fragments. 
+You can use standard Apollo fragments at any point in your Vulcan app (passing them as `fragment` instead of `fragmentName`), but be aware that you will lose the ability to extend and replace fragments. You will also need to [manually specify](http://dev.apollodata.com/react/fragments.html#reusing-fragments) sub-fragments.
