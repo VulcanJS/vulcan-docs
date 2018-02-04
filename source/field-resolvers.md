@@ -42,7 +42,7 @@ Also, the resolved type is a GraphQL type, not a primitive type or a schema. The
 
 ## Custom Types
 
-Creating a collection with `createCollection` will automatically create the associated GraphQL type, but in some case you might want to resolve a field to a GraphQL type that doesn't correspond to any existing collection. 
+Creating a collection with `createCollection` will automatically create the associated GraphQL type, but in some cases you might want to resolve a field to a GraphQL type that doesn't correspond to any existing collection. 
 
 Here's how the `vulcan:voting` package defines a new `Vote` GraphQL type:
 
