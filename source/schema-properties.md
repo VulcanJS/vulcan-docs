@@ -2,7 +2,7 @@
 title: Schema Properties
 ---
 
-A range of special properties are available to control the behavior of each document field. 
+A range of special properties are available to control the behavior of each document field.
 
 ## SimpleSchema Properties
 
@@ -30,15 +30,15 @@ If it's a function, it'll be called on the `user` performing the operation, and 
 
 #### `resolveAs`
 
-You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section. 
+You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section.
 
 ### `onInsert`, `onEdit`, `onRemove`
 
-These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field. 
+These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
-- `onInsert(document, currentUser)`
-- `onEdit(modifier, document, currentUser)`
-- `onRemove(document, currentUser)`
+* `onInsert(document, currentUser)`
+* `onEdit(modifier, document, currentUser)`
+* `onRemove(document, currentUser)`
 
 ## Forms Properties
 
@@ -97,10 +97,10 @@ Can either be a boolean or a function accepting form props as argument and retur
 Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:
 
 ```js
-this.context.updateCurrentValues({foo: 'bar'});
+this.context.updateCurrentValues({ foo: 'bar' });
 ```
 
-As long as a value is in this.state.currentValues it should be submitted with the form, no matter whether there is an actual form item or not.
+As long as a value is in `this.state.currentValues` it should be submitted with the form, no matter whether there is an actual form item or not.
 
 #### `form`
 
@@ -115,6 +115,7 @@ control: 'datetime'
 ```
 
 You may sometimes want to pass a function or a React component in the form. Since all functions in the `form` object will be evaluated before rendering the form, you'll need to pass a closure that returns the desired function or component instead.
+
 ```
 form:{
   locale: 'fr',
@@ -124,11 +125,11 @@ form:{
 },
 control: 'MyCustomSelect'
 ```
-When the form is generated, the closure is evaluated and return your component or function. Thus in `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
 
+When the form is generated, the closure is evaluated and return your component or function. Thus in `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
 
 ## Other Properties
 
 #### `mustComplete` (`Users` only)
 
-You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields. 
+You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields.
