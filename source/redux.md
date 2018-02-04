@@ -4,7 +4,7 @@ title: Using Redux
 
 Redux is used transparently by Apollo to cache your data on the client, and it's perfectly fine to use Vulcan without ever worrying about it. 
 
-That being said, if you need to manage state at an application-wide level (for example, you might want to track if a sidebar is open or closed), using Redux explicitely can be very useful. 
+That being said, if you need to manage state at an application-wide level (for example, you might want to track if a sidebar is open or closed), using Redux explicitly can be very useful. 
 
 ## A Redux Higher-Order Component
 
