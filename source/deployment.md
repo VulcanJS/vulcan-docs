@@ -252,6 +252,42 @@ To restart your App, type
 To delete your App, type
 `pm2 delete myappname`
 
+## Heroku with a Two-Repo install
+
+**Note: if you did not follow the optional [two-repo install](http://docs.vulcanjs.org/index.html#Two-Repo-Install-Optional), then simply follow the usual Meteor app deployment process as [described here](https://www.coshx.com/blog/2016/08/19/how-to-deploy-a-meteor-1-4-app-to-heroku/).**
+
+### Deloy the package repo
+
+Host your custom Vulcan packages repo on a public registry such as GitHub.
+
+In your application, add the packages repo as a submodule of your app repo, **in a hidden folder**. Hidden folder are ignored by your Meteor app. Otherwise it would eagerly load all modules from the packages repo, which you don't want. Actually any ignored folder would be ok (`imports` etc.). Name is arbitrary too, though `.submodules` is clear.
+
+```
+git submodule add https://your-packages-public-repo .submodules/your-packages-repo-name
+```
+
+Then, add a script to install the npm packages of this submodule every time Heroku triggers a build:
+
+```
+heroku-postbuild: "cd .submodules/my-repo-name && npm i"
+```
+
+Finally, in your settings or env variables set:
+```
+METEOR_PACKAGE_DIRS="/app/.submodules/my-repo-name/packages"
+```
+
+`/app` is your app folder in Heroku, exactly the same as your app folder on your computer.
+
+
+### Update the package repo
+
+If you need to update the submodule, simply go into its folder and pull:
+```
+cd .submodules/my-repo-name && git pull
+```
+You can then commit. If Heroku is unhappy (e.g if you deleted a commit), delete the submodule completely, push on Heroku, and readd it.
+
 ### References
 
 - [How to deploy Meteor Apps with pm2-meteor](http://pm2-meteor.betawerk.co/)
