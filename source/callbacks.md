@@ -74,3 +74,22 @@ It takes the following arguments:
 - `arguments`: an array of `{name: description}` objects describing the callback functions' arguments. 
 - `runs`: whether the callback runs in a `sync` or `async` manner. 
 - `returns`: what the callback is expected to return (for `sync` callbacks).
+
+## Error Handling
+
+Pass `break` on your `Error` object to cause the chain of callbacks to stop when using a *sync* callback.
+
+```
+function mySyncCallback() {
+  try {
+    const value = Posts.callingAFunctionThatDoesNotExistThisThrowsAnError();
+  } catch (error) {
+    console.error(error);
+    // Cause Vulcan to halt execution of resolver and throw the error to Apollo
+    error.break = true;
+    throw error;
+  }
+}
+
+addCallback('posts.new.sync', mySyncCallback);
+```
