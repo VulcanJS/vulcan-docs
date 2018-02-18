@@ -22,6 +22,43 @@ As server-side queries rely on the same resolvers as normal GraphQL queries, you
 
 Instead, inside GraphQL resolvers you'll usually want to go through Vulcan's [Dataloader layer](/performance.html#Caching-amp-Batching) instead of calling the database directly, to make sure you don't make extra database calls.
 
+## Connectors
+
+In Vulcan you usually don't write any database code directly, even when you do want to perform a database operation. Instead, you call a **connector**, which is the function that actually specifies how to perform the operation. 
+
+For example, if you need to create a new `Movies` document you can call the `create` connector: 
+
+```js
+const database = 'mongo';
+
+Connectors[database].create(Movies, { name: 'Titanic'});
+```
+
+Which itself will call Mongo's `insert`: 
+
+```js
+Connectors.mongo = {
+  create: async (collection, document, options) => {
+    return await collection.insert(document);
+  }
+}
+```
+
+The advantage of this approach is that if you one day want to use MySQL instead of Mongo, you can simply change the value of `database` in `Connectors[database]` and let the SQL connector do the rest. 
+
+The following connectors are available: 
+
+- `await get(collection, selector, options)`: return a single document.
+- `await find(collection, selector, options)`:  return a list of documents.
+- `await count(collection, selector, options)`: return a count of documents matching the selector.
+- `await create(collection, document, options)`: create a new document.
+- `await update(collection, selector, modifier, options)`: update a document.
+- `await delete(collection, selector, options)`: delete a document.
+
+Note that selectors can either be objects or `_id` strings. 
+
+Of course, if you don't foresee the need to support multiple databases in your own code, making direct databases call is also perfectly valid. 
+
 ## Databases
 
 ### MongoDB

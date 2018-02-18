@@ -197,6 +197,60 @@ Because the extra query code calls the `CategoriesList` resolver, whatever the r
 
 This lets us set the `options` property in order to populate our dropdown. Essentially, we're just translating a list of categories into a list of `{ value, label }` pairs.
 
+### Using Variables (`devel` branch)
+
+Field-specific queries work by adding “extra” query parts to a specialy created `formNewExtraQuery` HoC when inserting new documents; or to the `withDocument` HoC when editing an existing document. In either case, the main query will be called with the following `extraTerms` argument:
+
+```js
+const extraTerms = {
+  documentId,
+  currentUser,
+  view: `${collectionName}ExtraQueryView` // where collectionName is the collection the form belongs to
+}
+```
+
+You can use this `extraTerms` object for more complex data loading strategies. For example, let's imagine you want to load the list of all `Photos` taken by a user that are associated with the current `Articles` document. 
+
+Since our `extraTerms` object is hard-coded to expect an `ArticlesExtraQueryView` [view](/terms-parameters.html#Using-Views), let's create it. It will take in the `extraTerms` object and return the appropriate database selector:
+
+```js
+Photos.addView('ArticlesExtraQueryView', extraTerms => ({
+  selector: {
+    userId: extraTerms.currentUser && extraTerms.currentUser._id,
+    articleId: extraTerms.documentId,
+  }
+}));
+```
+
+With the view defined, we can pass `extraTerms` to our default `PhotosList` resolver as the `terms` argument:
+
+```js
+featuredPhotoId: {
+  type: String,
+  control: 'select',
+  optional: true,
+  insertableBy: ['members'],
+  editableBy: ['members'],
+  viewableBy: ['guests'],
+  query: `
+    PhotosList(terms: $extraTerms){
+      _id
+      url
+      height
+      width
+      credit
+    }
+  `,
+  options: props => props.data.PhotosList.map(photo => ({
+      value: photo._id,
+      label: photo.name,
+  })),
+  resolveAs: ...
+}
+```
+
+Note that because all extra queries share the same `extraTerms` object, it's currently not possible to load two different datasets for the same collection unless you create your own custom resolvers. 
+
 ## Context
 
 The main `SmartForm` components makes the following objects available as context to all its children:

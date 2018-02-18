@@ -33,7 +33,7 @@ npm install
 npm start
 ```
 
-And open `http://localhost:3000/` in your browser.
+And open `http://localhost:3000/` in your browser. You'll then be presented with the first step of the “Getting Started” tutorial. 
 
 Note that you can also start the app with:
 
@@ -42,7 +42,6 @@ meteor --settings sample_settings.json
 ```
 
 All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if missing. 
-
 ## Two-Repo Install (Optional)
 
 - [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
@@ -82,11 +81,13 @@ I you follow this install method, your Vulcan core files will *not* be included 
 
 ## Getting Started
 
-When you first run VulcanJS, you'll see the contents of the `example-simple` package. It is recommended you go through the [Simple Example tutorial](example-simple.html) to get a grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
+When you first run the Vulcan starter repo, you'll see the “Getting Started” tutorial, and you should be able to follow along from there. 
+
+After that, you can also go through the [Simple Example tutorial](example-simple.html) to get a grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
 You can then take the more in-depth [Movies Example tutorial](example-movies.html) to get a better understanding of VulcanJS's internals. You can enable the Movies Example package by uncommenting it in `.meteor/packages`, and commenting out `example-simple` in its place)
 
-Once you've gone through both tutorials, you can enable the `example-instagram` package, which takes the same basic example but goes a little further, as well as take a look at its code. 
+Once you've gone through these tutorials, you can enable the `example-instagram` package, which takes the same basic example but goes a little further, as well as take a look at its code. 
 
 At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced forum features by checking out the [`example-forum`](example-forum.html) package. 
 
