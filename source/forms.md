@@ -222,6 +222,8 @@ Photos.addView('ArticlesExtraQueryView', extraTerms => ({
 }));
 ```
 
+Note that we add the view to the `Photos` collection, because that's what we want it to return, but the view is named `ArticlesExtraQueryView` because the form is for editing a document from the `Articles` collection. 
+
 With the view defined, we can pass `extraTerms` to our default `PhotosList` resolver as the `terms` argument:
 
 ```js
