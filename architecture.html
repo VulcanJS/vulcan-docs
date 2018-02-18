@@ -591,7 +591,7 @@
       <p>Here’s what you need to know about Vulcan’s architecture. </p>
 <h2 id="Package-Based-Architecture"><a href="#Package-Based-Architecture" class="headerlink" title="Package-Based Architecture"></a>Package-Based Architecture</h2><p>In keeping with this idea of flexibility and modularity, Vulcan’s application structure is a bit different than most other Meteor apps. </p>
 <p>In Vulcan, each feature has its own distinct <strong>Meteor package</strong> which can be freely added or removed. <a href="packages.html">Learn more about packages here</a>.</p>
-<h2 id="Extend-Don’t-Edit"><a href="#Extend-Don’t-Edit" class="headerlink" title="Extend, Don’t Edit"></a>Extend, Don’t Edit</h2><p>Another key point of Vulcan’s philosophy is to never edit the core codebase (i.e. what you get from the Vulcan repo) directly if you can avoid it. </p>
+<h2 id="Extend-Don’t-Edit"><a href="#Extend-Don’t-Edit" class="headerlink" title="Extend, Don’t Edit"></a>Extend, Don’t Edit</h2><p>Another key point of Vulcan’s philosophy is to never edit the core codebase (i.e. what you get from the Vulcan repo) directly. </p>
 <p>Editing Vulcan’s code makes it harder to keep it up to date when things change in the main Vulcan repo, as your modifications might conflict with a new updated version. </p>
 <p>Instead, Vulcan includes many hooks and patterns that enable you to tweak and extend core features from your <em>own</em> packages without having to actually modify their code. </p>
 <h2 id="Register-amp-Execute"><a href="#Register-amp-Execute" class="headerlink" title="Register &amp; Execute"></a>Register &amp; Execute</h2><p>Many Vulcan objects (such as fragments, routes, components, etc.) follow a “register and execute” pattern, in which:</p>

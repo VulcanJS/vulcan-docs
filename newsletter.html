@@ -604,13 +604,14 @@
 <li><a href="https://github.com/gomfunkel/node-mailchimp" target="_blank" rel="noopener">mailchimp</a></li>
 <li><a href="https://github.com/igord/sendy-api" target="_blank" rel="noopener">sendy-api</a></li>
 </ul>
-<h2 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"enableNewsletter"</span>:false,</span><br><span class="line"><span class="string">"enableNewsletterInDev"</span>:false,</span><br><span class="line"><span class="string">"newsletterFrequency"</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line"><span class="string">"newsletterTime"</span>: <span class="string">"07:55"</span>,</span><br><span class="line"><span class="string">"newsletterProvider"</span>: <span class="string">"sendy"</span>,</span><br><span class="line"><span class="string">"sendy"</span>: &#123;</span><br><span class="line">  <span class="string">"server"</span>: <span class="string">"http://sendy.myapp.com/"</span>,</span><br><span class="line">  <span class="string">"apiKey"</span>: <span class="string">"123foo"</span>,</span><br><span class="line">  <span class="string">"listId"</span>: <span class="string">"456bar"</span>,</span><br><span class="line">  <span class="string">"fromName"</span>: <span class="string">"Bruce Willis"</span>,</span><br><span class="line">  <span class="string">"fromEmail"</span>: <span class="string">"hello@myapp.com"</span>,</span><br><span class="line">  <span class="string">"replyTo"</span>: <span class="string">"hello@myapp.com"</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"mailchimp"</span>: &#123;</span><br><span class="line">  <span class="string">"apiKey"</span>: <span class="string">"123foo"</span>,</span><br><span class="line">  <span class="string">"listId"</span>: <span class="string">"456bar"</span>,</span><br><span class="line">  <span class="string">"fromName"</span>: <span class="string">"hello@myapp.com"</span>,</span><br><span class="line">  <span class="string">"fromEmail"</span>: <span class="string">"hello@myapp.com"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"newsletter"</span>: &#123;</span><br><span class="line">  <span class="string">"enabled"</span>:true,</span><br><span class="line">  <span class="string">"enabledInDev"</span>:false,</span><br><span class="line">  <span class="string">"autoSubscribe"</span>:false,</span><br><span class="line">  <span class="string">"frequency"</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line">  <span class="string">"time"</span>: <span class="string">"00:00"</span>,</span><br><span class="line">  <span class="string">"provider"</span>: <span class="string">"mailchimp"</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"sendy"</span>: &#123;</span><br><span class="line">  <span class="string">"server"</span>: <span class="string">"http://sendy.myapp.com/"</span>,</span><br><span class="line">  <span class="string">"apiKey"</span>: <span class="string">"123foo"</span>,</span><br><span class="line">  <span class="string">"listId"</span>: <span class="string">"456bar"</span>,</span><br><span class="line">  <span class="string">"fromName"</span>: <span class="string">"Bruce Willis"</span>,</span><br><span class="line">  <span class="string">"fromEmail"</span>: <span class="string">"hello@myapp.com"</span>,</span><br><span class="line">  <span class="string">"replyTo"</span>: <span class="string">"hello@myapp.com"</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"mailchimp"</span>: &#123;</span><br><span class="line">  <span class="string">"apiKey"</span>: <span class="string">"123foo"</span>,</span><br><span class="line">  <span class="string">"listId"</span>: <span class="string">"456bar"</span>,</span><br><span class="line">  <span class="string">"fromName"</span>: <span class="string">"hello@myapp.com"</span>,</span><br><span class="line">  <span class="string">"fromEmail"</span>: <span class="string">"hello@myapp.com"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>enableNewsletter</code>: enable/disable automated newsletter sending.</li>
-<li><code>enableNewsletterInDev</code>: enable/disable newsletter while in development mode. </li>
-<li><code>newsletterFrequency</code>: which days the newsletter should go out. <code>1</code> is Monday, <code>2</code> is Tuesday, etc.</li>
-<li><code>newsletterTime</code>: what time the newsletter should go out.</li>
-<li><code>newsletterProvider</code>: the name of your newsletter provider.</li>
+<li><code>enabled</code>: enable/disable automated newsletter sending.</li>
+<li><code>enabledInDev</code>: enable/disable newsletter while in development mode. </li>
+<li><code>autoSubscribe</code>: automatically subscribe every new user to your newsletter.</li>
+<li><code>frequency</code>: which days the newsletter should go out. <code>1</code> is Monday, <code>2</code> is Tuesday, etc.</li>
+<li><code>time</code>: what time the newsletter should go out.</li>
+<li><code>provider</code>: the name of your newsletter provider.</li>
 </ul>
 <h4 id="Sendy-Settings"><a href="#Sendy-Settings" class="headerlink" title="Sendy Settings"></a>Sendy Settings</h4><ul>
 <li><code>server</code>: The URL to your self-hosted Sendy server (including trailing <code>/</code>).</li>
@@ -626,8 +627,8 @@
 </ul>
 <h2 id="Test-Routes"><a href="#Test-Routes" class="headerlink" title="Test Routes"></a>Test Routes</h2><p>If you want to preview your email templates, you can do so at the following routes: </p>
 <ul>
-<li><strong>Campaign</strong>: <a href="http://localhost:3000/email/campaign" target="_blank" rel="noopener">http://localhost:3000/email/campaign</a></li>
-<li><strong>Confirmation</strong>: <a href="http://localhost:3000/email/digest-confirmation" target="_blank" rel="noopener">http://localhost:3000/email/digest-confirmation</a></li>
+<li><strong>Campaign</strong>: <a href="http://localhost:3000/email/newsletter" target="_blank" rel="noopener">http://localhost:3000/email/newsletter</a></li>
+<li><strong>Confirmation</strong>: <a href="http://localhost:3000/email/newsletter-confirmation" target="_blank" rel="noopener">http://localhost:3000/email/newsletter-confirmation</a></li>
 </ul>
 <p>(Replace <code>http://localhost:3000</code> with your app’s URL)</p>
 <h2 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h2><p>The package exposes the following GraphQL mutations:</p>
@@ -658,22 +659,22 @@
 </thead>
 <tbody>
 <tr>
-<td>enableNewsletter</td>
+<td>enabled</td>
 <td>false</td>
 <td>Enable the automated newsletter</td>
 </tr>
 <tr>
-<td>enableNewsletterInDev</td>
+<td>enabledInDev</td>
 <td>false</td>
 <td>Enable the automated newsletter while in development mode</td>
 </tr>
 <tr>
-<td>newsletterFrequency</td>
+<td>frequency</td>
 <td>[1,2,3,4,5,6,7]</td>
 <td>The days on which to send the newsletter (1 = Monday, 2 = Tuesday, etc.)</td>
 </tr>
 <tr>
-<td>newsletterTime</td>
+<td>time</td>
 <td>“07:55”</td>
 <td>When to send out the newsletter</td>
 </tr>

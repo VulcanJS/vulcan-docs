@@ -589,7 +589,7 @@
 
     <div class="document-formatting">
       <p>GraphQL makes it easy to create rich schemas with multiple nested layers, but that can also come at a performance cost. Thankfully, Vulcan offer you a few ways to get the benefits of GraphQL without suffering too much of a slow-down. </p>
-<h2 id="Caching-amp-Batching"><a href="#Caching-amp-Batching" class="headerlink" title="Caching &amp; Batching"></a>Caching &amp; Batching</h2><p>You can optionally use <a href="https://github.com/facebook/dataloader" target="_blank" rel="noopener">Dataloader</a> inside your resolvers to get server-side better performance through caching and batching.</p>
+<h2 id="Caching-amp-Batching"><a href="#Caching-amp-Batching" class="headerlink" title="Caching &amp; Batching"></a>Caching &amp; Batching</h2><p>You can optionally use <a href="https://github.com/facebook/dataloader" target="_blank" rel="noopener">Dataloader</a> inside your resolvers to get better server-side performance through caching and batching.</p>
 <p>To understand how this works, let’s suppose you’re displaying five posts on your homepage, each of which has an author. </p>
 <p>Without batching, this would result in one database call to fetch the five posts, then one call per post to fetch the author as each <code>Post.author</code> resolver is called, for a total of six database queries. </p>
 <p>With batching enabled, these five calls to the <code>users</code> collection are batched together, for a total of two database calls. </p>
@@ -606,8 +606,7 @@
 <li><code>collection.loader.prime(_id, document)</code></li>
 </ul>
 <p>Finally, note that <code>load</code> and <code>loadMany</code> can only take <code>_id</code>s. If you instead need to query for data using more complex Mongo selectors, you can simply keep querying the database directly with <code>collection.find()</code> and <code>collection.findOne()</code>. </p>
-<p>Learn more: <a href="https://www.youtube.com/watch?v=55Ep5KBTIQE" target="_blank" rel="noopener">Using Dataloader to batch and cache database calls
-</a>.</p>
+<p>Learn more: <a href="https://www.youtube.com/watch?v=55Ep5KBTIQE" target="_blank" rel="noopener">Using Dataloader to batch and cache database calls</a>.</p>
 <h2 id="Performance-Optimization"><a href="#Performance-Optimization" class="headerlink" title="Performance Optimization"></a>Performance Optimization</h2><p>If you use complex GraphQL queries and resolvers a lot, you might notice some slow loading times. Here’s a few things you can try to speed things up.</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=M8Jmz8q2sUk" target="_blank" rel="noopener">Video Case Study: GraphQL Performance Optimization</a></li>
@@ -622,7 +621,7 @@
 <h4 id="Remove-Unnecessary-Fields"><a href="#Remove-Unnecessary-Fields" class="headerlink" title="Remove Unnecessary Fields"></a>Remove Unnecessary Fields</h4><p>Sometimes you might be asking for a field you don’t actually need, especially if you reuse the same fragments in multiple places. Always make sure you don’t load any data you don’t use, especially if these fields in turn trigger their own resolvers.</p>
 <h4 id="Denormalize-Data"><a href="#Denormalize-Data" class="headerlink" title="Denormalize Data"></a>Denormalize Data</h4><p>Although GraphQL makes it possible to keep data normalized inside your database in theory, in practice it can still be better for performance to denormalize (i.e. copy) some properties. </p>
 <p>For example, let’s imagine you want to know how many comments a user has made. You could definitely have a <code>commentCount</code> property with its own custom resolver that counts all comments with the right <code>userId</code>. </p>
-<p>But on the other hand, it would be far better from a performance point of view to simply store that information as a field on each user document and increment/decrement it every time a user creates or delete a comment. </p>
+<p>But on the other hand, it would be far better from a performance point of view to simply store that information as a field on each user document and increment/decrement it every time a user creates or deletes a comment. </p>
 <h4 id="Ensure-Fast-Server-DB-Speeds"><a href="#Ensure-Fast-Server-DB-Speeds" class="headerlink" title="Ensure Fast Server-DB Speeds"></a>Ensure Fast Server-DB Speeds</h4><p>At some point, the last bottleneck is the time it takes for the server to get data back from the database (assuming you’re not hosting both on the same instance). </p>
 <p>For example, if you’re in Tokyo and your database is too, but your server is in New York, your data has to go from Tokyo to New York then back to Tokyo, leading to slower load times than if everything was just stored in New York.</p>
 <p>For that reason, try to have both your server and database stored within the same Amazon (or equivalent) server cluster. </p>

@@ -604,6 +604,8 @@
 <h3 id="Setup-your-server"><a href="#Setup-your-server" class="headerlink" title="Setup your server"></a>Setup your server</h3><p>From this folder, you can now setup Docker &amp; Mongo your server with:<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mup <span class="built_in">setup</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="Deploy-your-app-to-your-server"><a href="#Deploy-your-app-to-your-server" class="headerlink" title="Deploy your app to your server"></a>Deploy your app to your server</h3><p>Still in the same folder, to deploy your app with your settings file:</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mup <span class="keyword">deploy</span> <span class="params">--settings</span> settings.json</span><br></pre></td></tr></table></figure>
+<p>If you are using the <a href="http://docs.vulcanjs.org/#Two-Repo-Install-Optional">two-repo install</a> you must specify the path to your package directory:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">METEOR_PACKAGE_DIRS</span>=<span class="string">"/Users/sacha/Vulcan/packages"</span> mup deploy --settings settings.json</span><br></pre></td></tr></table></figure></p>
+<p>(Taking care to adapt the <code>/Users/sacha/Vulcan/packages</code> path to point to your Vulcan core repo’s <code>/packages</code> directory)</p>
 <h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h3><ul>
 <li><code>meteor npm install --save bcrypt</code>.</li>
 <li>Increase <code>deployCheckWaitTime</code>.</li>
@@ -620,7 +622,7 @@
 <p>After your deployment is done, create an alias to the domain you just specified. Just copy the hashed link provided by the now deployment. It should be copied to your clipboad. It usually follows this format: <code>https://xxxxxxxxx.now.sh</code>.</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now alias <span class="keyword">set</span> http<span class="variable">s:</span>//xxxxxxxxx.now.<span class="keyword">sh</span> http<span class="variable">s:</span>//mydomain.now.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
 <p>That’s it! now visit <code>https://mydomain.now.sh</code>.</p>
-<p>For more info, for how to get a custom domain name run <code>now -h</code>. You may need a premium <a href="http://zeit.co/now" target="_blank" rel="noopener">now</a>account. </p>
+<p>For more info, for how to get a custom domain name run <code>now -h</code>. You may need a premium <a href="http://zeit.co/now" target="_blank" rel="noopener">now</a> account.</p>
 <h2 id="PM2"><a href="#PM2" class="headerlink" title="PM2"></a>PM2</h2><p>Contributed by <a href="https://github.com/VulcanJS/Vulcan/issues/1552#issuecomment-276948862" target="_blank" rel="noopener">adalidda</a>.</p>
 <p>Deploy Vulcan GraphQL/Apollo version with PM2</p>
 <h3 id="Server-Setup"><a href="#Server-Setup" class="headerlink" title="Server Setup"></a>Server Setup</h3><p>On Ubuntu 14 or better.</p>

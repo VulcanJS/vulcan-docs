@@ -588,39 +588,39 @@
     </div>
 
     <div class="document-formatting">
-      <p>Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app. </p>
-<h2 id="Common-Problems"><a href="#Common-Problems" class="headerlink" title="Common Problems"></a>Common Problems</h2><h3 id="“Load-More”-Not-Working"><a href="#“Load-More”-Not-Working" class="headerlink" title="“Load More” Not Working"></a>“Load More” Not Working</h3><p>If your app initially loads fine but “Load More” doesn’t work, this most likely indicates that while server-side rendering is working, data loading isn’t. </p>
-<p>The most common cause is a mismatch between your domain and the URL currently being used as your GraphQL endpoint, which is based on the <code>ROOT_URL</code> environment variable. </p>
-<p>To double-check which GraphQL endpoint URL is being used, just use your devtools’ Network tab and inspect any failed requests. </p>
-<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><h3 id="Finding-Errors"><a href="#Finding-Errors" class="headerlink" title="Finding Errors"></a>Finding Errors</h3><p>Locating the source of an issue can be trickier than you think. </p>
-<p>First, you’ll find most client-side errors through the browser console (<code>cmd/ctrl + opt + j</code> in Chrome). </p>
-<p>If nothing is showing up in the browser console. or maybe your app isn’t loading at all, make sure you also check the server logs. You’ll find them in the terminal window currently running your app locally, or with <code>mup logs -f</code> if you’ve deployed using Meteor Up.</p>
-<p>It’s also possible that you’ve encountered a GraphQL error, which won’t be shown in either places. One way to track this down is to open your browser devtools’ Network tab and look for any red <code>graphql</code> requests. If you see any failed requests, check their Response tab to view the error message.</p>
-<p>You can also access a query’s error message through the Redux or Apollo devtools. In the Redux devtools, click the State tab, drill down to the affected query, and check its <code>networkError</code> and <code>graphQLErrors</code> properties. </p>
-<h3 id="GraphQL-Schema-Issues"><a href="#GraphQL-Schema-Issues" class="headerlink" title="GraphQL Schema Issues"></a>GraphQL Schema Issues</h3><p>Although Vulcan includes features for generating your GraphQL schema automatically from your JSON schema, sometimes you’ll run into issues and need to take a look under the hood. </p>
-<p>You can review your final generated schema by opening the Meteor shell with <code>meteor shell</code> and then typing:</p>
-<pre><code>Vulcan.getGraphQLSchema()
-</code></pre><p>You’ll probably want to paste in the output in a text editor and replace <code>\n</code> with actual line breaks for better formatting. </p>
+      <p>Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app.</p>
+<h2 id="Common-Problems"><a href="#Common-Problems" class="headerlink" title="Common Problems"></a>Common Problems</h2><h3 id="“Load-More”-Not-Working"><a href="#“Load-More”-Not-Working" class="headerlink" title="“Load More” Not Working"></a>“Load More” Not Working</h3><p>If your app initially loads fine but “Load More” doesn’t work, this most likely indicates that while server-side rendering is working but data loading isn’t.</p>
+<p>The most common cause is a mismatch between your domain and the URL currently being used as your GraphQL endpoint, which is based on the <code>ROOT_URL</code> environment variable.</p>
+<p>To double-check which GraphQL endpoint URL is being used, just use your Devtools Network tab in your browser and inspect any failed requests.</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><h3 id="Finding-Errors"><a href="#Finding-Errors" class="headerlink" title="Finding Errors"></a>Finding Errors</h3><p>Locating the source of an issue can be trickier than you think.</p>
+<p>First, you’ll find most client-side errors through the browser console (<code>cmd/ctrl + opt + j</code> in Chrome).</p>
+<p>If nothing is showing up in the browser console or maybe your app isn’t loading at all, make sure you also check the server logs. You’ll find them in the terminal window currently running your app locally, or with <code>mup logs -f</code> if you’ve deployed using Meteor Up.</p>
+<p>It’s also possible that you’ve encountered a GraphQL error, which won’t be shown in either places. One way to track this down is to open your browser’s Devtools Network tab and look for any red <code>graphql</code> requests. If you see any failed requests, check their Response tab to view the error message.</p>
+<p>You can also access a query’s error message through the Redux or Apollo devtools. In the Redux devtools, click the State tab, drill down to the affected query, and check its <code>networkError</code> and <code>graphQLErrors</code> properties.</p>
+<h3 id="GraphQL-Schema-Issues"><a href="#GraphQL-Schema-Issues" class="headerlink" title="GraphQL Schema Issues"></a>GraphQL Schema Issues</h3><p>Although Vulcan includes features for generating your GraphQL schema automatically from your JSON schema, sometimes you’ll run into issues and need to take a look under the hood.</p>
+<p>You can review your final generated schema by opening the Meteor shell with command <code>meteor shell</code> and then type:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Vulcan</span><span class="selector-class">.getGraphQLSchema</span>()</span><br></pre></td></tr></table></figure>
+<p>You’ll probably want to paste the output in a text editor and replace <code>\n</code> with actual line breaks for better formatting.</p>
 <h3 id="SSR-Warnings"><a href="#SSR-Warnings" class="headerlink" title="SSR Warnings"></a>SSR Warnings</h3><p>Another common type of problem is server-side rendering (SSR) warnings:</p>
 <blockquote>
-<p> React attempted to reuse markup in a container but the checksum was invalid. This generally means that you are using server rendering and the markup generated on the server was not what the client was expecting. React injected new markup to compensate which works but you have lost many of the benefits of server rendering. Instead, figure out why the markup being generated is different on the client or server:</p>
+<p>React attempted to reuse markup in a container but the checksum was invalid. This generally means that you are using server rendering and the markup generated on the server was not what the client was expecting. React injected new markup to compensate which works but you have lost many of the benefits of server rendering. Instead, figure out why the markup being generated is different on the client or server:</p>
 </blockquote>
-<p>This means that the HTML content you’ve rendered on the server doesn’t match up with the markup React has generated on the client. For example, maybe the server thinks the current user is logged out, while the client knows they’re logged in. Or maybe the server thinks it’s Tuesday, while the client thinks it’s Wednesday. </p>
-<p>Whatever the cause, these warnings shouldn’t break your app, but they might slow it down a bit. </p>
+<p>This means that the HTML content you’ve rendered on the server doesn’t match up with the markup React has generated on the client. For example, maybe the server thinks the current user is logged out, while the client knows they’re logged in. Or maybe the server thinks it’s Tuesday, while the client thinks it’s Wednesday.</p>
+<p>Whatever the cause, these warnings should not break your app, but they might slow it down a bit.</p>
 <h3 id="Data-Loading"><a href="#Data-Loading" class="headerlink" title="Data Loading"></a>Data Loading</h3><p>If your data doesn’t seem to be loading, this could be due to a few reasons:</p>
 <ul>
-<li><strong>Component issue:</strong> the client is loading your data, but your component is not displaying it. Check that the data is available in the Redux store, and check the value of your component’s <code>props</code> using the React devtools. </li>
-<li><strong>Resolver issue:</strong> if your client isn’t loading any data at all, it might be because the resolver isn’t returning any. In this scenario, <code>console.log</code> will be your best friend. </li>
-<li><strong>Arguments issue:</strong> maybe the resolver itself is fine, but it’s just not receiving the right arguments from the client. Again, adding <code>console.log</code>s to the resolver will usually point you in the right direction.</li>
-<li><strong>Database issue:</strong> sometimes your code works, but the data you expect just isn’t present in your database. You can check this by taking the query being run by the resolver and running it manually in Mongo directly (using <code>meteor mongo</code>).</li>
+<li><strong>Component issue:</strong> the client is loading your data, but your component is not displaying it. Check that the data is available in the Redux store, and check the value of your component’s <code>props</code> using the React devtools.</li>
+<li><strong>Resolver issue:</strong> if your client isn’t loading any data at all, it might be because the resolver isn’t returning any. In this scenario, <code>console.log</code> will be your best friend.</li>
+<li><strong>Arguments issue:</strong> maybe the resolver itself is fine, but it’s just not receiving the right arguments from the client. Again, adding <code>console.log</code> statements to the resolver will usually point you in the right direction.</li>
+<li><strong>Database issue:</strong> sometimes your code works, but the data you expect just isn’t present in your database. You can check this by taking the query being run by the resolver and running it manually in Mongo directly (using <code>meteor mongo</code> command).</li>
 </ul>
 <h3 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h3><p>Mutations can fail for a number of reasons:</p>
 <ul>
-<li><strong>Component issue:</strong> is your mutation even getting called? Make sure you double-check your event handlers. </li>
-<li><strong>Resolver issue:</strong> just like queries, mutations can also have resolver problems. </li>
-<li><strong>Permissions issue:</strong> it’s also possible that the mutation is failing because you don’t have the proper rights. </li>
+<li><strong>Component issue:</strong> is your mutation even getting called? Make sure you double-check those event handlers.</li>
+<li><strong>Resolver issue:</strong> just like queries, mutations can also have resolver problems.</li>
+<li><strong>Permissions issue:</strong> it’s also possible that the mutation is failing because you don’t have the proper rights.</li>
 </ul>
-<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>If your data isn’t updating properly after a mutation, this can often be due to a fragment mismatch. Make sure that <code>new</code> mutations use the same fragment as the query they’re updating (<code>edit</code> mutations on the other hand can safely return partial fragments).</p>
+<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>If your data isn’t updating properly after a mutation, this can be due to a fragment mismatch. Make sure that <code>new</code> mutations use the same fragment as the query they’re updating (<code>edit</code> mutations on the other hand can safely return partial fragments).</p>
 
     </div>
   </div>
