@@ -197,37 +197,16 @@ Because the extra query code calls the `CategoriesList` resolver, whatever the r
 
 This lets us set the `options` property in order to populate our dropdown. Essentially, we're just translating a list of categories into a list of `{ value, label }` pairs.
 
-### Using Variables (`devel` branch)
+### Using `documentId`
 
-Field-specific queries work by adding “extra” query parts to a specialy created `formNewExtraQuery` HoC when inserting new documents; or to the `withDocument` HoC when editing an existing document. In either case, the main query will be called with the following `extraTerms` argument:
+Field-specific queries work by adding “extra” query parts to a specialy created formNewExtraQuery HoC when inserting new documents; or to the withDocument HoC when editing an existing document. 
 
-```js
-const extraTerms = {
-  documentId,
-  currentUser,
-  view: `${collectionName}ExtraQueryView` // where collectionName is the collection the form belongs to
-}
-```
+When editing a document, you can reuse the `documentId` in your extra query parts since it will already have been made available to the main query. 
 
-You can use this `extraTerms` object for more complex data loading strategies. For example, let's imagine you want to load the list of all `Photos` taken by a user that are associated with the current `Articles` document. 
-
-Since our `extraTerms` object is hard-coded to expect an `ArticlesExtraQueryView` [view](/terms-parameters.html#Using-Views), let's create it. It will take in the `extraTerms` object and return the appropriate database selector:
+For example, you might want to restrict a list of users to those having the ability to moderate a given document:
 
 ```js
-Photos.addView('ArticlesExtraQueryView', extraTerms => ({
-  selector: {
-    userId: extraTerms.currentUser && extraTerms.currentUser._id,
-    articleId: extraTerms.documentId,
-  }
-}));
-```
-
-Note that we add the view to the `Photos` collection, because that's what we want it to return, but the view is named `ArticlesExtraQueryView` because the form is for editing a document from the `Articles` collection. 
-
-With the view defined, we can pass `extraTerms` to our default `PhotosList` resolver as the `terms` argument:
-
-```js
-featuredPhotoId: {
+moderatorId: {
   type: String,
   control: 'select',
   optional: true,
@@ -235,23 +214,22 @@ featuredPhotoId: {
   editableBy: ['members'],
   viewableBy: ['guests'],
   query: `
-    PhotosList(terms: $extraTerms){
+    listDocumentModerators(documentId: $documentId){
       _id
-      url
-      height
-      width
-      credit
+      displayName
     }
   `,
-  options: props => props.data.PhotosList.map(photo => ({
-      value: photo._id,
-      label: photo.name,
+  options: props => props.data.listDocumentModerators.map(user => ({
+      value: user._id,
+      label: user.displayName,
   })),
   resolveAs: ...
 }
 ```
 
-Note that because all extra queries share the same `extraTerms` object, it's currently not possible to load two different datasets for the same collection unless you create your own custom resolvers. 
+Of course, you'll also have to write your own `listDocumentModerators` [custom resolver](/resolvers.html#Custom-Resolvers) that takes in a `documentId` argument and returns the corresponding list of users. 
+
+Note that although `currentUser` is not passed as an argument to your resolvers, it's available on the `context` object on the server.
 
 ## Context
 
