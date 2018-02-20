@@ -614,6 +614,21 @@
 <h2 id="Legacy-String-Syntax-deprecated"><a href="#Legacy-String-Syntax-deprecated" class="headerlink" title="Legacy String Syntax (deprecated)"></a>Legacy String Syntax (deprecated)</h2><p>Alternatively, you can also use the legacy syntax and specify a string value for <code>resolveAs</code> (in this case, <code>user: User</code>). You’ll then need to use <code>addGraphQLResolvers</code> to define the resolver object yourself:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> movieResolver = &#123;</span><br><span class="line">  Movie: &#123;</span><br><span class="line">    user(movie, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(</span><br><span class="line">        &#123; <span class="attr">_id</span>: movie.userId &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          fields: context.getViewableFields(context.currentUser, context.Users)</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(movieResolver);</span><br></pre></td></tr></table></figure>
 <p>Resolvers can be defined on any new or existing type (e.g. <code>Movie</code>).</p>
+<h2 id="Field-Resolvers-vs-Denormalization"><a href="#Field-Resolvers-vs-Denormalization" class="headerlink" title="Field Resolvers vs Denormalization"></a>Field Resolvers vs Denormalization</h2><p>Another approach to achieve the same thing as field resolvers is denormalization, in other words “phsyically” storing the same information in your database. </p>
+<p>For example, assuming you wanted to show a post author’s <code>displayName</code>, you could write a resolver that fetches the <code>user</code> object, or you could simply store a new <code>authorDisplayName</code> property on the post document directly. </p>
+<p>So how do you decide which approach to pick? Here are a few general guidelines. </p>
+<p>Resolvers are good when:</p>
+<ul>
+<li>The resolver doesn’t require any extra database calls. For example, generating a <code>createdAtFormatted</code> date string from a <code>createdAt</code> timestamp.</li>
+<li>You want to avoid duplicating data. For example, copying a post author’s entire <code>user</code> object on the post itself is probably a bad idea because that object can quickly get out of sync with the main <code>Users</code> document. </li>
+<li>Keeping the denormalized data up to date gets too complex. If you find yourself writing three or four callbacks to update a single property, a resolver might turn out to be better. </li>
+</ul>
+<p>On the other hand, denormalization is better when:</p>
+<ul>
+<li>You want to sort documents by the field. Resolved field don’t actually exist in your database, meaning you can’t sort by them. </li>
+<li>Generating the data through a resolver would require extra database calls. </li>
+<li>The data changes infrequently. </li>
+</ul>
 
     </div>
   </div>
