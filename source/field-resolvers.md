@@ -108,3 +108,23 @@ addGraphQLResolvers(movieResolver);
 ```
 
 Resolvers can be defined on any new or existing type (e.g. `Movie`).
+
+## Field Resolvers vs Denormalization
+
+Another approach to achieve the same thing as field resolvers is denormalization, in other words "phsyically" storing the same information in your database. 
+
+For example, assuming you wanted to show a post author's `displayName`, you could write a resolver that fetches the `user` object, or you could simply store a new `authorDisplayName` property on the post document directly. 
+
+So how do you decide which approach to pick? Here are a few general guidelines. 
+
+Resolvers are good when:
+
+- The resolver doesn't require any extra database calls. For example, generating a `createdAtFormatted` date string from a `createdAt` timestamp.
+- You want to avoid duplicating data. For example, copying a post author's entire `user` object on the post itself is probably a bad idea because that object can quickly get out of sync with the main `Users` document. 
+- Keeping the denormalized data up to date gets too complex. If you find yourself writing three or four callbacks to update a single property, a resolver might turn out to be better. 
+
+On the other hand, denormalization is better when:
+
+- You want to sort documents by the field. Resolved field don't actually exist in your database, meaning you can't sort by them. 
+- Generating the data through a resolver would require extra database calls. 
+- The data changes infrequently. 

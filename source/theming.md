@@ -148,6 +148,8 @@ class CustomLogo extends getRawComponent('Logo'){
 replaceComponent('Logo', CustomLogo);
 ```
 
+Note that using `getRawComponent` is also needed because components get registered at runtime. So in our `CustomLogo` example, `Components.Logo` would not be define dyet. 
+
 #### Alternative Approach
 
 The main purpose behind the components API is to enable extending and replacing components defined in third-party themes and plug-ins. However, if this is not a concern for you, you can use the standard `export default Foo` and `import Foo from './foo.jsx'` approach without any trouble. 
