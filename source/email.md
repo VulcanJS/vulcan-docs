@@ -104,12 +104,12 @@ A few things to note:
 
 ## Email Templates
 
-Unlike components, emails don't use React but the [Handlebars](http://handlebarsjs.com/) templating language. Before you can use a template with Vulcan's email system, you'll need to register it. 
+Unlike components, emails don't use React but the [Handlebars](http://handlebarsjs.com/) templating language. Before you can use a template with Vulcan's email system, you'll need to register it. A 'wrapper' template must first be registered as a container for your templates (e.g. Vulcan-Starter/packages/example-forum/lib/server/email/templates/common/wrapper.handlebars).
 
 In order to register a new template or override an existing one, first you must import it as a text asset in your `package.js` file (or store it in your `/public` directory):
 
 ```js
-api.addAssets(['path/to/template/newReply.handlebars',], ['server']);
+api.addAssets(['path/to/template/wrapper.handlebars',], ['server']);
 ```
 
 You'll then be able to add a new template with `VulcanEmail.addTemplates`:
@@ -118,7 +118,7 @@ You'll then be able to add a new template with `VulcanEmail.addTemplates`:
 import VulcanEmail from 'meteor/vulcan:email';
 
 VulcanEmail.addTemplates({
-  newReply: Assets.getText('path/to/template/newReply.handlebars')
+  wrapper: Assets.getText('path/to/template/wrapper.handlebars')
 });
 ```
 
@@ -127,7 +127,7 @@ Or override an existing one with:
 ```js
 import VulcanEmail from 'meteor/vulcan:email';
 
-VulcanEmail.templates.newReply = Assets.getText('path/to/template/newReply.handlebars');
+VulcanEmail.templates.wrapper = Assets.getText('path/to/template/wrapper.handlebars');
 });
 ```
 
