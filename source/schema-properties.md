@@ -30,7 +30,7 @@ If it's a function, it'll be called on the `user` performing the operation, and 
 
 #### `resolveAs`
 
-You can learn more about `resolveAs` in the [Field Resolvers](/data-loading.html#Field-Resolvers) section.
+You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.html) section.
 
 ### `onInsert`, `onEdit`, `onRemove`
 
