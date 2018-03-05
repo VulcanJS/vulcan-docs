@@ -603,7 +603,7 @@
 <p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and should return <code>true</code> or <code>false</code>. When generating a form for inserting new documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
 <h4 id="editableBy"><a href="#editableBy" class="headerlink" title="editableBy"></a><code>editableBy</code></h4><p>Can either be an array of group names or a function.</p>
 <p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and the <code>document</code> being operated on, and should return <code>true</code> or <code>false</code>. When generating a form for editing existing documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
-<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/data-loading.html#Field-Resolvers">Field Resolvers</a> section.</p>
+<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/field-resolvers.html">Field Resolvers</a> section.</p>
 <h3 id="onInsert-onEdit-onRemove"><a href="#onInsert-onEdit-onRemove" class="headerlink" title="onInsert, onEdit, onRemove"></a><code>onInsert</code>, <code>onEdit</code>, <code>onRemove</code></h3><p>These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.</p>
 <ul>
 <li><code>onInsert(document, currentUser)</code></li>
