@@ -111,7 +111,7 @@ Resolvers can be defined on any new or existing type (e.g. `Movie`).
 
 ## Field Resolvers vs Denormalization
 
-Another approach to achieve the same thing as field resolvers is denormalization, in other words "phsyically" storing the same information in your database. 
+Another approach to achieve the same thing as field resolvers is denormalization, in other words "physically" storing the same information in your database. 
 
 For example, assuming you wanted to show a post author's `displayName`, you could write a resolver that fetches the `user` object, or you could simply store a new `authorDisplayName` property on the post document directly. 
 
