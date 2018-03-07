@@ -25,7 +25,7 @@ To load data from Dataloader instead of the database, you can use the following 
 
 If the documents requested are not present in the cache, Dataloader will automatically query the database for them. 
 
-Aditionally, you can also manually add documents to the cache with:
+Additionally, you can also manually add documents to the cache with:
 
 - `collection.loader.prime(_id, document)`
 
