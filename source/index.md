@@ -42,6 +42,9 @@ meteor --settings sample_settings.json
 ```
 
 All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if missing. 
+
+(A note for `windows` user: While running `npm install` you might get error regarding `node-gyp` and `bcrypt` package installation. This is because you need [windows-build-tool](https://github.com/nodejs/node-gyp/blob/master/README.md#on-windows) for `node-gyp` installation which is [required](https://github.com/kelektiv/node.bcrypt.js#dependencies) for `bcrypt` installation.)
+
 ## Two-Repo Install (Optional)
 
 - [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
