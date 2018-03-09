@@ -4,15 +4,27 @@ title: Mutations
 
 A mutation is very similar to a query. It receives a GraphQL request, decides what to do with it, and then returns some data. But because mutations can result in _changes_ to your data, they have their own special `Mutation` type to differentiate them.
 
-## GraphQL Mutations
+## Mutation Steps
 
-`createCollection` also accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
+When talking about mutations, it's important to distinguish between the different elements that make up the overall process. For example, let's imagine that a user submits a form for creating a new document. 
 
-* `name`: the name of the mutation.
-* `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
-* `mutation`: the mutation function.
+1. First, this will **trigger a request** to your GraphQL endpoint, sent by Apollo Client. You can do this either by writing your own mutation higher-order component, or by using one of Vulcan's [pre-made mutation HoCs](#Mutation-Higher-Order-Components). 
+2. When the GraphQL endpoint receives this request, it will look for a corresponding **mutation resolver**. Again you can either code your own resolver, or use Vulcan's [default mutations](#Default-Mutation-Resolvers).
+3. The mutation resolver then calls a **mutator**. The mutator is the function that does the actual job of validating the request and mutating your data. The reason for this additional layer is that you'll often want to mutate data for *outside* your GraphQL API. By extracting that logic you're able to call the same exact mutator function whether you're inserting a new document sent by the front-end or, say, seeding your database with content extracted from an API. As usual, Vulcan offers a set of [default mutators](#Default-Mutators).
+4. Finally, the mutator calls a [database connector](/database.html#Connectors) to perform the actual database operation. By abstracting out the database operation, we're able to make mutators (and by extension your entire GraphQL API) database-agnostic. This means that you can switch from MongoDB to MySQL without having to modify any of the above three layers. 
 
-### New Mutation
+## Mutation Higher-Order Components
+
+Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
+
+#### `withNew`
+
+This HoC takes the following two options:
+
+* `collection`: the collection to operate on.
+* `fragment`: specifies the data to ask for as a return value.
+
+And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
 
 Takes an object as argument with a single `document` property and returns a promise:
 
@@ -25,7 +37,9 @@ this.props
   .catch(/* error */);
 ```
 
-### Edit Mutation
+#### `withEdit`
+
+Same options as `withNew`. The returned `editMutation` mutation takes three arguments: `documentId`, `set`, and `unset`.
 
 Takes an object with three properties as an argument and returns a promise:
 
@@ -44,7 +58,9 @@ this.props
   .catch(/* error */);
 ```
 
-### Remove Mutation
+#### `withRemove`
+
+A single `collection` option. The returned `removeMutation` mutation takes a single `documentId` argument.
 
 Takes an object with a single `documentId` property as an argument and returns a promise.
 
@@ -57,7 +73,41 @@ this.props
   .catch(/* error */);
 ```
 
-### Default Mutations
+#### `withMutation`
+
+In addition to the three main mutation HoCs, The `withMutation` HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers.
+
+It takes two options:
+
+* `name`: the name of the mutation to call on the server (will also be the name of the prop passed to the component).
+* `args`: (optional) an object containing the mutation's arguments and types.
+
+For example, here's how to wrap the `MyComponent` component to pass it an `addEmailNewsletter` function as prop:
+
+```js
+const mutationOptions = {
+  name: 'addEmailNewsletter',
+  args: { email: 'String' }
+};
+withMutation(mutationOptions)(MyComponent);
+```
+
+You would then call the function with:
+
+```
+this.props.addEmailNewsletter({email: 'foo@bar.com'})
+```
+
+
+## Mutations Resolvers
+
+When creating a new collection, `createCollection` accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
+
+* `name`: the name of the mutation.
+* `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
+* `mutation`: the mutation function.
+
+### Default Mutation Resolvers
 
 Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:
 
@@ -84,14 +134,52 @@ const Movies = createCollection({
 export default Movies;
 ```
 
+You can optionally pass a second `options` argument to `getDefaultMutations`, which can be used to override the `check` functions for each mutation: 
+
+```js
+const mutations = getDefaultMutations('Movies', {
+  newCheck: (user, document) => ...,
+  editCheck: (user, document) => ...,
+  removeCheck: (user, document) => ...,
+})
+```
+
+Vulcan's default mutations are fairly lightweight. For example here's the body of the `edit` mutation resolver (where `collectionName` is `getDefaultMutations`'s argument):
+
+```js
+async mutation(root, {documentId, set, unset}, context) {
+  
+  const collection = context[collectionName];
+
+  // get entire unmodified document from database
+  const document = await Connectors.get(collection, documentId);
+
+  // check if user can perform operation; if not throw error
+  Utils.performCheck(this.check, context.currentUser, document);
+
+  // call editMutator boilerplate function
+  return await editMutator({
+    collection, 
+    documentId: documentId, 
+    set: set, 
+    unset: unset, 
+    currentUser: context.currentUser,
+    validate: true,
+    context,
+  });
+},
+```
+
 To learn more about what exactly the default mutations do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js).
 
 ### Custom Mutations
 
-You can also add your own mutations using `GraphQLSchema.addMutation` and `GraphQLSchema.addResolvers`:
+You can also add your own mutations resolvers using `addGraphQLMutation` and `addGraphQLResolvers`:
 
 ```js
-GraphQLSchema.addMutation(
+import { addGraphQLMutation, addGraphQLResolvers } from 'meteor/vulcan:core';
+
+addGraphQLMutation(
   'postsVote(documentId: String, voteType: String) : Post'
 );
 
@@ -103,58 +191,14 @@ const voteResolver = {
   }
 };
 
-GraphQLSchema.addResolvers(voteResolver);
-```
-
-## Higher-Order Components
-
-#### `withNew`
-
-This HoC takes the following two options:
-
-* `collection`: the collection to operate on.
-* `fragment`: specifies the data to ask for as a return value.
-
-And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
-
-#### `withEdit`
-
-Same options as `withNew`. The returned `editMutation` mutation takes three arguments: `documentId`, `set`, and `unset`.
-
-#### `withRemove`
-
-A single `collection` option. The returned `removeMutation` mutation takes a single `documentId` argument.
-
-Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
-
-#### `withMutation`
-
-The `withMutation` HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers.
-
-It takes two options:
-
-* `name`: the name of the mutation to call on the server (will also be the name of the prop passed to the component).
-* `args`: (optional) an object containing the mutation's arguments and types.
-
-For example, here's how to wrap the `MyComponent` component to pass it an `addEmailNewsletter` function as prop:
-
-```js
-const mutationOptions = {
-  name: 'addEmailNewsletter',
-  args: { email: 'String' }
-};
-withMutation(mutationOptions)(MyComponent);
-```
-
-You would then call the function with:
-
-```
-this.props.addEmailNewsletter({email: 'foo@bar.com'})
+addGraphQLResolvers(voteResolver);
 ```
 
 ## Mutators
 
 A **mutator** is the function that actually does the work of mutating data on the server. As opposed to the _mutation_, which is usually a fairly light function called directly through the GraphQL API, a _mutator_ will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.
+
+### Default Mutators
 
 Vulcan features three standard mutators: `newMutator`, `editMutator`, and `removeMutator`. They are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`.
 
@@ -178,18 +222,10 @@ If `validate` is set to `true`, these boilerplate operations will:
 
 They will then run the mutation's document (or the `set` modifier) through the collection's sync callbacks (e.g. `movies.new.sync`), perform the operation, and finally run the async callbacks (e.g. `movies.new.async`).
 
-Callback hooks run with the following arguments:
-
-* `new`: `newDocument`, `currentUser`.
-* `edit`: `modifier`, `oldDocument`, `currentUser`.
-* `remove`: `document`, `currentUser`.
-
-You can learn more about callbacks in the [Callbacks](callbacks.html) section.
-
-For example, here is the `Posts` collection's `new` mutation resolver, using the `newMutation` boilerplate mutation:
+For example, here is the `Posts` collection's `new` mutation resolver, using the `newMutator` boilerplate mutation:
 
 ```js
-import { newMutation } from 'meteor/vulcan:core';
+import { newMutator } from 'meteor/vulcan:core';
 
 const mutations = {
   new: {
@@ -203,7 +239,7 @@ const mutations = {
     mutation(root, { document }, context) {
       performCheck(this.check, context.currentUser, document);
 
-      return newMutation({
+      return newMutator({
         collection: context.Posts,
         document: document,
         currentUser: context.currentUser,
@@ -215,6 +251,19 @@ const mutations = {
 };
 ```
 
-#### Alternative Approach
+### Mutator Callbacks
 
-Instead of calling `newMutation`, `editMutation`, and `removeMutation`, you can call the usual `collection.insert`, `collection.update`, and `collection.remove`. But if you do so, make sure you perform the appropriate validation and security checks to verify if the operation should be allowed.
+Default mutators create the following callback hooks for every collection: 
+
+- `collection.operation.validate`: called to validate the document or modifier. 
+- `collection.operation.before`: called before the database operation.
+- `collection.operation.after`: called after the database operation, but before the mutator returns.
+- `collection.operation.async`: called in an async manner after the mutator returns. 
+
+You can learn more about callbacks in the [Callbacks](callbacks.html) section.
+
+### Custom Mutators
+
+If you're writing your own resolvers you can of course also write your own mutators, either by using Vulcan's [Connectors](/database.html#Connectors) or even by accessing your database directly. 
+
+One thing to be aware of though is that by doing this you'll bypass any callback hooks used by the default mutators, and you'll also have to take care of your own data validation. 

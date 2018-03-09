@@ -90,6 +90,8 @@ addProduct('book', book => ({
 }));
 ```
 
+### Coupons
+
 In addition, you can also define coupon codes for your products:
 
 ```
@@ -104,6 +106,61 @@ addProduct('membership', {
 ```
 
 Make sure you define your products in a location accessible to both client and server, in order to access them both on the front-end to configure Stripe Checkout, and in the back-end to perform the actual charge. 
+
+### Subscription Products
+
+You can create recurring subscription products:
+
+```js
+addProduct('monthlyBooking', booking => {
+
+  // TODO: don't use findOne
+  const room = booking.room || Rooms.findOne({_id: booking.roomId});
+
+  return {
+    name: 'Rent this room',
+    currency: 'JPY',
+    description: `Rent ${room.name}`,
+    plan: getPlanId(room, booking.numberOfGuests),
+    initialAmount: booking.initialAmount,
+    initialAmountDescription: `Security deposit and cleaning fee`,
+    amount: booking.amount,
+    subscriptionProperties: {
+      billing_cycle_anchor: booking.startAt.valueOf().toString().slice(0,-3)
+    }
+  }
+});
+```
+
+#### Subscription Properties
+
+You can add a `subscriptionProperties` object to a product to pass extra properties to the payment gateway. For example, here's how to delay a subscription until the start date of a booking by setting the subscription's `trial_end` property:
+
+```js
+addProduct('booking', booking => {
+  return {
+    name: 'Rent a room',
+    currency: 'JPY',
+    amount: booking.amount,
+    subscriptionProperties: {
+      trial_end: booking.startAt.valueOf().toString().slice(0,-3)
+    }
+  }
+});
+```
+
+Inside `vulcan:payments`, this `subscriptionProperties` object will be passed on to the following code:
+
+```js
+const subscription = await stripe.subscriptions.create({
+  customer: customer.id,
+  items: [
+    { plan: product.plan },
+  ],
+  metadata,
+  ...product.subscriptionProperties,
+});
+```
 
 ## Checkout Component
 
