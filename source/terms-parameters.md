@@ -48,44 +48,129 @@ This two-tiered strategy ensures both that the user doesn't need to spell out ev
 
 #### Alternative Approach
 
-The generic `withList` component is hard-coded to send a `terms` argument, but if you're not using `withList` then you can send any argument you want, and bypass the terms/parameters system altogether.
+The generic `withList` component is hard-coded to pass a `terms` argument to a collection's GraphQL resolvers, but if you're not using `withList` then you can send any argument you want, and bypass the terms/parameters system altogether.
 
-### Parameter Callbacks
+## Parameter Callbacks
 
-Every Vulcan collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. For example, this is how the `framework-demo` implements a sort by `createdAt` on the `Movies` collection:
+Every Vulcan collection has its own `collection.parameters` callback hook which you can use to add additional parameter transformations. 
+
+(In addition, collections also have two distinct `collection.parameters.client` and `collection.parameters.server` hooks that only run in their respective environments, although the regular `collection.parameters` hook is usually enough.)
+
+### Simple Callbacks 
+
+For example, this is how you could implement a sort by `createdAt` on the `Movies` collection:
 
 ```js
-import { addCallback } from 'meteor/vulcan:core';
+import { addCallback, Utils } from 'meteor/vulcan:core';
 
-function sortByCreatedAt(parameters, terms) {
-  return {
-    selector: parameters.selector,
-    options: { ...parameters.options, sort: { createdAt: -1 } }
-  };
+function addSortByCreatedAt(parameters, terms) {
+  Utils.deepExtend(parameters, { options: { sort: { createdAt: -1 } } });
 }
 
-addCallback('movies.parameters', sortByCreatedAt);
+addCallback('movies.parameters', addSortByCreatedAt);
 ```
 
-Note that each iteration of the callback takes in the `parameters` and the original `terms` object received from the client, and should return a new augmented `parameters` object.
+Note that each iteration of the callback takes in the `parameters` and the original `terms` object received from the client (which you may or may not use), and should return a new augmented `parameters` object. 
 
-### Using Views
+Since multiple callbacks can run at the same time, it's generally a good idea to extend the `parameters` argument rather than overwrite it to avoid cancelling out the effects of previous parameter callbacks. 
 
-You've seen above how to manually create a `sortByCreatedAt` callback, but Vulcan also provides a built-in `view` shortcut you can use to achieve the same thing more easily (available on all collections created via `createCollection`). By defining a named view, you can then reference all the view's properties at once by specifying the `view: myViewName` option in your `terms`.
+### Advanced Callbacks 
 
-For example, this is how the `best` view is defined:
+You've seen above how to implement a “static” callback that always returns the same thing. But because callbacks receive `terms` as their second argument, they can also implement more advanced logic. For example, here's how you could add a callback to filter out products by `minPrice` and `maxPrice`: 
 
 ```js
-import { Posts } from 'meteor/vulcan:posts';
+function addMinPriceMaxPriceParameters (parameters, terms) {
 
-Posts.addView('best', terms => ({
+  let price = {};
+
+  if (terms.minPrice) {
+    price.$gte = parseInt(terms.minPrice);
+  }
+
+  if (terms.maxPrice) {
+   price.$lte = parseInt(terms.maxPrice);
+  }
+
+  if (!_.isEmpty(price)) {
+    parameters.selector.price = price;
+  }
+
+  return parameters;
+}
+addCallback('products.parameters', addMinPriceMaxPriceParameters);
+```
+
+Note that we've written our callback in a way that supports having `minPrice`, `maxPrice`, or both be undefined. After all, since `terms` comes from the client we don't have complete control over it and have to be ready to handle any possible permutation. 
+
+## Existing Parameters 
+
+While you can manually create callbacks to deal with any arbitrary property, Vulcan can also handle a few built-in `terms` properties out of the box (available on all collections created via `createCollection`).
+
+### Limit
+
+You can set `terms.limit` to limit the number of results returned. 
+
+### Query
+
+You can set `terms.query` to perform a search, assuming you've set some of your collection fields to `searchable: true`. 
+
+### View
+
+Vulcan's built-in `view` property lets you define shortcuts that aggregate multiple parameters in a single function. 
+
+Let's go back to our Movies example's `createdAt` sort:
+
+```js
+import { addCallback, Utils } from 'meteor/vulcan:core';
+
+function addSortByCreatedAt(parameters, terms) {
+  Utils.deepExtend(parameters, { options: { sort: { createdAt: -1 } } });
+}
+
+addCallback('movies.parameters', addSortByCreatedAt);
+```
+
+The issue here is that our `{ createdAt: -1 }` sort will *always* be applied whenever we load data from the Movies collection. But what if we also wanted the ability to sometimes sort movies by name as well?
+
+One solution would be to make our callback depend on `terms.sort`. But this will quickly devolve into a mess of `if` or `switch` statements as you try to handle every possible value. 
+
+Here is how you can achieve this by creating two views instead: 
+
+```js
+import { Movies } from 'meteor/example-movies';
+
+Movies.addView('new', terms => ({
   options: {
-    sort: { sticky: -1, baseScore: -1 }
+    sort: { createdAt: -1 }
+  }
+}));
+
+Movies.addView('alphabetical', terms => ({
+  options: {
+    sort: { name: 1 }
   }
 }));
 ```
 
-Instead of creating a dedicated `sortByStickyAndBaseScore` callback, you can simply specify `view: 'best'` in your `terms`.
+You can then pick a view by setting `terms.view` to either `new` or `alphabetical`. Another big advantage of views is that they can return complex objects. For example, here's how you'd create a view to show a user's posts:
+
+```js
+Posts.addView('userPosts', terms => ({
+  selector: {
+    userId: terms.userId,
+    status: Posts.config.STATUS_APPROVED,
+    isFuture: {$ne: true}
+  },
+  options: {
+    limit: 5,
+    sort: {
+      postedAt: -1
+    }
+  }
+}));
+```
+
+#### Default View
 
 If you'd like to specify some default options for all your views, you can also use `collection.addDefaultView`.
 
@@ -101,7 +186,3 @@ Posts.addDefaultView(terms => ({
 ```
 
 Note that views work by extending one another. In other words, the default view is extended by the view specified by the view option, which is is then extended by any additional parameter callbacks.
-
-#### Alternative Approach
-
-Using views is completely optional. You can also use `collection.parameters` callbacks instead to achieve the same thing with a little bit more code.
