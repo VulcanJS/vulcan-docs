@@ -618,6 +618,7 @@
 <p>Note that you can also start the app with:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor --settings sample_settings.json</span><br></pre></td></tr></table></figure>
 <p>All <code>npm start</code> does is run the above command, while also checking for the presence of <code>settings.json</code> first and creating it for you if missing. </p>
+<p>(A note for <code>windows</code> user: While running <code>npm install</code> you might get error regarding <code>node-gyp</code> and <code>bcrypt</code> package installation. This is because you need <a href="https://github.com/nodejs/node-gyp/blob/master/README.md#on-windows" target="_blank" rel="noopener">windows-build-tool</a> for <code>node-gyp</code> installation which is <a href="https://github.com/kelektiv/node.bcrypt.js#dependencies" target="_blank" rel="noopener">required</a> for <code>bcrypt</code> installation.)</p>
 <h2 id="Two-Repo-Install-Optional"><a href="#Two-Repo-Install-Optional" class="headerlink" title="Two-Repo Install (Optional)"></a>Two-Repo Install (Optional)</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=mEemOReAw5Y" target="_blank" rel="noopener">Full video tutorial</a></li>
 </ul>
