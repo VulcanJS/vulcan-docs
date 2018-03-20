@@ -596,24 +596,28 @@
 
     <div class="document-formatting">
       <p>Vulcan provides an API to add support for multiple analytics and event tracking providers.</p>
-<h2 id="Automated-Analytics"><a href="#Automated-Analytics" class="headerlink" title="Automated Analytics"></a>Automated Analytics</h2><p>The following events will happen automatically for every analytics provider (assuming they are supported):</p>
+<h2 id="Selecting-Providers"><a href="#Selecting-Providers" class="headerlink" title="Selecting Providers"></a>Selecting Providers</h2><p>Out of the box, Vulcan already supports a few different analytics providers:</p>
+<ul>
+<li><code>vulcan:events-ga</code>: Google Analytics (note: currently client-only)</li>
+<li><code>vulcan:events-segment</code>: Segment</li>
+<li><code>vulcan:events-intercom</code>: Intercom</li>
+<li><code>vulcan:events-internal</code>: Internal database-stored event tracking</li>
+</ul>
+<p>To use one or more of the existing providers, just add the corresponding package as a dependency (either using <code>meteor add</code> or as a dependency of your own custom package) and then configure any required API keys (check your <a href="/settings.html">Settings dashboard</a> for reference).</p>
+<p>You can use as many providers as you want simultaneously, and your tracked events will be automatically transmitted to all of them. </p>
+<h2 id="Event-Tracking"><a href="#Event-Tracking" class="headerlink" title="Event Tracking"></a>Event Tracking</h2><p>Once one or more provider is enabled, Vulcan will start transmitting event data, either through automated events that don’t require any configuration on your part, or through manual event tracking. </p>
+<h3 id="Automated-Events"><a href="#Automated-Events" class="headerlink" title="Automated Events"></a>Automated Events</h3><p>The following events will happen automatically for every analytics provider (assuming they are supported):</p>
 <ul>
 <li><code>init</code> (client only): initialize the provider’s code snippet.</li>
 <li><code>identify</code> (client/server): identify the current user, if they exists.</li>
 <li><code>page</code> (client only): track any page changes.</li>
 <li><code>user</code> (server only): track new user creations.</li>
 </ul>
-<h2 id="Manual-Event-Tracking"><a href="#Manual-Event-Tracking" class="headerlink" title="Manual Event Tracking"></a>Manual Event Tracking</h2><p>Additionally, you can also manually track specific events using the <code>track</code> function:</p>
+<h3 id="Manual-Events"><a href="#Manual-Events" class="headerlink" title="Manual Events"></a>Manual Events</h3><p>Additionally, you can also manually track specific events using the <code>track</code> function:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; track &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line">track(<span class="string">'clickedSignUp'</span>, &#123; <span class="attr">time</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;);</span><br></pre></td></tr></table></figure>
 <p><code>track</code> takes three argument: the name of the event (as a string), an optional properties object, and an optional <code>currentUser</code> object which will be used if the current user can’t be inferred from the context (for example, you’re calling <code>track</code> on the server).</p>
 <p>You can call <code>track</code> on either client or server (assuming both versions have been implemented), but note that even though both versions have the same API, they might work differently behind the scenes (see below). </p>
-<h2 id="Built-in-Providers"><a href="#Built-in-Providers" class="headerlink" title="Built-in Providers"></a>Built-in Providers</h2><ul>
-<li><code>vulcan:events-ga</code>: Google Analytics (note: currently client-only)</li>
-<li><code>vulcan:events-segment</code>: Segment</li>
-<li><code>vulcan:events-intercom</code>: Intercom</li>
-<li><code>vulcan:events-internal</code>: Internal database-stored event tracking</li>
-</ul>
-<h2 id="Adding-Providers"><a href="#Adding-Providers" class="headerlink" title="Adding Providers"></a>Adding Providers</h2><p>To add a provider, you can use the following methods (applied here to <a href="https://segment.com/" target="_blank" rel="noopener">Segment</a>‘s client-side JavaScript API):</p>
+<h2 id="Implementing-Other-Providers"><a href="#Implementing-Other-Providers" class="headerlink" title="Implementing Other Providers"></a>Implementing Other Providers</h2><p>To add support for an analytics provider that isn’t yet supported by one of the built-in integrations, you can use the following methods (applied here to <a href="https://segment.com/" target="_blank" rel="noopener">Segment</a>‘s client-side JavaScript API). Feel free to refer to one of the existing integrations and copy the same overall structure.</p>
 <h4 id="addInitFunction-client-only"><a href="#addInitFunction-client-only" class="headerlink" title="addInitFunction (client only)"></a><code>addInitFunction</code> (client only)</h4><p>Pass a function that will be called immediately to initialize the provider. For example:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addInitFunction, getSetting &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:events'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">segmentInit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  !(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> analytics = (<span class="built_in">window</span>.analytics = <span class="built_in">window</span>.analytics || []);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    snippet code</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    analytics.SNIPPET_VERSION = <span class="string">'4.0.0'</span>;</span><br><span class="line">    analytics.load(getSetting(<span class="string">'segment.clientKey'</span>));</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;</span><br><span class="line">addInitFunction(segmentInit);</span><br></pre></td></tr></table></figure>
 <p>Note that on the server, initialization will typically happen inside the provider package’s own code, which means you don’t need to use <code>addInitFunction</code>. </p>
