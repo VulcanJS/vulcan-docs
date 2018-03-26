@@ -366,15 +366,15 @@
             
               
               <li class="item-toc ">
-                <a href="forms-custom.html" class="sidebar-link ">
-                  <span>Custom Form Components</span>
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
                 </a>
               </li>
             
               
               <li class="item-toc ">
-                <a href="forms-upload.html" class="sidebar-link ">
-                  <span>Upload Package</span>
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
                 </a>
               </li>
             
@@ -447,6 +447,13 @@
               <li class="item-toc ">
                 <a href="events.html" class="sidebar-link ">
                   <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-upload.html" class="sidebar-link ">
+                  <span>Upload Package</span>
                 </a>
               </li>
             
@@ -610,7 +617,8 @@
 <li><code>onEdit(modifier, document, currentUser)</code></li>
 <li><code>onRemove(document, currentUser)</code></li>
 </ul>
-<h2 id="Forms-Properties"><a href="#Forms-Properties" class="headerlink" title="Forms Properties"></a>Forms Properties</h2><h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
+<h2 id="Form-Properties"><a href="#Form-Properties" class="headerlink" title="Form Properties"></a>Form Properties</h2><p>These schema properties are mostly used for controlling the appearance and behavior of Vulcan’s auto-generated forms.</p>
+<h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
 <h4 id="control"><a href="#control" class="headerlink" title="control"></a><code>control</code></h4><p>Either a text string (one of <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>checkboxgroup</code>, <code>radiogroup</code>, or <code>select</code>) or a React component.</p>
 <h4 id="order"><a href="#order" class="headerlink" title="order"></a><code>order</code></h4><p>A number corresponding to the position of the property’s field inside the form.</p>
 <h4 id="group"><a href="#group" class="headerlink" title="group"></a><code>group</code></h4><p>An optional object containing the group/section/fieldset in which to include the form element. Groups have <code>name</code>, <code>label</code>, and <code>order</code> properties.</p>
@@ -624,11 +632,18 @@
 <p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123; <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;);</span><br></pre></td></tr></table></figure>
 <p>As long as a value is in <code>this.state.currentValues</code> it should be submitted with the form, no matter whether there is an actual form item or not.</p>
+<h4 id="options"><a href="#options" class="headerlink" title="options"></a><code>options</code></h4><p>An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component’s <code>props</code> as argument and returns an array. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">status: &#123;</span><br><span class="line">  type: <span class="built_in">Number</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  viewableBy: [<span class="string">'admins'</span>],</span><br><span class="line">  insertableBy: [<span class="string">'admins'</span>],</span><br><span class="line">  editableBy: [<span class="string">'admins'</span>],</span><br><span class="line">  control: <span class="string">'select'</span>,</span><br><span class="line">  <span class="keyword">default</span>: <span class="number">2</span>,</span><br><span class="line">  options: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="number">1</span>,</span><br><span class="line">        label: <span class="string">'private'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="number">2</span>,</span><br><span class="line">        label: <span class="string">'public'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ];</span><br><span class="line">  &#125;,</span><br><span class="line">  description: <span class="string">`The room' status (Private/Public)`</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="query"><a href="#query" class="headerlink" title="query"></a><code>query</code></h4><p>A query used to require extra data needed to display the form field. See <a href="/forms.html#Field-Specific-Data-Loading">field-specific data loading</a>.</p>
 <h4 id="form"><a href="#form" class="headerlink" title="form"></a><code>form</code></h4><p>An object defining the props that will be passed to the <code>control</code> component to customize it. You can pass either values, or functions that will be evaluated each time the form is generated.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">form:&#123;</span><br><span class="line">  locale: <span class="string">'fr'</span>,</span><br><span class="line">  defaultValue: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="comment">// will be evaluated each time a form is generated</span></span><br><span class="line">&#125;,</span><br><span class="line">control: <span class="string">'datetime'</span></span><br></pre></td></tr></table></figure>
 <p>You may sometimes want to pass a function or a React component in the form. Since all functions in the <code>form</code> object will be evaluated before rendering the form, you’ll need to pass a closure that returns the desired function or component instead.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">form:&#123;</span><br><span class="line">  locale: <span class="string">'fr'</span>,</span><br><span class="line">  defaultValue: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="comment">// will be evaluated each time a form is generated</span></span><br><span class="line">  renderOption: <span class="function"><span class="params">()</span> =&gt;</span> MyCustomComponent, <span class="comment">// will return MyCustomComponent as expected</span></span><br><span class="line">  sortValues: <span class="function"><span class="params">()</span> =&gt;</span> mySortingFunction, <span class="comment">// will return mySortingFunction as expected</span></span><br><span class="line">&#125;,</span><br><span class="line">control: <span class="string">'MyCustomSelect'</span></span><br></pre></td></tr></table></figure>
-<p>When the form is generated, the closure is evaluated and return your component or function. Thus in <code>MyCustomSelect</code>, <code>props.renderOption</code> will equal <code>MyCustomComponent</code> as expected.</p>
+<p>When the form is generated, the closure is evaluated and return your component or function. Thus in<br><code>MyCustomSelect</code>, <code>props.renderOption</code> will equal <code>MyCustomComponent</code> as expected.</p>
+<h4 id="min"><a href="#min" class="headerlink" title="min"></a><code>min</code></h4><p>You can set <code>min</code> to force the field to be longer than a certain length (e.g. <code>min: 20</code>).</p>
+<h4 id="max"><a href="#max" class="headerlink" title="max"></a><code>max</code></h4><p>You can set <code>max</code> to limit the field to a certain length (e.g. <code>max: 140</code>).</p>
+<h4 id="defaultValue"><a href="#defaultValue" class="headerlink" title="defaultValue"></a><code>defaultValue</code></h4><p>The field’s default value. Note that you can also use <code>onInsert</code> to achieve the same effect.</p>
+<h4 id="description"><a href="#description" class="headerlink" title="description"></a><code>description</code></h4><p>A description that will be used as help text for the field. </p>
 <h2 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h2><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields.</p>
 
     </div>

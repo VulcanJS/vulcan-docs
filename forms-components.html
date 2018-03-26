@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Head Tags | Vulcan Docs</title>
+    <title>Form Components | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Head Tags | Vulcan Docs">
+    <meta property="og:title" content="Form Components | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Head Tags | Vulcan Docs">
+    <meta name="twitter:title" content="Form Components | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -335,8 +335,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
                   <span>Head Tags</span>
                 </a>
               </li>
@@ -365,8 +365,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="forms-components.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>Form Components</span>
                 </a>
               </li>
@@ -590,39 +590,39 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Head Tags</h1>
+      <h1 class="title-page">Form Components</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/head-tags.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/forms-components.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>You’ll often need to add tags to your app’s <code>&lt;head&gt;</code> section. There are three ways to do this: using the <a href="https://github.com/nfl/react-helmet" target="_blank" rel="noopener">Helmet</a> library, using the <code>&lt;Components.HeadTags/&gt;</code> component, or using the <code>Head</code> object. </p>
-<h2 id="Helmet"><a href="#Helmet" class="headerlink" title="Helmet"></a>Helmet</h2><p>You can use Helmet inside a VulcanJS app just like inside any other React app:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Layout = <span class="function">(<span class="params">&#123;children&#125;</span>) =&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;div id=<span class="string">'wrapper'</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Helmet&gt;</span><br><span class="line">      &lt;link name=<span class="string">'bootstrap'</span> rel=<span class="string">'stylesheet'</span> type=<span class="string">'text/css'</span> href=<span class="string">'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css'</span>/&gt;</span><br><span class="line">      &lt;link name=<span class="string">'font-awesome'</span> rel=<span class="string">'stylesheet'</span> type=<span class="string">'text/css'</span> href=<span class="string">'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/Helmet&gt;</span></span><br><span class="line"><span class="regexp">    </span></span><br><span class="line"><span class="regexp">    &lt;div className='main'&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &#123;children&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">registerComponent('Layout', Layout);</span></span><br></pre></td></tr></table></figure>
-<h2 id="Components-HeadTags"><a href="#Components-HeadTags" class="headerlink" title="Components.HeadTags"></a>Components.HeadTags</h2><h3 id="Using-HeadTags"><a href="#Using-HeadTags" class="headerlink" title="Using HeadTags"></a>Using HeadTags</h3><p>Out of the box, a VulcanJS app adds a few default tags such as <code>&lt;title/&gt;</code>, <code>&lt;meta name=&#39;description&#39;/&gt;</code>, etc. These are all added using Helmet by <code>Components.HeadTags</code> (called from inside the <code>App</code> component), using values provided by your <code>settings.json</code> file. </p>
-<p>In some cases, you’ll want to change these values for a given page. For example, a single post page will want to have a different title than your homepage. You can do that by calling <code>Components.HeadTags</code> directly anywhere inside your component tree  with one or more of the following props:</p>
-<ul>
-<li><code>title</code></li>
-<li><code>url</code></li>
-<li><code>image</code></li>
-<li><code>description</code></li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Components.HeadTags url=&#123;Posts.getPageUrl(post, <span class="literal">true</span>)&#125; title=&#123;post.title&#125; image=&#123;post.thumbnailUrl&#125; description=&#123;post.excerpt&#125; /&gt;</span><br></pre></td></tr></table></figure>
-<p>By calling <code>HeadTags</code> again, you’ll be calling Helmet again, which in turn will override the head tags previously set by the <code>App</code> component.</p>
-<h3 id="Overriding-Headtags"><a href="#Overriding-Headtags" class="headerlink" title="Overriding Headtags"></a>Overriding Headtags</h3><p>Since <code>Components.HeadTags</code> is a component, you can also override it completely using <code>replaceComponent(&#39;HeadTags&#39;, MyComponent)</code>.</p>
-<h2 id="The-Head-Object"><a href="#The-Head-Object" class="headerlink" title="The Head Object"></a>The Head Object</h2><p>Finally, there are also some cases where you want to add or remove a tag from <em>outside</em> your React components. You can do so using the <code>Head</code> object.</p>
-<p>For example. here is how the <code>vulcan:rss</code> package adds an RSS feed link to the head:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Head, Utils &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">Head.link.push(&#123;</span><br><span class="line">  name: <span class="string">'rss'</span>,</span><br><span class="line">  rel: <span class="string">'alternate'</span>, </span><br><span class="line">  type: <span class="string">'application/rss+xml'</span>,</span><br><span class="line">  href: <span class="string">`<span class="subst">$&#123;Utils.getSiteUrl()&#125;</span>feed.xml`</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>You can also remove a tag using <code>removeFromHeadTags</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; removeFromHeadTags &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">removeFromHeadTags(<span class="string">'link'</span>, <span class="string">'rss'</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="Head-Components"><a href="#Head-Components" class="headerlink" title="Head Components"></a>Head Components</h3><p>You can also use the <code>Head</code> object to add React components to every page of your app (this can be useful for adding analytics integrations wrapped inside React components, for example). Just push the components to <code>Head.components</code>. </p>
-<p>If you push an array (such as <code>[myComponent, withCurrentUser]</code>) the array will be interpreted as a component + HoC array similar to the arguments of <code>registerComponent</code>. </p>
+      <h2 id="General-Components"><a href="#General-Components" class="headerlink" title="General Components"></a>General Components</h2><p>The following components are used to display Vulcan forms.</p>
+<h4 id="SmartForm"><a href="#SmartForm" class="headerlink" title="SmartForm"></a><code>SmartForm</code></h4><p>This component (<code>FormWrapper.jsx</code>) wraps the entire form and handles all data loading.</p>
+<h4 id="Form"><a href="#Form" class="headerlink" title="Form"></a><code>Form</code></h4><p>This is the main component responsible for generating and displaying the form.</p>
+<h4 id="FormErrors"><a href="#FormErrors" class="headerlink" title="FormErrors"></a><code>FormErrors</code></h4><p>Used to display errors at the top of the form.</p>
+<h4 id="FormGroup"><a href="#FormGroup" class="headerlink" title="FormGroup"></a><code>FormGroup</code></h4><p>Used to display form groups.</p>
+<h4 id="FormSubmit"><a href="#FormSubmit" class="headerlink" title="FormSubmit"></a><code>FormSubmit</code></h4><p>Used to display the form’s submit and cancel buttons.</p>
+<h4 id="FieldErrors"><a href="#FieldErrors" class="headerlink" title="FieldErrors"></a><code>FieldErrors</code></h4><p>Used to display errors beneath a form field.</p>
+<h4 id="FormComponent"><a href="#FormComponent" class="headerlink" title="FormComponent"></a><code>FormComponent</code></h4><p>Used to display an individual form field.</p>
+<h4 id="FormNested-amp-FormNestedItem"><a href="#FormNested-amp-FormNestedItem" class="headerlink" title="FormNested &amp; FormNestedItem"></a><code>FormNested</code> &amp; <code>FormNestedItem</code></h4><p>Used to display nested form items along with add/remove controls.</p>
+<h2 id="Field-Components"><a href="#Field-Components" class="headerlink" title="Field Components"></a>Field Components</h2><p>In addition to the components used to display the form’s structure, an additional set of components is used to display each individual field, according to its type.</p>
+<p>To select a field, use its lowercase name as the <code>control</code> property on your schema (e.g. <code>control: &#39;select&#39;</code>).</p>
+<h4 id="Default"><a href="#Default" class="headerlink" title="Default"></a><code>Default</code></h4><p>Default form input, for text strings.</p>
+<h4 id="Textarea"><a href="#Textarea" class="headerlink" title="Textarea"></a><code>Textarea</code></h4><p>Textarea form input. </p>
+<h4 id="Email"><a href="#Email" class="headerlink" title="Email"></a><code>Email</code></h4><p>Email form input.</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a><code>Number</code></h4><p>Number form input. Will be used automatically for <code>Number</code> fields.</p>
+<h4 id="Url"><a href="#Url" class="headerlink" title="Url"></a><code>Url</code></h4><p>URL form input. </p>
+<h4 id="Checkbox"><a href="#Checkbox" class="headerlink" title="Checkbox"></a><code>Checkbox</code></h4><p>Checkbox form input. Will be used automatically for <code>Boolean</code> fields.</p>
+<h4 id="Checkboxgroup"><a href="#Checkboxgroup" class="headerlink" title="Checkboxgroup"></a><code>Checkboxgroup</code></h4><p>Checkbox form input.</p>
+<h4 id="Select"><a href="#Select" class="headerlink" title="Select"></a><code>Select</code></h4><p>Select form input.</p>
+<h4 id="Radiogroup"><a href="#Radiogroup" class="headerlink" title="Radiogroup"></a><code>Radiogroup</code></h4><p>Radio group form input</p>
+<h4 id="Date-Time-Datetime"><a href="#Date-Time-Datetime" class="headerlink" title="Date, Time, Datetime"></a><code>Date</code>, <code>Time</code>, <code>Datetime</code></h4><p>Used to select a date, a time, or both. <code>Date</code> will be used automatically for <code>Date</code> fields.</p>
 
     </div>
   </div>
@@ -632,17 +632,17 @@
       
       
         <a class="link primary prev"
-          href="internationalization.html">
+          href="forms.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Internationalization
+          Forms
         </a>
       
       
         <a class="link primary next"
-          href="settings.html">
+          href="forms-custom.html">
           <span class="subtitle-pagination">Next</span>
-          Settings
+          Custom Form Components
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -650,7 +650,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/head-tags.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/forms-components.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
