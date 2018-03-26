@@ -52,8 +52,8 @@ sidebar_categories:
     - settings
   Forms: 
     - forms
+    - forms-components
     - forms-custom
-    - forms-upload
   Packages:
     - packages
     - email
@@ -64,6 +64,7 @@ sidebar_categories:
     - cloudinary
     - voting
     - events
+    - forms-upload
   Tutorials:
     - example-simple
     - example-movies

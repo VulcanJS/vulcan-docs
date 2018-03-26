@@ -24,7 +24,7 @@ const schema = {
   },
 
   /**
-    The id of the document that was voted on
+    The name of the collection the document belongs to
   */
   collectionName: {
     type: String

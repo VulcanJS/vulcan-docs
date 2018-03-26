@@ -40,7 +40,9 @@ These three properties can take a callback function that will run during the cor
 * `onEdit(modifier, document, currentUser)`
 * `onRemove(document, currentUser)`
 
-## Forms Properties
+## Form Properties
+
+These schema properties are mostly used for controlling the appearance and behavior of Vulcan's auto-generated forms.
 
 #### `label`
 
@@ -102,6 +104,39 @@ this.context.updateCurrentValues({ foo: 'bar' });
 
 As long as a value is in `this.state.currentValues` it should be submitted with the form, no matter whether there is an actual form item or not.
 
+#### `options`
+
+An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component's `props` as argument and returns an array. 
+
+```js
+status: {
+  type: Number,
+  optional: true,
+  viewableBy: ['admins'],
+  insertableBy: ['admins'],
+  editableBy: ['admins'],
+  control: 'select',
+  default: 2,
+  options: () => {
+    return [
+      {
+        value: 1,
+        label: 'private',
+      },
+      {
+        value: 2,
+        label: 'public',
+      },
+    ];
+  },
+  description: `The room' status (Private/Public)`
+},
+```
+
+#### `query`
+
+A query used to require extra data needed to display the form field. See [field-specific data loading](/forms.html#Field-Specific-Data-Loading).
+
 #### `form`
 
 An object defining the props that will be passed to the `control` component to customize it. You can pass either values, or functions that will be evaluated each time the form is generated.
@@ -126,7 +161,24 @@ form:{
 control: 'MyCustomSelect'
 ```
 
-When the form is generated, the closure is evaluated and return your component or function. Thus in `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
+When the form is generated, the closure is evaluated and return your component or function. Thus in 
+`MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
+
+#### `min`
+
+You can set `min` to force the field to be longer than a certain length (e.g. `min: 20`).
+
+#### `max`
+
+You can set `max` to limit the field to a certain length (e.g. `max: 140`).
+
+#### `defaultValue`
+
+The field's default value. Note that you can also use `onInsert` to achieve the same effect.
+
+#### `description`
+
+A description that will be used as help text for the field. 
 
 ## Other Properties
 

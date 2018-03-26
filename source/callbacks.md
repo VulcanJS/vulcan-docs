@@ -4,6 +4,12 @@ title: Callbacks
 
 Vulcan uses a system of hooks and callbacks for many of its operations.
 
+A **hook** is a specific point in the code where **callbacks** can be attached and executed. These callbacks are middleware-like functions that take in an argument, then pass it on to the next callback attached to the same hook. 
+
+They are a handy way to inject your own code into other, pre-existing operations without having to modify the code of these operations directly. 
+
+Callback functions can take more than one arguments, but the first argument is special in that - for sync callbacks – it will be updated each time to reflect the return value of each successive function, letting you progressively iterate over a value or object. 
+
 ## Debugging
 
 **If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://0.0.0.0:3000/callbacks](http://0.0.0.0:3000/callbacks).**

@@ -137,7 +137,8 @@ One solution would be to make our callback depend on `terms.sort`. But this will
 Here is how you can achieve this by creating two views instead: 
 
 ```js
-import { Movies } from 'meteor/example-movies';
+// import Movies collection
+import { Movies } from './collection.js';
 
 Movies.addView('new', terms => ({
   options: {

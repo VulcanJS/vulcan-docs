@@ -4,7 +4,24 @@ title: Analytics & Event Tracking
 
 Vulcan provides an API to add support for multiple analytics and event tracking providers.
 
-## Automated Analytics
+## Selecting Providers
+
+Out of the box, Vulcan already supports a few different analytics providers:
+
+* `vulcan:events-ga`: Google Analytics (note: currently client-only)
+* `vulcan:events-segment`: Segment
+* `vulcan:events-intercom`: Intercom
+* `vulcan:events-internal`: Internal database-stored event tracking
+
+To use one or more of the existing providers, just add the corresponding package as a dependency (either using `meteor add` or as a dependency of your own custom package) and then configure any required API keys (check your [Settings dashboard](/settings.html) for reference).
+
+You can use as many providers as you want simultaneously, and your tracked events will be automatically transmitted to all of them. 
+
+## Event Tracking
+
+Once one or more provider is enabled, Vulcan will start transmitting event data, either through automated events that don't require any configuration on your part, or through manual event tracking. 
+
+### Automated Events
 
 The following events will happen automatically for every analytics provider (assuming they are supported):
 
@@ -13,7 +30,7 @@ The following events will happen automatically for every analytics provider (ass
 * `page` (client only): track any page changes.
 * `user` (server only): track new user creations.
 
-## Manual Event Tracking
+### Manual Events
 
 Additionally, you can also manually track specific events using the `track` function:
 
@@ -27,15 +44,9 @@ track('clickedSignUp', { time: new Date(), foo: 'bar' });
 
 You can call `track` on either client or server (assuming both versions have been implemented), but note that even though both versions have the same API, they might work differently behind the scenes (see below). 
 
-## Built-in Providers
+## Implementing Other Providers
 
-* `vulcan:events-ga`: Google Analytics (note: currently client-only)
-* `vulcan:events-segment`: Segment
-* `vulcan:events-internal`: Internal database-stored event tracking
-
-## Adding Providers
-
-To add a provider, you can use the following methods (applied here to [Segment](https://segment.com/)'s client-side JavaScript API):
+To add support for an analytics provider that isn't yet supported by one of the built-in integrations, you can use the following methods (applied here to [Segment](https://segment.com/)'s client-side JavaScript API). Feel free to refer to one of the existing integrations and copy the same overall structure.
 
 #### `addInitFunction` (client only)
 
