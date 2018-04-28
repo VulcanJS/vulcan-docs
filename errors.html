@@ -609,7 +609,7 @@
     </div>
 
     <div class="document-formatting">
-      <h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><p>An error object can have the following properties (all optional):</p>
+      <h2 id="Error-Properties"><a href="#Error-Properties" class="headerlink" title="Error Properties"></a>Error Properties</h2><p>An error object can have the following properties (all optional):</p>
 <ul>
 <li><code>id</code>: a string identifier, for example <code>app.not_found</code>. Can be used as an internationalization key.</li>
 <li><code>path</code>: for field-specific errors inside forms, the path of the field with the issue.</li>
@@ -625,6 +625,9 @@
 <p>For example, here is how you could throw an error when trying to geocode an address inside a mutation callback:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> message = <span class="string">`Could not geocode address “<span class="subst">$&#123;address&#125;</span>”`</span>;</span><br><span class="line"><span class="keyword">const</span> GeoDataError = createError(<span class="string">'app.geoData_error'</span>, &#123; message &#125;);</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> GeoDataError(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    <span class="keyword">break</span>: <span class="literal">false</span>,</span><br><span class="line">    id: <span class="string">'app.geoData_error'</span>,</span><br><span class="line">    path: <span class="string">'address'</span>,</span><br><span class="line">    properties: &#123; address &#125;,</span><br><span class="line">    message,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>Note that if <code>app.geoData_error</code> has a corresponding internationalization string, the string will be used (and <code>{ address }</code> passed as <code>values</code> usable inside the string); and if it does not <code>message</code> will be used instead. </p>
+<h2 id="Displaying-Errors"><a href="#Displaying-Errors" class="headerlink" title="Displaying Errors"></a>Displaying Errors</h2><p>Inside your Vulcan app, errors can be displayed using the <code>withMessages</code> HoC, which gives a component access to the <code>flash()</code> function to show a message. </p>
+<h2 id="Form-Errors"><a href="#Form-Errors" class="headerlink" title="Form Errors"></a>Form Errors</h2><p>Form errors are a special use case, and are thrown from inside a form component using <code>this.props.throwError()</code>. </p>
+<p>Note that when throwing a GraphQL error meant to be displayed inside a form, you can give it a <code>path</code> property to relate it to a specific form field. </p>
 
     </div>
   </div>
