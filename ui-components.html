@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Schemas & Collections | Vulcan Docs</title>
+    <title>UI Components | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Schemas & Collections | Vulcan Docs">
+    <meta property="og:title" content="UI Components | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Schemas & Collections | Vulcan Docs">
+    <meta name="twitter:title" content="UI Components | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -170,8 +170,8 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
                   <span>Schemas & Collections</span>
                 </a>
               </li>
@@ -300,8 +300,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="ui-components.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
                   <span>UI Components</span>
                 </a>
               </li>
@@ -611,53 +611,49 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Schemas & Collections</h1>
+      <h1 class="title-page">UI Components</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schemas.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/ui-components.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>The role of the schema is to serve as a central source of truth that will be used to generate or populate many of Vulcan’s other components.</p>
-<p><img src="/images/vulcan-schemas.svg" alt="/images/vulcan-schemas.svg"></p>
-<p>Based on your schema, Vulcan can:</p>
-<ul>
-<li>Generate a GraphQL equivalent of your schema to control your GraphQL API.</li>
-<li><a href="/groups-permissions.html">Control permissions</a> for accessing and modifying data.</li>
-<li><a href="/forms.html">Generate forms</a> on the client.</li>
-<li>Validate form contents on submission.</li>
-<li>Auto-generate <a href="/core-components.html#Datatable">paginated, searchable datatables</a>.</li>
-<li>Auto-generate <a href="/core-components.html#Card">smart cards</a> for displaying individual documents.</li>
-<li>Add callbacks on document insert or edit.</li>
+      <p>While Vulcan itself doesn’t provide its own UI components (besides core utilites such as <code>Layout</code>, <code>App</code>, etc.), it does make use of a common component API that can serve as a bridge between your app and UI frameworks such as <a href="https://react-bootstrap.github.io/" target="_blank" rel="noopener">React Bootstrap</a> or <a href="https://www.material-ui.com/#/" target="_blank" rel="noopener">Material UI</a>.</p>
+<p>By using this API instead of depending on a framework’s components directly, Vulcan plugins and projects can make it easy to easily swap from one UI framework to another. </p>
+<h2 id="Form-Components"><a href="#Form-Components" class="headerlink" title="Form Components"></a>Form Components</h2><ul>
+<li>Checkbox</li>
+<li>Checkboxgroup</li>
+<li>Date</li>
+<li>Datetime</li>
+<li>Default</li>
+<li>Email</li>
+<li>FormControl</li>
+<li>Number</li>
+<li>Radiogroup</li>
+<li>Select</li>
+<li>Textarea</li>
+<li>Time</li>
+<li>URL</li>
 </ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Here is a schema example, taken from the <a href="/example-movies.html">Movies tutorial</a>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">  <span class="comment">// default properties</span></span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  createdAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>],</span><br><span class="line">    onInsert: <span class="function">(<span class="params"><span class="built_in">document</span>, currentUser</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>],</span><br><span class="line">    resolveAs: &#123;</span><br><span class="line">      fieldName: <span class="string">"user"</span>,</span><br><span class="line">      type: <span class="string">"User"</span>,</span><br><span class="line">      resolver: <span class="function">(<span class="params">movie, args, context</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> context.Users.findOne(</span><br><span class="line">          &#123; <span class="attr">_id</span>: movie.userId &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            fields: context.Users.getViewableFields(</span><br><span class="line">              context.currentUser,</span><br><span class="line">              context.Users</span><br><span class="line">            )</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">      addOriginalField: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// custom properties</span></span><br><span class="line"></span><br><span class="line">  name: &#123;</span><br><span class="line">    label: <span class="string">"Name"</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>],</span><br><span class="line">    insertableBy: [<span class="string">"members"</span>],</span><br><span class="line">    editableBy: [<span class="string">"members"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  year: &#123;</span><br><span class="line">    label: <span class="string">"Year"</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>],</span><br><span class="line">    insertableBy: [<span class="string">"members"</span>],</span><br><span class="line">    editableBy: [<span class="string">"members"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  review: &#123;</span><br><span class="line">    label: <span class="string">"Review"</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    control: <span class="string">"textarea"</span>,</span><br><span class="line">    viewableBy: [<span class="string">"guests"</span>],</span><br><span class="line">    insertableBy: [<span class="string">"members"</span>],</span><br><span class="line">    editableBy: [<span class="string">"members"</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>As you can see, a schema is a JavaScript object containing a list of fields, each of which is defined using a range of special properties.</p>
-<h2 id="Creating-Collections"><a href="#Creating-Collections" class="headerlink" title="Creating Collections"></a>Creating Collections</h2><p>Vulcan features a number of helpers to make setting up your layer faster, most of which are initialized through the <code>createCollection</code> function:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  collectionName: <span class="string">"movies"</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">"Movie"</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers,</span><br><span class="line"></span><br><span class="line">  mutations</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>The function takes the following arguments:</p>
+<h2 id="Other-Components"><a href="#Other-Components" class="headerlink" title="Other Components"></a>Other Components</h2><h3 id="Alert"><a href="#Alert" class="headerlink" title="Alert"></a>Alert</h3><h3 id="Button"><a href="#Button" class="headerlink" title="Button"></a>Button</h3><h3 id="Dropdown"><a href="#Dropdown" class="headerlink" title="Dropdown"></a>Dropdown</h3><h3 id="Modal"><a href="#Modal" class="headerlink" title="Modal"></a>Modal</h3><h3 id="ModalTrigger"><a href="#ModalTrigger" class="headerlink" title="ModalTrigger"></a>ModalTrigger</h3><p>The <code>ModalTrigger</code> component can be used to display its child component inside a modal window when the trigger component is clicked:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Components.ModalTrigger size=&#123;size&#125; title=<span class="string">"New Post"</span> component=&#123;&lt;MyButton/&gt;&#125;&gt;</span><br><span class="line">  &lt;PostsNewForm /&gt;</span><br><span class="line">&lt;<span class="regexp">/Components.ModalTrigger&gt;</span></span><br></pre></td></tr></table></figure>
+<p>It accepts the following props:</p>
 <ul>
-<li><code>collectionName</code>: the name of the collection throughout your app (will be lowercased in your MongoDB database).</li>
-<li><code>dbCollectionName</code>: if you want to use a different name in your database you can specify it here.</li>
-<li><code>typeName</code>: the name of the GraphQL type that will be generated for the collection.</li>
-<li><code>schema</code>, <code>resolvers</code>, <code>mutations</code>: see below.</li>
-<li><code>generateGraphQLSchema</code>: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to <code>true</code>).</li>
+<li><code>className</code></li>
+<li><code>component</code>: the trigger component.</li>
+<li><code>label</code>: if no trigger component is passed, you can also specify a label for a text link. </li>
+<li><code>size</code>: <code>large</code> or <code>small</code> (defaults to <code>large</code>). </li>
+<li><code>title</code>: the modal popup’s title.</li>
 </ul>
-<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>Passing a schema, a resolver, and a mutation to <code>createCollection</code> enables a lot of Vulcan’s internal synergy. That being said, you can also set <code>generateGraphQLSchema</code> to <code>false</code> and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer.</p>
-<h2 id="Extending-Schemas"><a href="#Extending-Schemas" class="headerlink" title="Extending Schemas"></a>Extending Schemas</h2><p>Sometimes, you’ll want to extend an existing schema. For example Vulcan’s <a href="/example-forum.html">Forum example</a> has three main collections: <code>Posts</code>, <code>Users</code>, and <code>Comments</code>. Each of them has a pre-set schema, but that schema can also be extended with custom fields.</p>
-<p>This is how the <code>vulcan:newsletter</code> package extends the <code>Posts</code> schema with a <code>scheduledAt</code> property that keeps track of when a post was sent out as part of an email newsletter:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Posts.addField(&#123;</span><br><span class="line">  fieldName: <span class="string">"scheduledAt"</span>,</span><br><span class="line">  fieldSchema: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>The <code>collection.addField()</code> function takes either a field object, or an array of fields. Each field has a <code>fieldName</code> property, and a <code>fieldSchema</code> property.</p>
-<p>Each field schema supports all of the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema properties</a>, such as <code>type</code>, <code>optional</code>, etc.</p>
-<p>A few special properties (<code>viewableBy</code>, <code>insertableBy</code>, <code>editableBy</code>, <code>control</code>, and <code>order</code>) are also supported by the <a href="forms.html">Forms</a> package.</p>
-<p>You can also remove a field by calling <code>collection.removeField(fieldName)</code>. For example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Posts.removeField(<span class="string">"scheduledAt"</span>);</span><br></pre></td></tr></table></figure>
-
+<p>All props are optional, but you should pass at least either <code>component</code> or <code>label</code>. </p>
+<p>Note that the element passed as <code>component</code> needs to accept an <code>onClick</code> handler. In some cases, it might be necessary to wrap it inside an extra <code>&lt;div&gt;</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Components.ModalTrigger size=&#123;size&#125; title=<span class="string">"New Post"</span> component=&#123;&lt;div&gt;<span class="xml"><span class="tag">&lt;<span class="name">MyButton</span>/&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>&#125;&gt;</span><br><span class="line">  &lt;PostsNewForm /&gt;</span><br><span class="line">&lt;<span class="regexp">/Components.ModalTrigger&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h3><h3 id="Tooltip"><a href="#Tooltip" class="headerlink" title="Tooltip"></a>Tooltip</h3>
     </div>
   </div>
 
@@ -666,17 +662,17 @@
       
       
         <a class="link primary prev"
-          href="common-problems.html">
+          href="core-components.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Common Problems
+          Core Components
         </a>
       
       
         <a class="link primary next"
-          href="graphql-schema.html">
+          href="callbacks.html">
           <span class="subtitle-pagination">Next</span>
-          GraphQL Schema
+          Callbacks
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -684,7 +680,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schemas.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/ui-components.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
