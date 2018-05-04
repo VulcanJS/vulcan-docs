@@ -48,7 +48,9 @@ These schema properties are mostly used for controlling the appearance and behav
 
 The form label. If not provided, the label will be generated based on the field name and the available language strings data.
 
-#### `control`
+#### `input` 
+
+(legacy: `control`)
 
 Either a text string (one of `text`, `textarea`, `checkbox`, `checkboxgroup`, `radiogroup`, or `select`) or a React component.
 
@@ -137,22 +139,22 @@ status: {
 
 A query used to require extra data needed to display the form field. See [field-specific data loading](/forms.html#Field-Specific-Data-Loading).
 
-#### `form`
+#### `inputProperties`
 
-An object defining the props that will be passed to the `control` component to customize it. You can pass either values, or functions that will be evaluated each time the form is generated.
+An object defining the props that will be passed to the `input` component to customize it. You can pass either values, or a function that will be evaluated each time the form is generated.
 
 ```
-form:{
+inputProperties: {
   locale: 'fr',
   defaultValue: () => new Date(), // will be evaluated each time a form is generated
 },
-control: 'datetime'
+input: 'datetime'
 ```
 
-You may sometimes want to pass a function or a React component in the form. Since all functions in the `form` object will be evaluated before rendering the form, you'll need to pass a closure that returns the desired function or component instead.
+You may sometimes want to pass a function or a React component in the form. Since all functions in the `inputProperties` object will be evaluated before rendering the form, you'll need to pass a closure that returns the desired function or component instead.
 
 ```
-form:{
+inputProperties: {
   locale: 'fr',
   defaultValue: () => new Date(), // will be evaluated each time a form is generated
   renderOption: () => MyCustomComponent, // will return MyCustomComponent as expected

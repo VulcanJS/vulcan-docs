@@ -15,6 +15,12 @@ To figure out the token, log in as the user you want to emulate and inspect any 
 This is the header and token you'll need to set when making your API call to the GraphQL endpoint. You can test it using a tool such as [GraphQL Playground](https://github.com/graphcool/graphql-playground)
 .
 
+In GraphQL Playground, select the "HTTP Headers" tab and type in (replacing the value with your own token): 
+
+```
+{ "Authorization": "JKdsfahyvfHvsdf234s59pNbHGH7Z2fadsdrfCmR8WimItX" }
+```
+
 ### GraphQL Clients
 
 You can send your GraphQL request as a plain text string (inspect the Request Payload object in your devtools' Network tab to see what that looks like) or you can use a GraphQL client to perform the request. 

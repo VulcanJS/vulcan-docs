@@ -8,7 +8,7 @@ But it's important to understand that you can also use the underlying framework 
 
 So in this tutorial, we'll focus on understanding this framework and seeing how to build a simple paginated list of movies. 
 
-The completed code for this tutorial can be found in [the `example-movies` package](https://github.com/TelescopeJS/Telescope/tree/master/packages/example-movies).
+The completed code for this tutorial can be found in [the `example-movies` package](https://github.com/VulcanJS/Vulcan-Starter/tree/master/packages/example-movies).
 
 ## Video Tutorial
 

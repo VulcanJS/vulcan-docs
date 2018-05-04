@@ -18,34 +18,6 @@ The default `Layout` component only serves as a placeholder.
 
 The `Avatar` component takes in a `user` and displays the user's avatar. Additionally, if you pass `link = {true}`, the avatar will be linked to the user's profile.
 
-## ModalTrigger
-
-The `ModalTrigger` component can be used to display its child component inside a modal window when the trigger component is clicked:
-
-```js
-<Components.ModalTrigger size={size} title="New Post" component={<MyButton/>}>
-  <PostsNewForm />
-</Components.ModalTrigger>
-```
-
-It accepts the following props:
-
-- `className`
-- `component`: the trigger component.
-- `label`: if no trigger component is passed, you can also specify a label for a text link. 
-- `size`: `large` or `small` (defaults to `large`). 
-- `title`: the modal popup's title.
-
-All props are optional, but you should pass at least either `component` or `label`. 
-
-Note that the element passed as `component` needs to accept an `onClick` handler. In some cases, it might be necessary to wrap it inside an extra `<div>`:
-
-```js
-<Components.ModalTrigger size={size} title="New Post" component={<div><MyButton/></div>}>
-  <PostsNewForm />
-</Components.ModalTrigger>
-```
-
 ## Loading
 
 Show a loading animation.
@@ -184,10 +156,6 @@ const columns = [
 ```
 
 Note that columns do not necessarily have to correspond to schema fields. For example, you could add an `actions` column to each rows even though there is no `actions` field in your collection schema.
-
-#### Search
-
-To make a field searchable inside the Datatable component, add `searchable: true` to its schema. 
 
 ## Flash
 
