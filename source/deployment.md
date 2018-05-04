@@ -2,15 +2,20 @@
 title: Deployment Guide
 ---
 
+This guide is written to get your Vulcan app deployed and running on a remote server.
+Deploying a Vulcan app is much like deploying a [Meteor](https://guide.meteor.com/deployment) app. If something isn't addressed here, it might be in the official documentation.
 ## Meteor Up
 
-The recommended way to deploy Vulcan is by using [Meteor Up](https://github.com/zodern/meteor-up).
+The recommended way to deploy Vulcan is by using [Meteor Up](http://meteor-up.com/).
 
 ### Configuration
 
 You should have a Linux server online, for instance [a Digital Ocean droplet running with Ubuntu](https://www.digitalocean.com).
+> Here's a guide to a [good initial server setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
 
-On your local development machine, install globally the latest `kadirahq/meteor-up`.
+_____
+
+On your local development machine, install the latest [Meteor Up release](https://www.npmjs.com/package/mup).
 
 ```
 npm install -g mup
@@ -25,7 +30,7 @@ cd .deploy
 mup init
 ```
 
-This will create two files :
+This will create two files:
 
 ```
 mup.js - Meteor Up configuration file
@@ -34,44 +39,108 @@ settings.json - Settings for Meteor's settings API
 
 Then, replace the content of the newly created `settings.json` with your own settings (you can use the content of `sample_settings.json` as a starter).
 
-Fill `mup.js` with your credentials and optional settings (check the [Mup repo](https://github.com/kadirahq/meteor-up) for additional docs).
 
-**Note:** the `ROOT_URL` field should be the absolute url of your deploy ; and you need to explicitly point out to use `abernix/meteord:base` docker image with a `docker` field within the `meteor` object.
+To quickly get up and running, copy/paste the following configuration and edit it to reflect your environment:
+
+
+Please refer to the official [Meteor Up starting guide](http://meteor-up.com/getting-started.html) for more in-depth instructions.
+
+
+> The official [mup.js configuration examples and the possible options are found here](http://meteor-up.com/docs.html#example-configs).
+
+```javascript
+module.exports = {
+  servers: {
+    one: {
+      // TODO: set host address, username, and authentication method
+      host: '123.123.321.321',
+      username: 'server-username',
+      // pem: '/home/user/.ssh/id_rsa',
+      // password: 'server-password'
+      // or neither for authenticate from ssh-agent
+
+      // If I'm not using a default SSH port, declare which here:
+      //   opts: {
+      //     port: 2222,
+      //   },
+    },
+  },
+
+  app: {
+    // TODO: change app name and path
+    name: 'myAppName',
+    path: '../',
+
+    servers: {
+      one: {},
+    },
+
+   // All options are optional.
+    buildOptions: {
+      // Set to true to skip building mobile apps
+      // but still build the web.cordova architecture. (recommended)
+      serverOnly: true,
+
+      executable: 'meteor',
+    },
+
+    env: {
+      // TODO: Change to your app's url
+      // If you are using ssl, it needs to start with https://
+      ROOT_URL: 'https://mydomain.example',
+      MONGO_URL: 'mongodb://mongodb/meteor',
+      MONGO_OPLOG_URL: 'mongodb://mongodb/local',
+    },
+
+    docker: {
+      // change to 'abernix/meteord:base' if your app is using Meteor 1.4 - 1.5
+      image: 'zodern/meteor:root',
+    },
+
+    // Show progress bar while uploading bundle to server
+    // You might need to disable it on CI servers
+    enableUploadProgressBar: true,
+  },
+
+  mongo: {
+    servers: {
+      one: {},
+    },
+  },
+
+  proxy: {
+    // comma-separated list of domains your website
+    // will be accessed at.
+    // You will need to configure your DNS for each one.
+    domains: 'mydomain.example',
+    ssl: {
+      // TODO: disable if not using SSL
+      forceSSL: true,
+      // Enable let's encrypt to create free certificates
+      letsEncryptEmail: 'my-active-contact@email.com',
+    },
+  },
+};
 
 ```
-...
-meteor: {
-  ...
-  path: '../' // relative path of the app considering your mup config files
-  env: {
-        ROOT_URL: 'http://nova-app.com', // absolute url of your deploy
-        ...
-  },
-  ...
-  docker: {
-        image:'abernix/meteord:base' // docker image working with meteor 1.4 & node 4
-  },
-  ...
-},
-...
-```
-
-You can take inspiration (or copy/paste) on this [`mup.js` example](https://gist.github.com/xavcz/6ddc2bb6f67fe0936c8328ab3314641d).
-
+> You do not have to edit the mongo settings unless you are using a custom database setup.
 ### Setup your server
 
-From this folder, you can now setup Docker & Mongo your server with:
+From the `./deploy` folder, you can now set up the remote servers you have specified in your config.
+It will take around 2-5 minutes depending on the server’s performance and network availability.
 ```
 mup setup
 ```
 
-### Deploy your app to your server
+### Deploy your app
 
-Still in the same folder, to deploy your app with your settings file:
+Still in the `./deploy` folder, to deploy your app with your settings file:
 
 ```
 mup deploy --settings settings.json
 ```
+
+This will bundle the Meteor project locally and deploy it to the remote server(s). The bundling process is the same as what meteor deploy does.
 
 If you are using the [two-repo install](http://docs.vulcanjs.org/#Two-Repo-Install-Optional) you must specify the path to your package directory:
 ```
@@ -80,12 +149,26 @@ METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages" mup deploy --settings setting
 
 (Taking care to adapt the `/Users/sacha/Vulcan/packages` path to point to your Vulcan core repo's `/packages` directory)
 
+### Utility Commands
+
+- `mup reconfig` - reconfigures app with new environment variables, Meteor settings, and it updates the start script. This is also the last step of mup deploy.
+- `mup stop` - stop the app
+- `mup start` - start the app
+- `mup restart` - restart the app
+- `mup logs [-f --tail=50]` - view the app’s logs. Supports all of the flags from `docker logs`.
+
+_____
+
 ### Troubleshooting
 
+> Official docs on [deplyoing with Meteor Up](http://meteor-up.com/docs)
+
+- [Troubleshooting docs](http://meteor-up.com/docs.html#troubleshooting)
+- [Common problems](http://meteor-up.com/docs.html#common-problems)
 - `meteor npm install --save bcrypt`.
 - Increase `deployCheckWaitTime`.
 
-
+_____
 
 ## Meteor Now
 

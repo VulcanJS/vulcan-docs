@@ -8,7 +8,7 @@ In Vulcan, this GraphQL schema can be generated automatically from your collecti
 
 ## Viewing the Schema
 
-You can view your GraphQL schema using the Meteor shell. First, launch the shell from your temrinal with:
+You can view your GraphQL schema using the Meteor shell. First, launch the shell from your terminal with:
 
 ```
 meteor shell
