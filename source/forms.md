@@ -10,7 +10,7 @@ This package can generate new document and edit document forms from a [schema](s
 
 - Error handling.
 - Bootstrap-compatible.
-- Cross-component communciation (prefill a field based on another).
+- Cross-component communication (prefill a field based on another).
 - Callbacks on form submission, success, and failure.
 - Support for basic form controls (input, textarea, radio, etc.).
 - Support for custom form controls.
@@ -157,7 +157,7 @@ A GraphQL fragment used to specify the data to return once a mutation is complet
 
 If no fragment is passed, SmartForm will only return fields used in the form, but note that this might sometimes lead to discrepancies when compared with documents already loaded on the client. 
 
-An example would be a `createdAt` date added automatically on creation even though it's not part of the actual form. If you'd like that field to be returned after the mutation, you can define a custom `mutationFragment` that includes it explicitely.   
+An example would be a `createdAt` date added automatically on creation even though it's not part of the actual form. If you'd like that field to be returned after the mutation, you can define a custom `mutationFragment` that includes it explicitly.   
 
 ## Field-Specific Data Loading
 
@@ -199,7 +199,7 @@ This lets us set the `options` property in order to populate our dropdown. Essen
 
 ### Using `documentId`
 
-Field-specific queries work by adding “extra” query parts to a specialy created formNewExtraQuery HoC when inserting new documents; or to the withDocument HoC when editing an existing document. 
+Field-specific queries work by adding “extra” query parts to a specially created formNewExtraQuery HoC when inserting new documents; or to the withDocument HoC when editing an existing document. 
 
 When editing a document, you can reuse the `documentId` in your extra query parts since it will already have been made available to the main query. 
 
@@ -263,7 +263,7 @@ The highest-priority value is the user input. If there is no user input, we defa
 
 ## i18n
 
-This package uses [React Intl](https://github.com/yahoo/react-intl/) to automatically translate all labels. In order to do so it expects an `intl` object ot be passed as part of its context. For example, in a parent component: 
+This package uses [React Intl](https://github.com/yahoo/react-intl/) to automatically translate all labels. In order to do so it expects an `intl` object to be passed as part of its context. For example, in a parent component: 
 
 ```
 getChildContext() {
