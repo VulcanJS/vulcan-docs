@@ -161,7 +161,7 @@ _____
 
 ### Troubleshooting
 
-> Official docs on [deplyoing with Meteor Up](http://meteor-up.com/docs)
+> Official docs on [deploying with Meteor Up](http://meteor-up.com/docs)
 
 - [Troubleshooting docs](http://meteor-up.com/docs.html#troubleshooting)
 - [Common problems](http://meteor-up.com/docs.html#common-problems)
