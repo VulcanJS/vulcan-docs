@@ -2,7 +2,7 @@
 title: Instagram Example
 ---
 
-Here's a [video walkthrough](https://www.youtube.com/watch?v=qibyA_ReqEQ) of [the code](https://github.com/TelescopeJS/Telescope/tree/master/packages/example-instagram) for the `example-instagram` package.
+Here's a [video walkthrough](https://www.youtube.com/watch?v=qibyA_ReqEQ) of [the code](https://github.com/VulcanJS/Vulcan-Starter/tree/master/packages/example-instagram) for the `example-instagram` package.
 
 ### Note: Code Changes
 
