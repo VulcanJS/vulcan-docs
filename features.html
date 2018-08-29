@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Features | Vulcan Docs</title>
+    <title>Features – [REVIEW] | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Features | Vulcan Docs">
+    <meta property="og:title" content="Features – [REVIEW] | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Features | Vulcan Docs">
+    <meta name="twitter:title" content="Features – [REVIEW] | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -133,30 +133,9 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
               <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -611,7 +590,7 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Features</h1>
+      <h1 class="title-page">Features – [REVIEW]</h1>
       
 
       <div class="page-actions">
@@ -629,18 +608,17 @@
 <h2 id="Automated-Forms"><a href="#Automated-Forms" class="headerlink" title="Automated Forms"></a>Automated Forms</h2><p>Vulcan will also use your schema to generate client-side forms and handle their submission via the appropriate Apollo mutation.</p>
 <p><img src="https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&amp;v=8fc5164f" alt="https://d3vv6lp55qjaqc.cloudfront.net/items/3B0F0h3U1a0i0o372x24/Screen%20Shot%202017-12-21%20at%2015.44.39.png?X-CloudApp-Visitor-Id=f25ee64a8f9b32be400086060540ffac&amp;v=8fc5164f"></p>
 <p>For example, here’s how you would display a form to edit a single movie:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VulcanForm</span><br><span class="line">  collection=&#123;Movies&#125;</span><br><span class="line">  documentId=&#123;props.documentId&#125;</span><br><span class="line">  queryName=<span class="string">"moviesListQuery"</span></span><br><span class="line">  showRemove=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
-<p>The <code>queryName</code> option tells VulcanForm which query should be automatically updated once the operation is done, while the <code>showRemove</code> option add a “Delete Movie” button to the form.</p>
-<p>Note that VulcanForm will also take care of loading the document to edit, if it’s not already loaded in the client store.</p>
-<h2 id="Easy-Data-Loading"><a href="#Easy-Data-Loading" class="headerlink" title="Easy Data Loading"></a>Easy Data Loading</h2><p>Vulcan features a set of data loading helpers to make loading Apollo data easier, <code>withList</code> (to load a list of documents) and <code>withDocument</code> (to load a single document).</p>
-<p>For example, here’s how you would use <code>withList</code> to pass a <code>results</code> prop containing all movies to your <code>MoviesList</code> component:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  queryName: <span class="string">"moviesListQuery"</span>,</span><br><span class="line">  fragment: fragment</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withList(listOptions)(MoviesList);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Components.SmartForm</span><br><span class="line">  collection=&#123;Movies&#125;</span><br><span class="line">  documentId=&#123;props.documentId&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p>Note that SmartForm will also take care of loading the document to edit, if it’s not already loaded in the client store.</p>
+<h2 id="Easy-Data-Loading"><a href="#Easy-Data-Loading" class="headerlink" title="Easy Data Loading"></a>Easy Data Loading</h2><p>Vulcan features a set of data loading helpers to make loading Apollo data easier, <code>withMulti</code> (to load a list of documents) and <code>withSingle</code> (to load a single document).</p>
+<p>For example, here’s how you would use <code>withMulti</code> to pass a <code>results</code> prop containing all movies to your <code>movies</code> component:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  fragment: fragment</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withMulti(listOptions)(movies);</span><br></pre></td></tr></table></figure>
 <p>You can pass a fragment to control what data is loaded for each document.</p>
 <h2 id="Schema-based-Security-amp-Validation"><a href="#Schema-based-Security-amp-Validation" class="headerlink" title="Schema-based Security &amp; Validation"></a>Schema-based Security &amp; Validation</h2><p>All of Vulcan’s security and validation is based on your collection’s schema. For each field of your schema, you can define the following functions:</p>
 <ul>
-<li><code>viewableBy</code></li>
-<li><code>insertableBy</code></li>
-<li><code>editableBy</code></li>
+<li><code>canRead</code></li>
+<li><code>canCreate</code></li>
+<li><code>canUpdate</code></li>
 </ul>
 <p>They all take the current user as argument (and optionally the document being affected) and check if the user can perform the given action.</p>
 <h2 id="Groups-amp-Permissions"><a href="#Groups-amp-Permissions" class="headerlink" title="Groups &amp; Permissions"></a>Groups &amp; Permissions</h2><p>Vulcan features a simple system to handle user groups and permissions. For example, here’s how you would define that all users can create new movies and edit/remove their own, but only admins can edit or remove other user’s movies:</p>
@@ -675,18 +653,11 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev"
-          href="nutshell.html">
-          <span class="icon-arrow-left-alt"></span>
-          <span class="subtitle-pagination">Previous</span>
-          Vulcan in a Nutshell
-        </a>
-      
       
         <a class="link primary next"
-          href="architecture.html">
+          href="index.html">
           <span class="subtitle-pagination">Next</span>
-          Architecture
+          Read Me
           <span class="icon-arrow-right-alt"></span>
         </a>
       

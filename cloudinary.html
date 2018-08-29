@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -631,7 +610,7 @@
 <p>The <code>collection</code> option indicates which collection you want to use Cloudinary with, while the <code>fieldName</code> option indicates which field you want to cache (which should contain an image URL). </p>
 <p>Note that at this time, you can only cache a single image field per collection. </p>
 <h2 id="Custom-Fields"><a href="#Custom-Fields" class="headerlink" title="Custom Fields"></a>Custom Fields</h2><p><code>makeCloudinary</code> will add the following custom fields to store image data:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryId'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls.$'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      blackbox: <span class="literal">true</span>,</span><br><span class="line">      optional: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryId'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">      canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'cloudinaryUrls.$'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Object</span>,</span><br><span class="line">      blackbox: <span class="literal">true</span>,</span><br><span class="line">      optional: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>In addition, the <code>cloudinaryUrl</code> GraphQL-only field is also available as a shortcut to get a specific image format’s URL. </p>
 <p>It optionally takes a <code>format</code> argument when used inside a GraphQL query or fragment, for example:</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">cloudinaryUrl</span><span class="params">(format: <span class="string">"small"</span>)</span></span></span><br></pre></td></tr></table></figure>

@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -638,7 +617,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; registerFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:lib'</span>;</span><br><span class="line"></span><br><span class="line">registerFragment(<span class="string">`</span></span><br><span class="line"><span class="string">  fragment UsersMinimumInfo on User &#123;</span></span><br><span class="line"><span class="string">    _id</span></span><br><span class="line"><span class="string">    slug</span></span><br><span class="line"><span class="string">    username</span></span><br><span class="line"><span class="string">    # displayName # remove this</span></span><br><span class="line"><span class="string">    # emailHash # and this</span></span><br><span class="line"><span class="string">    mySuperCustomProperty # but add this</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>);</span><br></pre></td></tr></table></figure>
 <p>Note that you can replace both “regular” fragments and sub-fragments.</p>
 <h2 id="Default-Fragments"><a href="#Default-Fragments" class="headerlink" title="Default Fragments"></a>Default Fragments</h2><p>Every collection automatically gets a default fragment associated with it called <code>FooDefaultFragment</code> (for example <code>PostsDefaultFragment</code>).</p>
-<p>This default fragment simply contain all fields where <code>viewableBy</code> is defined (in other words, all public fields). Note that it <strong>does not</strong> follow field resolvers, meaning that the default fragment will e.g. include <code>userId</code> but not <code>user</code>.</p>
+<p>This default fragment simply contain all fields where <code>canRead</code> is defined (in other words, all public fields). Note that it <strong>does not</strong> follow field resolvers, meaning that the default fragment will e.g. include <code>userId</code> but not <code>user</code>.</p>
 <h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>You can use standard Apollo fragments at any point in your Vulcan app (passing them as <code>fragment</code> instead of <code>fragmentName</code>), but be aware that you will lose the ability to extend and replace fragments. You will also need to <a href="http://dev.apollodata.com/react/fragments.html#reusing-fragments" target="_blank" rel="noopener">manually specify</a> sub-fragments.</p>
 
     </div>

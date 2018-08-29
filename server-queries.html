@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc  current">
                 <a href="" class="sidebar-link  current">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -630,8 +609,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> post = Posts.findOne(documentId);</span><br></pre></td></tr></table></figure>
 <p>But the document you fetch directly from MongoDB won’t have a <code>user</code> property, let alone a <code>user.displayName</code> (since those are provided by the GraphQL resolver).</p>
 <p>Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL <em>on the server</em></p>
-<h3 id="runQuery-query-variables"><a href="#runQuery-query-variables" class="headerlink" title="runQuery(query, variables)"></a>runQuery(query, variables)</h3><p><code>runQuery</code> lets you execute any GraphQL query against your schema and get its result back on the server. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runQuery(email.query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="runGraphQL-query-variables"><a href="#runGraphQL-query-variables" class="headerlink" title="runGraphQL(query, variables)"></a>runGraphQL(query, variables)</h3><p><code>runGraphQL</code> lets you execute any GraphQL query or mutation against your schema and get its result back on the server. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runGraphQL &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runGraphQL(query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>(Note that you’ll need to be inside an <code>async</code> context to use the <code>await</code> keyword)</p>
 <h3 id="collection-queryOne-documentId-options"><a href="#collection-queryOne-documentId-options" class="headerlink" title="collection.queryOne(documentId, options)"></a>collection.queryOne(documentId, options)</h3><p>A common need on the server is fetching a single document by its <code>_id</code>. You can do so with <code>collection.queryOne</code>. It takes an <code>options</code> object with a <code>fragmentText</code> property. If no fragment is provided, the query will use the collection’s <code>defaultFragment</code>. </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId, &#123;</span><br><span class="line">  fragmentText: <span class="string">`</span></span><br><span class="line"><span class="string">    fragment MyUsersFragment on User &#123;</span></span><br><span class="line"><span class="string">      _id</span></span><br><span class="line"><span class="string">      username</span></span><br><span class="line"><span class="string">      createdAt</span></span><br><span class="line"><span class="string">      posts&#123;</span></span><br><span class="line"><span class="string">        _id</span></span><br><span class="line"><span class="string">        title</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -655,9 +634,9 @@
       
       
         <a class="link primary next"
-          href="redux.html">
+          href="security.html">
           <span class="subtitle-pagination">Next</span>
-          Using Redux
+          Security
           <span class="icon-arrow-right-alt"></span>
         </a>
       

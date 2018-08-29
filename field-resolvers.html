@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -626,7 +605,7 @@
       <p>Although Vulcan uses SimpleSchema JSON schema to generate a GraphQL schema, it’s important to understand that the two can be very different.</p>
 <p>Note: this section will make more sense if you’ve already read the <a href="/resolvers.html">Resolvers</a> section.</p>
 <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>For example, you might have a <code>userId</code> property in your <code>Movie</code> schema, but then you want this property to <em>resolve</em> as a <code>user</code> object in the GraphQL schema (and in turn, in your client store). You can use <code>resolveAs</code> to accomplish this:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userId:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">String,</span></span><br><span class="line"><span class="attr">  optional:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line"><span class="attr">  viewableBy:</span> <span class="string">['guests'],</span></span><br><span class="line"><span class="attr">  resolveAs:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    fieldName:</span> <span class="string">'user'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    arguments:</span> <span class="string">'foo: Int = 10'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">'User'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    resolver:</span> <span class="string">(movie,</span> <span class="string">args,</span> <span class="string">context)</span> <span class="string">=&gt;</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="string">return</span> <span class="string">context.Users.findOne(&#123;</span> <span class="attr">_id:</span> <span class="string">movie.userId</span> <span class="string">&#125;,</span> <span class="string">&#123;</span> <span class="attr">fields:</span> <span class="string">context.Users.getViewableFields(context.currentUser,</span> <span class="string">context.Users)</span> <span class="string">&#125;);</span></span><br><span class="line">    <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">    addOriginalField:</span> <span class="literal">true</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userId:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">String,</span></span><br><span class="line"><span class="attr">  optional:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line"><span class="attr">  canRead:</span> <span class="string">['guests'],</span></span><br><span class="line"><span class="attr">  resolveAs:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    fieldName:</span> <span class="string">'user'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    arguments:</span> <span class="string">'foo: Int = 10'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">'User'</span><span class="string">,</span></span><br><span class="line"><span class="attr">    resolver:</span> <span class="string">(movie,</span> <span class="string">args,</span> <span class="string">context)</span> <span class="string">=&gt;</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="string">return</span> <span class="string">context.Users.findOne(&#123;</span> <span class="attr">_id:</span> <span class="string">movie.userId</span> <span class="string">&#125;,</span> <span class="string">&#123;</span> <span class="attr">fields:</span> <span class="string">context.Users.getViewableFields(context.currentUser,</span> <span class="string">context.Users)</span> <span class="string">&#125;);</span></span><br><span class="line">    <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">    addOriginalField:</span> <span class="literal">true</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure>
 <p>We are doing five things here:</p>
 <ol>
 <li>Specifying that the field should be named <code>user</code> in the API.</li>
@@ -643,12 +622,9 @@
 <p>Which can then be used as the value for <code>type</code> in a <code>resolveAs</code> field.</p>
 <h2 id="GraphQL-Only-Fields"><a href="#GraphQL-Only-Fields" class="headerlink" title="GraphQL-Only Fields"></a>GraphQL-Only Fields</h2><p>Note that a field doesn’t have to “physically” exist in your database to be able to generate a corresponding GraphQL field.</p>
 <p>For example, you might want to query the Facebook API to get the number of likes associated with a post’s URL:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">likesNumber</span>: &#123;</span><br><span class="line">  <span class="attribute">type</span>: Number,</span><br><span class="line">  optional: true,</span><br><span class="line">  viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  resolveAs: &#123;</span><br><span class="line">    type: <span class="string">'Number'</span>,</span><br><span class="line">    resolver: async (post, args, context) =&gt; &#123;</span><br><span class="line">      return await <span class="built_in">getFacebookLikes</span>(post.url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">likesNumber</span>: &#123;</span><br><span class="line">  <span class="attribute">type</span>: Number,</span><br><span class="line">  optional: true,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  resolveAs: &#123;</span><br><span class="line">    type: <span class="string">'Number'</span>,</span><br><span class="line">    resolver: async (post, args, context) =&gt; &#123;</span><br><span class="line">      return await <span class="built_in">getFacebookLikes</span>(post.url);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>This will create a <code>likesNumber</code> field in your GraphQL schema (and your Apollo store) even though no such field has to exist in your database.</p>
 <p>Note that for GraphQL only fields it is ok to leave out the <code>fieldName</code> property (which will default to using the same name as the schema field) since there is no actual database field of the same name.</p>
-<h2 id="Legacy-String-Syntax-deprecated"><a href="#Legacy-String-Syntax-deprecated" class="headerlink" title="Legacy String Syntax (deprecated)"></a>Legacy String Syntax (deprecated)</h2><p>Alternatively, you can also use the legacy syntax and specify a string value for <code>resolveAs</code> (in this case, <code>user: User</code>). You’ll then need to use <code>addGraphQLResolvers</code> to define the resolver object yourself:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> movieResolver = &#123;</span><br><span class="line">  Movie: &#123;</span><br><span class="line">    user(movie, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(</span><br><span class="line">        &#123; <span class="attr">_id</span>: movie.userId &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          fields: context.getViewableFields(context.currentUser, context.Users)</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(movieResolver);</span><br></pre></td></tr></table></figure>
-<p>Resolvers can be defined on any new or existing type (e.g. <code>Movie</code>).</p>
 <h2 id="Field-Resolvers-vs-Denormalization"><a href="#Field-Resolvers-vs-Denormalization" class="headerlink" title="Field Resolvers vs Denormalization"></a>Field Resolvers vs Denormalization</h2><p>Another approach to achieve the same thing as field resolvers is denormalization, in other words “physically” storing the same information in your database. </p>
 <p>For example, assuming you wanted to show a post author’s <code>displayName</code>, you could write a resolver that fetches the <code>user</code> object, or you could simply store a new <code>authorDisplayName</code> property on the post document directly. </p>
 <p>So how do you decide which approach to pick? Here are a few general guidelines. </p>

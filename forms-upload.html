@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -640,7 +619,7 @@
 <h3 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h3><p>Edit your <code>settings.json</code> and add inside the <code>public: { ... }</code> block the following entries with your own credentials:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"public": &#123;</span><br><span class="line">  "cloudinary": &#123;</span><br><span class="line">    "cloudName": "YOUR_APP_NAME",</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Specifying-a-Preset"><a href="#Specifying-a-Preset" class="headerlink" title="Specifying a Preset"></a>Specifying a Preset</h3><p>If you’d like to specify a Cloudinary preset to be used to resize, convert, etc. your images, you can do so in the properties of the <strong>form field</strong>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">photos: &#123;</span><br><span class="line">  label: <span class="string">'Photos'</span>,</span><br><span class="line">  type: <span class="built_in">Array</span>,</span><br><span class="line">  optional: <span class="literal">false</span>,</span><br><span class="line">  viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  insertableBy: [<span class="string">'members'</span>],</span><br><span class="line">  editableBy: [<span class="string">'members'</span>],</span><br><span class="line">  control: FormsUpload, <span class="comment">// use the FormsUpload form component</span></span><br><span class="line">  form: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      preset: <span class="string">'myCloudinaryPreset'</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">photos: &#123;</span><br><span class="line">  label: <span class="string">'Photos'</span>,</span><br><span class="line">  type: <span class="built_in">Array</span>,</span><br><span class="line">  optional: <span class="literal">false</span>,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  canCreate: [<span class="string">'members'</span>],</span><br><span class="line">  canUpdate: [<span class="string">'members'</span>],</span><br><span class="line">  control: FormsUpload, <span class="comment">// use the FormsUpload form component</span></span><br><span class="line">  form: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      preset: <span class="string">'myCloudinaryPreset'</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <h3 id="Adding-images-to-Posts-as-an-example"><a href="#Adding-images-to-Posts-as-an-example" class="headerlink" title="Adding images to Posts (as an example)"></a>Adding images to Posts (as an example)</h3><p>If you want to add images to a certain collection. Add the custom field, make sure to add this in your fragments.js file:</p>
 <figure class="highlight plain"><figcaption><span>`</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   image</span><br><span class="line"> `);</span><br><span class="line"></span><br><span class="line">extendFragment(&apos;PostsPage&apos;, `</span><br><span class="line">   image</span><br><span class="line"> `);</span><br></pre></td></tr></table></figure>
 <p> You can now use the uploaded image anywhere in your Vulcan app, using this:<br><code>&lt;img src={post.image} /&gt;</code><br>which will look for the image field from your post.</p>

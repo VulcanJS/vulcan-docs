@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -659,9 +638,9 @@
 </ul>
 <h2 id="Custom-Fields"><a href="#Custom-Fields" class="headerlink" title="Custom Fields"></a>Custom Fields</h2><p>A few schema properties have been changed, and these will trigger schema errors until you update them:</p>
 <ul>
-<li><code>insertableBy</code> is now <code>insertableBy</code>, and takes either the name of a group or a function. </li>
-<li><code>editableBy</code> is now <code>editableBy</code>, and takes either the name of a group or a function. </li>
-<li><code>publish</code> is replaced by <code>viewableBy</code>, which works similarly to <code>insertableBy</code> and <code>editableBy</code>. </li>
+<li><code>canCreate</code> is now <code>canCreate</code>, and takes either the name of a group or a function. </li>
+<li><code>canUpdate</code> is now <code>canUpdate</code>, and takes either the name of a group or a function. </li>
+<li><code>publish</code> is replaced by <code>canRead</code>, which works similarly to <code>canCreate</code> and <code>canUpdate</code>. </li>
 <li><code>join</code> has been replaced by <code>resolveAs</code>, which you can use to specify a GraphQL resolver for the field.</li>
 </ul>
 <p>In addition, there are also a few new properties:</p>
@@ -669,18 +648,18 @@
 <li><code>preload</code>, which you can set to <code>true</code> to preload data (only for the <code>Users</code> schema).<h2 id="List-amp-Single-Containers"><a href="#List-amp-Single-Containers" class="headerlink" title="List &amp; Single Containers"></a>List &amp; Single Containers</h2></li>
 </ul>
 <p>The <code>utilities:smart-publications</code> package has been deprecated, so you can also delete any <code>PublicationUtils.addToFields()</code> calls.</p>
-<h2 id="Data-Loading"><a href="#Data-Loading" class="headerlink" title="Data Loading"></a>Data Loading</h2><p>With the move to Apollo, the <code>utilities:react-list-container</code> package is not used anymore, and <code>ListContainer</code> and <code>DocumentContainer</code> are instead replaced with <code>withList</code> and <code>withDocument</code>. </p>
-<p>The key difference is that <code>withList</code> is now called directly around the component that needs the data (e.g. <code>export default withList(options)(MyComponent)</code>) unlike <code>ListContainer</code>, which was called from that component’s <em>parent</em> component. </p>
+<h2 id="Data-Loading"><a href="#Data-Loading" class="headerlink" title="Data Loading"></a>Data Loading</h2><p>With the move to Apollo, the <code>utilities:react-list-container</code> package is not used anymore, and <code>ListContainer</code> and <code>DocumentContainer</code> are instead replaced with <code>withMulti</code> and <code>withSingle</code>. </p>
+<p>The key difference is that <code>withMulti</code> is now called directly around the component that needs the data (e.g. <code>export default withMulti(options)(MyComponent)</code>) unlike <code>ListContainer</code>, which was called from that component’s <em>parent</em> component. </p>
 <p>In practice, this means replacing something like this:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ListContainer</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">collection</span>=<span class="string">&#123;Posts&#125;</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">publication</span>=<span class="string">"posts.list"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">selector</span>=<span class="string">&#123;selector&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">options</span>=<span class="string">&#123;options&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">terms</span>=<span class="string">&#123;params&#125;</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">joins</span>=<span class="string">&#123;Posts.getJoins()&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">component</span>=<span class="string">&#123;MyPostsList&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">cacheSubscription</span>=<span class="string">&#123;false&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">limit</span>=<span class="string">&#123;20&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">increment</span>=<span class="string">&#123;20&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">listId</span>=<span class="string">&#123;params.listId&#125;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
 <p>With:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">PostsList</span> <span class="attr">terms</span>=<span class="string">&#123;terms&#125;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>And then wrapping <code>MyPostsList</code> with <code>withList(options)</code> inside <code>MyPostsList.jsx</code>.</p>
+<p>And then wrapping <code>MyPostsList</code> with <code>withMulti(options)</code> inside <code>MyPostsList.jsx</code>.</p>
 <p>Also keep in mind that the data format provided by the GraphQL API can be slightly different from was was previously available (for example, categories are now available on <code>posts.categories</code> instead of <code>posts.categoriesArray</code>). Make sure to check your component’s <code>props</code> in the React inspector if you run into any issues. </p>
 <h2 id="Daily-View"><a href="#Daily-View" class="headerlink" title="Daily View"></a>Daily View</h2><p>The daily view now has a slightly different component architecture in the <code>base-components</code> package. </p>
 <ul>
 <li><code>PostsDaily</code> sets the <code>terms</code> for the view and calls <code>PostsDailyList</code>.</li>
-<li><code>PostsDailyList</code> is wrapped with the <code>withList</code> data loading HoC and then iterates over each day, calling <code>PostsDay</code>.</li>
+<li><code>PostsDailyList</code> is wrapped with the <code>withMulti</code> data loading HoC and then iterates over each day, calling <code>PostsDay</code>.</li>
 <li><code>PostsDay</code> displays the posts for that day.</li>
 </ul>
 <p>Note that data loading happens at the <strong>list</strong> level, not at the level of an individual day. In other words, if you’re displaying five days, <strong>all</strong> posts for all five days will be loaded at the same time. </p>

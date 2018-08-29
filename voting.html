@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -625,7 +604,7 @@
     <div class="document-formatting">
       <p>This package adds voting features to a collection.</p>
 <h2 id="Vote-Schema"><a href="#Vote-Schema" class="headerlink" title="Vote Schema"></a>Vote Schema</h2><p>An individual vote document is defined according to the following schema:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    viewableBy: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The id of the document that was voted on</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  documentId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The name of the collection the document belongs to</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  collectionName: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The id of the user that voted</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote type (upvote, downvote, Facebook-style reactions, etc.)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  voteType: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote power (e.g. 1 = upvote, -1 = downvote, or any other value)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  power: &#123;</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote timestamp</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  votedAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The id of the document that was voted on</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  documentId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The name of the collection the document belongs to</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  collectionName: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The id of the user that voted</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote type (upvote, downvote, Facebook-style reactions, etc.)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  voteType: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote power (e.g. 1 = upvote, -1 = downvote, or any other value)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  power: &#123;</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    The vote timestamp</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  votedAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>Two important properties are:</p>
 <ul>
 <li><code>voteType</code>: a name such as <code>upvote</code> or <code>downvote</code>. It can also be used for Facebook-style reactions such as <code>happy</code>, <code>sad</code>, or even for 5-star ratings (<code>1stars</code>, <code>2stars</code>, etc.).</li>

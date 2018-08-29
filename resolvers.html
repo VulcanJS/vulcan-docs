@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -634,18 +613,17 @@
 <p>That being said if you wanted <code>createdAt</code> to resolve to, say, <code>formatDate(post.createdAt)</code> instead of just <code>post.createdAt</code>, then you could write a custom resolver <a href="/field-resolvers.html">just for that specific field</a>.</p>
 <h2 id="Collection-Resolvers"><a href="#Collection-Resolvers" class="headerlink" title="Collection Resolvers"></a>Collection Resolvers</h2><p>As a time-saving convention, Vulcan makes the assumption that you as a developer will provide it with three “default” resolvers:</p>
 <ul>
-<li><code>list</code>: used to return a list of documents matching a set of arguments</li>
-<li><code>total</code>: used to return the <em>total number</em> of documents matching a set of arguments</li>
+<li><code>multi</code>: used to return a list of documents matching a set of arguments, as well as the <em>total number</em> of documents matching the same arguments.</li>
 <li><code>single</code>: used to return a single document matching an <code>_id</code> or <code>slug</code></li>
 </ul>
-<p>You can pass a <code>resolver</code> object to <code>createCollection</code> when initializing your collection. It should include these three <code>list</code>, <code>single</code>, and <code>total</code> resolvers.</p>
+<p>You can pass a <code>resolver</code> object to <code>createCollection</code> when initializing your collection. It should include these two <code>multi</code> and <code>single</code> resolvers.</p>
 <p>Each resolver should have the following properties:</p>
 <ul>
 <li><code>name</code>: the resolver’s name.</li>
 <li><code>resolver</code>: the resolver function.</li>
 </ul>
 <p>Note that if the collections include private data, you’ll have to implement your own security layer inside each resolver to prevent unwanted access. Check out the <a href="/groups-permissions.html#Controlling-Viewing">Controlling Viewing</a> section for more details.</p>
-<h3 id="List-Resolver"><a href="#List-Resolver" class="headerlink" title="List Resolver"></a>List Resolver</h3><p>The <code>list</code> resolver is used to display lists of documents. It takes the following arguments:</p>
+<h3 id="Multi-Resolver"><a href="#Multi-Resolver" class="headerlink" title="Multi Resolver"></a>Multi Resolver</h3><p>The <code>multi</code> resolver is used to display lists of documents. It takes the following arguments:</p>
 <ul>
 <li><code>terms</code>: a JSON object containing a list of terms used to filter and sort the list.</li>
 <li><code>offset</code>: how many documents to offset the list by (used for paginating requests).</li>
@@ -653,9 +631,13 @@
 </ul>
 <p>It should return an array of documents.</p>
 <h3 id="Single-Resolver"><a href="#Single-Resolver" class="headerlink" title="Single Resolver"></a>Single Resolver</h3><p>The <code>single</code> resolver takes a <code>documentId</code> argument, and should return a single document.</p>
-<h3 id="List-Total-Resolver"><a href="#List-Total-Resolver" class="headerlink" title="List Total Resolver"></a>List Total Resolver</h3><p>The <code>total</code> resolver takes a <code>terms</code> argument and should return the total count of results matching these terms in the database.</p>
 <h3 id="Default-Resolvers"><a href="#Default-Resolvers" class="headerlink" title="Default Resolvers"></a>Default Resolvers</h3><p>Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling <code>getDefaultResolvers(collectionName)</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(<span class="string">'Movies'</span>),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(<span class="string">'Movies'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(options),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(options)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+<p>The <code>options</code> object can have the following properties: </p>
+<ul>
+<li><code>typeName</code> (String): the resolver’s type name (required).</li>
+<li><code>cacheMaxAge</code> (Number): a custom cache age (in seconds) for the resolvers. </li>
+</ul>
 <p>To learn more about what exactly the default resolvers do, you can <a href="https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_resolvers.js" target="_blank" rel="noopener">find their code here</a>.</p>
 <h2 id="Custom-Resolvers"><a href="#Custom-Resolvers" class="headerlink" title="Custom Resolvers"></a>Custom Resolvers</h2><p>In some cases, you will want to go beyond the three default resolvers. For example, you might want to create a resolver that returns a single random post, or the current user. You can do so by using <code>addGraphQLResolvers</code> and <code>addGraphQLQuery</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers, addGraphQLQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    currentUser(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: args.userId &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(currentUserResolver);</span><br><span class="line"></span><br><span class="line">addGraphQLQuery(<span class="string">`currentUser: User`</span>);</span><br></pre></td></tr></table></figure>
@@ -663,14 +645,13 @@
 <p>Learn more about resolvers in the <a href="http://dev.apollodata.com/tools/graphql-tools/resolvers.html" target="_blank" rel="noopener">Apollo documentation</a>.</p>
 <h2 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h2><p>To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).</p>
 <p>An <strong>HoC</strong> is simply a function you can call on a React component to give it additional props. Think of it as a mechanic’s assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.</p>
-<h3 id="withList"><a href="#withList" class="headerlink" title="withList"></a>withList</h3><p>The <code>withList</code> HoC is used to display lists of documents. It takes the following options:</p>
+<h3 id="withMulti"><a href="#withMulti" class="headerlink" title="withMulti"></a>withMulti</h3><p>The <code>withMulti</code> HoC is used to display lists of documents. It takes the following options:</p>
 <ul>
-<li><code>queryName</code>: an arbitrary name for the query.</li>
 <li><code>collection</code>: the collection on which to look for the <code>list</code> resolver.</li>
 <li><code>fragment</code> or <code>fragmentName</code>: the fragment to use. If you pass <code>fragmentName</code> instead of <code>fragment</code>, the name you passed will be used to look up a fragment registered with <code>registerFragment</code>.</li>
 </ul>
 <p>For example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  queryName: <span class="string">'moviesListQuery'</span>,</span><br><span class="line">  fragment: MoviesItem.fragment</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withList(listOptions)(MoviesList);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  fragmentName: <span class="string">'MoviesItem'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withMulti(listOptions)(movies);</span><br></pre></td></tr></table></figure>
 <p>The resulting wrapped component also takes in the following options:</p>
 <ul>
 <li><code>terms</code>: an object containing a list of querying, sorting, and filtering terms.</li>
@@ -685,21 +666,21 @@
 <li><code>refetch</code>: a function that can be called to trigger a query refetch.</li>
 <li><code>loadMore</code>: a function that can be called to load more data.</li>
 </ul>
-<h3 id="withDocument"><a href="#withDocument" class="headerlink" title="withDocument"></a>withDocument</h3><p>The <code>withDocument</code> HoC displays a single document. It takes the same options as <code>withList</code>, but takes a <code>documentId</code> <strong>prop</strong>.</p>
-<p>Like <code>terms</code> for <code>withList</code>, <code>documentId</code> needs to be passed not as an option, but as a prop from the <em>parent</em> component.</p>
+<h3 id="withSingle"><a href="#withSingle" class="headerlink" title="withSingle"></a>withSingle</h3><p>The <code>withSingle</code> HoC displays a single document. It takes the same options as <code>withMulti</code>, but takes a <code>documentId</code> <strong>prop</strong>.</p>
+<p>Like <code>terms</code> for <code>withMulti</code>, <code>documentId</code> needs to be passed not as an option, but as a prop from the <em>parent</em> component.</p>
 <p>This HoC then passes on the following child prop:</p>
 <ul>
 <li><code>loading</code>: <code>true</code> while the data is loading.</li>
 <li><code>document</code>: the loaded document.</li>
 </ul>
-<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>As long as you use <code>withList</code> in conjunction with <code>withNew</code>, <code>withEdit</code>, and <code>withRemove</code>, your lists will automatically be updated after any mutation. This includes:</p>
+<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>As long as you use <code>withMulti</code> in conjunction with <code>withCreate</code>, <code>withUpdate</code>, and <code>withDelete</code>, your lists will automatically be updated after any mutation. This includes:</p>
 <ul>
 <li>Inserting new items in lists after they’re inserted.</li>
 <li>Removing items when they’re removed.</li>
 <li>Reordering lists when an item is edited in a way that changes a sort.</li>
 <li>Removing an item after it’s been edited when it doesn’t match a list’s filters anymore.</li>
 </ul>
-<p>At this time, it’s only possible to benefit from this auto-updating behavior if you’re using the three built-in mutation HoCs, although making <code>withList</code> more flexible towards custom mutations is on the roadmap (PRs welcome!).</p>
+<p>At this time, it’s only possible to benefit from this auto-updating behavior if you’re using the three built-in mutation HoCs, although making <code>withMulti</code> more flexible towards custom mutations is on the roadmap (PRs welcome!).</p>
 <h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>You can replace any of Vulcan’s generic HoCs with your own tailor-made HoCs (whether it is for queries or mutations) using the <code>graphql</code> utility. Note that if you do so, you will need to manually <a href="http://dev.apollodata.com/react/cache-updates.html" target="_blank" rel="noopener">update your queries</a> after each mutation.</p>
 
     </div>

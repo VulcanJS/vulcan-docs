@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -626,7 +605,7 @@
       <h2 id="Using-Components"><a href="#Using-Components" class="headerlink" title="Using Components"></a>Using Components</h2><p>Assuming a component is registered, you can use it with <code>Components.Foo</code>. For example:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Components &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Header = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Components.Logo /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 <h2 id="Registering-Components"><a href="#Registering-Components" class="headerlink" title="Registering Components"></a>Registering Components</h2><p>Vulcan components are all listed in <code>vulcan:core</code>‘s <code>Components</code> object. You can add new ones with the ‘registerComponent` method:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; registerComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Logo = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;<span class="comment">/* component code */</span>&lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">registerComponent(<span class="string">'Logo'</span>, Logo);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; registerComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Logo = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;<span class="comment">/* component code */</span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">registerComponent(<span class="string">'Logo'</span>, Logo);</span><br></pre></td></tr></table></figure>
 <h3 id="Components-amp-HoCs"><a href="#Components-amp-HoCs" class="headerlink" title="Components &amp; HoCs"></a>Components &amp; HoCs</h3><p>To understand how theming works in Vulcan, it’s important to understand how components and higher-order components (HoCs) interact. </p>
 <p>A higher-order component’s role is to wrap a regular component to pass it a specific prop (such as a list of posts, the current user, the <code>Router</code> object, etc.). You can think of HoCs as specialized assistants that each hand the component a tool it needs to do its job. </p>
 <p>The first argument of <code>registerComponent</code> is the component’s name, the second is the component itself, and any successive arguments will be interpreted as higher-order components and wrapped around the component.</p>
@@ -637,15 +616,15 @@
 <p>Second, both techniques also lead to different results when it comes to higher-order components (more on this below). If you write <code>export withCurrentUser(Foo)</code>, the <code>withCurrentUser</code> function will be executed immediately, which will trigger an error because the fragment it depends on isn’t properly initialized yet. </p>
 <p>On the other hand, <code>registerComponent(&#39;Foo&#39;, Foo, withCurrentUser)</code> <em>doesn’t</em> execute the function (note that we write <code>withCurrentUser</code> and not <code>withCurrentUser()</code>), delaying execution until app’s initialization. </p>
 <p>But what about HoC functions that take arguments? For example if you were to write:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registerComponent(<span class="string">'PostsList'</span>, PostsList, withList(options));</span><br></pre></td></tr></table></figure>
-<p>The <code>withList(options)</code> would be executed immediately, and you would have no way of overriding the <code>options</code> object later on (a common use case being overriding a fragment).</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registerComponent(<span class="string">'PostsList'</span>, PostsList, withMulti(options));</span><br></pre></td></tr></table></figure>
+<p>The <code>withMulti(options)</code> would be executed immediately, and you would have no way of overriding the <code>options</code> object later on (a common use case being overriding a fragment).</p>
 <p>For that reason, to delay the execution until the start of the app, you can use the following alternative syntax:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registerComponent(<span class="string">'PostsList'</span>, PostsList, [withList, options]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registerComponent(<span class="string">'PostsList'</span>, PostsList, [withMulti, options]);</span><br></pre></td></tr></table></figure>
 <h3 id="Accessing-Raw-Components"><a href="#Accessing-Raw-Components" class="headerlink" title="Accessing Raw Components"></a>Accessing Raw Components</h3><p>Going back to our example:</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">const WrappedComponent</span> = withCurrentUser(MyComponent);</span><br></pre></td></tr></table></figure>
 <p>This would result a <em>new</em> <code>WrappedComponent</code> component that has <code>MyComponent</code> as a child. This has the consequence that properties and objects you set on <code>MyComponent</code> might not exist on <code>WrappedComponent</code>. </p>
 <p>For that reason, Vulcan provides a <code>getRawComponent</code> utility that lets you access the unwrapped “raw” component, provided said component has been registered with <code>registerComponent</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyComponent.foo = <span class="string">"bar"</span>;</span><br><span class="line"><span class="keyword">const</span> WrappedComponent = registerComponent(MyComponent, withCurrentUser);</span><br><span class="line"><span class="built_in">console</span>.log(WrappedComponent.foo); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(getRawComponent(WrappedComponent).foo); <span class="comment">// "bar"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyComponent.foo = <span class="string">"bar"</span>;</span><br><span class="line"><span class="keyword">const</span> WrappedComponent = registerComponent(MyComponent, withCurrentUser);</span><br><span class="line">console.<span class="built_in">log</span>(WrappedComponent.foo); <span class="comment">// undefined</span></span><br><span class="line">console.<span class="built_in">log</span>(getRawComponent(WrappedComponent).foo); <span class="comment">// "bar"</span></span><br></pre></td></tr></table></figure>
 <h2 id="Replacing-Components"><a href="#Replacing-Components" class="headerlink" title="Replacing Components"></a>Replacing Components</h2><p>If you only need to modify a single component, you can simply override it with a new one without having to touch the original package.code</p>
 <p>For example, if you wanted to use your own <code>CustomLogo</code> component you would do:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; replaceComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CustomLogo = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;<span class="comment">/* custom component code */</span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line">replaceComponent(<span class="string">'Logo'</span>, CustomLogo);</span><br></pre></td></tr></table></figure>

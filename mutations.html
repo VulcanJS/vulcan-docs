@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -632,25 +611,24 @@
 <li>Finally, the mutator calls a <a href="/database.html#Connectors">database connector</a> to perform the actual database operation. By abstracting out the database operation, we’re able to make mutators (and by extension your entire GraphQL API) database-agnostic. This means that you can switch from MongoDB to MySQL without having to modify any of the above three layers. </li>
 </ol>
 <h2 id="Mutation-Higher-Order-Components"><a href="#Mutation-Higher-Order-Components" class="headerlink" title="Mutation Higher-Order Components"></a>Mutation Higher-Order Components</h2><p>Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the <a href="forms.html">Forms</a> module, all three mutation HoCs are automatically added for you.</p>
-<h4 id="withNew"><a href="#withNew" class="headerlink" title="withNew"></a><code>withNew</code></h4><p>This HoC takes the following two options:</p>
+<h4 id="withCreate"><a href="#withCreate" class="headerlink" title="withCreate"></a><code>withCreate</code></h4><p>This HoC takes the following two options:</p>
 <ul>
 <li><code>collection</code>: the collection to operate on.</li>
 <li><code>fragment</code>: specifies the data to ask for as a return value.</li>
 </ul>
-<p>And passes on a <code>newMutation</code> function to the wrapped component, which takes a single <code>document</code> argument.</p>
-<p>Takes an object as argument with a single <code>document</code> property and returns a promise:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .newMutation(&#123;</span><br><span class="line">    <span class="built_in">document</span>: <span class="built_in">document</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="withEdit"><a href="#withEdit" class="headerlink" title="withEdit"></a><code>withEdit</code></h4><p>Same options as <code>withNew</code>. The returned <code>editMutation</code> mutation takes three arguments: <code>documentId</code>, <code>set</code>, and <code>unset</code>.</p>
-<p>Takes an object with three properties as an argument and returns a promise:</p>
+<p>And passes on a <code>createMovie</code> (or <code>createPost</code>, <code>createUser</code>, etc.) function to the wrapped component, which takes a single <code>document</code> argument.</p>
+<p>Takes an object as argument with a single <code>data</code> property and returns a promise:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .createMovie(&#123; data &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="withUpdate"><a href="#withUpdate" class="headerlink" title="withUpdate"></a><code>withUpdate</code></h4><p>Same options as <code>withCreate</code>. The returned <code>updateMovie</code> mutation takes three arguments: <code>documentId</code>, <code>set</code>, and <code>unset</code>.</p>
+<p>Takes an object with two properties as an argument and returns a promise:</p>
 <ul>
-<li><code>documentId</code>: the document to modify.</li>
-<li><code>set</code>: the fields to modify (as a list of field name/value pairs, e.g.<code>{title: &#39;My New Title&#39;, body: &#39;My new body&#39;}</code>).</li>
-<li><code>unset</code>: the fields to remove (as a list of field names/booleans, e.g. <code>{title: true, body: true}</code>).</li>
+<li><code>selector</code>: a selector pointing to the document to modify. Usually <code>{ documentId }</code>.</li>
+<li><code>data</code>: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to <code>null</code>, e.g.<code>{title: &#39;My New Title&#39;, body: &#39;My new body&#39;, status: null}</code>).</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .editMutation(&#123;</span><br><span class="line">    documentId: <span class="built_in">document</span>._id,</span><br><span class="line">    set: set,</span><br><span class="line">    unset: unset</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="withRemove"><a href="#withRemove" class="headerlink" title="withRemove"></a><code>withRemove</code></h4><p>A single <code>collection</code> option. The returned <code>removeMutation</code> mutation takes a single <code>documentId</code> argument.</p>
-<p>Takes an object with a single <code>documentId</code> property as an argument and returns a promise.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .removeMutation(&#123;</span><br><span class="line">    documentId: documentId</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .updateMovie(&#123;</span><br><span class="line">    selector: &#123; documentId &#125;,</span><br><span class="line">    data,</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="withDelete"><a href="#withDelete" class="headerlink" title="withDelete"></a><code>withDelete</code></h4><p>A single <code>collection</code> option. The returned <code>deleteMovie</code> mutation takes a single <code>selector</code> argument.</p>
+<p>Takes an object with a single <code>selector</code> property as an argument and returns a promise.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props</span><br><span class="line">  .removeMutation(&#123;</span><br><span class="line">    selector: &#123; documentId &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="comment">/* success */</span>)</span><br><span class="line">  .catch(<span class="comment">/* error */</span>);</span><br></pre></td></tr></table></figure>
 <h4 id="withMutation"><a href="#withMutation" class="headerlink" title="withMutation"></a><code>withMutation</code></h4><p>In addition to the three main mutation HoCs, The <code>withMutation</code> HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers.</p>
 <p>It takes two options:</p>
 <ul>
@@ -668,22 +646,32 @@
 <li><code>mutation</code>: the mutation function.</li>
 </ul>
 <h3 id="Default-Mutation-Resolvers"><a href="#Default-Mutation-Resolvers" class="headerlink" title="Default Mutation Resolvers"></a>Default Mutation Resolvers</h3><p>Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(<span class="string">'Movies'</span>),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(<span class="string">'Movies'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
-<p>You can optionally pass a second <code>options</code> argument to <code>getDefaultMutations</code>, which can be used to override the <code>check</code> functions for each mutation: </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutations = getDefaultMutations(<span class="string">'Movies'</span>, &#123;</span><br><span class="line">  newCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> ...,</span><br><span class="line">  editCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> ...,</span><br><span class="line">  removeCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> ...,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(options),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(options)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+<p>The <code>options</code> object can have the following properties: </p>
+<ul>
+<li><code>typeName</code> (String): the resolver’s type name (required).</li>
+<li><code>create</code> (Boolean): whether to create a <code>create</code> mutation (defaults to <code>true</code>).</li>
+<li><code>update</code> (Boolean): whether to create a <code>update</code> mutation (defaults to <code>true</code>).</li>
+<li><code>upsert</code> (Boolean): whether to create a <code>upsert</code> mutation (defaults to <code>true</code>).</li>
+<li><code>delete</code> (Boolean): whether to create a <code>delete</code> mutation (defaults to <code>true</code>).</li>
+<li><code>createCheck</code> (Function): a function used to customize the <code>create</code> check.</li>
+<li><code>updateCheck</code> (Function): a function used to customize the <code>update</code> check.</li>
+<li><code>upsertCheck</code> (Function): a function used to customize the <code>upsert</code> check.</li>
+<li><code>deleteCheck</code> (Function): a function used to customize the <code>delete</code> check.</li>
+</ul>
 <p>Vulcan’s default mutations are fairly lightweight. For example here’s the body of the <code>edit</code> mutation resolver (where <code>collectionName</code> is <code>getDefaultMutations</code>‘s argument):</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> mutation(root, &#123;documentId, set, unset&#125;, context) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> collection = context[collectionName];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// get entire unmodified document from database</span></span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">document</span> = <span class="keyword">await</span> Connectors.get(collection, documentId);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// check if user can perform operation; if not throw error</span></span><br><span class="line">  Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// call editMutator boilerplate function</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> editMutator(&#123;</span><br><span class="line">    collection, </span><br><span class="line">    documentId: documentId, </span><br><span class="line">    set: set, </span><br><span class="line">    unset: unset, </span><br><span class="line">    currentUser: context.currentUser,</span><br><span class="line">    validate: <span class="literal">true</span>,</span><br><span class="line">    context,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> mutation(root, &#123;documentId, set, unset&#125;, context) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> collection = context[collectionName];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// get entire unmodified document from database</span></span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">document</span> = <span class="keyword">await</span> Connectors.get(collection, documentId);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// check if user can perform operation; if not throw error</span></span><br><span class="line">  Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// call updateMutator boilerplate function</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> updateMutator(&#123;</span><br><span class="line">    collection, </span><br><span class="line">    selector, </span><br><span class="line">    data, </span><br><span class="line">    currentUser: context.currentUser,</span><br><span class="line">    validate: <span class="literal">true</span>,</span><br><span class="line">    context,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>To learn more about what exactly the default mutations do, you can <a href="https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js" target="_blank" rel="noopener">find their code here</a>.</p>
 <h3 id="Custom-Mutations"><a href="#Custom-Mutations" class="headerlink" title="Custom Mutations"></a>Custom Mutations</h3><p>You can also add your own mutations resolvers using <code>addGraphQLMutation</code> and <code>addGraphQLResolvers</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLMutation, addGraphQLResolvers &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">addGraphQLMutation(</span><br><span class="line">  <span class="string">'postsVote(documentId: String, voteType: String) : Post'</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> voteResolver = &#123;</span><br><span class="line">  Mutation: &#123;</span><br><span class="line">    postsVote(root, &#123; documentId, voteType &#125;, context) &#123;</span><br><span class="line">      <span class="comment">// do mutation</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addGraphQLResolvers(voteResolver);</span><br></pre></td></tr></table></figure>
 <h2 id="Mutators"><a href="#Mutators" class="headerlink" title="Mutators"></a>Mutators</h2><p>A <strong>mutator</strong> is the function that actually does the work of mutating data on the server. As opposed to the <em>mutation</em>, which is usually a fairly light function called directly through the GraphQL API, a <em>mutator</em> will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.</p>
-<h3 id="Default-Mutators"><a href="#Default-Mutators" class="headerlink" title="Default Mutators"></a>Default Mutators</h3><p>Vulcan features three standard mutators: <code>newMutator</code>, <code>editMutator</code>, and <code>removeMutator</code>. They are in essence thin wrappers around the standard Mongo <code>insert</code>, <code>update</code>, and <code>remove</code>.</p>
+<h3 id="Default-Mutators"><a href="#Default-Mutators" class="headerlink" title="Default Mutators"></a>Default Mutators</h3><p>Vulcan features three standard mutators: <code>createMutator</code>, <code>updateMutator</code>, and <code>deleteMutator</code>. They are in essence thin wrappers around the standard Mongo <code>insert</code>, <code>update</code>, and <code>remove</code>.</p>
 <p>These mutation functions should be defined <em>outside</em> your GraphQL mutation resolvers, so that you’re able to call them from outside a GraphQL context (for example, to seed your database through a server script).</p>
 <p>They take the following arguments:</p>
 <ul>
 <li><code>collection</code>: the collection affected.</li>
-<li><code>document</code> (new) or <code>documentId</code> (edit, remove): the document or document ID.</li>
-<li><code>set</code>, <code>unset</code> (edit only): the <code>set</code> and <code>unset</code> objects.</li>
+<li><code>document</code>: the document to mutate.</li>
+<li><code>data</code>: (<code>updateMutator</code> only) the mutation payload.</li>
 <li><code>currentUser</code>: the user performing the operation.</li>
 <li><code>validate</code>: whether to validate the operation based on the current user.</li>
 <li><code>context</code>: the resolver context.</li>
@@ -695,15 +683,15 @@
 <li>Add <code>userId</code> to document (insert only).</li>
 <li>Run any validation callbacks (e.g. <code>movies.new.validate</code>).</li>
 </ul>
-<p>They will then run the mutation’s document (or the <code>set</code> modifier) through the collection’s sync callbacks (e.g. <code>movies.new.sync</code>), perform the operation, and finally run the async callbacks (e.g. <code>movies.new.async</code>).</p>
-<p>For example, here is the <code>Posts</code> collection’s <code>new</code> mutation resolver, using the <code>newMutator</code> boilerplate mutation:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; newMutator &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">  <span class="keyword">new</span>: &#123;</span><br><span class="line">    name: <span class="string">'postsNew'</span>,</span><br><span class="line"></span><br><span class="line">    check(user, <span class="built_in">document</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.canDo(user, <span class="string">'posts.new'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, &#123; <span class="built_in">document</span> &#125;, context) &#123;</span><br><span class="line">      performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> newMutator(&#123;</span><br><span class="line">        collection: context.Posts,</span><br><span class="line">        <span class="built_in">document</span>: <span class="built_in">document</span>,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>,</span><br><span class="line">        context</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>They will then run the mutation’s document (or the <code>set</code> modifier) through the collection’s sync callbacks (e.g. <code>movie.create.sync</code>), perform the operation, and finally run the async callbacks (e.g. <code>movie.create.async</code>).</p>
+<p>For example, here is the <code>Posts</code> collection’s <code>create</code> mutation resolver, using the <code>createMutator</code> boilerplate mutation:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createMutator &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">  <span class="keyword">new</span>: &#123;</span><br><span class="line">    name: <span class="string">'createPost'</span>,</span><br><span class="line"></span><br><span class="line">    check(user, <span class="built_in">document</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.canDo(user, <span class="string">'post.create'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, &#123; <span class="built_in">document</span> &#125;, context) &#123;</span><br><span class="line">      performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> createMutator(&#123;</span><br><span class="line">        collection: context.Posts,</span><br><span class="line">        <span class="built_in">document</span>: <span class="built_in">document</span>,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>,</span><br><span class="line">        context</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Mutator-Callbacks"><a href="#Mutator-Callbacks" class="headerlink" title="Mutator Callbacks"></a>Mutator Callbacks</h3><p>Default mutators create the following callback hooks for every collection: </p>
 <ul>
-<li><code>collection.operation.validate</code>: called to validate the document or modifier. </li>
-<li><code>collection.operation.before</code>: called before the database operation.</li>
-<li><code>collection.operation.after</code>: called after the database operation, but before the mutator returns.</li>
-<li><code>collection.operation.async</code>: called in an async manner after the mutator returns. </li>
+<li><code>typename.operation.validate</code>: called to validate the document or modifier. </li>
+<li><code>typename.operation.before</code>: called before the database operation.</li>
+<li><code>typename.operation.after</code>: called after the database operation, but before the mutator returns.</li>
+<li><code>typename.operation.async</code>: called in an async manner after the mutator returns. </li>
 </ul>
 <p>You can learn more about callbacks in the <a href="callbacks.html">Callbacks</a> section.</p>
 <h3 id="Custom-Mutators"><a href="#Custom-Mutators" class="headerlink" title="Custom Mutators"></a>Custom Mutators</h3><p>If you’re writing your own resolvers you can of course also write your own mutators, either by using Vulcan’s <a href="/database.html#Connectors">Connectors</a> or even by accessing your database directly. </p>

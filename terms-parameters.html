@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -638,7 +617,7 @@
 <p>Into these parameters:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  selector: &#123;</span><br><span class="line">    status: Posts.config.STATUS_APPROVED,</span><br><span class="line">    isFuture: &#123;<span class="attr">$ne</span>: <span class="literal">true</span>&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  options: &#123;</span><br><span class="line">    sort: &#123;</span><br><span class="line">      sticky: <span class="number">-1</span>,</span><br><span class="line">      score: <span class="number">-1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>This two-tiered strategy ensures both that the user doesn’t need to spell out every rule (“only select approved posts”) every single time, and also that security risks don’t creep in.</p>
-<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>The generic <code>withList</code> component is hard-coded to pass a <code>terms</code> argument to a collection’s GraphQL resolvers, but if you’re not using <code>withList</code> then you can send any argument you want, and bypass the terms/parameters system altogether.</p>
+<h4 id="Alternative-Approach"><a href="#Alternative-Approach" class="headerlink" title="Alternative Approach"></a>Alternative Approach</h4><p>The generic <code>withMulti</code> component is hard-coded to pass a <code>terms</code> argument to a collection’s GraphQL resolvers, but if you’re not using <code>withMulti</code> then you can send any argument you want, and bypass the terms/parameters system altogether.</p>
 <h2 id="Parameter-Callbacks"><a href="#Parameter-Callbacks" class="headerlink" title="Parameter Callbacks"></a>Parameter Callbacks</h2><p>Every Vulcan collection has its own <code>collection.parameters</code> callback hook which you can use to add additional parameter transformations. </p>
 <p>(In addition, collections also have two distinct <code>collection.parameters.client</code> and <code>collection.parameters.server</code> hooks that only run in their respective environments, although the regular <code>collection.parameters</code> hook is usually enough.)</p>
 <h3 id="Simple-Callbacks"><a href="#Simple-Callbacks" class="headerlink" title="Simple Callbacks"></a>Simple Callbacks</h3><p>For example, this is how you could implement a sort by <code>createdAt</code> on the <code>Movies</code> collection:</p>

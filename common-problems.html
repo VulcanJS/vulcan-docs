@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -574,6 +546,13 @@
               </li>
             
               
+              <li class="item-toc  current">
+                <a href="" class="sidebar-link  current">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
               <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
@@ -624,7 +603,7 @@
 
     <div class="document-formatting">
       <p>Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app.</p>
-<h2 id="Common-Problems"><a href="#Common-Problems" class="headerlink" title="Common Problems"></a>Common Problems</h2><h3 id="“Load-More”-Not-Working"><a href="#“Load-More”-Not-Working" class="headerlink" title="“Load More” Not Working"></a>“Load More” Not Working</h3><p>If your app initially loads fine but “Load More” doesn’t work, this most likely indicates that while server-side rendering is working but data loading isn’t.</p>
+<h2 id="Common-Problems"><a href="#Common-Problems" class="headerlink" title="Common Problems"></a>Common Problems</h2><h3 id="“Load-More”-Not-Working"><a href="#“Load-More”-Not-Working" class="headerlink" title="“Load More” Not Working"></a>“Load More” Not Working</h3><p>If your app initially loads fine but “Load More” doesn’t work, this most likely indicates that while server-side rendering is working, data loading isn’t.</p>
 <p>The most common cause is a mismatch between your domain and the URL currently being used as your GraphQL endpoint, which is based on the <code>ROOT_URL</code> environment variable.</p>
 <p>To double-check which GraphQL endpoint URL is being used, just use your Devtools Network tab in your browser and inspect any failed requests.</p>
 <h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><h3 id="Finding-Errors"><a href="#Finding-Errors" class="headerlink" title="Finding Errors"></a>Finding Errors</h3><p>Locating the source of an issue can be trickier than you think.</p>
@@ -655,7 +634,7 @@
 <li><strong>Resolver issue:</strong> just like queries, mutations can also have resolver problems.</li>
 <li><strong>Permissions issue:</strong> it’s also possible that the mutation is failing because you don’t have the proper rights.</li>
 </ul>
-<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>If your data isn’t updating properly after a mutation, this can be due to a fragment mismatch. Make sure that <code>new</code> mutations use the same fragment as the query they’re updating (<code>edit</code> mutations on the other hand can safely return partial fragments).</p>
+<h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>If your data isn’t updating properly after a mutation, this can be due to a fragment mismatch. Make sure that <code>create</code> mutations use the same fragment as the query they’re updating (<code>update</code> mutations on the other hand can safely return partial fragments).</p>
 
     </div>
   </div>
@@ -665,17 +644,17 @@
       
       
         <a class="link primary prev"
-          href="vulcan.html">
+          href="examples.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          From Telescope to Vulcan
+          Examples
         </a>
       
       
         <a class="link primary next"
-          href="schemas.html">
+          href="plugins.html">
           <span class="subtitle-pagination">Next</span>
-          Schemas & Collections
+          Plugins
           <span class="icon-arrow-right-alt"></span>
         </a>
       

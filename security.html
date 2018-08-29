@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -633,31 +612,31 @@
 <p>You can do this using the <a href="/groups-permissions.html#Controlling-Viewing">collection’s global <code>checkAccess</code> function</a>, which is called by the default <code>list</code> and <code>single</code> resolvers every time a document is requested.</p>
 <p>Note that if you are <em>not</em> using the default resolvers, specifying <code>checkAccess</code> won’t do anything unless you manually call it yourself.</p>
 <h3 id="Field-Level-Access"><a href="#Field-Level-Access" class="headerlink" title="Field-Level Access"></a>Field-Level Access</h3><p>Another way of looking at security is field by field. For example, maybe you want to limit the visibility of a hidden <code>score</code> field to admins to make it harder to game your voting system. </p>
-<p>You can do this through <a href="/schema-properties.html#Data-Layer-Properties">the <code>isViewable</code> property</a> as defined on a field’s schema. </p>
-<p><code>isViewable</code> either takes a function that takes in the current user and current document and return <code>true</code> or <code>false</code>; or an array of strings corresponding to the names of the <a href="/groups-permissions.html#Groups-amp-Actions">user groups</a> who can view the document. </p>
-<h4 id="Visibility-vs-Accessibility"><a href="#Visibility-vs-Accessibility" class="headerlink" title="Visibility vs Accessibility"></a>Visibility vs Accessibility</h4><p>Note that in order to be included in the GraphQL schema at all, a field needs either an <code>isViewable</code>, <code>isInsertable</code>, or <code>isEditable</code> property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all, no matter what. </p>
-<p>If one of these properties <em>does</em> exist, the field will be added to the schema, but that doesn’t necessarily mean querying it will actually return a value; that all depends on the contents of <code>isViewable</code>.</p>
+<p>You can do this through <a href="/schema-properties.html#Data-Layer-Properties">the <code>canRead</code> property</a> as defined on a field’s schema. </p>
+<p><code>canRead</code> either takes a function that takes in the current user and current document and return <code>true</code> or <code>false</code>; or an array of strings corresponding to the names of the <a href="/groups-permissions.html#Groups-amp-Actions">user groups</a> who can view the document. </p>
+<h4 id="Visibility-vs-Accessibility"><a href="#Visibility-vs-Accessibility" class="headerlink" title="Visibility vs Accessibility"></a>Visibility vs Accessibility</h4><p>Note that in order to be included in the GraphQL schema at all, a field needs either an <code>canRead</code>, <code>canCreate</code>, or <code>canUpdate</code> property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all, no matter what. </p>
+<p>If one of these properties <em>does</em> exist, the field will be added to the schema, but that doesn’t necessarily mean querying it will actually return a value; that all depends on the contents of <code>canRead</code>.</p>
 <h2 id="Writing-Data"><a href="#Writing-Data" class="headerlink" title="Writing Data"></a>Writing Data</h2><p>Even more important than controlling who can <em>read</em> data is controlling who can <em>write</em> it. And Vulcan’s <a href="/mutations.html#Default-Mutations">default mutations</a> also have a few tricks up their sleeves. </p>
 <p>Again, we need to make a distinction between <strong>document-level checks</strong> (“only these users can edit this document”) and <strong>field-level checks</strong> (“only these users can edit these fields of this document”).</p>
 <h3 id="Document-Level-Checks"><a href="#Document-Level-Checks" class="headerlink" title="Document-Level Checks"></a>Document-Level Checks</h3><p>The first step in securing your mutations is deciding who can perform them, and on which documents. Vulcan’s default mutations offer two different approaches.</p>
 <h4 id="Group-Based-Checks"><a href="#Group-Based-Checks" class="headerlink" title="Group-Based Checks"></a>Group-Based Checks</h4><p>Out of the box, the three default mutations will first check if a current user exists. If it does, they will then check if that user can perform the <code>collectionName.operationName</code> action. Depending on the current action, this action could be named (using the <code>Posts</code> collection as an example):</p>
 <ul>
-<li><code>posts.new</code></li>
-<li><code>posts.edit.own</code></li>
-<li><code>posts.edit.all</code></li>
-<li><code>posts.remove.own</code></li>
-<li><code>posts.remove.all</code></li>
+<li><code>post.create</code></li>
+<li><code>post.update.own</code></li>
+<li><code>post.update.all</code></li>
+<li><code>post.delete.own</code></li>
+<li><code>post.delete.all</code></li>
 </ul>
 <p>So an easy way to enable a user to perform a given mutation is to <a href="/groups-permissions.html#Assigning-Actions">enable the corresponding action</a> for a group they belong to. </p>
-<p>Note that for <code>edit</code> and <code>remove</code> operations, two distinct actions are checked (<code>*.all</code> and <code>*.own</code>) based on whether the current user owns the current document or not. This makes it easy to let one group (for example, <code>mods</code>) edit all documents in a collection while another one can only edit their own. </p>
-<p>When writing your own back-end logic, you’re welcome to also add your own new action names (<code>posts.edit.drafts</code>, <code>posts.remove.archived</code>, etc.) if that helps set up your permissions structure. </p>
+<p>Note that for <code>update</code> and <code>delete</code> operations, two distinct actions are checked (<code>*.all</code> and <code>*.own</code>) based on whether the current user owns the current document or not. This makes it easy to let one group (for example, <code>mods</code>) edit all documents in a collection while another one can only edit their own. </p>
+<p>When writing your own back-end logic, you’re welcome to also add your own new action names (<code>post.update.drafts</code>, <code>post.delete.archived</code>, etc.) if that helps set up your permissions structure. </p>
 <h4 id="Manual-Checks"><a href="#Manual-Checks" class="headerlink" title="Manual Checks"></a>Manual Checks</h4><p>Sometimes you need finer-grained control over mutations, or maybe you’re just not using groups at all. In that case, when calling <code>getDefaultMutations(collectionName)</code> inside <code>createCollection</code> you can also pass a second <code>options</code> object to define <code>check</code> functions for the three default mutations:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutations = getDefaultMutations(<span class="string">'Posts'</span>, &#123;</span><br><span class="line">  newCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;,</span><br><span class="line">  editCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;,</span><br><span class="line">  removeCheck: <span class="function">(<span class="params">user, <span class="built_in">document</span></span>) =&gt;</span> &#123; <span class="comment">/*...*/</span> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>This is useful when a mutation check has to depend on a specific document. For example, you can imagine a scenario where documents can only be edited if their <code>status</code> is set to <code>draft</code>. In this case, simply checking for groups wouldn’t be dynamic enough, and you’ll need to pass an <code>editCheck</code> function instead. </p>
 <p>Note that if you specify manual checks for a mutation, the aforementioned group checks will be bypassed.</p>
-<h3 id="Field-Level-Checks"><a href="#Field-Level-Checks" class="headerlink" title="Field-Level Checks"></a>Field-Level Checks</h3><p>Just like you can control field-level access with <code>isViewable</code>, you can control field-level data writes with <code>isInsertable</code> and <code>isEditable</code>. </p>
+<h3 id="Field-Level-Checks"><a href="#Field-Level-Checks" class="headerlink" title="Field-Level Checks"></a>Field-Level Checks</h3><p>Just like you can control field-level access with <code>canRead</code>, you can control field-level data writes with <code>canCreate</code> and <code>canUpdate</code>. </p>
 <p>For example, maybe you only want admin users to be able to reassign a post to a different user. In which case you could make a post’s <code>userId</code> only be editable by users belonging to the <code>admins</code> group.</p>
-<p>And just like <code>isViewable</code>, both <code>isInsertable</code> and <code>isEditable</code> can also take functions in addition to an array of group names. </p>
+<p>And just like <code>canRead</code>, both <code>canCreate</code> and <code>canUpdate</code> can also take functions in addition to an array of group names. </p>
 <h2 id="Other-Resolvers-amp-Mutations"><a href="#Other-Resolvers-amp-Mutations" class="headerlink" title="Other Resolvers &amp; Mutations"></a>Other Resolvers &amp; Mutations</h2><p>If you work with other resolvers and mutations beyond the defaults (for example, maybe you need to create a dedicated mutation for voting on a post), security will be left up to you to implement. That being said, you can still piggy-back on top of the existing Vulcan security infrastructure and reuse some of the same helpers and functions. </p>
 
     </div>
@@ -668,10 +647,10 @@
       
       
         <a class="link primary prev"
-          href="redux.html">
+          href="server-queries.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Using Redux
+          Querying on the Server
         </a>
       
       

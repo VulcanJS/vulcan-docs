@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -623,7 +602,7 @@
     </div>
 
     <div class="document-formatting">
-      <p>Here’s a <a href="https://www.youtube.com/watch?v=qibyA_ReqEQ" target="_blank" rel="noopener">video walkthrough</a> of <a href="https://github.com/TelescopeJS/Telescope/tree/master/packages/example-instagram" target="_blank" rel="noopener">the code</a> for the <code>example-instagram</code> package.</p>
+      <p>Here’s a <a href="https://www.youtube.com/watch?v=qibyA_ReqEQ" target="_blank" rel="noopener">video walkthrough</a> of <a href="https://github.com/VulcanJS/Vulcan-Starter/tree/master/packages/example-instagram" target="_blank" rel="noopener">the code</a> for the <code>example-instagram</code> package.</p>
 <h3 id="Note-Code-Changes"><a href="#Note-Code-Changes" class="headerlink" title="Note: Code Changes"></a>Note: Code Changes</h3><p>Unlike the video, the actual package now relies on <a href="/resolvers.html#Default-Resolvers">default resolvers</a> and <a href="/mutations.html#Default-Mutations">default mutations</a> to simplify the code, meaning the <code>resolvers.js</code> and <code>mutations.js</code> files were removed. </p>
 <p>Also, resolvers for the <code>userId</code> and <code>commentsCount</code> fields are now specified directly in the schema instead of in the <code>resolvers.js</code> file.</p>
 <h3 id="Image-Upload"><a href="#Image-Upload" class="headerlink" title="Image Upload"></a>Image Upload</h3><p>This example uses <a href="forms-upload.html">the <code>vulcan:forms-upload</code> package</a>, which  uploads images to <a href="http://cloudinary.com" target="_blank" rel="noopener">Cloudinary</a>.</p>

@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -629,21 +608,22 @@
 <p>Callback functions can take more than one arguments, but the first argument is special in that - for sync callbacks – it will be updated each time to reflect the return value of each successive function, letting you progressively iterate over a value or object. </p>
 <h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a callback debugging UI is available at <a href="http://0.0.0.0:3000/callbacks" target="_blank" rel="noopener">http://0.0.0.0:3000/callbacks</a>.</strong></p>
 <h2 id="Adding-Callback-Functions"><a href="#Adding-Callback-Functions" class="headerlink" title="Adding Callback Functions"></a>Adding Callback Functions</h2><p>For example, here’s how you would add a callback to <code>posts.edit.sync</code> to give posts an <code>editedAt</code> date every time they are modified:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setEditedAt</span> (<span class="params">post, user</span>) </span>&#123;</span><br><span class="line">  post.editedAt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">return</span> post;</span><br><span class="line">&#125;</span><br><span class="line">addCallback(<span class="string">'posts.edit.sync'</span>, setEditedAt);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setEditedAt</span> (<span class="params">post, user</span>) </span>&#123;</span><br><span class="line">  post.editedAt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">return</span> post;</span><br><span class="line">&#125;</span><br><span class="line">addCallback(<span class="string">'post.update.before'</span>, setEditedAt);</span><br></pre></td></tr></table></figure>
 <p>Vulcan’s boilerplate mutations support three distinct types of callback functions, each with their own hook:</p>
 <ul>
 <li><code>validate</code> callbacks are called to decide if an operation should run or not. </li>
-<li><code>sync</code> callbacks are called in a blocking manner before the database operation.</li>
+<li><code>before</code> callbacks are called in a blocking manner before the database operation.</li>
+<li><code>after</code> callbacks are called in a blocking manner after the database operation.</li>
 <li><code>async</code> callbacks are called in a non-blocking manner, after the database operation. </li>
 </ul>
 <h2 id="Removing-Callback-Functions"><a href="#Removing-Callback-Functions" class="headerlink" title="Removing Callback Functions"></a>Removing Callback Functions</h2><p>If the callback function is named (i.e. declared using the <code>function foo () {}</code> syntax), you can also remove it from the callback using:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; removeCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">removeCallback(<span class="string">'posts.edit.sync'</span>, <span class="string">"setEditedAt"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="Running-Callback-Hooks"><a href="#Running-Callback-Hooks" class="headerlink" title="Running Callback Hooks"></a>Running Callback Hooks</h2><p>Callbacks are run using the <code>Callbacks.runSync</code> and <code>Callbacks.runAsync</code> functions:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modifier = Callbacks.run(<span class="string">`movies.edit.sync`</span>, modifier, <span class="built_in">document</span>, currentUser)</span><br></pre></td></tr></table></figure>
-<p>In each case, the <strong>first</strong> argument is the name of the callback hook, the <strong>second</strong> argument is the one iterated on by each callback function on the hook, while any remaining arguments are just passed along from one iteration to the next.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; removeCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">removeCallback(<span class="string">'post.update.before'</span>, <span class="string">"setEditedAt"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Running-Callback-Hooks"><a href="#Running-Callback-Hooks" class="headerlink" title="Running Callback Hooks"></a>Running Callback Hooks</h2><p>Callbacks are run using the <code>runCallbacks</code> and <code>runCallbacksAsync</code> functions:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modifier = runCallbacks(&#123; <span class="attr">name</span>: <span class="string">`movie.update.before`</span>, <span class="attr">iterator</span>: data, <span class="attr">properties</span>: &#123; <span class="built_in">document</span>, currentUser &#125;&#125;);</span><br></pre></td></tr></table></figure>
+<p>In each case, the <code>name</code> argument is the name of the callback hook, the <code>iterator</code> argument is the one iterated on by each callback function on the hook, while <code>properties</code> are just passed along from one iteration to the next.</p>
 <p>Note that for <em>sync</em> callbacks, each callback function should return the main argument to pass it on to the next function, while <em>async</em> callbacks don’t need to return anything.</p>
 <h2 id="Registering-Callbacks"><a href="#Registering-Callbacks" class="headerlink" title="Registering Callbacks"></a>Registering Callbacks</h2><p>While you don’t need to register new callback hooks to use them (as long as you do run them), registering a callback makes it easier to document and use it:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; registerCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:lib'</span>;</span><br><span class="line"></span><br><span class="line">registerCallback(&#123;</span><br><span class="line">  name: <span class="string">`posts.new.validate`</span>, </span><br><span class="line">  description: <span class="string">`Validate a document before insertion (can be skipped when inserting directly on server).`</span>,  </span><br><span class="line">  <span class="built_in">arguments</span>: [&#123;<span class="attr">document</span>: <span class="string">'The document being inserted'</span>&#125;, &#123;<span class="attr">currentUser</span>: <span class="string">'The current user'</span>&#125;, &#123;<span class="attr">validationErrors</span>: <span class="string">'An object that can be used to accumulate validation errors'</span>&#125;], </span><br><span class="line">  runs: <span class="string">'sync'</span>, </span><br><span class="line">  returns: <span class="string">'document'</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; registerCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:lib'</span>;</span><br><span class="line"></span><br><span class="line">registerCallback(&#123;</span><br><span class="line">  name: <span class="string">`post.create.validate`</span>, </span><br><span class="line">  description: <span class="string">`Validate a document before insertion (can be skipped when inserting directly on server).`</span>,  </span><br><span class="line">  <span class="built_in">arguments</span>: [&#123;<span class="attr">document</span>: <span class="string">'The document being inserted'</span>&#125;, &#123;<span class="attr">currentUser</span>: <span class="string">'The current user'</span>&#125;, &#123;<span class="attr">validationErrors</span>: <span class="string">'An object that can be used to accumulate validation errors'</span>&#125;], </span><br><span class="line">  runs: <span class="string">'sync'</span>, </span><br><span class="line">  returns: <span class="string">'document'</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>It takes the following arguments: </p>
 <ul>
 <li><code>name</code>: the name of the callback.</li>

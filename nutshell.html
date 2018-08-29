@@ -68,7 +68,7 @@
     
       
       <div class="nav-item show-desktop false ">
-        <a class="link" href="http://slack.telescopeapp.org"  >
+        <a class="link" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
       </div>
     
       <div class="panel-item "">
-        <a class="" href="http://slack.telescopeapp.org"  >
+        <a class="" href="http://slack.vulcanjs.org"  >
           <span>Slack</span>
         </a>
       </div>
@@ -134,29 +134,8 @@
             
               
               <li class="item-toc ">
-                <a href="features.html" class="sidebar-link ">
-                  <span>Features</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
                 <a href="architecture.html" class="sidebar-link ">
                   <span>Architecture</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="vulcan.html" class="sidebar-link ">
-                  <span>From Telescope to Vulcan</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="common-problems.html" class="sidebar-link ">
-                  <span>Common Problems</span>
                 </a>
               </li>
             
@@ -238,13 +217,6 @@
               <li class="item-toc ">
                 <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
-                </a>
-              </li>
-            
-              
-              <li class="item-toc ">
-                <a href="redux.html" class="sidebar-link ">
-                  <span>Using Redux</span>
                 </a>
               </li>
             
@@ -575,6 +547,13 @@
             
               
               <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="plugins.html" class="sidebar-link ">
                   <span>Plugins</span>
                 </a>
@@ -626,7 +605,7 @@
       <p>The best way to understand how Vulcan works is to consider its three main aspects: the role of the schema, how Vulcan reads data, and how Vulcan writes data.</p>
 <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><a href="/images/how-vulcan-works.svg"><img src="/images/how-vulcan-works.svg" alt="/images/how-vulcan-works.svg"></a></p>
 <h2 id="The-Schema"><a href="#The-Schema" class="headerlink" title="The Schema"></a>The Schema</h2><p>At its core, a Vulcan schema is just a JavaScript object containing a list of fields such as <code>name</code>, <code>_id</code>, <code>createdAt</code>, <code>description</code>, etc. describing a <strong>type of document</strong> (a movie, a post, a photo, a review, and so on).</p>
-<p>The schema is what defines how a <a href="/schemas.html">Collection</a> (a.k.a. a Model) behaves, and it fulfills many important functions:</p>
+<p>The schema is what defines how a <a href="/schemas.html">Collection</a> (you might also be more familiar with the equivalent term “model”) behaves, and it fulfills many important functions:</p>
 <ol>
 <li>It’s used to generate your GraphQL schema, which in turn controls your app’s GraphQL API.</li>
 <li>It’s used to <a href="http://docs.vulcanjs.org/groups-permissions.html">control permissions</a>.</li>
@@ -634,13 +613,13 @@
 </ol>
 <h2 id="Reading-Data"><a href="#Reading-Data" class="headerlink" title="Reading Data"></a>Reading Data</h2><p>Reading data basically means getting data from your database all the way to the user’s browser.</p>
 <p>Let’s assume you have a <code>Movies.jsx</code> component ready to take a <code>results</code> prop and display its contents as a list of movies.</p>
-<p>In order to pass that prop, you’ll wrap your component with the <a href="/resolvers.html#withList"><code>withList</code> higher-order component</a>. You just need to specify the appropriate <a href="/schemas.html">Collection</a>, and optionally also specify a <a href="/fragments.html">fragment</a> to define which document fields to load.</p>
-<p>The <code>withList</code> HoC will then query your GraphQL endpoint’s corresponding <a href="/resolvers.html#List-Resolver"><code>MoviesList</code> resolver</a>, which can be generated automatically using Vulcan’s <a href="/resolvers.html#Default-Resolvers">default resolvers</a>.</p>
-<p>The <code>MoviesList</code> resolver will optionally check the query’s <code>terms</code> argument and <a href="/terms-parameters.html">feed it through a set of callbacks</a> in order to generate a valid MongoDB query, whose result it will return to <code>withList</code> and from there back to your <code>Movies</code> component.</p>
+<p>In order to pass that prop, you’ll wrap your component with the <a href="/resolvers.html#withMulti"><code>withMulti</code> higher-order component</a>. You just need to specify the appropriate <a href="/schemas.html">Collection</a>, and optionally also specify a <a href="/fragments.html">fragment</a> to define which document fields to load.</p>
+<p>The <code>withMulti</code> HoC will then query your GraphQL endpoint’s corresponding <a href="/resolvers.html#List-Resolver"><code>movies</code> resolver</a>, which will usually have been generated automatically using Vulcan’s <a href="/resolvers.html#Default-Resolvers">default resolvers</a>.</p>
+<p>The <code>movies</code> resolver will optionally check the query’s <code>terms</code> argument and <a href="/terms-parameters.html">feed it through a set of callbacks</a> in order to generate a valid MongoDB query, whose result it will return to <code>withMulti</code> and from there back to your <code>Movies</code> component.</p>
 <h2 id="Writing-Data"><a href="#Writing-Data" class="headerlink" title="Writing Data"></a>Writing Data</h2><p>Now let’s consider the opposite operation: writing data, such as editing a movie’s description.</p>
-<p>First, you should know that the movie edit form can be <a href="/forms.html">automatically generated from your schema</a>, meaning you don’t actually need to code it or worry about hooking it up to your GraphQL API.</p>
-<p>That form is wrapped with the <a href="/mutations.html#Higher-Order-Components"><code>withEdit</code> HoC</a>, which in turn will call the <code>EditMovies</code> mutation on the server (which again can be <a href="/mutations.html#Default-Mutations">automatically generated from default mutations</a>).</p>
-<p><code>EditMovies</code> will then call a <a href="/mutations.html#Boilerplate-Mutations">boilerplate mutator</a> which will perform <strong>validation</strong> based on your schema, and finally modify the document inside your database.</p>
+<p>First, you should know that the movie update form can be <a href="/forms.html">automatically generated from your schema</a>, meaning you don’t actually need to code it or worry about hooking it up to your GraphQL API.</p>
+<p>That form is wrapped with the <a href="/mutations.html#Higher-Order-Components"><code>withUpdate</code> HoC</a>, which in turn will call the <code>updateMovie</code> mutation on the server (which again can be <a href="/mutations.html#Default-Mutations">automatically generated from default mutations</a>).</p>
+<p><code>updateMovie</code> will then call a <a href="/mutations.html#Boilerplate-Mutations">boilerplate mutator</a> which will perform <strong>validation</strong> based on your schema, and finally modify the document inside your database.</p>
 
     </div>
   </div>
@@ -658,9 +637,9 @@
       
       
         <a class="link primary next"
-          href="features.html">
+          href="architecture.html">
           <span class="subtitle-pagination">Next</span>
-          Features
+          Architecture
           <span class="icon-arrow-right-alt"></span>
         </a>
       
