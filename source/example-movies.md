@@ -105,13 +105,13 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `MoviesList.jsx` containing a `MoviesList` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `movies.jsx` containing a `movies` component:
 
 ```js
 import React, { PropTypes, Component } from 'react';
 import { registerComponent } from 'meteor/vulcan:core';
 
-const MoviesList = () => 
+const movies = () => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -131,13 +131,13 @@ const MoviesList = () =>
 
   </div>
 
-registerComponent('MoviesList', MoviesList);
+registerComponent('movies', movies);
 ```
 
 We'll also create a new `components.js` file inside `modules` so we can import our new component and make it available globally: 
 
 ```js
-import '../components/movies/MoviesList.jsx';
+import '../components/movies/movies.jsx';
 ```
 
 Then we need to import the `components.js` inside of our `modules/index.js` before going to the next step.
@@ -153,7 +153,7 @@ We can now create a [route](/routing.html) to display this component. Create a n
 ```js
 import { addRoute } from 'meteor/vulcan:core';
 
-addRoute({ name: 'movies', path: '/', componentName: 'MoviesList' });
+addRoute({ name: 'movies', path: '/', componentName: 'movies' });
 ```
 
 In case you're wondering, `addRoute` is a very thin wrapper over [React Router](https://github.com/ReactTraining/react-router). 
@@ -164,7 +164,7 @@ Make sure to also import `routes.js` inside `modules/index.js`:
 import './routes.js';
 ```
 
-If everything worked properly, you should now be able to head to `http://localhost:3000/` and see your `MoviesList` component show up. 
+If everything worked properly, you should now be able to head to `http://localhost:3000/` and see your `movies` component show up. 
 
 ## The Schema
 
@@ -182,20 +182,20 @@ const schema = {
   _id: {
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
   createdAt: {
     type: Date,
     optional: true,
-    viewableBy: ['guests'],
-    onInsert: () => {
+    canRead: ['guests'],
+    onCreate: () => {
       return new Date();
     },
   },
   userId: {
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
   
   // custom properties
@@ -204,19 +204,19 @@ const schema = {
     label: 'Name',
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
   year: {
     label: 'Year',
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
   review: {
     label: 'Review',
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
 
 };
@@ -224,9 +224,9 @@ const schema = {
 export default schema;
 ```
 
-Note that we're setting up an `onInsert` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
+Note that we're setting up an `onCreate` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
 
-And we're also setting `viewableBy: ['guests']` on every field to make sure they're visible to non-logged-in users (who belong to the default `guests` group). By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
+And we're also setting `canRead: ['guests']` on every field to make sure they're visible to non-logged-in users (who belong to the default `guests` group). By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
 
 ## Setting Up a Collection
 
@@ -315,7 +315,7 @@ const resolvers = {
 
   list: {
 
-    name: 'moviesList',
+    name: 'movies',
 
     resolver(root, args, context) {
       return context.Movies.find().fetch();
@@ -442,7 +442,7 @@ Head to [http://localhost:3000/graphiql](http://localhost:3000/graphiql) and typ
 
 ```js
 query moviesQuery{
-  moviesList{
+  movies{
     createdAt
     name
   }
@@ -453,7 +453,7 @@ You should get a list of movie names and creation dates on the right. If you'd l
 
 ```js
 query moviesQuery{
-  moviesList{
+  movies{
     createdAt
     name
     review
@@ -477,7 +477,7 @@ const resolvers = {
 
   list: {
 
-    name: 'moviesList',
+    name: 'movies',
 
     resolver(root, {terms = {}}, context, info) {
       const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
@@ -521,7 +521,7 @@ Go back to your `schema.js` file, and add the following `resolveAs` property to 
 userId: {
   type: String,
   optional: true,
-  viewableBy: ['guests'],
+  canRead: ['guests'],
   resolveAs: {
     fieldName: 'user',
     type: 'User',
@@ -570,15 +570,15 @@ Don't forget to import our new component in `components.js`:
 import '../components/movies/MoviesItem.js';
 ```
 
-We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withList` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
+We'll also come back to the `movies` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withMulti` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withMulti, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -614,10 +614,10 @@ const options = {
   limit: 5
 };
 
-registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
+registerComponent('movies', movies, [withMulti, options], withCurrentUser);
 ```
 
-We want to provide `MoviesList` with the `results` document list and the `currentUser` property, so we wrap it with `withList` and `withCurrentUser`.
+We want to provide `movies` with the `results` document list and the `currentUser` property, so we wrap it with `withMulti` and `withCurrentUser`.
 
 ## Fragments
 
@@ -656,15 +656,15 @@ Once you save, you should finally get your prize: a shiny new movie list display
 
 ## User Accounts
 
-So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `MoviesList`: 
+So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `movies`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, registerComponent, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, registerComponent, withMulti, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -706,7 +706,7 @@ const options = {
   limit: 5
 };
 
-registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
+registerComponent('movies', movies, [withMulti, options], withCurrentUser);
 ```
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
@@ -814,7 +814,7 @@ Note that in this specific case, creating an action and checking for it is a bit
 
 One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
-Once again, we do this through the schema. We'll add an `insertableBy` property to any “insertable” field and set it to `[members]` to indicate that a field should be insertable by any member of the `members` group (in other words, regular logged-in users):
+Once again, we do this through the schema. We'll add an `canCreate` property to any “insertable” field and set it to `[members]` to indicate that a field should be insertable by any member of the `members` group (in other words, regular logged-in users):
 
 ```js
 const schema = {
@@ -824,20 +824,20 @@ const schema = {
   _id: {
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
   createdAt: {
     type: Date,
     optional: true,
-    viewableBy: ['guests'],
-    onInsert: (document, currentUser) => {
+    canRead: ['guests'],
+    onCreate: (document, currentUser) => {
       return new Date();
     }
   },
   userId: {
     type: String,
     optional: true,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
     resolveAs: {
       fieldName: 'user',
       type: 'User',
@@ -853,26 +853,26 @@ const schema = {
     label: 'Name',
     type: String,
     optional: true,
-    viewableBy: ['guests'],
-    insertableBy: ['members'],
-    editableBy: ['members'],
+    canRead: ['guests'],
+    canCreate: ['members'],
+    canUpdate: ['members'],
   },
   year: {
     label: 'Year',
     type: String,
     optional: true,
-    viewableBy: ['guests'],
-    insertableBy: ['members'],
-    editableBy: ['members'],
+    canRead: ['guests'],
+    canCreate: ['members'],
+    canUpdate: ['members'],
   },
   review: {
     label: 'Review',
     type: String,
     optional: true,
     control: 'textarea',
-    viewableBy: ['guests'],
-    insertableBy: ['members'],
-    editableBy: ['members']
+    canRead: ['guests'],
+    canCreate: ['members'],
+    canUpdate: ['members']
   },
 
 };
@@ -880,7 +880,7 @@ const schema = {
 export default schema;
 ```
 
-While we're at it we'll also specify which fields can be edited via `editableBy`. In this case, the three fields we want members to be able to write to are `name`, `year`, and `review`. Finally, we'll also give the `review` field a `textarea` form control. 
+While we're at it we'll also specify which fields can be edited via `canUpdate`. In this case, the three fields we want members to be able to write to are `name`, `year`, and `review`. Finally, we'll also give the `review` field a `textarea` form control. 
 
 At this point it's worth pointing out that for mutations like inserting and editing a document, we have two distinct permission "checkpoints": first, the mutation's `check` function checks if the user can perform the mutation at all. Then, each of the mutated document's fields is checked individually to see if the user should be able to mutate it.
 
@@ -928,15 +928,15 @@ A few things to note:
 - We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `new` mutation's `check` function to figure this out.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
-Let's add the form component to `MoviesList.jsx`:
+Let's add the form component to `movies.jsx`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, withList, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, withMulti, withCurrentUser, Loading } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -980,7 +980,7 @@ const options = {
   limit: 5
 };
 
-registerComponent('MoviesList', MoviesList, [withList, options], withCurrentUser);
+registerComponent('movies', movies, [withMulti, options], withCurrentUser);
 ```
 
 Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! 
@@ -1027,7 +1027,7 @@ const resolvers = {
 
   list: {
 
-    name: 'moviesList',
+    name: 'movies',
 
     resolver(root, {terms = {}}, context, info) {
       const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);

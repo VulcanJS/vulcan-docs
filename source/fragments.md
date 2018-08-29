@@ -94,7 +94,7 @@ Note that you can replace both “regular” fragments and sub-fragments.
 
 Every collection automatically gets a default fragment associated with it called `FooDefaultFragment` (for example `PostsDefaultFragment`).
 
-This default fragment simply contain all fields where `viewableBy` is defined (in other words, all public fields). Note that it **does not** follow field resolvers, meaning that the default fragment will e.g. include `userId` but not `user`.
+This default fragment simply contain all fields where `canRead` is defined (in other words, all public fields). Note that it **does not** follow field resolvers, meaning that the default fragment will e.g. include `userId` but not `user`.
 
 #### Alternative Approach
 

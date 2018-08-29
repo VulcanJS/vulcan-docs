@@ -56,9 +56,9 @@ If you'd like to specify a Cloudinary preset to be used to resize, convert, etc.
     label: 'Photos',
     type: Array,
     optional: false,
-    viewableBy: ['guests'],
-    insertableBy: ['members'],
-    editableBy: ['members'],
+    canRead: ['guests'],
+    canCreate: ['members'],
+    canUpdate: ['members'],
     control: FormsUpload, // use the FormsUpload form component
     form: {
       options: {

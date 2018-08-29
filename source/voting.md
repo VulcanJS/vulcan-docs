@@ -13,7 +13,7 @@ const schema = {
 
   _id: {
     type: String,
-    viewableBy: ['guests'],
+    canRead: ['guests'],
   },
 
   /**

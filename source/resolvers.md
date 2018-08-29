@@ -28,11 +28,10 @@ That being said if you wanted `createdAt` to resolve to, say, `formatDate(post.c
 
 As a time-saving convention, Vulcan makes the assumption that you as a developer will provide it with three "default" resolvers:
 
-* `list`: used to return a list of documents matching a set of arguments
-* `total`: used to return the _total number_ of documents matching a set of arguments
+* `multi`: used to return a list of documents matching a set of arguments, as well as the _total number_ of documents matching the same arguments.
 * `single`: used to return a single document matching an `_id` or `slug`
 
-You can pass a `resolver` object to `createCollection` when initializing your collection. It should include these three `list`, `single`, and `total` resolvers.
+You can pass a `resolver` object to `createCollection` when initializing your collection. It should include these two `multi` and `single` resolvers.
 
 Each resolver should have the following properties:
 
@@ -41,9 +40,9 @@ Each resolver should have the following properties:
 
 Note that if the collections include private data, you'll have to implement your own security layer inside each resolver to prevent unwanted access. Check out the [Controlling Viewing](/groups-permissions.html#Controlling-Viewing) section for more details.
 
-### List Resolver
+### Multi Resolver
 
-The `list` resolver is used to display lists of documents. It takes the following arguments:
+The `multi` resolver is used to display lists of documents. It takes the following arguments:
 
 * `terms`: a JSON object containing a list of terms used to filter and sort the list.
 * `offset`: how many documents to offset the list by (used for paginating requests).
@@ -54,10 +53,6 @@ It should return an array of documents.
 ### Single Resolver
 
 The `single` resolver takes a `documentId` argument, and should return a single document.
-
-### List Total Resolver
-
-The `total` resolver takes a `terms` argument and should return the total count of results matching these terms in the database.
 
 ### Default Resolvers
 
@@ -72,19 +67,22 @@ import {
 import schema from './schema.js';
 
 const Movies = createCollection({
-  collectionName: 'Movies',
-
   typeName: 'Movie',
 
   schema,
 
-  resolvers: getDefaultResolvers('Movies'),
+  resolvers: getDefaultResolvers(options),
 
-  mutations: getDefaultMutations('Movies')
+  mutations: getDefaultMutations(options)
 });
 
 export default Movies;
 ```
+
+The `options` object can have the following properties: 
+
+- `typeName` (String): the resolver's type name (required).
+- `cacheMaxAge` (Number): a custom cache age (in seconds) for the resolvers. 
 
 To learn more about what exactly the default resolvers do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_resolvers.js).
 
@@ -117,11 +115,10 @@ To make working with Apollo easier, Vulcan provides you with a set of higher-ord
 
 An **HoC** is simply a function you can call on a React component to give it additional props. Think of it as a mechanic's assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.
 
-### withList
+### withMulti
 
-The `withList` HoC is used to display lists of documents. It takes the following options:
+The `withMulti` HoC is used to display lists of documents. It takes the following options:
 
-* `queryName`: an arbitrary name for the query.
 * `collection`: the collection on which to look for the `list` resolver.
 * `fragment` or `fragmentName`: the fragment to use. If you pass `fragmentName` instead of `fragment`, the name you passed will be used to look up a fragment registered with `registerFragment`.
 
@@ -130,11 +127,10 @@ For example:
 ```js
 const listOptions = {
   collection: Movies,
-  queryName: 'moviesListQuery',
-  fragment: MoviesItem.fragment
+  fragmentName: 'MoviesItem',
 };
 
-export default withList(listOptions)(MoviesList);
+export default withMulti(listOptions)(movies);
 ```
 
 The resulting wrapped component also takes in the following options:
@@ -152,11 +148,11 @@ The HoC then passes on the following props:
 * `refetch`: a function that can be called to trigger a query refetch.
 * `loadMore`: a function that can be called to load more data.
 
-### withDocument
+### withSingle
 
-The `withDocument` HoC displays a single document. It takes the same options as `withList`, but takes a `documentId` **prop**.
+The `withSingle` HoC displays a single document. It takes the same options as `withMulti`, but takes a `documentId` **prop**.
 
-Like `terms` for `withList`, `documentId` needs to be passed not as an option, but as a prop from the _parent_ component.
+Like `terms` for `withMulti`, `documentId` needs to be passed not as an option, but as a prop from the _parent_ component.
 
 This HoC then passes on the following child prop:
 
@@ -165,14 +161,14 @@ This HoC then passes on the following child prop:
 
 ### Data Updating
 
-As long as you use `withList` in conjunction with `withNew`, `withEdit`, and `withRemove`, your lists will automatically be updated after any mutation. This includes:
+As long as you use `withMulti` in conjunction with `withCreate`, `withUpdate`, and `withDelete`, your lists will automatically be updated after any mutation. This includes:
 
 * Inserting new items in lists after they're inserted.
 * Removing items when they're removed.
 * Reordering lists when an item is edited in a way that changes a sort.
 * Removing an item after it's been edited when it doesn't match a list's filters anymore.
 
-At this time, it's only possible to benefit from this auto-updating behavior if you're using the three built-in mutation HoCs, although making `withList` more flexible towards custom mutations is on the roadmap (PRs welcome!).
+At this time, it's only possible to benefit from this auto-updating behavior if you're using the three built-in mutation HoCs, although making `withMulti` more flexible towards custom mutations is on the roadmap (PRs welcome!).
 
 #### Alternative Approach
 

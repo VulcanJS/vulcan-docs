@@ -61,9 +61,9 @@ Posts.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      insertableBy: ['members'],
-      editableBy: ['members'],
-      viewableBy: ['guests'],
+      canCreate: ['members'],
+      canUpdate: ['members'],
+      canRead: ['guests'],
       hidden: true
     }
   },
@@ -73,7 +73,7 @@ Posts.addField([
       type: Object,
       optional: true,
       blackbox: true,
-      viewableBy: ['guests'],
+      canRead: ['guests'],
     }
   },
   {
@@ -81,7 +81,7 @@ Posts.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      viewableBy: ['guests'],
+      canRead: ['guests'],
     }
   },
   {
@@ -89,7 +89,7 @@ Posts.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      viewableBy: ['guests'],
+      canRead: ['guests'],
     }
   }
 ]);
@@ -176,7 +176,7 @@ function AddMediaAfterSubmit (post) {
 }
 addCallback('posts.new.sync', AddMediaAfterSubmit);
 
-function updateMediaOnEdit (modifier, post) {
+function updateMediaonUpdate (modifier, post) {
   
   const newUrl = modifier.$set.url;
 
@@ -203,5 +203,5 @@ function updateMediaOnEdit (modifier, post) {
   }
   return modifier;
 }
-addCallback('posts.edit.sync', updateMediaOnEdit);
+addCallback('posts.edit.sync', updateMediaonUpdate);
 ```

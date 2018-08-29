@@ -18,10 +18,9 @@ sidebar_categories:
     - index
   Overview:
     - nutshell
-    - features
+    # - features
     - architecture
-    - vulcan
-    - common-problems
+    # - vulcan
     # - features-packages
     # - forum-packages
   Collections:
@@ -35,7 +34,7 @@ sidebar_categories:
     - fragments
     - terms-parameters
     - server-queries
-    - redux
+    # - redux
     - security
     - performance
     - database
@@ -81,6 +80,7 @@ sidebar_categories:
   Resources:
     - learn
     - examples
+    - common-problems
     - plugins
     - themes
     - tutorials

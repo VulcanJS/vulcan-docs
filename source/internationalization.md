@@ -4,7 +4,7 @@ title: Internationalization
 
 There are two different yet related aspects to internationalization: making an app or package available for translation so that it can be used in any language, and actually building multi-language sites. 
 
-*Note: W.I.P., refer to the `devel` branch for most of the following.*
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yO4MAdmiiCc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Locales
 
@@ -24,6 +24,16 @@ The easiest way to tell Vulcan which language to use is to set the `locale` fiel
 
 This will act as the default locale and be applied unless a specific locale has been selected by the server (based on the URL, user cookie, or user data). 
 
+[TODO] You can also specify your locale as an array in order to enable fallback locales. For example, here's how you can tell Vulcan to use the `fr_CA` locale whenever possible, but to fallback to `fr_FR` if it's not available:
+
+```js
+{
+  "public": {
+    "locale": [ "fr_CA", "fr_FR"]
+  }
+}
+```
+
 ### Registering Locales
 
 For multi-language apps, you can also register one or more locales:
@@ -33,9 +43,9 @@ import { registerLocale } from 'meteor/vulcan:core';
 
 registerLocale({
   id: 'en', // will be used as a general identifier and URL slug
-  aliases: ['en_US', 'en_UK'], // other strings that should be matched
-  label: '🇺🇸', // an optional label used in forms, etc.
-  domains: ['http://localhost:3000', 'http://en.zenshome.jp'], // domain aliases that should use the locale
+  aliases: ['en_US', 'en_UK'], // other strings that should be matched [TODO]
+  label: 'English', // an optional label used in forms, etc.
+  domains: ['http://localhost:3000', 'http://en.zenshome.jp'], // domain aliases that should use the locale [TODO]
 });
 ```
 
@@ -44,9 +54,14 @@ registerLocale({
 Vulcan can pick a locale to show users based on a number of factors. By order of priority (higher priority first): 
 
 - If the user is logged in, the `locale` property on their profile object. 
-- A `locale` cookie. 
-- The current domain (`mysite.com`, `mysite.fr`, `mysite.jp`, etc.).
-- The current locale URL segment (`mysite.com/en/foo`, `mysite.com/fr/foo`, etc.).
+- A `locale` cookie. [TODO]
+- The current domain (`mysite.com`, `mysite.fr`, `mysite.jp`, etc.). [TODO]
+- The current locale URL segment (`mysite.com/en/foo`, `mysite.com/fr/foo`, etc.). [TODO]
+- Browser settings. [TODO]
+
+Ideally, all factors should resolve similarly both on the client, and on the server during the SSR process.
+
+A big difference between these techniques is whether you're actually using different URLs for different locales or not. Putting everything on the same domain with a simple toggle is easy to set up and easy to navigate for users (provided your locale controls are easily accessible), but you won't reap any SEO benefits from supporting multiple languages. On the other hand, having different domains can be good for SEO, but might require users to log in again if they switch locales. For those reasons, using different paths on the *same* domain can be a good middle ground. 
 
 ### Switching Locales
 
@@ -68,7 +83,9 @@ LanguageSwitcher.contextTypes = {
 registerComponent('LanguageSwitcher', LanguageSwitcher);
 ```
 
-Note that calling `setLocale` will automatically set the `locale` cookie, as well as the `user.locale` property on the user profie object if the user is logged in. 
+Note that calling `setLocale` will automatically set the `locale` cookie, as well as the `user.locale` property on the user profie object if the user is logged in. It will also reset the Apollo store in order to reload a fresh set of data from the server. 
+
+Alternatively, if you're setting the locale based on the current domain, you can also dispense with `setLocale()` altogether and simply redirect users to the correct domain or URL. 
 
 ## Strings
 
@@ -228,35 +245,108 @@ You'll now have two packages named `vulcan:i18n`, but because your newly created
 
 You can keep importing from `vulcan:i18n` as usual, except `vulcan:i18n` will now simply be a clone of `react-intl`. 
 
+### getLocale()
+
+For content that is *not* stored as an internationalized string, you can always just use `getLocale()` to pick the correct string or component:
+
+```js
+const Intro = ({}, { setLocale, getLocale }) => (
+  <div className="intro">
+    {getLocale() === 'en' && <Components.IntroEn/>}
+    {getLocale() === 'fr' && <Components.IntroFr/>}
+    {getLocale() === 'jafr' && <Components.IntroJa/>}
+  </div>
+)
+
+Intro.contextTypes = {
+  getLocale: PropTypes.func,
+  setLocale: PropTypes.func,
+};
+
+registerComponent('Intro', Intro);
+```
+
 ## Internationalizing Content
 
 In addition to translating your app's UI, you'll sometimes want to translate your site's actual content. For example, you might be building an online store where product names need to be translated. 
 
-### Field Schemas
+### Storing Translations
 
-In order to internationalize a field, you'll need to replace its `String` type with `getIntlString()` (imported from `vulcan:core`):
-
-```js
-title: {
-  type: getIntlString(),
-  optional: false,
-  viewableBy: ['guests'],
-  insertableBy: ['admins'],
-  editableBy: ['admins'],
-},
-```
-
-Note that this changes how data is stored in your database, from:
+When migrating from a single-language app, you'll need to change how data is stored in your database by adding a `foo_intl` field (for example `title_intl`) in accordance with Mongo's [text search](https://docs.mongodb.com/manual/tutorial/specify-language-for-text-index/) guidelines. So you'll go from:
 
 ```
-{ title: 'My Awesome Product' }
+{ 
+  title: 'My Awesome Product', // internationalized field
+  createdAt: ISODate("2018-05-17T00:41:40.247Z") // non-internationalized field
+}
 ```
 
 To: 
 
 ```
-{ title { en: 'My Awesome Product', fr: 'Mon Super Produit'} }
+{ 
+  title: 'My Awesome Product' 
+  title_intl: [
+    {
+      locale: 'en',
+      value: 'My Awesome Product'
+    },
+    {
+      locale: 'fr',
+      value: 'Mon Super Produit'
+    }
+  ],
+  createdAt: ISODate("2018-05-17T00:41:40.247Z")
+}
 ```
+
+Note that the original `title` field then becomes optional, and is kept mainly for backwards compatibility when internationalizing existing apps, or as a fallback when no translations exist. The following is also valid if you'd rather not duplicate content:
+
+```
+{ 
+  title_intl: [
+    {
+      locale: 'en',
+      value: 'My Awesome Product'
+    },
+    {
+      locale: 'fr',
+      value: 'Mon Super Produit'
+    }
+  ],
+  createdAt: ISODate("2018-05-17T00:41:40.247Z")
+}
+```
+
+#### Translation Order
+
+Note that it's very important that locales are stored in the same order in your database as they are declared using `registerLocale`. 
+
+In other words, for the above examples you need to make sure you register the `en` locale before the `fr` locale, otherwise the generated form fields might not match up with your translation strings. 
+
+#### Migration Script
+
+Vulcan includes a migration script that will take all internationalized schema fields (i.e. those using the `getIntlString()` type) and convert their data format. 
+
+Just call `Vulcan.migrateIntlFields(locale)` from your `meteor shell` (where `locale` is the locale of the fields' current content) or from inside a `meteor.startup()` block (note that `Vulcan` is a global, meaning it doesn't need to be imported).
+
+### Field Schema
+
+In order to make a field support multiple languages, all you need to do is replace its `String` type with `getIntlString()` (imported from `vulcan:core`):
+
+```js
+title: {
+  type: getIntlString(),
+  optional: false,
+  canRead: ['guests'],
+  canCreate: ['admins'],
+  canUpdate: ['admins'],
+},
+```
+
+Behind the scenes, Vulcan will then create a new `title_intl` schema field, which will be an Array of JSON objects. 
+
+This generated field will also be available through your GraphQL API if you need to fetch all translations.
 
 ### GraphQL API
 
@@ -267,15 +357,17 @@ There are two ways to determine that string's language:
 - Set the `locale` GraphQL header.
 - Pass the locale field argument (`title(locale: "en")`).
 
-Additionally, a special `*field*Intl` (e.g. `titleIntl`) field that returns all available translations will be automatically created.
+Additionally, a special `*field*_intl` (e.g. `title_intl`) field that returns all available translations will also be available.
 
-Note that when querying your endpoint through your Vulcan front-end, the `locale` header should usually be set automatically for you. 
+Note that when querying your endpoint through your Vulcan front-end, the `locale` header should usually be set automatically for you. Also, you can also specify a locale when using the GraphQL API on the server with `runQuery`: 
 
-### Migrating Content
+### Locale-Specific Content
 
-Vulcan includes a migration script that will take all internationalized schema fields (i.e. those using the `getIntlString()` type) and convert their data format. 
+In some cases, you'll want to restrict some content to only be displayed in a specific locale. This is not yet supported, but PRs are welcome! [TODO]
 
-Just call `Vulcan.migrateIntlFields(locale)` from your `meteor shell` (where `locale` is the locale of the fields' current content) or from inside a `meteor.startup()` block (note that `Vulcan` is a global, meaning it doesn't need to be imported).
+### Search
+
+Search is not currently supported for internationalized content [TODO].
  
 ## Internationalizing Emails
 
@@ -308,4 +400,4 @@ If your i18n strings keys contain special characters (dots, spaces, etc.), you c
 <h1>{{__.[emails.inquiry_approved]}}</h1>
 ```
 
-Note that email internationalization is pretty basic and does not currently support string replacement. PR welcome!
+Note that email internationalization is pretty basic and does not currently support string replacement. PR welcome! [TODO]

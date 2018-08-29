@@ -48,7 +48,7 @@ This two-tiered strategy ensures both that the user doesn't need to spell out ev
 
 #### Alternative Approach
 
-The generic `withList` component is hard-coded to pass a `terms` argument to a collection's GraphQL resolvers, but if you're not using `withList` then you can send any argument you want, and bypass the terms/parameters system altogether.
+The generic `withMulti` component is hard-coded to pass a `terms` argument to a collection's GraphQL resolvers, but if you're not using `withMulti` then you can send any argument you want, and bypass the terms/parameters system altogether.
 
 ## Parameter Callbacks
 

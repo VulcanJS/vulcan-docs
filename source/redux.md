@@ -1,5 +1,5 @@
 ---
-title: Using Redux
+title: Using Redux [REVIEW]
 ---
 
 Redux is used transparently by Apollo to cache your data on the client, and it's perfectly fine to use Vulcan without ever worrying about it. 

@@ -9,7 +9,7 @@ title: Groups & Permissions
 
 When it comes to controlling who can do what in your Vulcan app, it's important to understand two concepts, **groups** and **actions**. 
 
-A **group** (such as `admins` or `mods`) represents a list of users which can perform specific actions (such as `posts.edit` or `posts.remove`). 
+A **group** (such as `admins` or `mods`) represents a list of users which can perform specific actions (such as `post.update` or `post.delete`). 
 
 To test if a user can perform an action, we don't check if they belong to a specific group (e.g. `user.isAdmin === true`), but instead if *at least one of the groups they belong to* has the rights to perform the current action.  
 
@@ -17,7 +17,7 @@ To understand the benefits of this two-tiered approach, let's consider a common 
 
 If we had adopted the “obvious” solution of testing if a user belongs to a set of groups before letting them perform an action, this would mean adding the “mods” group to the list everywhere where this action is performed. 
 
-If, instead, we test if the user has permissions to perform the *action* `posts.edit.all`, we can now simply add this action to the “mods” group in a single place. 
+If, instead, we test if the user has permissions to perform the *action* `post.update.all`, we can now simply add this action to the “mods” group in a single place. 
 
 ## Documents & Fields
 
@@ -28,13 +28,13 @@ Consider a scenario where a user can edit their own posts, but an admin can edit
 First, we'll need a **document-level** check to see if the current user can edit a given document. In Vulcan, this check lives, appropriately enough, next to the relevant mutation:
 
 ```js
-edit: {
+updatePost: {
   
-  name: 'postsEdit',
+  name: 'updatePost',
   
   check(user, document) {
     if (!user || !document) return false;
-    return Users.owns(user, document) ? Users.canDo(user, 'posts.edit.own') : Users.canDo(user, `posts.edit.all`);
+    return Users.owns(user, document) ? Users.canDo(user, 'post.update.own') : Users.canDo(user, `post.update.all`);
   },
 
   mutation(root, {documentId, set, unset}, context) {
@@ -48,28 +48,28 @@ edit: {
 },
 ```
 
-Here, we're first testing if the current user owns the document (meaning their `_id` is equal to the document's `userId`). If they do, we test if they can perform the `posts.edit.own` action. If they can't we test for the `posts.edit.all` action. 
+Here, we're first testing if the current user owns the document (meaning their `_id` is equal to the document's `userId`). If they do, we test if they can perform the `post.update.own` action. If they can't we test for the `post.update.all` action. 
 
 Now comes the second check: is the user trying to modify fields they don't have access to? This check lives at the field level, in the schema:
 
 ```js
 title: {
   type: String,
-  viewableBy: ['guests'],
-  insertableBy: ['members'],
-  editableBy: ['members'],
+  canRead: ['guests'],
+  canCreate: ['members'],
+  canUpdate: ['members'],
 },
 status: {
   type: Number,
-  viewableBy: ['guests'],
-  insertableBy: ['admins'],
-  editableBy: ['admins'],
+  canRead: ['guests'],
+  canCreate: ['admins'],
+  canUpdate: ['admins'],
 },
 ```
 
-The `editableBy` property takes an array of the names of the groups that can edit a given field. This is one of the few places where we test for groups and not actions, because defining new actions for each field (`posts.edit.title`, `posts.edit.status`, etc.) would be a bit too time consuming. 
+The `canUpdate` property takes an array of the names of the groups that can edit a given field. This is one of the few places where we test for groups and not actions, because defining new actions for each field (`post.update.title`, `post.update.status`, etc.) would be a bit too time consuming. 
 
-Optionally, for more fine-grained permissions `viewableBy`, `insertableBy`, and `editableBy` can also take a function that returns a boolean as argument. That function takes the current user as first argument (and, for `viewableBy` and `editableBy`, the current document as second argument).
+Optionally, for more fine-grained permissions `canRead`, `canCreate`, and `canUpdate` can also take a function that returns a boolean as argument. That function takes the current user as first argument (and, for `canRead` and `canUpdate`, the current document as second argument).
 
 Note that we've talked about editing, but the same principles apply when it comes to inserting, or removing documents (although there is no field-level check for the `remove` operation).
 
@@ -84,7 +84,7 @@ userId: {
   optional: true
 }
 ```
-By default, Vulcan will set this `userId` to `currentUser._id` before it calls the `onInsert` callbacks. However, you still need to define this `userId` field in your schema in order to activate this behaviour.
+By default, Vulcan will set this `userId` to `currentUser._id` before it calls the `onCreate` callbacks. However, you still need to define this `userId` field in your schema in order to activate this behaviour.
 
 Of course you can also set the `userId` to another value as you would do for any other field, for example if you are an admin that need to assign documents to other users.
 
@@ -121,7 +121,7 @@ const Posts.checkAccess = (currentUser, post) => {
 }
 ```
 
-If a user is an admin, or if they're the owner of the document in question, we always give them access. In the opposite case, if the document is scheduled to appear in the future, we always *deny* access. Finally, for non-future documents, we check the post's status and whether the user can perform the relevant action (`posts.view.pending`, `posts.view.approved`, etc.) as defined in `permissions.js`. 
+If a user is an admin, or if they're the owner of the document in question, we always give them access. In the opposite case, if the document is scheduled to appear in the future, we always *deny* access. Finally, for non-future documents, we check the post's status and whether the user can perform the relevant action (`post.read.pending`, `post.read.approved`, etc.) as defined in `permissions.js`. 
 
 Of course, your own `check` function can also be much simpler depending on your needs.
 
@@ -137,7 +137,7 @@ Step 3 and 4 are taken care of together through the `Users.restrictViewableField
 const restrictedPosts = Users.restrictViewableFields(currentUser, Posts, viewablePosts);
 ```
 
-Behind the scenes, this uses each field's `viewableBy` property to either check if the current user is member of the right group (if `viewableBy` is a group string) or passes the viewable check (if `viewableBy` is a function). 
+Behind the scenes, this uses each field's `canRead` property to either check if the current user is member of the right group (if `canRead` is a group string) or passes the viewable check (if `canRead` is a function). 
 
 ## Back-End vs Front-End
 
@@ -149,7 +149,7 @@ For example, before showing a user an “edit post” link, you can call the edi
 
 ```jsx
 <div className="posts-item-meta">
-  {Posts.options.mutations.edit.check(this.props.currentUser, post) ? this.renderEditLink() : null}
+  {Posts.options.mutations.update.check(this.props.currentUser, post) ? this.renderEditLink() : null}
 </div>
 ```
 
@@ -191,67 +191,12 @@ user.group = [...user.group, 'mods'];
 
 ```js
 // assuming we've created a new "mods" group
-Users.groups.mods.can("posts.edit.all"); // mods can edit anybody's posts
-Users.groups.mods.can("posts.remove.all"); // mods can delete anybody's posts
+Users.groups.mods.can("post.update.all"); // mods can edit anybody's posts
+Users.groups.mods.can("post.delete.all"); // mods can delete anybody's posts
 ```
 
 You can also define your own custom actions:
 
 ```js
 Users.groups.mods.can("invite"); // new custom action
-```
-
-Here's a list of all out-of-the-box permissions:
-
-```js
-// guests actions
-posts.view.approved.own
-posts.view.approved.all
-comments.view.own
-comments.view.all
-categories.view.all
-
-// members actions
-posts.view.approved.own
-posts.view.approved.all
-posts.view.pending.own
-posts.view.rejected.own
-posts.view.spam.own
-posts.view.deleted.own
-posts.new
-posts.edit.own
-posts.remove.own
-posts.upvote
-posts.cancelUpvote
-posts.downvote
-posts.cancelDownvote
-comments.view.own
-comments.view.all
-comments.new
-comments.edit.own
-comments.remove.own
-comments.upvote
-comments.cancelUpvote
-comments.downvote
-comments.cancelDownvote
-users.edit.own
-users.remove.own
-categories.view.all
-
-// admin actions
-posts.view.pending.all
-posts.view.rejected.all
-posts.view.spam.all
-posts.view.deleted.all
-posts.new.approved
-posts.edit.all
-posts.remove.all
-comments.edit.all
-comments.remove.all
-users.edit.all
-users.remove.all
-categories.view.all
-categories.new
-categories.edit.all
-categories.remove.all
 ```

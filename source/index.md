@@ -102,10 +102,6 @@ You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channe
 
 Vulcan has a pretty active [Slack channel](http://slack.vulcanjs.org/) where you can ask for support, share ideas, and get tips. 
 
-## Roadmap
-
-You can find the [Vulcan roadmap on Trello](https://trello.com/b/dwPR0LTz/nova-roadmap).
-
 ## Contribute
 
-We're looking for contributors! If you're interested in this project, come say hello in the [Vulcan Slack chatroom](http://slack.telescopeapp.org).
+We're looking for contributors! If you're interested in this project, come say hello in the [Vulcan Slack chatroom](http://slack.vulcanjs.org/).
