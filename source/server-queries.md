@@ -20,12 +20,12 @@ But the document you fetch directly from MongoDB won't have a `user` property, l
 
 Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL *on the server*
 
-### runQuery(query, variables)
+### runGraphQL(query, variables)
 
-`runQuery` lets you execute any GraphQL query against your schema and get its result back on the server. 
+`runGraphQL` lets you execute any GraphQL query or mutation against your schema and get its result back on the server. 
 
 ```js
-import { runQuery } from 'meteor/vulcan:core';
+import { runGraphQL } from 'meteor/vulcan:core';
 
 async function foo = () => {
   
@@ -41,7 +41,7 @@ async function foo = () => {
       }
     }
   `;
-  return await runQuery(email.query, {documentId: '123foo'});
+  return await runGraphQL(query, {documentId: '123foo'});
 
 }
 ```
