@@ -22,7 +22,9 @@ This tutorial includes a shorter version that uses some of Vulcan's default pres
 
 ## Set Up
 
-First, make sure you're only including the packages you need. This means everything in your `.meteor/packages` file should be commented out except for the core packages, a language package, and an accounts package.
+Clone the [vulcan-starter](https://github.com/VulcanJS/Vulcan-Starter) repository to get a working Vulcan project. 
+
+Then, make sure you're only including the packages you need. This means everything in your `.meteor/packages` file should be commented out except for the core packages, a language package, and an accounts package.
 
 Here's a quick overview of the main packages:
 
@@ -31,7 +33,11 @@ Here's a quick overview of the main packages:
 - `vulcan:routing`: sets up and initializes routing and server-side rendering.
 - `vulcan:users`: user management (groups, permissions, etc.).
 
+From these packages, we only need to keep `vulcan:core`, which will automatically include all the other packages Vulcan needs to work.
+
 We'll also keep `vulcan:i18n-en-us`, since it contains strings for core UI features, as well as Meteor's `accounts-password` package to activate password log in.
+
+Finally, open a terminal at the root of the vulcan-starter directory and install the node packages: `npm install`
 
 ## Creating a Package
 
@@ -58,8 +64,7 @@ my-package
 - `package.js` is your [package manifest](http://docs.meteor.com/api/packagejs.html), and it tells Meteor which files to load.
 - `client/main.js` and `server/main.js` are the client and server entry points.
 - `modules/index.js` lists all the various modules that make up our package. 
-- `style.css` contains all our styles.
-
+  
 Set up all the directories along with the blank files within. Once this is done, let's start with the `package.js` file:
 
 ```js
@@ -131,7 +136,7 @@ const movies = () =>
 
   </div>
 
-registerComponent('movies', movies);
+registerComponent({name: 'MoviesList', component: MoviesList});
 ```
 
 We'll also create a new `components.js` file inside `modules` so we can import our new component and make it available globally: 
@@ -164,13 +169,13 @@ Make sure to also import `routes.js` inside `modules/index.js`:
 import './routes.js';
 ```
 
-If everything worked properly, you should now be able to head to `http://localhost:3000/` and see your `movies` component show up. 
+If everything worked properly, open a terminal at the root of the vulcan-starter directory and type `npm start` you should now be able to head to `http://localhost:3000/` and see your `MoviesList` component show up. 
 
 ## The Schema
 
 We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. 
 
-Vulcan uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/meteor-simple-schema) package. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
+Vulcan uses JSON schemas based on the [SimpleSchema](https://github.com/aldeed/simple-schema-js) npm module. You can also check out the [Collections & Schemas](/schemas.html) section if you want to learn more. 
 
 Create `schema.js` inside `modules/movies`:
 
@@ -208,7 +213,7 @@ const schema = {
   },
   year: {
     label: 'Year',
-    type: String,
+    type: Number,
     optional: true,
     canRead: ['guests'],
   },
@@ -242,7 +247,7 @@ const Movies = createCollection({
 
   typeName: 'Movie',
 
-  schema,
+  schema: schema,
 
 });
 
@@ -279,11 +284,6 @@ If you'd rather skip this and use the defaults for now, just use the following c
 ```js
 import { createCollection, getDefaultResolvers, getDefaultMutations } from 'meteor/vulcan:core';
 import schema from './schema.js';
-import resolvers from './resolvers.js';
-import './fragments.js';
-import mutations from './mutations.js';
-import './permissions.js';
-import './parameters.js';
 
 const Movies = createCollection({
 
@@ -291,16 +291,18 @@ const Movies = createCollection({
 
   typeName: 'Movie',
 
-  schema,
+  schema: schema,
   
-  resolvers: getDefaultResolvers('Movies'),
+  resolvers: getDefaultResolvers({typeName: 'Movie'}),
 
-  mutations: getDefaultMutations('Movies'),
+  mutations: getDefaultMutations({typeName: 'Movie'}),
 
 });
 
 export default Movies;
 ```
+
+The code above throws an error `Error: Type "CreateMovieDataInput" not found in document.` This is because we need to set permission to mutate the collection. This will be done later in the [Actions, Groups, & Permissions](#Actions-Groups-amp-Permissions) chapter. For now, to avoid this error, you can comment out the line defining the mutations in the collection, but don't forget to uncomment it once we have set the permissions.
 
 ## Custom Query Resolvers*
 
@@ -312,17 +314,14 @@ Let's start simple. Create a new `resolvers.js` file inside `modules/movies` and
 
 ```js
 const resolvers = {
-
-  list: {
+  multi: {
 
     name: 'movies',
 
     resolver(root, args, context) {
-      return context.Movies.find().fetch();
+      return { results: context.Movies.find().fetch() };
     },
-
   },
-
 };
 
 export default resolvers;
@@ -341,9 +340,9 @@ const Movies = createCollection({
 
   typeName: 'Movie',
 
-  schema,
+  schema: schema,
   
-  resolvers,
+  resolvers: resolvers,
 
 });
 
@@ -362,46 +361,46 @@ import { newMutation } from 'meteor/vulcan:core';
 const seedData = [
   {
     name: 'Star Wars',
-    year: '1973',
+    year: 1973,
     review: `A classic.`,
     privateComments: `Actually, I don't really like Star Wars…`,
   },
   {
     name: 'Die Hard',
-    year: '1987',
+    year: 1987,
     review: `A must-see if you like action movies.`,
     privateComments: `I love Bruce Willis so much!`,
   },
   {
     name: 'Terminator',
-    year: '1983',
+    year: 1983,
     review: `Once again, Schwarzenegger shows why he's the boss.`,
     privateComments: `Terminator is my favorite movie ever. `,
   },
   {
     name: 'Jaws',
-    year: '1971',
+    year: 1971,
     review: 'The original blockbuster.',
     privateComments: `I'm scared of sharks…`,
   },
   {
     name: 'Die Hard II',
-    year: '1991',
+    year: 1991,
     review: `Another classic.`,
   },
   {
     name: 'Rush Hour',
-    year: '1993',
+    year: 1993,
     review: `Jackie Chan at his best.`,
   },
   {
     name: 'Citizen Kane',
-    year: '1943',
+    year: 1943,
     review: `A disappointing lack of action sequences.`,
   },
   {
     name: 'Commando',
-    year: '1983',
+    year: 1983,
     review: 'A good contender for highest kill count ever.',
   },
 ];
@@ -440,24 +439,28 @@ import './seed.js';
 
 Head to [http://localhost:3000/graphiql](http://localhost:3000/graphiql) and type:
 
-```js
-query moviesQuery{
-  movies{
-    createdAt
-    name
+```graphql
+query moviesQuery {
+  movies {
+    results {
+      createdAt
+      name
+    }
   }
 }
 ```
 
 You should get a list of movie names and creation dates on the right. If you'd like, try requesting more fields:
 
-```js
-query moviesQuery{
-  movies{
-    createdAt
-    name
-    review
-    year
+```graphql
+query moviesQuery {
+  movies {
+    results {
+      createdAt
+      name
+      review
+      year
+    }
   }
 }
 ```
@@ -470,31 +473,21 @@ As you can see, the great thing about GraphQL is that you can specify exactly wh
 
 Although our resolver works, it's fairly limited. As it stands, we can't filter, sort, or paginate our data. Even though we might not need these features right away, now is a good time to set things up in a more future-proof way.
 
-Our resolver will accept a [terms](terms-parameters.html) object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the `Movies.getParameters()` function. Additionally, we'll add a second resolver that takes in the same `terms`, but returns the *number* of documents matching these terms:
+Our resolver will accept a [terms](terms-parameters.html) object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the `Movies.getParameters()` function. Additionally, we'll add a `totalCount` field that contains the *number* of documents matching these terms:
 
 ```js
 const resolvers = {
-
-  list: {
-
+  multi: {
     name: 'movies',
 
-    resolver(root, {terms = {}}, context, info) {
-      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
-      return context.Movies.find(selector, options).fetch();
+    async resolver(root, args, context) {
+      const { input: { terms = {}} } = args;
+      let { selector, options } = await context.Movies.getParameters(terms, {}, context.currentUser);
+      movies = await context.Movies.find(selector, options);
+      moviesContent = movies.fetch();
+      moviesCount = movies.count();
+      return { results: moviesContent, totalCount: moviesCount };
     },
-
-  },
-
-  total: {
-    
-    name: 'moviesTotal',
-    
-    resolver(root, {terms = {}}, context) {
-      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
-      return context.Movies.find(selector, options).count();
-    },
-  
   },
 };
 
@@ -540,13 +533,34 @@ We are doing four things here:
 3. Defining a `resolver` function that indicates how to retrieve that object.
 4. Specifying that in addition to this new `user` object, we want the original `userId` field to still be available as well. 
 
+To test this, go back to [GraphiQL](http://localhost:3000/graphiql) and send the following query to our server: 
+
+```graphql
+query moviesQuery {
+  movies {
+    results {
+      name
+      userId
+      user {
+        username
+      }
+    }
+    totalCount
+  }
+}
+```
+
+You should see new fields returned by the server:
+- Inside the `results` there should be the `userId` field, an object `user` containing the username of the creator. You can also query all the fields from the `Users` collection, such as `email`.
+- Additionally to the `results` object, there should be a `totalCount` field that contains the number of movies queried.
+
 ## Displaying Data
 
 Now that we know we can access data from the client, let's see how to actually load and display it within our app. 
 
 We'll need two pieces for this: a [**container** component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8) that loads the data, and a **presentational** component that displays it. Fortunately, Vulcan comes with [a set of built-in higher-order container components](resolvers.html#Higher-Order-Components) which we can use out of the box, so we can focus on the presentational components.
 
-Create a new `MoviesItem` component inside `components/movies`:
+Create a new `MoviesItem.jsx` component inside `components/movies`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -561,16 +575,16 @@ const MoviesItem = ({movie, currentUser}) =>
 
   </div>
 
-registerComponent('MoviesItem', MoviesItem);
+registerComponent({name: 'MoviesItem', component: MoviesItem});
 ```
 
 Don't forget to import our new component in `components.js`: 
 
 ```js
-import '../components/movies/MoviesItem.js';
+import '../components/movies/MoviesItem.jsx';
 ```
 
-We'll also come back to the `movies` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withMulti` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
+We'll also come back to the `MoviesList` component and use a [GraphQL fragment](fragments.html) (which we'll define in the next section) to specify what data we want to load using the `withMulti` [higher-order component](/resolvers.html#Higher-Order-Components), and then show it using `MoviesItem`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -614,10 +628,10 @@ const options = {
   limit: 5
 };
 
-registerComponent('movies', movies, [withMulti, options], withCurrentUser);
+registerComponent('MoviesList', MoviesList, [withMulti, options], withCurrentUser);
 ```
 
-We want to provide `movies` with the `results` document list and the `currentUser` property, so we wrap it with `withMulti` and `withCurrentUser`.
+We want to provide `MoviesList` with the `results` document list and the `currentUser` property, so we wrap it with `withMulti` and `withCurrentUser`.
 
 ## Fragments
 
@@ -706,7 +720,8 @@ const options = {
   limit: 5
 };
 
-registerComponent('movies', movies, [withMulti, options], withCurrentUser);
+registerComponent({ name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser]});
+
 ```
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
@@ -722,41 +737,38 @@ Before we can build the user-facing part of this feature though, we need to thin
 Create a new `mutations.js` file in `modules/movies`:
 
 ```js
-import { newMutation, Utils } from 'meteor/vulcan:core';
+import { createMutator, Utils } from 'meteor/vulcan:core';
 import Users from 'meteor/vulcan:users';
 
 const mutations = {
+  create: {
+    name: 'createMovie',
 
-  new: {
-    
-    name: 'moviesNew',
-    
     check(user) {
       if (!user) return false;
       return Users.canDo(user, 'movies.new');
     },
-    
-    mutation(root, {document}, context) {
+
+    mutation(root, args, context) {
+      const { data: document } = args;
       
       Utils.performCheck(this.check, context.currentUser, document);
 
-      return newMutation({
+      return createMutator({
         collection: context.Movies,
-        document: document, 
+        document: document,
         currentUser: context.currentUser,
-        validate: true,
+        validate: true, 
         context,
       });
     },
-
-  }
-
+  },
 };
 
 export default mutations;
 ```
 
-This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the `document` property to one of Vulcan's boilerplate mutations, `newMutation`. 
+This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the `document` property to one of Vulcan's boilerplate mutations, `createMutator`. 
 
 Let's pass it on to our `createCollection` function in `collection.js`:
 
@@ -773,16 +785,18 @@ const Movies = createCollection({
 
   typeName: 'Movie',
 
-  schema,
+  schema: schema,
   
-  resolvers,
+  resolvers: resolvers,
 
-  mutations,
+  mutations: mutations,
 
 });
 
 export default Movies;
 ```
+
+At this state, your application should be crashing with the message `Error: Type "CreateMovieDataInput" not found in document.`. This will be fixed once we set the permissions to mutate the data.
 
 ## Actions, Groups, & Permissions
 
@@ -792,7 +806,7 @@ The mutation's `check` function checks if the user can perform an action named `
 import Users from 'meteor/vulcan:users';
 
 const membersActions = [
-  'movies.new',
+  'movies.create',
 ];
 Users.groups.members.can(membersActions);
 ```
@@ -830,7 +844,7 @@ const schema = {
     type: Date,
     optional: true,
     canRead: ['guests'],
-    onCreate: (document, currentUser) => {
+    onCreate: () => {
       return new Date();
     }
   },
@@ -843,7 +857,8 @@ const schema = {
       type: 'User',
       resolver: (movie, args, context) => {
         return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
-      }
+      },
+      addOriginalField: true,
     }
   },
   
@@ -859,7 +874,7 @@ const schema = {
   },
   year: {
     label: 'Year',
-    type: String,
+    type: Number,
     optional: true,
     canRead: ['guests'],
     canCreate: ['members'],
@@ -913,7 +928,7 @@ const MoviesNewForm = ({currentUser}) =>
 
   </div>
 
-registerComponent('MoviesNewForm', MoviesNewForm, withCurrentUser);
+registerComponent({ name: 'MoviesNewForm', component: MoviesNewForm, hocs: [withCurrentUser]});
 ```
 
 And import it in `components.js`: 
@@ -925,14 +940,14 @@ import '../components/movies/MoviesNewForm.jsx';
 A few things to note: 
 
 - We'll pass the `MoviesItemFragment` fragment to the form so that it knows what data to return from the server once the mutation is complete. 
-- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `new` mutation's `check` function to figure this out.
+- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `create` mutation's `check` function to figure this out.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
 Let's add the form component to `movies.jsx`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
-import { Components, withMulti, withCurrentUser, Loading } from 'meteor/vulcan:core';
+import { Components, withMulti, withCurrentUser, Loading, registerComponent } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
 
@@ -980,7 +995,7 @@ const options = {
   limit: 5
 };
 
-registerComponent('movies', movies, [withMulti, options], withCurrentUser);
+registerComponent({name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser]});
 ```
 
 Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! 
@@ -1007,7 +1022,7 @@ const MoviesEditForm = ({documentId, closeModal}) =>
     }}
   />
 
-registerComponent('MoviesEditForm', MoviesEditForm);
+registerComponent({ name: 'MoviesEditForm', component: MoviesEditForm});
 ```
 
 And in `components.js`: 
@@ -1024,36 +1039,27 @@ Go back to `resolvers.js` and add a `single` resolver:
 
 ```js
 const resolvers = {
-
-  list: {
-
+  multi: {
     name: 'movies',
 
-    resolver(root, {terms = {}}, context, info) {
-      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
-      return context.Movies.find(selector, options).fetch();
+    async resolver(root, args, context) {
+      const { { input: terms = {} } } = args;
+      let { selector, options } = await context.Movies.getParameters(terms, {}, context.currentUser);
+      movies = await context.Movies.find(selector, options);
+      moviesContent = movies.fetch();
+      moviesCount = movies.count();
+      return { results: moviesContent, totalCount: moviesCount };
     },
-
   },
 
   single: {
+    name: 'movie',
 
-    name: 'moviesSingle',
-
-    resolver(root, {documentId}, context) {
-      return context.Movies.findOne(documentId);
-    }
-  },
-
-  total: {
-    
-    name: 'moviesTotal',
-    
-    resolver(root, {terms = {}}, context) {
-      const {selector, options} = context.Movies.getParameters(terms, {}, context.currentUser);
-      return context.Movies.find(selector, options).count();
+    async resolver(root, args, context) {
+      const _id = args.input.selector.documentId || args.input.selector._id; 
+      const document = await context.Movies.findOne({ _id: _id });
+      return { result: context.Users.restrictViewableFields(context.currentUser, context.Movies, document) };
     },
-  
   },
 };
 
@@ -1079,7 +1085,7 @@ const MoviesItem = ({movie, currentUser}) =>
     
     {/* edit document form */}
 
-    {Movies.options.mutations.edit.check(currentUser, movie) ? 
+    {Movies.options.mutations.update.check(currentUser, movie) ? 
       <Components.ModalTrigger label="Edit Movie">
         <Components.MoviesEditForm currentUser={currentUser} documentId={movie._id} />
       </Components.ModalTrigger>
@@ -1088,98 +1094,114 @@ const MoviesItem = ({movie, currentUser}) =>
 
   </div>
 
-registerComponent('MoviesItem', MoviesItem);
+registerComponent({ name: 'MoviesItem', component: MoviesItem});
 ```
 
 This time we're using the `<Components.ModalTrigger />` Vulcan component to show our form inside a popup (assuming the current user can perform an edit, of course).
 
-Finally, we'll also need to hook up our edit and remove mutations in `mutations.js`:
+Finally, we'll also need to hook up our update and delete mutations in `mutations.js`:
 
 ```js
-import { newMutation, editMutation, removeMutation, Utils } from 'meteor/vulcan:core';
+/*
+
+Define the three default mutations:
+
+- create (e.g.: createMovie(data: {document: CreateMovieDataInput!}) : MovieOutput )
+- update (e.g.: updateMovie(selector: MovieSelectorUniqueInput!, data: UpdateMovieDataInput!) : MovieOutput )
+- delete (e.g.: deleteMovie(selector: MovieSelectorUniqueInput!) : MovieOutput )
+
+Each mutation has:
+
+- A name
+- A check function that takes the current user and (optionally) the document affected
+- The actual mutation
+
+*/
+
+import {
+  createMutator,
+  updateMutator,
+  deleteMutator,
+  Utils,
+} from 'meteor/vulcan:core';
 import Users from 'meteor/vulcan:users';
 
 const mutations = {
+  create: {
+    name: 'createMovie',
 
-  new: {
-    
-    name: 'moviesNew',
-    
     check(user) {
       if (!user) return false;
-      return Users.canDo(user, 'movies.new');
+      return Users.canDo(user, 'movies.create');
     },
-    
-    mutation(root, {document}, context) {
+
+    mutation(root, args, context) {
+      const { data: document } = args;
       
       Utils.performCheck(this.check, context.currentUser, document);
 
-      return newMutation({
+      return createMutator({
         collection: context.Movies,
-        document: document, 
+        document: document,
         currentUser: context.currentUser,
-        validate: true,
+        validate: true, 
         context,
       });
     },
-
   },
 
-  edit: {
-    
-    name: 'moviesEdit',
-    
+  update: {
+    name: 'updateMovie',
+
     check(user, document) {
       if (!user || !document) return false;
-      return Users.owns(user, document) ? Users.canDo(user, 'movies.edit.own') : Users.canDo(user, `movies.edit.all`);
+      return Users.owns(user, document)
+        ? Users.canDo(user, 'movies.update.own')
+        : Users.canDo(user, `movies.update.all`);
     },
 
-    mutation(root, {documentId, set, unset}, context) {
-
-      const document = context.Movies.findOne(documentId);
+    mutation(root, {selector, data}, context) {
+      const document = context.Movies.findOne( {_id: selector.documentId || selector._id});
       Utils.performCheck(this.check, context.currentUser, document);
 
-      return editMutation({
-        collection: context.Movies, 
-        documentId: documentId, 
-        set: set, 
-        unset: unset, 
+      return updateMutator({
+        collection: context.Movies,
+        selector: selector,
+        data: data,
         currentUser: context.currentUser,
         validate: true,
         context,
       });
     },
-
   },
-  
-  remove: {
 
-    name: 'moviesRemove',
-    
+  delete: {
+    name: 'deleteMovie',
+
     check(user, document) {
       if (!user || !document) return false;
-      return Users.owns(user, document) ? Users.canDo(user, 'movies.remove.own') : Users.canDo(user, `movies.remove.all`);
+      return Users.owns(user, document)
+        ? Users.canDo(user, 'movies.delete.own')
+        : Users.canDo(user, `movies.delete.all`);
     },
-    
-    mutation(root, {documentId}, context) {
 
-      const document = context.Movies.findOne(documentId);
+    mutation(root, { selector }, context) {
+      const document = context.Movies.findOne({ _id: selector.documentId || selector._id });
       Utils.performCheck(this.check, context.currentUser, document);
 
-      return removeMutation({
-        collection: context.Movies, 
-        documentId: documentId, 
+      return deleteMutator({
+        collection: context.Movies,
+        selector: selector,
         currentUser: context.currentUser,
         validate: true,
         context,
       });
     },
-
   },
-
 };
 
 export default mutations;
+
 ```
 For the `check` function to work properly we need to update the `permissions.js` file.
 
@@ -1187,9 +1209,9 @@ For the `check` function to work properly we need to update the `permissions.js`
 import Users from 'meteor/vulcan:users';
 
 const membersActions = [
-  'movies.new',
-  'movies.edit.own',
-  'movies.remove.own',
+  'movies.create',
+  'movies.update.own',
+  'movies.delete.own',
 ];
 Users.groups.members.can(membersActions);
 ```
@@ -1212,7 +1234,7 @@ function sortByYear (parameters, terms) {
   };
 }
 
-addCallback("movies.parameters", sortByYear);
+addCallback("movie.parameters", sortByYear);
 ```
 
 And add it to `movies/collection.js`:

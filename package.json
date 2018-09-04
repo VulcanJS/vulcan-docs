@@ -9,6 +9,7 @@
     "global": "^4.3.2",
     "handlebars": "^4.0.5",
     "hexo": "^3.4.1",
+    "hexo-browsersync": "^0.3.0",
     "hexo-deployer-git": "^0.2.0",
     "hexo-generator-archive": "^0.1.2",
     "hexo-generator-category": "^0.1.2",
