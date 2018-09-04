@@ -27,20 +27,20 @@ const schema = {
   _id: {
     type: String,
     optional: true,
-    viewableBy: ["guests"]
+    canRead: ["guests"]
   },
   createdAt: {
     type: Date,
     optional: true,
-    viewableBy: ["guests"],
-    onInsert: (document, currentUser) => {
+    canRead: ["guests"],
+    onCreate: ({ newDocument, currentUser }) => {
       return new Date();
     }
   },
   userId: {
     type: String,
     optional: true,
-    viewableBy: ["guests"],
+    canRead: ["guests"],
     resolveAs: {
       fieldName: "user",
       type: "User",
@@ -65,26 +65,26 @@ const schema = {
     label: "Name",
     type: String,
     optional: true,
-    viewableBy: ["guests"],
-    insertableBy: ["members"],
-    editableBy: ["members"]
+    canRead: ["guests"],
+    canCreate: ["members"],
+    canUpdate: ["members"]
   },
   year: {
     label: "Year",
     type: String,
     optional: true,
-    viewableBy: ["guests"],
-    insertableBy: ["members"],
-    editableBy: ["members"]
+    canRead: ["guests"],
+    canCreate: ["members"],
+    canUpdate: ["members"]
   },
   review: {
     label: "Review",
     type: String,
     optional: true,
     control: "textarea",
-    viewableBy: ["guests"],
-    insertableBy: ["members"],
-    editableBy: ["members"]
+    canRead: ["guests"],
+    canCreate: ["members"],
+    canUpdate: ["members"]
   }
 };
 ```
@@ -97,8 +97,6 @@ Vulcan features a number of helpers to make setting up your layer faster, most o
 
 ```js
 const Movies = createCollection({
-  collectionName: "movies",
-
   typeName: "Movie",
 
   schema,
@@ -111,9 +109,9 @@ const Movies = createCollection({
 
 The function takes the following arguments:
 
-* `collectionName`: the name of the collection throughout your app (will be lowercased in your MongoDB database).
-* `dbCollectionName`: if you want to use a different name in your database you can specify it here.
 * `typeName`: the name of the GraphQL type that will be generated for the collection.
+* `collectionName`: optionally, the name of the collection throughout your app (will be lowercased in your MongoDB database). If not provided it will be the plural of your type name.
+* `dbCollectionName`: if you want to use a different name in your database you can specify it here.
 * `schema`, `resolvers`, `mutations`: see below.
 * `generateGraphQLSchema`: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to `true`).
 
@@ -141,7 +139,7 @@ The `collection.addField()` function takes either a field object, or an array of
 
 Each field schema supports all of the [SimpleSchema properties](https://github.com/aldeed/meteor-simple-schema#schema-rules), such as `type`, `optional`, etc.
 
-A few special properties (`viewableBy`, `insertableBy`, `editableBy`, `control`, and `order`) are also supported by the [Forms](forms.html) package.
+A few special properties (`canRead`, `canCreate`, `canUpdate`, `control`, and `order`) are also supported by the [Forms](forms.html) package.
 
 You can also remove a field by calling `collection.removeField(fieldName)`. For example:
 

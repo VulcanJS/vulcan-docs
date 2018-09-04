@@ -1,5 +1,5 @@
 ---
-title: Features
+title: Features – [REVIEW]
 ---
 
 Core Vulcan features include:
@@ -19,32 +19,27 @@ Vulcan will also use your schema to generate client-side forms and handle their 
 For example, here's how you would display a form to edit a single movie:
 
 ```js
-<VulcanForm
+<Components.SmartForm
   collection={Movies}
   documentId={props.documentId}
-  queryName="moviesListQuery"
-  showRemove={true}
 />
 ```
 
-The `queryName` option tells VulcanForm which query should be automatically updated once the operation is done, while the `showRemove` option add a “Delete Movie” button to the form.
-
-Note that VulcanForm will also take care of loading the document to edit, if it's not already loaded in the client store.
+Note that SmartForm will also take care of loading the document to edit, if it's not already loaded in the client store.
 
 ## Easy Data Loading
 
-Vulcan features a set of data loading helpers to make loading Apollo data easier, `withList` (to load a list of documents) and `withDocument` (to load a single document).
+Vulcan features a set of data loading helpers to make loading Apollo data easier, `withMulti` (to load a list of documents) and `withSingle` (to load a single document).
 
-For example, here's how you would use `withList` to pass a `results` prop containing all movies to your `MoviesList` component:
+For example, here's how you would use `withMulti` to pass a `results` prop containing all movies to your `movies` component:
 
 ```js
 const listOptions = {
   collection: Movies,
-  queryName: "moviesListQuery",
   fragment: fragment
 };
 
-export default withList(listOptions)(MoviesList);
+export default withMulti(listOptions)(movies);
 ```
 
 You can pass a fragment to control what data is loaded for each document.
@@ -53,9 +48,9 @@ You can pass a fragment to control what data is loaded for each document.
 
 All of Vulcan's security and validation is based on your collection's schema. For each field of your schema, you can define the following functions:
 
-* `viewableBy`
-* `insertableBy`
-* `editableBy`
+* `canRead`
+* `canCreate`
+* `canUpdate`
 
 They all take the current user as argument (and optionally the document being affected) and check if the user can perform the given action.
 

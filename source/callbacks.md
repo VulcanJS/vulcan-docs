@@ -25,13 +25,14 @@ function setEditedAt (post, user) {
   post.editedAt = new Date();
   return post;
 }
-addCallback('posts.edit.sync', setEditedAt);
+addCallback('post.update.before', setEditedAt);
 ```
 
 Vulcan's boilerplate mutations support three distinct types of callback functions, each with their own hook:
 
 - `validate` callbacks are called to decide if an operation should run or not. 
-- `sync` callbacks are called in a blocking manner before the database operation.
+- `before` callbacks are called in a blocking manner before the database operation.
+- `after` callbacks are called in a blocking manner after the database operation.
 - `async` callbacks are called in a non-blocking manner, after the database operation. 
 
 ## Removing Callback Functions
@@ -41,18 +42,18 @@ If the callback function is named (i.e. declared using the `function foo () {}` 
 ```js
 import { removeCallback } from 'meteor/vulcan:core';
 
-removeCallback('posts.edit.sync', "setEditedAt");
+removeCallback('post.update.before', "setEditedAt");
 ```
 
 ## Running Callback Hooks
 
-Callbacks are run using the `Callbacks.runSync` and `Callbacks.runAsync` functions:
+Callbacks are run using the `runCallbacks` and `runCallbacksAsync` functions:
 
 ```js
-modifier = Callbacks.run(`movies.edit.sync`, modifier, document, currentUser)
+modifier = runCallbacks({ name: `movie.update.before`, iterator: data, properties: { document, currentUser }});
 ```
 
-In each case, the **first** argument is the name of the callback hook, the **second** argument is the one iterated on by each callback function on the hook, while any remaining arguments are just passed along from one iteration to the next.
+In each case, the `name` argument is the name of the callback hook, the `iterator` argument is the one iterated on by each callback function on the hook, while `properties` are just passed along from one iteration to the next.
 
 Note that for *sync* callbacks, each callback function should return the main argument to pass it on to the next function, while *async* callbacks don't need to return anything.
 
@@ -65,7 +66,7 @@ While you don't need to register new callback hooks to use them (as long as you 
 import { registerCallback } from 'meteor/vulcan:lib';
 
 registerCallback({
-  name: `posts.new.validate`, 
+  name: `post.create.validate`, 
   description: `Validate a document before insertion (can be skipped when inserting directly on server).`,  
   arguments: [{document: 'The document being inserted'}, {currentUser: 'The current user'}, {validationErrors: 'An object that can be used to accumulate validation errors'}], 
   runs: 'sync', 

@@ -14,7 +14,7 @@ For example, you might have a `userId` property in your `Movie` schema, but then
 userId: {
   type: String,
   optional: true,
-  viewableBy: ['guests'],
+  canRead: ['guests'],
   resolveAs: {
     fieldName: 'user',
     arguments: 'foo: Int = 10',
@@ -71,7 +71,7 @@ For example, you might want to query the Facebook API to get the number of likes
 likesNumber: {
   type: Number,
   optional: true,
-  viewableBy: ['guests'],
+  canRead: ['guests'],
   resolveAs: {
     type: 'Number',
     resolver: async (post, args, context) => {
@@ -84,30 +84,6 @@ likesNumber: {
 This will create a `likesNumber` field in your GraphQL schema (and your Apollo store) even though no such field has to exist in your database.
 
 Note that for GraphQL only fields it is ok to leave out the `fieldName` property (which will default to using the same name as the schema field) since there is no actual database field of the same name.
-
-## Legacy String Syntax (deprecated)
-
-Alternatively, you can also use the legacy syntax and specify a string value for `resolveAs` (in this case, `user: User`). You'll then need to use `addGraphQLResolvers` to define the resolver object yourself:
-
-```js
-import { addGraphQLResolvers } from 'meteor/vulcan:core';
-
-const movieResolver = {
-  Movie: {
-    user(movie, args, context) {
-      return context.Users.findOne(
-        { _id: movie.userId },
-        {
-          fields: context.getViewableFields(context.currentUser, context.Users)
-        }
-      );
-    }
-  }
-};
-addGraphQLResolvers(movieResolver);
-```
-
-Resolvers can be defined on any new or existing type (e.g. `Movie`).
 
 ## Field Resolvers vs Denormalization
 

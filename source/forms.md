@@ -32,14 +32,14 @@ const PostsSchema = new SimpleSchema({
   postedAt: {
     type: Date,
     optional: true
-    // no insertableBy or editableBy means this field won't appear in forms
+    // no canCreate or canUpdate means this field won't appear in forms
   },
   title: {
     type: String,
     optional: false,
     max: 500,
-    insertableBy: isLoggedIn,
-    editableBy: isOwner,
+    canCreate: isLoggedIn,
+    canUpdate: isOwner,
     control: "text",
     order: 1
   },
@@ -47,8 +47,8 @@ const PostsSchema = new SimpleSchema({
     type: String,
     optional: true,
     max: 3000,
-    insertableBy: isLoggedIn,
-    editableBy: isOwner,
+    canCreate: isLoggedIn,
+    canUpdate: isOwner,
     control: BodyFormControl,
     order: 2
   },
@@ -56,8 +56,8 @@ const PostsSchema = new SimpleSchema({
     type: Boolean,
     optional: true,
     defaultValue: false,
-    insertableBy: isAdmin,
-    editableBy: isAdmin,
+    canCreate: isAdmin,
+    canUpdate: isAdmin,
     control: "checkbox",
     order: 3
   },
@@ -172,9 +172,9 @@ categoryId: {
   type: String,
   control: 'checkboxgroup',
   optional: true,
-  insertableBy: ['members'],
-  editableBy: ['members'],
-  viewableBy: ['guests'],
+  canCreate: ['members'],
+  canUpdate: ['members'],
+  canRead: ['guests'],
   query: `
     CategoriesList{
       _id
@@ -199,7 +199,7 @@ This lets us set the `options` property in order to populate our dropdown. Essen
 
 ### Using `documentId`
 
-Field-specific queries work by adding “extra” query parts to a specially created formNewExtraQuery HoC when inserting new documents; or to the withDocument HoC when editing an existing document. 
+Field-specific queries work by adding “extra” query parts to a specially created formNewExtraQuery HoC when inserting new documents; or to the withSingle HoC when editing an existing document. 
 
 When editing a document, you can reuse the `documentId` in your extra query parts since it will already have been made available to the main query. 
 
@@ -210,9 +210,9 @@ moderatorId: {
   type: String,
   control: 'select',
   optional: true,
-  insertableBy: ['members'],
-  editableBy: ['members'],
-  viewableBy: ['guests'],
+  canCreate: ['members'],
+  canUpdate: ['members'],
+  canRead: ['guests'],
   query: `
     listDocumentModerators(documentId: $documentId){
       _id
@@ -277,4 +277,4 @@ getChildContext() {
 
 #### Alternative Approach
 
-If you prefer, you can also code your own forms from scratch, either using `withNew`, `withEdit`, and `withRemove`, or with your own custom mutation HoCs. 
+If you prefer, you can also code your own forms from scratch, either using `withCreate`, `withUpdate`, and `withDelete`, or with your own custom mutation HoCs. 

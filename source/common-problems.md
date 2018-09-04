@@ -8,7 +8,7 @@ Sometimes, things just go wrong. Here are a few tips to debug your Vulcan app.
 
 ### “Load More” Not Working
 
-If your app initially loads fine but “Load More” doesn't work, this most likely indicates that while server-side rendering is working but data loading isn't.
+If your app initially loads fine but “Load More” doesn't work, this most likely indicates that while server-side rendering is working, data loading isn't.
 
 The most common cause is a mismatch between your domain and the URL currently being used as your GraphQL endpoint, which is based on the `ROOT_URL` environment variable.
 
@@ -69,4 +69,4 @@ Mutations can fail for a number of reasons:
 
 ### Data Updating
 
-If your data isn't updating properly after a mutation, this can be due to a fragment mismatch. Make sure that `new` mutations use the same fragment as the query they're updating (`edit` mutations on the other hand can safely return partial fragments).
+If your data isn't updating properly after a mutation, this can be due to a fragment mismatch. Make sure that `create` mutations use the same fragment as the query they're updating (`update` mutations on the other hand can safely return partial fragments).

@@ -60,15 +60,15 @@ On the other hand, `registerComponent('Foo', Foo, withCurrentUser)` *doesn't* ex
 But what about HoC functions that take arguments? For example if you were to write:
 
 ```js
-registerComponent('PostsList', PostsList, withList(options));
+registerComponent('PostsList', PostsList, withMulti(options));
 ```
 
-The `withList(options)` would be executed immediately, and you would have no way of overriding the `options` object later on (a common use case being overriding a fragment).
+The `withMulti(options)` would be executed immediately, and you would have no way of overriding the `options` object later on (a common use case being overriding a fragment).
 
 For that reason, to delay the execution until the start of the app, you can use the following alternative syntax:
 
 ```js
-registerComponent('PostsList', PostsList, [withList, options]);
+registerComponent('PostsList', PostsList, [withMulti, options]);
 ```
 ### Accessing Raw Components
 

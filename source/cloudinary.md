@@ -41,7 +41,7 @@ Note that at this time, you can only cache a single image field per collection.
     fieldSchema: {
       type: String,
       optional: true,
-      viewableBy: ['guests'],
+      canRead: ['guests'],
     }
   },
   {
@@ -49,7 +49,7 @@ Note that at this time, you can only cache a single image field per collection.
     fieldSchema: {
       type: Array,
       optional: true,
-      viewableBy: ['guests'],
+      canRead: ['guests'],
     }
   },
   {

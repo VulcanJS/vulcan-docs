@@ -62,9 +62,9 @@ Other changes:
 
 A few schema properties have been changed, and these will trigger schema errors until you update them:
 
-- `insertableBy` is now `insertableBy`, and takes either the name of a group or a function. 
-- `editableBy` is now `editableBy`, and takes either the name of a group or a function. 
-- `publish` is replaced by `viewableBy`, which works similarly to `insertableBy` and `editableBy`. 
+- `canCreate` is now `canCreate`, and takes either the name of a group or a function. 
+- `canUpdate` is now `canUpdate`, and takes either the name of a group or a function. 
+- `publish` is replaced by `canRead`, which works similarly to `canCreate` and `canUpdate`. 
 - `join` has been replaced by `resolveAs`, which you can use to specify a GraphQL resolver for the field.
 
 In addition, there are also a few new properties:
@@ -76,9 +76,9 @@ The `utilities:smart-publications` package has been deprecated, so you can also 
 
 ## Data Loading
 
-With the move to Apollo, the `utilities:react-list-container` package is not used anymore, and `ListContainer` and `DocumentContainer` are instead replaced with `withList` and `withDocument`. 
+With the move to Apollo, the `utilities:react-list-container` package is not used anymore, and `ListContainer` and `DocumentContainer` are instead replaced with `withMulti` and `withSingle`. 
 
-The key difference is that `withList` is now called directly around the component that needs the data (e.g. `export default withList(options)(MyComponent)`) unlike `ListContainer`, which was called from that component's *parent* component. 
+The key difference is that `withMulti` is now called directly around the component that needs the data (e.g. `export default withMulti(options)(MyComponent)`) unlike `ListContainer`, which was called from that component's *parent* component. 
 
 In practice, this means replacing something like this:
 
@@ -104,7 +104,7 @@ With:
 <PostsList terms={terms} />
 ```
 
-And then wrapping `MyPostsList` with `withList(options)` inside `MyPostsList.jsx`.
+And then wrapping `MyPostsList` with `withMulti(options)` inside `MyPostsList.jsx`.
 
 Also keep in mind that the data format provided by the GraphQL API can be slightly different from was was previously available (for example, categories are now available on `posts.categories` instead of `posts.categoriesArray`). Make sure to check your component's `props` in the React inspector if you run into any issues. 
 
@@ -113,7 +113,7 @@ Also keep in mind that the data format provided by the GraphQL API can be slight
 The daily view now has a slightly different component architecture in the `base-components` package. 
 
 - `PostsDaily` sets the `terms` for the view and calls `PostsDailyList`.
-- `PostsDailyList` is wrapped with the `withList` data loading HoC and then iterates over each day, calling `PostsDay`.
+- `PostsDailyList` is wrapped with the `withMulti` data loading HoC and then iterates over each day, calling `PostsDay`.
 - `PostsDay` displays the posts for that day.
 
 Note that data loading happens at the **list** level, not at the level of an individual day. In other words, if you're displaying five days, **all** posts for all five days will be loaded at the same time. 

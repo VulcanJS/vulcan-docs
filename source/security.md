@@ -30,15 +30,15 @@ Note that if you are *not* using the default resolvers, specifying `checkAccess`
 
 Another way of looking at security is field by field. For example, maybe you want to limit the visibility of a hidden `score` field to admins to make it harder to game your voting system. 
 
-You can do this through [the `isViewable` property](/schema-properties.html#Data-Layer-Properties) as defined on a field's schema. 
+You can do this through [the `canRead` property](/schema-properties.html#Data-Layer-Properties) as defined on a field's schema. 
 
-`isViewable` either takes a function that takes in the current user and current document and return `true` or `false`; or an array of strings corresponding to the names of the [user groups](/groups-permissions.html#Groups-amp-Actions) who can view the document. 
+`canRead` either takes a function that takes in the current user and current document and return `true` or `false`; or an array of strings corresponding to the names of the [user groups](/groups-permissions.html#Groups-amp-Actions) who can view the document. 
 
 #### Visibility vs Accessibility
 
-Note that in order to be included in the GraphQL schema at all, a field needs either an `isViewable`, `isInsertable`, or `isEditable` property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all, no matter what. 
+Note that in order to be included in the GraphQL schema at all, a field needs either an `canRead`, `canCreate`, or `canUpdate` property. If none of these properties exist, the field will be left out of the schema and will not be accessible through the GraphQL endpoint at all, no matter what. 
 
-If one of these properties *does* exist, the field will be added to the schema, but that doesn't necessarily mean querying it will actually return a value; that all depends on the contents of `isViewable`.
+If one of these properties *does* exist, the field will be added to the schema, but that doesn't necessarily mean querying it will actually return a value; that all depends on the contents of `canRead`.
 
 ## Writing Data
 
@@ -54,17 +54,17 @@ The first step in securing your mutations is deciding who can perform them, and 
 
 Out of the box, the three default mutations will first check if a current user exists. If it does, they will then check if that user can perform the `collectionName.operationName` action. Depending on the current action, this action could be named (using the `Posts` collection as an example):
 
-- `posts.new`
-- `posts.edit.own`
-- `posts.edit.all`
-- `posts.remove.own`
-- `posts.remove.all`
+- `post.create`
+- `post.update.own`
+- `post.update.all`
+- `post.delete.own`
+- `post.delete.all`
 
 So an easy way to enable a user to perform a given mutation is to [enable the corresponding action](/groups-permissions.html#Assigning-Actions) for a group they belong to. 
 
-Note that for `edit` and `remove` operations, two distinct actions are checked (`*.all` and `*.own`) based on whether the current user owns the current document or not. This makes it easy to let one group (for example, `mods`) edit all documents in a collection while another one can only edit their own. 
+Note that for `update` and `delete` operations, two distinct actions are checked (`*.all` and `*.own`) based on whether the current user owns the current document or not. This makes it easy to let one group (for example, `mods`) edit all documents in a collection while another one can only edit their own. 
 
-When writing your own back-end logic, you're welcome to also add your own new action names (`posts.edit.drafts`, `posts.remove.archived`, etc.) if that helps set up your permissions structure. 
+When writing your own back-end logic, you're welcome to also add your own new action names (`post.update.drafts`, `post.delete.archived`, etc.) if that helps set up your permissions structure. 
 
 #### Manual Checks
 
@@ -84,11 +84,11 @@ Note that if you specify manual checks for a mutation, the aforementioned group 
 
 ### Field-Level Checks
 
-Just like you can control field-level access with `isViewable`, you can control field-level data writes with `isInsertable` and `isEditable`. 
+Just like you can control field-level access with `canRead`, you can control field-level data writes with `canCreate` and `canUpdate`. 
 
 For example, maybe you only want admin users to be able to reassign a post to a different user. In which case you could make a post's `userId` only be editable by users belonging to the `admins` group.
 
-And just like `isViewable`, both `isInsertable` and `isEditable` can also take functions in addition to an array of group names. 
+And just like `canRead`, both `canCreate` and `canUpdate` can also take functions in addition to an array of group names. 
 
 ## Other Resolvers & Mutations
 

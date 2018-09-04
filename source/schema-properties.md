@@ -10,21 +10,21 @@ See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-sch
 
 ## Data Layer Properties
 
-#### `viewableBy`
+#### `canRead`
 
-Can either be an array of group names or a function.
+Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` viewing the document and the `document` itself, and should return `true` or `false`.
 
-#### `insertableBy`
+#### `canCreate`
 
-Can either be an array of group names or a function.
+Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user.
 
-#### `editableBy`
+#### `canUpdate`
 
-Can either be an array of group names or a function.
+Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
 
@@ -32,13 +32,13 @@ If it's a function, it'll be called on the `user` performing the operation, and 
 
 You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.html) section.
 
-### `onInsert`, `onEdit`, `onRemove`
+### `onCreate`, `onUpdate`, `onDelete`
 
 These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
-* `onInsert(document, currentUser)`
-* `onEdit(modifier, document, currentUser)`
-* `onRemove(document, currentUser)`
+* `onCreate({ newDocument, currentUser })`
+* `onUpdate({ data, document, currentUser })`
+* `onDelete({ document, currentUser })`
 
 ## Form Properties
 
@@ -68,8 +68,8 @@ For example:
 postedAt: {
   type: Date,
   optional: true,
-  insertableBy: Users.isAdmin,
-  editableBy: Users.isAdmin,
+  canCreate: Users.isAdmin,
+  canUpdate: Users.isAdmin,
   publish: true,
   control: "datetime",
   group: {
@@ -114,9 +114,9 @@ An array containing a set of options for the form (for select, checkbox, radio, 
 status: {
   type: Number,
   optional: true,
-  viewableBy: ['admins'],
-  insertableBy: ['admins'],
-  editableBy: ['admins'],
+  canRead: ['admins'],
+  canCreate: ['admins'],
+  canUpdate: ['admins'],
   control: 'select',
   default: 2,
   options: () => {
@@ -176,7 +176,7 @@ You can set `max` to limit the field to a certain length (e.g. `max: 140`).
 
 #### `defaultValue`
 
-The field's default value. Note that you can also use `onInsert` to achieve the same effect.
+The field's default value. Note that you can also use `onCreate` to achieve the same effect.
 
 #### `description`
 

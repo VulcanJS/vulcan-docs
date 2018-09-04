@@ -29,7 +29,7 @@
 </g>
 <g id="schema">
 <g id="Group">
-<g id="const MoviesSchema = { _id: { type: String, optional: true, viewableBy: [&#39;guests&#39;], }, createdAt: { type: Date, optional: true, viewableBy: [&#39;guests&#39;], }, /* ... */ }">
+<g id="const MoviesSchema = { _id: { type: String, optional: true, canRead: [&#39;guests&#39;], }, createdAt: { type: Date, optional: true, canRead: [&#39;guests&#39;], }, /* ... */ }">
 <use xlink:href="#path5_fill" transform="translate(-563 133)" fill="#828282"/>
 </g>
 <g id="Rectangle">

@@ -110,13 +110,13 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `MoviesList.jsx` containing a `MoviesList` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `movies.jsx` containing a `movies` component:
 
 ```js
 import React, { PropTypes, Component } from 'react';
 import { registerComponent } from 'meteor/vulcan:core';
 
-const MoviesList = () => 
+const movies = () => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -142,7 +142,7 @@ registerComponent({name: 'MoviesList', component: MoviesList});
 We'll also create a new `components.js` file inside `modules` so we can import our new component and make it available globally: 
 
 ```js
-import '../components/movies/MoviesList.jsx';
+import '../components/movies/movies.jsx';
 ```
 
 Then we need to import the `components.js` inside of our `modules/index.js` before going to the next step.
@@ -158,7 +158,7 @@ We can now create a [route](/routing.html) to display this component. Create a n
 ```js
 import { addRoute } from 'meteor/vulcan:core';
 
-addRoute({ name: 'movies', path: '/', componentName: 'MoviesList' });
+addRoute({ name: 'movies', path: '/', componentName: 'movies' });
 ```
 
 In case you're wondering, `addRoute` is a very thin wrapper over [React Router](https://github.com/ReactTraining/react-router). 
@@ -193,7 +193,7 @@ const schema = {
     type: Date,
     optional: true,
     canRead: ['guests'],
-    onInsert: () => {
+    onCreate: () => {
       return new Date();
     },
   },
@@ -229,7 +229,7 @@ const schema = {
 export default schema;
 ```
 
-Note that we're setting up an `onInsert` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
+Note that we're setting up an `onCreate` function on the `createdAt` field to initialize it to the current timestamp whenever a new document is inserted. 
 
 And we're also setting `canRead: ['guests']` on every field to make sure they're visible to non-logged-in users (who belong to the default `guests` group). By default, any schema field is kept private, so we need to make sure we don't forget this step if we want our data to be publicly accessible.
 
@@ -315,6 +315,7 @@ Let's start simple. Create a new `resolvers.js` file inside `modules/movies` and
 ```js
 const resolvers = {
   multi: {
+
     name: 'movies',
 
     resolver(root, args, context) {
@@ -591,7 +592,7 @@ import { Components, registerComponent, withMulti, withCurrentUser, Loading } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -669,7 +670,7 @@ Once you save, you should finally get your prize: a shiny new movie list display
 
 ## User Accounts
 
-So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `MoviesList`: 
+So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `movies`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -677,7 +678,7 @@ import { Components, registerComponent, withMulti, withCurrentUser, Loading } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -720,6 +721,7 @@ const options = {
 };
 
 registerComponent({ name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser]});
+
 ```
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
@@ -842,7 +844,7 @@ const schema = {
     type: Date,
     optional: true,
     canRead: ['guests'],
-    onInsert: (document, currentUser) => {
+    onCreate: () => {
       return new Date();
     }
   },
@@ -941,7 +943,7 @@ A few things to note:
 - We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `create` mutation's `check` function to figure this out.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
-Let's add the form component to `MoviesList.jsx`:
+Let's add the form component to `movies.jsx`:
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -949,7 +951,7 @@ import { Components, withMulti, withCurrentUser, Loading, registerComponent } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 

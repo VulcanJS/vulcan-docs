@@ -108,7 +108,7 @@ The `Datatable` component is used to show a dynamic datatable for a given collec
 
 - `collection`: the collection to load data from.
 - `columns`: an array containing a list of columns (see below).
-- `options`: the `options` object passed to `withList` in order to load the data (optional).
+- `options`: the `options` object passed to `withMulti` in order to load the data (optional).
 - `showEdit`: if `true`, will add a column with an Edit button at the end of each row (defaults to `false`).
 
 The `columns` array is an array of either column names, objects, or both. If you're passing objects, each one should contain the following properties:

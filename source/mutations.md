@@ -17,57 +17,53 @@ When talking about mutations, it's important to distinguish between the differen
 
 Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
-#### `withNew`
+#### `withCreate`
 
 This HoC takes the following two options:
 
 * `collection`: the collection to operate on.
 * `fragment`: specifies the data to ask for as a return value.
 
-And passes on a `newMutation` function to the wrapped component, which takes a single `document` argument.
+And passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `document` argument.
 
-Takes an object as argument with a single `document` property and returns a promise:
+Takes an object as argument with a single `data` property and returns a promise:
 
 ```js
 this.props
-  .newMutation({
-    document: document
+  .createMovie({ data })
+  .then(/* success */)
+  .catch(/* error */);
+```
+
+#### `withUpdate`
+
+Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `documentId`, `set`, and `unset`.
+
+Takes an object with two properties as an argument and returns a promise:
+
+* `selector`: a selector pointing to the document to modify. Usually `{ documentId }`.
+* `data`: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to `null`, e.g.`{title: 'My New Title', body: 'My new body', status: null}`).
+
+```js
+this.props
+  .updateMovie({
+    selector: { documentId },
+    data,
   })
   .then(/* success */)
   .catch(/* error */);
 ```
 
-#### `withEdit`
+#### `withDelete`
 
-Same options as `withNew`. The returned `editMutation` mutation takes three arguments: `documentId`, `set`, and `unset`.
+A single `collection` option. The returned `deleteMovie` mutation takes a single `selector` argument.
 
-Takes an object with three properties as an argument and returns a promise:
-
-* `documentId`: the document to modify.
-* `set`: the fields to modify (as a list of field name/value pairs, e.g.`{title: 'My New Title', body: 'My new body'}`).
-* `unset`: the fields to remove (as a list of field names/booleans, e.g. `{title: true, body: true}`).
-
-```js
-this.props
-  .editMutation({
-    documentId: document._id,
-    set: set,
-    unset: unset
-  })
-  .then(/* success */)
-  .catch(/* error */);
-```
-
-#### `withRemove`
-
-A single `collection` option. The returned `removeMutation` mutation takes a single `documentId` argument.
-
-Takes an object with a single `documentId` property as an argument and returns a promise.
+Takes an object with a single `selector` property as an argument and returns a promise.
 
 ```js
 this.props
   .removeMutation({
-    documentId: documentId
+    selector: { documentId },
   })
   .then(/* success */)
   .catch(/* error */);
@@ -98,7 +94,6 @@ You would then call the function with:
 this.props.addEmailNewsletter({email: 'foo@bar.com'})
 ```
 
-
 ## Mutations Resolvers
 
 When creating a new collection, `createCollection` accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
@@ -120,29 +115,29 @@ import {
 import schema from './schema.js';
 
 const Movies = createCollection({
-  collectionName: 'Movies',
-
   typeName: 'Movie',
 
   schema,
 
-  resolvers: getDefaultResolvers('Movies'),
+  resolvers: getDefaultResolvers(options),
 
-  mutations: getDefaultMutations('Movies')
+  mutations: getDefaultMutations(options)
 });
 
 export default Movies;
 ```
 
-You can optionally pass a second `options` argument to `getDefaultMutations`, which can be used to override the `check` functions for each mutation: 
+The `options` object can have the following properties: 
 
-```js
-const mutations = getDefaultMutations('Movies', {
-  newCheck: (user, document) => ...,
-  editCheck: (user, document) => ...,
-  removeCheck: (user, document) => ...,
-})
-```
+- `typeName` (String): the resolver's type name (required).
+- `create` (Boolean): whether to create a `create` mutation (defaults to `true`).
+- `update` (Boolean): whether to create a `update` mutation (defaults to `true`).
+- `upsert` (Boolean): whether to create a `upsert` mutation (defaults to `true`).
+- `delete` (Boolean): whether to create a `delete` mutation (defaults to `true`).
+- `createCheck` (Function): a function used to customize the `create` check.
+- `updateCheck` (Function): a function used to customize the `update` check.
+- `upsertCheck` (Function): a function used to customize the `upsert` check.
+- `deleteCheck` (Function): a function used to customize the `delete` check.
 
 Vulcan's default mutations are fairly lightweight. For example here's the body of the `edit` mutation resolver (where `collectionName` is `getDefaultMutations`'s argument):
 
@@ -157,12 +152,11 @@ async mutation(root, {documentId, set, unset}, context) {
   // check if user can perform operation; if not throw error
   Utils.performCheck(this.check, context.currentUser, document);
 
-  // call editMutator boilerplate function
-  return await editMutator({
+  // call updateMutator boilerplate function
+  return await updateMutator({
     collection, 
-    documentId: documentId, 
-    set: set, 
-    unset: unset, 
+    selector, 
+    data, 
     currentUser: context.currentUser,
     validate: true,
     context,
@@ -200,15 +194,15 @@ A **mutator** is the function that actually does the work of mutating data on th
 
 ### Default Mutators
 
-Vulcan features three standard mutators: `newMutator`, `editMutator`, and `removeMutator`. They are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`.
+Vulcan features three standard mutators: `createMutator`, `updateMutator`, and `deleteMutator`. They are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`.
 
 These mutation functions should be defined _outside_ your GraphQL mutation resolvers, so that you're able to call them from outside a GraphQL context (for example, to seed your database through a server script).
 
 They take the following arguments:
 
 * `collection`: the collection affected.
-* `document` (new) or `documentId` (edit, remove): the document or document ID.
-* `set`, `unset` (edit only): the `set` and `unset` objects.
+* `document`: the document to mutate.
+* `data`: (`updateMutator` only) the mutation payload.
 * `currentUser`: the user performing the operation.
 * `validate`: whether to validate the operation based on the current user.
 * `context`: the resolver context.
@@ -220,26 +214,26 @@ If `validate` is set to `true`, these boilerplate operations will:
 * Add `userId` to document (insert only).
 * Run any validation callbacks (e.g. `movies.new.validate`).
 
-They will then run the mutation's document (or the `set` modifier) through the collection's sync callbacks (e.g. `movies.new.sync`), perform the operation, and finally run the async callbacks (e.g. `movies.new.async`).
+They will then run the mutation's document (or the `set` modifier) through the collection's sync callbacks (e.g. `movie.create.sync`), perform the operation, and finally run the async callbacks (e.g. `movie.create.async`).
 
-For example, here is the `Posts` collection's `new` mutation resolver, using the `newMutator` boilerplate mutation:
+For example, here is the `Posts` collection's `create` mutation resolver, using the `createMutator` boilerplate mutation:
 
 ```js
-import { newMutator } from 'meteor/vulcan:core';
+import { createMutator } from 'meteor/vulcan:core';
 
 const mutations = {
   new: {
-    name: 'postsNew',
+    name: 'createPost',
 
     check(user, document) {
       if (!user) return false;
-      return Users.canDo(user, 'posts.new');
+      return Users.canDo(user, 'post.create');
     },
 
     mutation(root, { document }, context) {
       performCheck(this.check, context.currentUser, document);
 
-      return newMutator({
+      return createMutator({
         collection: context.Posts,
         document: document,
         currentUser: context.currentUser,
@@ -255,10 +249,10 @@ const mutations = {
 
 Default mutators create the following callback hooks for every collection: 
 
-- `collection.operation.validate`: called to validate the document or modifier. 
-- `collection.operation.before`: called before the database operation.
-- `collection.operation.after`: called after the database operation, but before the mutator returns.
-- `collection.operation.async`: called in an async manner after the mutator returns. 
+- `typename.operation.validate`: called to validate the document or modifier. 
+- `typename.operation.before`: called before the database operation.
+- `typename.operation.after`: called after the database operation, but before the mutator returns.
+- `typename.operation.async`: called in an async manner after the mutator returns. 
 
 You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 
