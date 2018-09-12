@@ -75,9 +75,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'vulcan:core@1.8.1',
-    'vulcan:forms@1.8.1',
-    'vulcan:accounts@1.8.1',
+    'vulcan:core@1.12.3',
+    'vulcan:forms@1.12.3',
+    'vulcan:accounts@1.12.3',
   ]);
 
   api.addFiles('lib/stylesheets/bootstrap.min.css');
@@ -110,13 +110,13 @@ It may seem like not much happened, but once Meteor restart our custom package w
 
 We now have the basic structure of our package, so let's get to work. We'll create a new component and a new route to display it. 
 
-First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `movies.jsx` containing a `movies` component:
+First, create a new `components` directory inside `lib` if you haven't done so yet and add the `movies` directory inside of it. In `components/movies` add a new file named `MoviesList.jsx` containing a `MoviesList` component:
 
 ```js
 import React, { PropTypes, Component } from 'react';
 import { registerComponent } from 'meteor/vulcan:core';
 
-const movies = () => 
+const MoviesList = () => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -142,7 +142,7 @@ registerComponent({name: 'MoviesList', component: MoviesList});
 We'll also create a new `components.js` file inside `modules` so we can import our new component and make it available globally: 
 
 ```js
-import '../components/movies/movies.jsx';
+import '../components/movies/MoviesList.jsx';
 ```
 
 Then we need to import the `components.js` inside of our `modules/index.js` before going to the next step.
@@ -158,7 +158,7 @@ We can now create a [route](/routing.html) to display this component. Create a n
 ```js
 import { addRoute } from 'meteor/vulcan:core';
 
-addRoute({ name: 'movies', path: '/', componentName: 'movies' });
+addRoute({ name: 'movies', path: '/', componentName: 'MoviesList' });
 ```
 
 In case you're wondering, `addRoute` is a very thin wrapper over [React Router](https://github.com/ReactTraining/react-router). 
@@ -356,7 +356,7 @@ We can try out our new query resolver using [GraphiQL](https://github.com/graphq
 ```js
 import Movies from '../modules/movies/collection.js';
 import Users from 'meteor/vulcan:users';
-import { newMutation } from 'meteor/vulcan:core';
+import { createMutator } from 'meteor/vulcan:core';
 
 const seedData = [
   {
@@ -418,8 +418,7 @@ Meteor.startup(function () {
   const currentUser = Users.findOne();
   if (Movies.find().fetch().length === 0) {
     seedData.forEach(document => {
-      newMutation({
-        action: 'movies.new',
+      createMutator({
         collection: Movies,
         document: document, 
         currentUser: currentUser,
@@ -628,7 +627,7 @@ const options = {
   limit: 5
 };
 
-registerComponent('MoviesList', MoviesList, [withMulti, options], withCurrentUser);
+registerComponent({ name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser] });
 ```
 
 We want to provide `MoviesList` with the `results` document list and the `currentUser` property, so we wrap it with `withMulti` and `withCurrentUser`.
@@ -670,7 +669,7 @@ Once you save, you should finally get your prize: a shiny new movie list display
 
 ## User Accounts
 
-So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `movies`: 
+So far so good, but we can't yet do a lot with our app. In order to give it a little more potential, let's add user accounts to `MoviesList`: 
 
 ```js
 import React, { PropTypes, Component } from 'react';
@@ -678,7 +677,7 @@ import { Components, registerComponent, withMulti, withCurrentUser, Loading } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -720,8 +719,7 @@ const options = {
   limit: 5
 };
 
-registerComponent({ name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser]});
-
+registerComponent({ name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser] });
 ```
 
 Yay! You can now log in and sign up at your own leisure. Note that the `<Components.AccountsLoginForm />` component is a ready-made accounts UI component that comes from the `vulcan:accounts` package. 
@@ -746,7 +744,7 @@ const mutations = {
 
     check(user) {
       if (!user) return false;
-      return Users.canDo(user, 'movies.new');
+      return Users.canDo(user, 'movie.create');
     },
 
     mutation(root, args, context) {
@@ -800,13 +798,13 @@ At this state, your application should be crashing with the message `Error: Type
 
 ## Actions, Groups, & Permissions
 
-The mutation's `check` function checks if the user can perform an action named `movies.new`. We want all logged-in users (known as the `members` group) to be able to perform this action, so let's take care of this by creating a new `movies/permissions.js` file:
+The mutation's `check` function checks if the user can perform an action named `movies.create`. We want all logged-in users (known as the `members` group) to be able to perform this action, so let's take care of this by creating a new `movies/permissions.js` file:
 
 ```js
 import Users from 'meteor/vulcan:users';
 
 const membersActions = [
-  'movies.create',
+  'movie.create',
 ];
 Users.groups.members.can(membersActions);
 ```
@@ -915,7 +913,7 @@ const MoviesNewForm = ({currentUser}) =>
 
   <div>
 
-    {Movies.options.mutations.new.check(currentUser) ?
+    {Movies.options.mutations.create.check(currentUser) ?
       <div style={ { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc' } }>
         <h4>Insert New Document</h4>
         <Components.SmartForm 
@@ -928,7 +926,7 @@ const MoviesNewForm = ({currentUser}) =>
 
   </div>
 
-registerComponent({ name: 'MoviesNewForm', component: MoviesNewForm, hocs: [withCurrentUser]});
+registerComponent({ name: 'MoviesNewForm', component: MoviesNewForm, hocs: [withCurrentUser] });
 ```
 
 And import it in `components.js`: 
@@ -951,7 +949,7 @@ import { Components, withMulti, withCurrentUser, Loading, registerComponent } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
@@ -1094,7 +1092,7 @@ const MoviesItem = ({movie, currentUser}) =>
 
   </div>
 
-registerComponent({ name: 'MoviesItem', component: MoviesItem});
+registerComponent({ name: 'MoviesItem', component: MoviesItem });
 ```
 
 This time we're using the `<Components.ModalTrigger />` Vulcan component to show our form inside a popup (assuming the current user can perform an edit, of course).
@@ -1132,7 +1130,7 @@ const mutations = {
 
     check(user) {
       if (!user) return false;
-      return Users.canDo(user, 'movies.create');
+      return Users.canDo(user, 'movie.create');
     },
 
     mutation(root, args, context) {
@@ -1156,8 +1154,8 @@ const mutations = {
     check(user, document) {
       if (!user || !document) return false;
       return Users.owns(user, document)
-        ? Users.canDo(user, 'movies.update.own')
-        : Users.canDo(user, `movies.update.all`);
+        ? Users.canDo(user, 'movie.update.own')
+        : Users.canDo(user, `movie.update.all`);
     },
 
     mutation(root, {selector, data}, context) {
@@ -1181,8 +1179,8 @@ const mutations = {
     check(user, document) {
       if (!user || !document) return false;
       return Users.owns(user, document)
-        ? Users.canDo(user, 'movies.delete.own')
-        : Users.canDo(user, `movies.delete.all`);
+        ? Users.canDo(user, 'movie.delete.own')
+        : Users.canDo(user, `movie.delete.all`);
     },
 
     mutation(root, { selector }, context) {
@@ -1209,9 +1207,9 @@ For the `check` function to work properly we need to update the `permissions.js`
 import Users from 'meteor/vulcan:users';
 
 const membersActions = [
-  'movies.create',
-  'movies.update.own',
-  'movies.delete.own',
+  'movie.create',
+  'movie.update.own',
+  'movie.delete.own',
 ];
 Users.groups.members.can(membersActions);
 ```
