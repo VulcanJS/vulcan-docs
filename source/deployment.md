@@ -208,6 +208,14 @@ Change `mydomain` with your custom domain name.
 
 You can also add `-e MONGO_URL=mongodb://<username>:<pass>@....` for persistance storage of data. We recommend you using a service like [mlab](https://mlab.com/).
 
+If you are using the [two-repo install](http://docs.vulcanjs.org/#Two-Repo-Install-Optional) you must specify the path to your package directory:
+```
+METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages" meteor-now ...
+```
+
+(Taking care to adapt the `/Users/sacha/Vulcan/packages` path to point to your Vulcan core repo's `/packages` directory)
+
+
 After your deployment is done, create an alias to the domain you just specified. Just copy the hashed link provided by the now deployment. It should be copied to your clipboad. It usually follows this format: `https://xxxxxxxxx.now.sh`.
 
 ```
