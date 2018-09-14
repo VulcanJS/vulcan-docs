@@ -155,7 +155,7 @@ For example, before showing a user an “edit post” link, you can call the edi
 
 When displaying a list of items, you can rely on [terms and parameters](http://docs.vulcanjs.org/terms-parameters.html) to require only the data the current user is authorized to see from the database. This is actually mandatory if you want Mongo to count the total number of documents that are really available to the user, which is needed for pagination and "load more" buttons.
 
-This example view tells the database to look only for documents that are either owned by the user or already published. **However you still need to define a `checkAccess` method**, since a malicious user could still decide to bypass the view and ask all the data from the database.
+This example view tells the database to look only for documents that are either owned by the user or already published. **However you still need to define a `checkAccess` method**, since a malicious user could decide to bypass the view and ask all the data from the database.
 
 ```js
 // filter the data fetched from the database
