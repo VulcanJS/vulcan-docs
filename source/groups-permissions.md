@@ -153,6 +153,33 @@ For example, before showing a user an “edit post” link, you can call the edi
 </div>
 ```
 
+When displaying a list of items, you can rely on [terms and parameters](http://docs.vulcanjs.org/terms-parameters.html) to require only the data the current user is authorized to see from the database. This is actually mandatory if you want Mongo to count the total number of documents that are really available to the user, which is needed for pagination and "load more" buttons.
+
+This example view tells the database to look only for documents that are either owned by the user or already published. **However you still need to define a `checkAccess` method**, since a malicious user could decide to bypass the view and ask all the data from the database.
+
+```js
+// filter the data fetched from the database
+const myRestrictedView = terms => ({
+  selector: {
+    $or: [
+      {userId: terms.userId},
+      {isFuture: false}
+    ]
+  }
+})
+Posts.addView("myRestrictedView", myRestrictedView)
+```
+
+Example usage with Datatable:
+
+```jsx
+// /!\ this is only a frontend restriction and does not actually secure the database
+<DataTable
+  options={{ terms: { view: "myRestictedView" }}}
+  collection={Posts}
+/>
+```
+
 ## Permissions API
 
 Here's how to create and modify groups.
