@@ -204,7 +204,7 @@ Now on your root folder, run the following command:
 meteor-now -d -e ROOT_URL=https://mydomain.now.sh -e NODE_ENV=production`
 ```
 
-Change `mydomain` with your custom domain name.
+Change `mydomain` with your custom domain name. `meteor-now` will automatically look for a file named `production.settings.json` at the root of your application. For a staging deployment, you can also set `NODE_ENV=development`, `meteor-now` will then look for `development.settings.json` instead.
 
 You can also add `-e MONGO_URL=mongodb://<username>:<pass>@....` for persistance storage of data. We recommend you using a service like [mlab](https://mlab.com/).
 
@@ -212,9 +212,9 @@ If you are using the [two-repo install](http://docs.vulcanjs.org/#Two-Repo-Insta
 ```
 METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages" meteor-now ...
 ```
-
 (Taking care to adapt the `/Users/sacha/Vulcan/packages` path to point to your Vulcan core repo's `/packages` directory)
 
+Note that the `METEOR_PACKAGE_DIRS` variable is only used locally by the machine that runs`meteor-now` during build, you **must not** send it to the server with the `-e` option, contrary to other variables.
 
 After your deployment is done, create an alias to the domain you just specified. Just copy the hashed link provided by the now deployment. It should be copied to your clipboad. It usually follows this format: `https://xxxxxxxxx.now.sh`.
 
