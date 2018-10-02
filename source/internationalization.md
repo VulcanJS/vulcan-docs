@@ -6,6 +6,11 @@ There are two different yet related aspects to internationalization: making an a
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yO4MAdmiiCc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+## Debugging
+
+**If you've got the [debug package](/debug.html) enabled, an Internationalization debugging UI is available at [http://0.0.0.0:3000/debug/i18n](http://0.0.0.0:3000/debug/i18n).**
+
+
 ## Locales
 
 A locale is a language variant, such as UK English, American English, Canadian French, France French, and so on. 

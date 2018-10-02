@@ -6,7 +6,7 @@ You can configure the following settings in your `settings.json` file.
 
 ## Debugging
 
-**If you've got the [debug package](/debug.html) enabled, a settings debugging UI is available at [http://0.0.0.0:3000/settings](http://0.0.0.0:3000/settings).**
+**If you've got the [debug package](/debug.html) enabled, a settings debugging UI is available at [http://0.0.0.0:3000/debug/settings](http://0.0.0.0:3000/debug/settings).**
 
 ## Overview
 

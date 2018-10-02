@@ -12,7 +12,7 @@ Callback functions can take more than one arguments, but the first argument is s
 
 ## Debugging
 
-**If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://0.0.0.0:3000/callbacks](http://0.0.0.0:3000/callbacks).**
+**If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://0.0.0.0:3000/debug/callbacks](http://0.0.0.0:3000/debug/callbacks).**
 
 ## Adding Callback Functions
 
