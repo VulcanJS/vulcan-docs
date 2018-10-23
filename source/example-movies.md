@@ -480,7 +480,7 @@ const resolvers = {
     name: 'movies',
 
     async resolver(root, args, context) {
-      const { input: { terms = {}} } = args;
+      const { input: {terms = {}} = {terms: {}} } = args;
       let { selector, options } = await context.Movies.getParameters(terms, {}, context.currentUser);
       movies = await context.Movies.find(selector, options);
       moviesContent = movies.fetch();
@@ -1041,7 +1041,7 @@ const resolvers = {
     name: 'movies',
 
     async resolver(root, args, context) {
-      const { { input: terms = {} } } = args;
+      const { input: {terms = {}} = {terms: {}} } = args;
       let { selector, options } = await context.Movies.getParameters(terms, {}, context.currentUser);
       movies = await context.Movies.find(selector, options);
       moviesContent = movies.fetch();
