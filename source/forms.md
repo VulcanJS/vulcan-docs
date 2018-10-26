@@ -71,7 +71,7 @@ const PostsSchema = new SimpleSchema({
 Just pass the `collection` props top the `SmartForm` component:
 
 ```jsx
-<SmartForm 
+<Components.SmartForm
   collection={Posts}
 />
 ```
@@ -81,7 +81,7 @@ Just pass the `collection` props top the `SmartForm` component:
 Same as the New Document form, but also passing the `documentId` to edit. 
 
 ```jsx
-<SmartForm 
+<Components.SmartForm
   collection={Posts}
   documentId={post._id}
 />
