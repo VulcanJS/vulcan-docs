@@ -1253,6 +1253,8 @@ Note that the list automatically re-sorts as you edit individual documents. This
 
 ## Going Further
 
+You can try to add a page displaying a single movie, fetching the data with the `withSingle` higher-order component. Look into the starter package [example-movies](https://github.com/VulcanJS/Vulcan-Starter/) for an implementation of this.
+
 This is probably a good place to stop, but you can go further simply by going through the code of the `example-instagram` package. In it, you'll see how to create a resolver for single documents so you can load more data for a specific movie, and use permission checks to enforce fine-grained security throughout your app.
 
 And this is just the start. You can do a lot more with Vulcan, Apollo, and React, as you'll soon see!
