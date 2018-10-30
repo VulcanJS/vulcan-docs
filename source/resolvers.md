@@ -52,7 +52,9 @@ It should return an array of documents.
 
 ### Single Resolver
 
-The `single` resolver takes a `documentId` argument, and should return a single document.
+The `single` resolver takes a `documentId` argument, and should return a single document. If no `documentId` is provided or the id does not match any existing document, it should either return null or throw an error depending on your use case.
+
+If you need to get only one element but you don't know its id, for example to display the most recent article on your website, the preferred pattern is to use the `multi` resolver with a limit of 1.
 
 ### Default Resolvers
 
