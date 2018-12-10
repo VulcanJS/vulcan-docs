@@ -75,7 +75,8 @@ Just pass the `collection` or `collectionName` props to the `SmartForm` componen
   collection={Posts}
 />
 
-//or
+// or
+
 <Components.SmartForm
   collectionName="Posts"
 />
@@ -104,7 +105,7 @@ The collection in which to edit or insert a document.
 
 #### `collectionName`
 
-Instead of passing `collction` you can pass the name of the collection.
+Instead of passing `collection` you can pass the name of the collection.
 
 #### `documentId`
 
