@@ -160,6 +160,7 @@ This HoC then passes on the following child prop:
 
 * `loading`: `true` while the data is loading.
 * `document`: the loaded document.
+* `refetch`: a function that can be called to trigger a query refetch.
 
 ### Data Updating
 
