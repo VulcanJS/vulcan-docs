@@ -115,6 +115,10 @@ If present, the document to edit. If not present, the form will be a “new docu
 
 An array of field names, if you want to restrict the form to a specific set of fields.
 
+#### `submitLabel`
+
+The text inside the submit button of the form.
+
 #### `layout`
 
 A layout property used to control how the form fields are displayed. Defaults to `horizontal`. 
