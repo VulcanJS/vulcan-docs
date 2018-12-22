@@ -158,7 +158,7 @@ import "./components/CustomLogo.jsx";
 
 Replacing the entire component works for simple components, but sometimes you only want to replace one part of the component (typically its `render` method) while preserving others.
 
-Take a look look at the `CustomNewsletter` component to see an example of doing just that:
+Take a look at the `CustomNewsletter` component to see an example of doing just that:
 
 ```js
 import { Components, replaceComponent, getRawComponent } from 'meteor/vulcan:core';
