@@ -68,11 +68,17 @@ const PostsSchema = new SimpleSchema({
 
 ### New Document
 
-Just pass the `collection` props top the `SmartForm` component:
+Just pass the `collection` or `collectionName` props to the `SmartForm` component:
 
 ```jsx
 <Components.SmartForm
   collection={Posts}
+/>
+
+// or
+
+<Components.SmartForm
+  collectionName="Posts"
 />
 ```
 
@@ -97,6 +103,10 @@ Here are all the props accepted by the `SmartForm` component:
 
 The collection in which to edit or insert a document.
 
+#### `collectionName`
+
+Instead of passing `collection` you can pass the name of the collection.
+
 #### `documentId`
 
 If present, the document to edit. If not present, the form will be a “new document” form. 
@@ -104,6 +114,10 @@ If present, the document to edit. If not present, the form will be a “new docu
 #### `fields`
 
 An array of field names, if you want to restrict the form to a specific set of fields.
+
+#### `submitLabel`
+
+The text inside the submit button of the form.
 
 #### `layout`
 

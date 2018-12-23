@@ -174,6 +174,14 @@ You can set `min` to force the field to be longer than a certain length (e.g. `m
 
 You can set `max` to limit the field to a certain length (e.g. `max: 140`).
 
+#### `minCount`
+
+The minimum count of items that must be in an array field.
+
+#### `maxCount`
+
+The maximum count of items that can be in an array field.
+
 #### `defaultValue`
 
 The field's default value. Note that you can also use `onCreate` to achieve the same effect.
