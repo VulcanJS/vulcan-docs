@@ -151,7 +151,7 @@ addStrings('en', {
 
 const MyComponent = ({ user }) => 
   <div>
-    <FormattedMessage id="hello_world" values={{ firstName: user.firstName, lastName: user.lastName }}/>
+    <FormattedMessage id="hello_last_name_first_name" values={{ firstName: user.firstName, lastName: user.lastName }}/>
   </div>
 ```
 
