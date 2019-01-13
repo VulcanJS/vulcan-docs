@@ -591,7 +591,7 @@ import { Components, registerComponent, withMulti, withCurrentUser, Loading } fr
 
 import Movies from '../../modules/movies/collection.js';
 
-const movies = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
+const MoviesList = ({results = [], currentUser, loading, loadMore, count, totalCount}) => 
   
   <div style={ { maxWidth: '500px', margin: '20px auto' } }>
 
