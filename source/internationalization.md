@@ -124,7 +124,7 @@ addStrings('en', {
 
 ### Internationalizing Components
 
-There are two ways to use internationalized strings inside your components, `<FormattedMessaged/>` and `intl()`. 
+There are two ways to use internationalized strings inside your components, `<FormattedMessage/>` and `intl()`. 
 
 #### FormattedMessage
 
