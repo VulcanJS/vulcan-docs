@@ -4,7 +4,7 @@ title: UI Components
 
 While Vulcan itself doesn't provide its own UI components (besides core utilites such as `Layout`, `App`, etc.), it does make use of a common component API that can serve as a bridge between your app and UI frameworks such as [React Bootstrap](https://react-bootstrap.github.io/) or [Material UI](https://www.material-ui.com/#/).
 
-By using this API instead of depending on a framework's components directly, Vulcan plugins and projects can make it easy to easily swap from one UI framework to another. 
+By using this API instead of depending on a framework's components directly, Vulcan plugins and projects can make it possible to easily swap from one UI framework to another. 
 
 ## Form Components
 

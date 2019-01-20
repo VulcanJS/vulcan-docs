@@ -22,9 +22,11 @@ Vulcan.getGraphQLSchema()
 
 ## Custom Schemas
 
-If you need to manually add a schema, you can also do this using the `GraphQLSchema.addSchema` function which will add one or more [GraphQL schemas](http://graphql.org/learn/schema/) to your GraphQL API:
+If you need to manually add a schema, you can also do this using the `addGraphQLSchema` function which will add one or more [GraphQL schemas](http://graphql.org/learn/schema/) to your GraphQL API:
 
 ```js
+import { addGraphQLSchema } from 'meteor/vulcan:core';
+
 const customSchema = `
   input Custom {
     _id: String
@@ -32,5 +34,5 @@ const customSchema = `
     title: String
   }
 `;
-GraphQLSchema.addSchema(customSchema);
+addGraphQLSchema(customSchema);
 ```

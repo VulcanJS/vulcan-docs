@@ -26,7 +26,9 @@ In order to run a Vulcan project, we'll need to first install [Node](https://nod
 
 3. Clone the [Vulcan Starter repo](https://github.com/VulcanJS/Vulcan-Starter) locally.
 
-4. Run:
+4. Rename the `sample_settings.json` file to `settings.json`
+
+5. Run:
 
 ```sh
 npm install
@@ -38,7 +40,7 @@ And open `http://localhost:3000/` in your browser. You'll then be presented with
 Note that you can also start the app with:
 
 ```sh
-meteor --settings sample_settings.json 
+meteor --settings settings.json 
 ```
 
 All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if missing. 

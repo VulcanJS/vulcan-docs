@@ -46,6 +46,8 @@ Creating a collection with `createCollection` will automatically create the asso
 Here's how the `vulcan:voting` package defines a new `Vote` GraphQL type:
 
 ```
+import { addGraphQLSchema } from 'meteor/vulcan:core';
+
 const voteSchema = `
   type Vote {
     itemId: String

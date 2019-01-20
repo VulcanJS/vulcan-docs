@@ -12,23 +12,111 @@ Callback functions can take more than one arguments, but the first argument is s
 
 ## Debugging
 
-**If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://0.0.0.0:3000/debug/callbacks](http://0.0.0.0:3000/debug/callbacks).**
+**If you've got the [debug package](/debug.html) enabled, a callback debugging UI is available at [http://localhost:3000/debug/callbacks](http://localhost:3000/debug/callbacks).**
+
+## Collection Callbacks
+
+The most common place to use callbacks is after CRUD operations on your collections (in other words creating or updating a document).
+
+### Naming
+
+Collection callbacks follow a common naming scheme: 
+
+- `typename.operation.type`
+
+For example, the `async` callback of the `post` type's `update` operation will be available under the name: 
+
+- `post.update.async`
+
+In addition, you can use global callbacks that will apply to all e.g. `update` operations: 
+
+- `*.update.async`
+
+### Arguments
+
+Functions added to the default collection callbacks will be called with the following arguments:
+
+(Note: `validate`, `before`, and `after` functions take two arguments, an `iterator` which should be returned by the function, and a `properties` object).
+
+#### Create
+
+For all `create` callback functions, `properties` has the following properties:
+
+```
+{ 
+  document, // the new document being created
+  currentUser,
+  collection, 
+  context, 
+}
+```
+
+- `validate`: `(validationErrors, properties) => { ... }`
+- `before`: `(document, properties) => { ... }`
+- `after`: `(document, properties) => { ... }`
+- `async`: `(properties) => { ... }`
+
+#### Update
+
+For all `update` callback functions, `properties` has the following properties:
+
+```
+{ 
+  data, // the raw mutation data sent by the client
+  oldDocument, // the original document before the mutation
+  newDocument, // the new, mutated document
+  currentUser, 
+  collection, 
+  context, 
+}
+```
+
+- `validate`: `(validationErrors, properties) => { ... }`
+- `before`: `(data, properties) => { ... }`
+- `after`: `(newDocument, properties) => { ... }`
+- `async`: `(properties) => { ... }`
+
+Note that for `validate` and `before`, `newDocument` is a preview of the new document, while for `after` and `async` it will have been fetched fresh from the database. 
+
+#### Delete
+
+For all `delete` callback functions, `properties` has the following properties:
+
+```
+{ 
+  document, // the document being deleted
+  currentUser, 
+  collection, 
+  context, 
+}
+```
+
+- `validate`: `(validationErrors, properties) => { ... }`
+- `before`: `(document, properties) => { ... }`
+- `async`: `(properties) => { ... }`
+
+#### Delete
+
+- `validate`: `validationErrors, { currentUser, collection, context, document }`
+- `before`: `document, { currentUser, collection, context }`
+- `after`: `document, { currentUser, collection, context }`
+- `async`: `{ currentUser, collection, context, document }`
 
 ## Adding Callback Functions
 
-For example, here's how you would add a callback to `posts.edit.sync` to give posts an `editedAt` date every time they are modified:
+For example, here's how you would add a callback to `post.update.before` to give posts an `updatedAt` date every time they are modified:
 
 ```js
 import { addCallback } from 'meteor/vulcan:core';
 
-function setEditedAt (post, user) {
-  post.editedAt = new Date();
-  return post;
+function setUpdatedAt (data) {
+  data.updatedAt = new Date();
+  return data;
 }
-addCallback('post.update.before', setEditedAt);
+addCallback('post.update.before', setUpdatedAt);
 ```
 
-Vulcan's boilerplate mutations support three distinct types of callback functions, each with their own hook:
+Vulcan's boilerplate mutations support four distinct types of callback functions, each with their own hook:
 
 - `validate` callbacks are called to decide if an operation should run or not. 
 - `before` callbacks are called in a blocking manner before the database operation.
@@ -42,7 +130,7 @@ If the callback function is named (i.e. declared using the `function foo () {}` 
 ```js
 import { removeCallback } from 'meteor/vulcan:core';
 
-removeCallback('post.update.before', "setEditedAt");
+removeCallback('post.update.before', "setUpdatedAt");
 ```
 
 ## Running Callback Hooks
@@ -98,5 +186,5 @@ function mySyncCallback() {
   }
 }
 
-addCallback('posts.new.sync', mySyncCallback);
+addCallback('post.create.before', mySyncCallback);
 ```

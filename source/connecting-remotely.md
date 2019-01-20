@@ -4,9 +4,23 @@ title: Connecting Remotely
 
 You might sometimes need to connect to your GraphQL endpoint (typically accessible at `http://yourapp.com/graphql`) from outside your app.
 
-### Authorization Tokens
+### API Key
 
-An easy way to perform remote API queries and mutations with special privilages is to emulate one of your app's users. You can do so by reusing their authorization token. 
+You can make authorized requests to your GraphQL endpoint by defining an arbitrary `vulcan.apiKey` setting in your `settings.json` file (make sure to keep it private by keeping it out of the `public` block), and then including an `apikey` header whose value matches that API key:
+
+```
+{
+  "vulcan": {
+    "apiKey": "123foo"
+  }
+}
+```
+
+Any request made with that header will automatically be granted admin privileges. 
+
+### Authenticating as a User
+
+Another way to perform remote API queries and mutations with special privilages is to emulate one of your app's users. You can do so by reusing their authorization token. 
 
 To figure out the token, log in as the user you want to emulate and inspect any `graphql` request using your devtools' Network tab. In the Headers tab, locate the `Authorization` field of the Request Headers group and make a note of its value. 
 

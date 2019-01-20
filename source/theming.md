@@ -30,7 +30,7 @@ const Logo = props => {
     <div>/* component code */</div>
   )
 }
-registerComponent('Logo', Logo);
+registerComponent({ name: 'Logo', component: Logo });
 ```
 
 ### Components & HoCs
@@ -39,12 +39,10 @@ To understand how theming works in Vulcan, it's important to understand how comp
 
 A higher-order component's role is to wrap a regular component to pass it a specific prop (such as a list of posts, the current user, the `Router` object, etc.). You can think of HoCs as specialized assistants that each hand the component a tool it needs to do its job. 
 
-The first argument of `registerComponent` is the component's name, the second is the component itself, and any successive arguments will be interpreted as higher-order components and wrapped around the component.
-
 For example, this is how you'd pass the `currentUser` object to the `Logo` component:
 
 ```js
-registerComponent('Logo', Logo, withCurrentUser);
+registerComponent({ name: 'Logo', component: Logo, hocs: [withCurrentUser] });
 ```
 
 ### "Delayed" HoCs
@@ -60,7 +58,7 @@ On the other hand, `registerComponent('Foo', Foo, withCurrentUser)` *doesn't* ex
 But what about HoC functions that take arguments? For example if you were to write:
 
 ```js
-registerComponent('PostsList', PostsList, withMulti(options));
+registerComponent({ name: 'PostsList', component: PostsList, hocs: [withMulti(options)] });
 ```
 
 The `withMulti(options)` would be executed immediately, and you would have no way of overriding the `options` object later on (a common use case being overriding a fragment).
@@ -68,7 +66,7 @@ The `withMulti(options)` would be executed immediately, and you would have no wa
 For that reason, to delay the execution until the start of the app, you can use the following alternative syntax:
 
 ```js
-registerComponent('PostsList', PostsList, [withMulti, options]);
+registerComponent({ name: 'PostsList', component: PostsList, hocs: [ [withMulti, options] ] });
 ```
 ### Accessing Raw Components
 
@@ -88,6 +86,16 @@ const WrappedComponent = registerComponent(MyComponent, withCurrentUser);
 console.log(WrappedComponent.foo); // undefined
 console.log(getRawComponent(WrappedComponent).foo); // "bar"
 ```
+
+### Shortcut Syntax
+
+Throughout the documentation and the example projects you might also see this equivalent `registerComponent` shortcut syntax:
+
+```
+registerComponent('ComponentName', Component, hoc1, hoc2, ...);
+```
+
+The first argument of `registerComponent` will be the component's name, the second the component itself, and any successive arguments will be interpreted as higher-order components and wrapped around the component.
 
 ## Replacing Components
 
@@ -153,57 +161,3 @@ Note that using `getRawComponent` is also needed because components get register
 #### Alternative Approach
 
 The main purpose behind the components API is to enable extending and replacing components defined in third-party themes and plug-ins. However, if this is not a concern for you, you can use the standard `export default Foo` and `import Foo from './foo.jsx'` approach without any trouble. 
-
-## Core Components
-
-In addition to components that are part of a specific theme or example package, a few components are provided with `vulcan:core`.
-
-### App
-
-The `App` component takes care of loading data for the current active user and setting up internationalization. Most of the time, you shouldn't need to worry about it. 
-
-### Error404
-
-This is a default “page not found” error component. This ensures Vulcan has something to show even when you remove all themes and routes. 
-
-### Icon
-
-The icon component is a simple wrapper to display [Font Awesome](http://fontawesome.io/) icons. If you'd like to use a different icon set, you can just replace it using the usual `replaceComponent` technique. 
-
-### Layout
-
-This is a default layout. It'll usually be replaced with each theme's own custom layout.
-
-### Loading
-
-A simple loading spinner component you can use to show loading states. Its corresponding styles currently live in the `vulcan:base-styles` package. 
-
-### ModalTrigger
-
-A component used to display another component inside a [react-bootstrap](https://react-bootstrap.github.io/) modal popup:
-
-```js
-<Components.ModalTrigger size={size} title={context.intl.formatMessage({id: "posts.new_post"})} component={button}>
-  <Components.PostsNewForm />
-</Components.ModalTrigger>
-```
-
-It takes the following props:
-
-- `size`: `large` or `small`, how wide the modal popup should be.
-- `title`: the modal's title.
-- `component`: the component used to trigger the modal when clicked.
-
-### ShowIf
-
-A component that takes a `check` function and an optional `document`, and performs the check on the document for the current user. If the check succeeds, the children are displayed. If not, `failureComponent` is displayed instead. 
-
-```js
-<Components.ShowIf check={Comments.options.mutations.edit.check} document={this.props.comment}>
-  <div>
-    <a className="comment-edit" onClick={this.showEdit}><FormattedMessage id="comments.edit"/></a>
-  </div>
-</Components.ShowIf>
-```
-
-Note that due to the way React works, children component code is executed even if the check fails (the component just won't be displayed).
