@@ -446,7 +446,7 @@
               
               <li class="item-toc ">
                 <a href="debug.html" class="sidebar-link ">
-                  <span></span>
+                  <span>Debugging</span>
                 </a>
               </li>
             
@@ -630,7 +630,8 @@
 <li><code>limit</code>: how many documents to return.</li>
 </ul>
 <p>It should return an array of documents.</p>
-<h3 id="Single-Resolver"><a href="#Single-Resolver" class="headerlink" title="Single Resolver"></a>Single Resolver</h3><p>The <code>single</code> resolver takes a <code>documentId</code> argument, and should return a single document.</p>
+<h3 id="Single-Resolver"><a href="#Single-Resolver" class="headerlink" title="Single Resolver"></a>Single Resolver</h3><p>The <code>single</code> resolver takes a <code>documentId</code> argument, and should return a single document. If no <code>documentId</code> is provided or the id does not match any existing document, it should either return null or throw an error depending on your use case.</p>
+<p>If you need to get only one element but you don’t know its id, for example to display the most recent article on your website, the preferred pattern is to use the <code>multi</code> resolver with a limit of 1.</p>
 <h3 id="Default-Resolvers"><a href="#Default-Resolvers" class="headerlink" title="Default Resolvers"></a>Default Resolvers</h3><p>Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling <code>getDefaultResolvers(collectionName)</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(options),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(options)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
 <p>The <code>options</code> object can have the following properties: </p>
@@ -672,6 +673,7 @@
 <ul>
 <li><code>loading</code>: <code>true</code> while the data is loading.</li>
 <li><code>document</code>: the loaded document.</li>
+<li><code>refetch</code>: a function that can be called to trigger a query refetch.</li>
 </ul>
 <h3 id="Data-Updating"><a href="#Data-Updating" class="headerlink" title="Data Updating"></a>Data Updating</h3><p>As long as you use <code>withMulti</code> in conjunction with <code>withCreate</code>, <code>withUpdate</code>, and <code>withDelete</code>, your lists will automatically be updated after any mutation. This includes:</p>
 <ul>

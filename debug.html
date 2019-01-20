@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title> | Vulcan Docs</title>
+    <title>Debugging | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content=" | Vulcan Docs">
+    <meta property="og:title" content="Debugging | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content=" | Vulcan Docs">
+    <meta name="twitter:title" content="Debugging | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -446,7 +446,7 @@
               
               <li class="item-toc  current">
                 <a href="" class="sidebar-link  current">
-                  <span></span>
+                  <span>Debugging</span>
                 </a>
               </li>
             
@@ -590,7 +590,7 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page"></h1>
+      <h1 class="title-page">Debugging</h1>
       
 
       <div class="page-actions">
@@ -602,15 +602,18 @@
     </div>
 
     <div class="document-formatting">
-      <hr>
-<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor <span class="keyword">add</span><span class="bash"> vulcan:debug</span></span><br></pre></td></tr></table></figure>
+      <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor <span class="keyword">add</span><span class="bash"> vulcan:debug</span></span><br></pre></td></tr></table></figure>
 <h2 id="Dashboards"><a href="#Dashboards" class="headerlink" title="Dashboards"></a>Dashboards</h2><p>The package provides a few debugging dashboards:</p>
 <ul>
-<li><a href="http://0.0.0.0:3000/groups" target="_blank" rel="noopener">http://0.0.0.0:3000/groups</a>: view your currently defined <a href="/groups-permissions.html">groups</a>.</li>
-<li><a href="http://0.0.0.0:3000/settings" target="_blank" rel="noopener">http://0.0.0.0:3000/settings</a>: view your currently defined <a href="/settings.html">settings</a>.</li>
-<li><a href="http://0.0.0.0:3000/callbacks" target="_blank" rel="noopener">http://0.0.0.0:3000/callbacks</a>: view your currently defined <a href="/callbacks.html">callbacks</a>.</li>
-<li><a href="http://0.0.0.0:3000/emails" target="_blank" rel="noopener">http://0.0.0.0:3000/emails</a>: view your currently defined <a href="/emails.html">emails</a>.</li>
+<li><a href="http://0.0.0.0:3000/debug/groups" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/groups</a>: view your currently defined <a href="/groups-permissions.html">groups</a>.</li>
+<li><a href="http://0.0.0.0:3000/debug/settings" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/settings</a>: view your currently defined <a href="/settings.html">settings</a>.</li>
+<li><a href="http://0.0.0.0:3000/debug/callbacks" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/callbacks</a>: view your currently defined <a href="/callbacks.html">callbacks</a>.</li>
+<li><a href="http://0.0.0.0:3000/debug/emails" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/emails</a>: view your currently defined <a href="/emails.html">emails</a>.</li>
+<li><a href="http://0.0.0.0:3000/debug/routes" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/routes</a>: view your currently defined <a href="/routing.html">routes</a></li>
+<li><a href="http://0.0.0.0:3000/debug/components" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/components</a>: view your currently defined <a href="/theming.html">components</a></li>
+<li><a href="http://0.0.0.0:3000/debug/i18n" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/i18n</a>: view your currently defined <a href="/internationalization.html">I18n Strings</a></li>
 </ul>
+<p>You can find a link to all these dashboards from the parent page : <a href="http://0.0.0.0:3000/debug" target="_blank" rel="noopener">http://0.0.0.0:3000/debug</a></p>
 
     </div>
   </div>

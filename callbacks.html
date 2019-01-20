@@ -446,7 +446,7 @@
               
               <li class="item-toc ">
                 <a href="debug.html" class="sidebar-link ">
-                  <span></span>
+                  <span>Debugging</span>
                 </a>
               </li>
             
@@ -606,7 +606,7 @@
 <p>A <strong>hook</strong> is a specific point in the code where <strong>callbacks</strong> can be attached and executed. These callbacks are middleware-like functions that take in an argument, then pass it on to the next callback attached to the same hook. </p>
 <p>They are a handy way to inject your own code into other, pre-existing operations without having to modify the code of these operations directly. </p>
 <p>Callback functions can take more than one arguments, but the first argument is special in that - for sync callbacks – it will be updated each time to reflect the return value of each successive function, letting you progressively iterate over a value or object. </p>
-<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a callback debugging UI is available at <a href="http://0.0.0.0:3000/callbacks" target="_blank" rel="noopener">http://0.0.0.0:3000/callbacks</a>.</strong></p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a callback debugging UI is available at <a href="http://0.0.0.0:3000/debug/callbacks" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/callbacks</a>.</strong></p>
 <h2 id="Adding-Callback-Functions"><a href="#Adding-Callback-Functions" class="headerlink" title="Adding Callback Functions"></a>Adding Callback Functions</h2><p>For example, here’s how you would add a callback to <code>posts.edit.sync</code> to give posts an <code>editedAt</code> date every time they are modified:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setEditedAt</span> (<span class="params">post, user</span>) </span>&#123;</span><br><span class="line">  post.editedAt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">return</span> post;</span><br><span class="line">&#125;</span><br><span class="line">addCallback(<span class="string">'post.update.before'</span>, setEditedAt);</span><br></pre></td></tr></table></figure>
 <p>Vulcan’s boilerplate mutations support three distinct types of callback functions, each with their own hook:</p>
