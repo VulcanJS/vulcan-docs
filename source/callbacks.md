@@ -42,7 +42,7 @@ Functions added to the default collection callbacks will be called with the foll
 
 For all `create` callback functions, `properties` has the following properties:
 
-```
+```js
 { 
   document, // the new document being created
   currentUser,
@@ -60,7 +60,7 @@ For all `create` callback functions, `properties` has the following properties:
 
 For all `update` callback functions, `properties` has the following properties:
 
-```
+```js
 { 
   data, // the raw mutation data sent by the client
   oldDocument, // the original document before the mutation
@@ -82,7 +82,7 @@ Note that for `validate` and `before`, `newDocument` is a preview of the new doc
 
 For all `delete` callback functions, `properties` has the following properties:
 
-```
+```js
 { 
   document, // the document being deleted
   currentUser, 
@@ -94,13 +94,6 @@ For all `delete` callback functions, `properties` has the following properties:
 - `validate`: `(validationErrors, properties) => { ... }`
 - `before`: `(document, properties) => { ... }`
 - `async`: `(properties) => { ... }`
-
-#### Delete
-
-- `validate`: `validationErrors, { currentUser, collection, context, document }`
-- `before`: `document, { currentUser, collection, context }`
-- `after`: `document, { currentUser, collection, context }`
-- `async`: `{ currentUser, collection, context, document }`
 
 ## Adding Callback Functions
 
