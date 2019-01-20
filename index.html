@@ -617,13 +617,15 @@
 </li>
 <li><p>Clone the <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan Starter repo</a> locally.</p>
 </li>
+<li><p>Rename the <code>sample_settings.json</code> file to <code>settings.json</code></p>
+</li>
 <li><p>Run:</p>
 </li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
 <p>And open <code>http://localhost:3000/</code> in your browser. You’ll then be presented with the first step of the “Getting Started” tutorial. </p>
 <p>Note that you can also start the app with:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor --settings sample_settings.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor --settings settings.json</span><br></pre></td></tr></table></figure>
 <p>All <code>npm start</code> does is run the above command, while also checking for the presence of <code>settings.json</code> first and creating it for you if missing. </p>
 <p>(A note for <code>windows</code> user: While running <code>npm install</code> you might get error regarding <code>node-gyp</code> and <code>bcrypt</code> package installation. This is because you need <a href="https://github.com/nodejs/node-gyp/blob/master/README.md#on-windows" target="_blank" rel="noopener">windows-build-tool</a> for <code>node-gyp</code> installation which is <a href="https://github.com/kelektiv/node.bcrypt.js#dependencies" target="_blank" rel="noopener">required</a> for <code>bcrypt</code> installation.)</p>
 <h2 id="Two-Repo-Install-Optional"><a href="#Two-Repo-Install-Optional" class="headerlink" title="Two-Repo Install (Optional)"></a>Two-Repo Install (Optional)</h2><ul>
