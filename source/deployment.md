@@ -126,17 +126,8 @@ module.exports = {
 > You do not have to edit the mongo settings unless you are using a custom database setup.
 ### Setup your server
 
-If you are using the [two-repo install](http://docs.vulcanjs.org/#Two-Repo-Install-Optional) you must add a global environment variable to your shell to specify the path to your Vulcan core package directory:
-
-```
-export METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages"
-```
-
-Taking care to adapt the `/Users/sacha/Vulcan/packages` path to point to your Vulcan core repo's `/packages` directory. If you wish to use a relative path, it needs to be relative to your Vulcan core repo's `/packages` directory, not the `./deploy` folder.
-
 From the `./deploy` folder, you can now set up the remote servers you have specified in your config.
 It will take around 2-5 minutes depending on the server’s performance and network availability.
-
 ```
 mup setup
 ```
@@ -150,6 +141,13 @@ mup deploy --settings settings.json
 ```
 
 This will bundle the Meteor project locally and deploy it to the remote server(s). The bundling process is the same as what meteor deploy does.
+
+If you are using the [two-repo install](http://docs.vulcanjs.org/#Two-Repo-Install-Optional) you must specify the path to your package directory:
+```
+METEOR_PACKAGE_DIRS="/Users/sacha/Vulcan/packages" mup deploy --settings settings.json
+```
+
+(Taking care to adapt the `/Users/sacha/Vulcan/packages` path to point to your Vulcan core repo's `/packages` directory)
 
 ### Utility Commands
 
