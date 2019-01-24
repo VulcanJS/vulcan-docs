@@ -63,7 +63,7 @@ For all `update` callback functions, `properties` has the following properties:
 ```js
 { 
   data, // the raw mutation data sent by the client
-  oldDocument, // the original document before the mutation
+  document, // the original document before the mutation
   newDocument, // the new, mutated document
   currentUser, 
   collection, 
