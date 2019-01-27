@@ -157,7 +157,7 @@ const MyComponent = ({ user }) =>
   </div>
 ```
 
-And a `defaultValue` prop as a fallback:
+And a `defaultMessage` prop as a fallback:
 
 ```js
 import React from 'react';
@@ -170,7 +170,7 @@ addStrings('en', {
 
 const MyComponent = ({ user }) => 
   <div>
-    <FormattedMessage id="hello_world" defaultValue="Hello world!" />
+    <FormattedMessage id="hello_world" defaultMessage="Hello world!" />
   </div>
 ```
 
