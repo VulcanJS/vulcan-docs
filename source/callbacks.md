@@ -34,22 +34,24 @@ In addition, you can use global callbacks that will apply to all e.g. `update` o
 
 ### Arguments
 
-Functions added to the default collection callbacks will be called with the following arguments:
+Functions added to the default collection callbacks will be called with a set of predetermined arguments.
 
-(Note: `validate`, `before`, and `after` functions take two arguments, an `iterator` which should be returned by the function, and a `properties` object).
+`validate`, `before`, and `after` functions take two arguments, an `iterator` which should be returned by the function, and a `properties` object; while `async` callbacks only take a `properties` argument and don't need to return anything. 
 
-#### Create
+#### Common Properties
 
-For all `create` callback functions, `properties` has the following properties:
+All collection callbacks (as well as `onCreate`, `onUpdate`, etc. callbacks) take a `properties` object with these properties:
 
 ```js
 { 
-  document, // the new document being created
+  document,
   currentUser,
   collection, 
   context, 
 }
 ```
+
+#### Create
 
 - `validate`: `(validationErrors, properties) => { ... }`
 - `before`: `(document, properties) => { ... }`
@@ -58,42 +60,29 @@ For all `create` callback functions, `properties` has the following properties:
 
 #### Update
 
-For all `update` callback functions, `properties` has the following properties:
+For all `update` callback functions, `properties` has the following additional properties:
 
 ```js
-{ 
+{
   data, // the raw mutation data sent by the client
   oldDocument, // the original document before the mutation
-  newDocument, // the new, mutated document
-  currentUser, 
-  collection, 
-  context, 
 }
 ```
+
+Note that for `validate` and `before`, `document` is a simulated preview of the new document post-mutation, while for `after` and `async` it will have been fetched fresh from the database. 
 
 - `validate`: `(validationErrors, properties) => { ... }`
 - `before`: `(data, properties) => { ... }`
-- `after`: `(newDocument, properties) => { ... }`
+- `after`: `(document, properties) => { ... }`
 - `async`: `(properties) => { ... }`
 
-Note that for `validate` and `before`, `newDocument` is a preview of the new document, while for `after` and `async` it will have been fetched fresh from the database. 
-
 #### Delete
-
-For all `delete` callback functions, `properties` has the following properties:
-
-```js
-{ 
-  document, // the document being deleted
-  currentUser, 
-  collection, 
-  context, 
-}
-```
 
 - `validate`: `(validationErrors, properties) => { ... }`
 - `before`: `(document, properties) => { ... }`
 - `async`: `(properties) => { ... }`
+
+Note: delete mutations do not have an `after` callback, as they return the document that was just deleted unmodified.
 
 ## Adding Callback Functions
 
