@@ -186,7 +186,7 @@ import { withRouter } from 'react-router'
 class SearchForm extends Component{
 
   render() {
-    // this.props.router is accessible
+    // this.props.route is accessible
   }
 }
 
