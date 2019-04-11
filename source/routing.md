@@ -238,7 +238,7 @@ class Dashboard extends PureComponent {
   constructor(props) {
     super(props);
     if(!props.currentUser) {
-      props.router.push('/sign-up');
+      props.history.push('/sign-up');
     }
   }
 
