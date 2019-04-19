@@ -34,11 +34,15 @@ Good news, the current version of the Vulcan Starter already includes Storybook.
 ### Install in an application not based on a recent version of Vulcan Starter
 
 - Copy-paste the `.storybook` and `stories` folder from [Vulcan Starter](https://github.com/VulcanJS/Vulcan-Starter)
+- Add "stories" to your `.meteorignore` file
+```sh
+echo "stories" >> .meteorignore
+```
 - Enhance your `package.json` with a storybook script:
 
 ```json
 	"storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook
+    	"build-storybook": "build-storybook
 ```
 
 - Install the following packages:
@@ -50,6 +54,9 @@ npm i --save-dev @storybook/addon-links
 npm i --save-dev @storybook/addons
 npm i --save-dev @storybook/react
 npm i --save-dev @storybook/theming
+npm i --save-dev storybook-react-router
+npm i --save-dev storybook-react-router
+npm i --save-dev storybook-addon-intl
 # Must explicitely install Webpack 4.28.4 because of https://github.com/webpack/webpack/issues/8656
 npm i --save-exact --save-dev webpack@4.28.4
 
