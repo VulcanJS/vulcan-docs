@@ -18,7 +18,7 @@ For that reason, Vulcan also offers [server-side GraphQL queries](/server-querie
 
 As server-side queries rely on the same resolvers as normal GraphQL queries, you can't use them inside any resolver (or you'd risk an infinite loop). 
 
-### Using Dataloder
+### Using Dataloader
 
 Instead, inside GraphQL resolvers you'll usually want to go through Vulcan's [Dataloader layer](/performance.html#Caching-amp-Batching) instead of calling the database directly, to make sure you don't make extra database calls.
 
