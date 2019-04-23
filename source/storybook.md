@@ -33,7 +33,8 @@ Good news, the current version of the Vulcan Starter already includes Storybook.
 
 ### Install in an application not based on a recent version of Vulcan Starter
 
-- Copy-paste the `.storybook` and `stories` folder from [Vulcan Starter](https://github.com/VulcanJS/Vulcan-Starter)
+- Copy-paste the `.storybook` and `stories` folder from [Vulcan Starter](https://github.com/VulcanJS/Vulcan-Starter) in your app
+- Copy-paste `.babelrc` in your app if it does not exist already
 - Add "stories" to your `.meteorignore` file
 ```sh
 echo "stories" >> .meteorignore
