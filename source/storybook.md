@@ -35,7 +35,7 @@ Good news, the current version of the Vulcan Starter already includes Storybook.
 
 - Copy-paste the `.storybook` and `stories` folder from [Vulcan Starter](https://github.com/VulcanJS/Vulcan-Starter) in your app
 - Copy-paste `.babelrc` in your app if it does not exist already
-- Add "stories" to your `.meteorignore` file
+- Add "stories" to your `.meteorignore` file. This excludes stories from your application build.
 ```sh
 echo "stories" >> .meteorignore
 ```
@@ -85,7 +85,12 @@ In case of error, please check that you followed the Prerequisites and Install s
 
 ### Add stories
 
-Storybook automatically finds stories based on filenames. The Vulcan Starter provides examples of stories in the `stories` folder.
+#### Folder location
+**All stories must be located in the `stories` folder at the root of your application**. As a default Storybook automatically finds stories based on filenames. However, you don't want stories to be included in your Meteor build, so you have to put them in a clearly separated `stories` folder, and list this folder in your `.meteorignore` file. The Vulcan Starter provides examples of stories.
+
+#### Components initalization
+
+When importing a Vulcan package in a story, you may then need to manually trigger startup actions that Vulcan usually handles for you during Meteor startup. For example, the `populateComponentsApp` function must be called after a new package is imported, so that the `<Components.XX />` is correctly defined in your stories based on registered components. You may find concrete examples in the Vulcan Starter and Vulcan core stories.
 
 ### Load your packages
 
