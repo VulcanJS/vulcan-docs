@@ -73,7 +73,6 @@ You can then reference these actions in your mutation checks.
 Out of the box, Vulcan also includes many other time-saving features, such as:
 
 * Internationalization
-* Server-side rendering
 * Utilities for theming and extending components
 * Email and email templates handling
 * Preset boilerplate mutations
