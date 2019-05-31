@@ -10,7 +10,7 @@ For routing we use React Router 4. You can find the docs at https://reacttrainin
 
 To create a link to a route, use React Router's `<Link>` (and not the usual `<a>`):
 
-```jsx harmony
+```jsx
 import { Link } from 'react-router-dom';
 
 <Link to={`/post/${post._id}`}>{post.title}</Link>
