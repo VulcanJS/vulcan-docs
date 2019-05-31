@@ -2,7 +2,7 @@
 title: Routing
 ---
 
-## Linking to a Route
+## React Router
 
 For routing we use React Router 4. You can find the docs at https://reacttraining.com/react-router/web/api/.
 
