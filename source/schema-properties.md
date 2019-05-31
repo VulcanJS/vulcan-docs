@@ -60,7 +60,7 @@ A number corresponding to the position of the property's field inside the form.
 
 #### `group`
 
-An optional object containing the group/section/fieldset in which to include the form element. Groups have `name`, `label`, and `order` properties.
+An optional object containing the group/section/fieldset in which to include the form element. Groups have `name`, `label`, `order`, and other properties.
 
 For example:
 
@@ -68,19 +68,26 @@ For example:
 postedAt: {
   type: Date,
   optional: true,
-  canCreate: Users.isAdmin,
-  canUpdate: Users.isAdmin,
-  publish: true,
+  canRead: ['guests'],
+  canCreate: ['admins'],
+  canUpdate: ['admins'],
   control: "datetime",
   group: {
-    name: "admin",
-    label: "Admin Options",
-    order: 2
-  }
+    name: "admin",        // The name of the group
+    label: "Admin",       // The label; if omitted, the name will be used as an i18n id
+    order: 100,           // Used for ordering the groups
+    collapsible: true,    // The group can be collapsed
+    startCollapsed: true, // If true, the group will start collapsed
+    adminsOnly: true,     // Lets you put fields that members canUpdate in a group that only admins can see
+    beforeComponent: 'PostedAtHelp', // Component to place at the start of the group
+    afterComponent: 'PostedAtFoot',  // Component to place at the end of the group
+  },
 },
 ```
 
-Note that fields with no groups are always rendered first in the form.
+Note that fields with no groups are always rendered first in the form in a default group without a label.
+
+You only need to specify the group details for the first field that refers to it. Subsequently you can just use `group: { name: "admin" }`.
 
 #### `placeholder`
 
