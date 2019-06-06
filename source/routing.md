@@ -2,12 +2,16 @@
 title: Routing
 ---
 
+## React Router
+
+For routing we use React Router 4. You can find the docs at https://reacttraining.com/react-router/web/api/.
+
 ## Linking to a Route
 
 To create a link to a route, use React Router's `<Link>` (and not the usual `<a>`):
 
-```js
-import { Link } from 'react-router';
+```jsx
+import { Link } from 'react-router-dom';
 
 <Link to={`/post/${post._id}`}>{post.title}</Link>
 ```
@@ -180,15 +184,27 @@ addCallback('router.onUpdate', sendGoogleAnalyticsRequest);
 If you need to access router properties (such as the current route, path, or query parameters) inside a component, you'll need to wrap that component with the `withRouter` HoC (higher-order component):
 
 ```js
-import React, { PropTypes, Component } from 'react';
-import { withRouter } from 'react-router'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 class SearchForm extends Component{
 
   render() {
-    // this.props.route is accessible
+    // this.props.currentRoute is accessible
+    // this.props.history is accessible
+    // this.props.location is accessible
+    // this.props.match is accessible
+    // this.props.match.params is an object with the route params
   }
 }
+
+SearchForm.propTypes = {
+  currentRoute: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 export default withRouter(SearchForm);
 ```
@@ -230,7 +246,7 @@ Behind the scenes, this is equivalent to using `withCurrentUser` and `withRouter
 ```js
 import React, { PureComponent } from 'react';
 
-import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
+import { registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 import { withRouter } from 'react-router';
 
 class Dashboard extends PureComponent {
