@@ -24,6 +24,8 @@ This feature is still experimental. We'd be glad to hear about your feedback on 
 - The default config will look for your Vulcan local installation based on environment variable. 
   - **If your install folder is named exactly "Vulcan"**, setup your `METEOR_PACKAGE_DIRS`  as usual. Vulcan Loader will automatically detect your install.
   - **If your Vulcan install folder have a specific name**, setup a `VULCAN_DIR` environment variable to point to the **root** path of your Vulcan install.
+- You should be running on node v8.16.0
+  - To install node, run `nvm install 8.16.0` in your terminal
 
 ## Install
 
@@ -35,9 +37,10 @@ Good news, the current version of the Vulcan Starter already includes Storybook.
 
 - Copy-paste the `.storybook` and `stories` folder from [Vulcan Starter](https://github.com/VulcanJS/Vulcan-Starter) in your app
 - Copy-paste `.babelrc` in your app if it does not exist already
-- Add "stories" to your `.meteorignore` file. This excludes stories from your application build.
+- Add "stories" and "storybook-static" to your `.meteorignore` file. This excludes stories from your application build.
 ```sh
 echo "stories" >> .meteorignore
+echo "storybook-static" >> .meteorignore
 ```
 - Enhance your `package.json` with a storybook script:
 
@@ -52,11 +55,13 @@ echo "stories" >> .meteorignore
 # Install Storybook and relevant addons
 npm i --save-dev @storybook/addon-actions
 npm i --save-dev @storybook/addon-links
+npm i --save-dev @storybook/addon-knobs
 npm i --save-dev @storybook/addons
 npm i --save-dev @storybook/react
 npm i --save-dev @storybook/theming
 npm i --save-dev storybook-addon-intl
 npm i --save-dev storybook-react-router
+npm i --save-dev css-loader
 
 # Must explicitely install Webpack 4.28.4 because of https://github.com/webpack/webpack/issues/8656
 npm i --save-exact --save-dev webpack@4.28.4
