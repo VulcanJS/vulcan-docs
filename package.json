@@ -3,25 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "3.4.1"
+    "version": "3.8.0"
   },
   "dependencies": {
     "global": "^4.3.2",
-    "handlebars": "^4.0.5",
-    "hexo": "^3.4.1",
+    "handlebars": "^4.1.2",
+    "hexo": "^3.8.0",
     "hexo-browsersync": "^0.3.0",
-    "hexo-deployer-git": "^0.2.0",
+    "hexo-deployer-git": "^1.0.0",
     "hexo-generator-archive": "^0.1.2",
     "hexo-generator-category": "^0.1.2",
     "hexo-generator-cname": "^0.3.0",
-    "hexo-generator-index": "^0.1.2",
-    "hexo-generator-tag": "^0.1.1",
-    "hexo-renderer-ejs": "^0.1.0",
+    "hexo-generator-index": "^0.2.1",
+    "hexo-generator-tag": "^0.2.0",
+    "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-less": "^0.2.0",
-    "hexo-renderer-marked": "^0.2.4",
-    "hexo-server": "^0.1.2",
-    "lodash": "^4.13.1",
-    "showdown": "^1.4.2"
+    "hexo-renderer-marked": "^1.0.1",
+    "hexo-server": "^0.3.3",
+    "lodash": "^4.17.11",
+    "showdown": "^1.9.0"
   },
   "scripts": {
     "start": "hexo serve",
