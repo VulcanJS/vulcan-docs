@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Schema Properties | Vulcan Docs</title>
+    <title>Storybook | Vulcan Docs</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://docs.vulcanjs.org">
-    <meta property="og:title" content="Schema Properties | Vulcan Docs">
+    <meta property="og:title" content="Storybook | Vulcan Docs">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Schema Properties | Vulcan Docs">
+    <meta name="twitter:title" content="Storybook | Vulcan Docs">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
 
@@ -170,8 +170,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href="" class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
                   <span>Schema Properties</span>
                 </a>
               </li>
@@ -590,65 +590,63 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Schema Properties</h1>
+      <h1 class="title-page">Storybook</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schema-properties.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/storybook.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>A range of special properties are available to control the behavior of each document field.</p>
-<h2 id="SimpleSchema-Properties"><a href="#SimpleSchema-Properties" class="headerlink" title="SimpleSchema Properties"></a>SimpleSchema Properties</h2><p>See the <a href="https://github.com/aldeed/meteor-simple-schema#schema-rules" target="_blank" rel="noopener">SimpleSchema documentation</a>.</p>
-<h2 id="Data-Layer-Properties"><a href="#Data-Layer-Properties" class="headerlink" title="Data Layer Properties"></a>Data Layer Properties</h2><h4 id="canRead"><a href="#canRead" class="headerlink" title="canRead"></a><code>canRead</code></h4><p>Can either be a string, an array of group names, or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> viewing the document and the <code>document</code> itself, and should return <code>true</code> or <code>false</code>.</p>
-<h4 id="canCreate"><a href="#canCreate" class="headerlink" title="canCreate"></a><code>canCreate</code></h4><p>Can either be a string, an array of group names, or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and should return <code>true</code> or <code>false</code>. When generating a form for inserting new documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
-<h4 id="canUpdate"><a href="#canUpdate" class="headerlink" title="canUpdate"></a><code>canUpdate</code></h4><p>Can either be a string, an array of group names, or a function.</p>
-<p>If it’s a function, it’ll be called on the <code>user</code> performing the operation, and the <code>document</code> being operated on, and should return <code>true</code> or <code>false</code>. When generating a form for editing existing documents, the form will contain all the fields that return <code>true</code> for the current user.</p>
-<h4 id="resolveAs"><a href="#resolveAs" class="headerlink" title="resolveAs"></a><code>resolveAs</code></h4><p>You can learn more about <code>resolveAs</code> in the <a href="/field-resolvers.html">Field Resolvers</a> section.</p>
-<h3 id="onCreate-onUpdate-onDelete"><a href="#onCreate-onUpdate-onDelete" class="headerlink" title="onCreate, onUpdate, onDelete"></a><code>onCreate</code>, <code>onUpdate</code>, <code>onDelete</code></h3><p>These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.</p>
-<ul>
-<li><code>onCreate({ newDocument, currentUser })</code></li>
-<li><code>onUpdate({ data, document, currentUser })</code></li>
-<li><code>onDelete({ document, currentUser })</code></li>
+      <h1 id="Storybook"><a href="#Storybook" class="headerlink" title="Storybook"></a>Storybook</h1><p>If you don’t know Storybook yet, please read <a href="https://storybook.js.org/" target="_blank" rel="noopener">the official documentation</a>.</p>
+<h2 id="Under-the-hood"><a href="#Under-the-hood" class="headerlink" title="Under the hood"></a>Under the hood</h2><p>Storybook, as many modern JavaScript development tools, relies on Webpack to build the application. However, it is not currently possible to load Meteor packages using Webpack. See <a href="https://github.com/storybooks/storybook/issues/3329" target="_blank" rel="noopener">this discussion on GitHub</a> for more insights.</p>
+<p>To overcome this difficulty, we have created custom Webpack loaders that are able to load Vulcan packages, even if they are based on Meteor. Thanks to those Webpack loaders, we are able to import, build and display Vulcan components. </p>
+<p>The <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan Starter</a> provides a fully working example with multiple stories.</p>
+<h2 id="Contribute"><a href="#Contribute" class="headerlink" title="Contribute"></a>Contribute</h2><p>This feature is still experimental. We’d be glad to hear about your feedback on <a href="http://slack.telescopeapp.org/" target="_blank" rel="noopener">Slack</a> or even receive your contributions on <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">GitHub</a>!</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
+<li>You application must be setup using a <a href="http://docs.vulcanjs.org/index.html#Two-Repo-Install-Optional">2-repo install</a>. This is a mandatory step because Webpack will load the Vulcan packages based on your local installation.</li>
+<li>The default config will look for your Vulcan local installation based on environment variable. <ul>
+<li><strong>If your install folder is named exactly “Vulcan”</strong>, setup your <code>METEOR_PACKAGE_DIRS</code>  as usual. Vulcan Loader will automatically detect your install.</li>
+<li><strong>If your Vulcan install folder have a specific name</strong>, setup a <code>VULCAN_DIR</code> environment variable to point to the <strong>root</strong> path of your Vulcan install.</li>
 </ul>
-<h2 id="Form-Properties"><a href="#Form-Properties" class="headerlink" title="Form Properties"></a>Form Properties</h2><p>These schema properties are mostly used for controlling the appearance and behavior of Vulcan’s auto-generated forms.</p>
-<h4 id="label"><a href="#label" class="headerlink" title="label"></a><code>label</code></h4><p>The form label. If not provided, the label will be generated based on the field name and the available language strings data.</p>
-<h4 id="input"><a href="#input" class="headerlink" title="input"></a><code>input</code></h4><p>(legacy: <code>control</code>)</p>
-<p>Either a text string (one of <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>checkboxgroup</code>, <code>radiogroup</code>, or <code>select</code>) or a React component.</p>
-<h4 id="order"><a href="#order" class="headerlink" title="order"></a><code>order</code></h4><p>A number corresponding to the position of the property’s field inside the form.</p>
-<h4 id="group"><a href="#group" class="headerlink" title="group"></a><code>group</code></h4><p>An optional object containing the group/section/fieldset in which to include the form element. Groups have <code>name</code>, <code>label</code>, <code>order</code>, and other properties.</p>
-<p>For example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">postedAt: &#123;</span><br><span class="line">  type: <span class="built_in">Date</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  canCreate: [<span class="string">'admins'</span>],</span><br><span class="line">  canUpdate: [<span class="string">'admins'</span>],</span><br><span class="line">  control: <span class="string">"datetime"</span>,</span><br><span class="line">  group: &#123;</span><br><span class="line">    name: <span class="string">"admin"</span>,        <span class="comment">// The name of the group</span></span><br><span class="line">    label: <span class="string">"Admin"</span>,       <span class="comment">// The label; if omitted, the name will be used as an i18n id</span></span><br><span class="line">    order: <span class="number">100</span>,           <span class="comment">// Used for ordering the groups</span></span><br><span class="line">    collapsible: <span class="literal">true</span>,    <span class="comment">// The group can be collapsed</span></span><br><span class="line">    startCollapsed: <span class="literal">true</span>, <span class="comment">// If true, the group will start collapsed</span></span><br><span class="line">    adminsOnly: <span class="literal">true</span>,     <span class="comment">// Lets you put fields that members canUpdate in a group that only admins can see</span></span><br><span class="line">    beforeComponent: <span class="string">'PostedAtHelp'</span>, <span class="comment">// Component to place at the start of the group</span></span><br><span class="line">    afterComponent: <span class="string">'PostedAtFoot'</span>,  <span class="comment">// Component to place at the end of the group</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>Note that fields with no groups are always rendered first in the form in a default group without a label.</p>
-<p>You only need to specify the group details for the first field that refers to it. Subsequently you can just use <code>group: { name: &quot;admin&quot; }</code>.</p>
-<h4 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a><code>placeholder</code></h4><p>A placeholder value for the form field.</p>
-<h4 id="beforeComponent"><a href="#beforeComponent" class="headerlink" title="beforeComponent"></a><code>beforeComponent</code></h4><p>A React component that will be inserted just before the form component itself.</p>
-<h4 id="afterComponent"><a href="#afterComponent" class="headerlink" title="afterComponent"></a><code>afterComponent</code></h4><p>A React component that will be inserted just after the form component itself.</p>
-<h4 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a><code>hidden</code></h4><p>Can either be a boolean or a function accepting form props as argument and returning a boolean.</p>
-<p>Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.context.updateCurrentValues(&#123; <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;);</span><br></pre></td></tr></table></figure>
-<p>As long as a value is in <code>this.state.currentValues</code> it should be submitted with the form, no matter whether there is an actual form item or not.</p>
-<h4 id="options"><a href="#options" class="headerlink" title="options"></a><code>options</code></h4><p>An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component’s <code>props</code> as argument and returns an array. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">status: &#123;</span><br><span class="line">  type: <span class="built_in">Number</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  canRead: [<span class="string">'admins'</span>],</span><br><span class="line">  canCreate: [<span class="string">'admins'</span>],</span><br><span class="line">  canUpdate: [<span class="string">'admins'</span>],</span><br><span class="line">  control: <span class="string">'select'</span>,</span><br><span class="line">  <span class="keyword">default</span>: <span class="number">2</span>,</span><br><span class="line">  options: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="number">1</span>,</span><br><span class="line">        label: <span class="string">'private'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        value: <span class="number">2</span>,</span><br><span class="line">        label: <span class="string">'public'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ];</span><br><span class="line">  &#125;,</span><br><span class="line">  description: <span class="string">`The room' status (Private/Public)`</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<h4 id="query"><a href="#query" class="headerlink" title="query"></a><code>query</code></h4><p>A query used to require extra data needed to display the form field. See <a href="/forms.html#Field-Specific-Data-Loading">field-specific data loading</a>.</p>
-<h4 id="inputProperties"><a href="#inputProperties" class="headerlink" title="inputProperties"></a><code>inputProperties</code></h4><p>An object defining the props that will be passed to the <code>input</code> component to customize it. You can pass either values, or a function that will be evaluated each time the form is generated.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">inputProperties: &#123;</span><br><span class="line">  locale: <span class="string">'fr'</span>,</span><br><span class="line">  defaultValue: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="comment">// will be evaluated each time a form is generated</span></span><br><span class="line">&#125;,</span><br><span class="line">input: <span class="string">'datetime'</span></span><br></pre></td></tr></table></figure>
-<p>You may sometimes want to pass a function or a React component in the form. Since all functions in the <code>inputProperties</code> object will be evaluated before rendering the form, you’ll need to pass a closure that returns the desired function or component instead.</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inputProperties: &#123;</span><br><span class="line">  locale: <span class="string">'fr'</span>,</span><br><span class="line">  defaultValue: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> Date(), <span class="regexp">//</span> will be evaluated each time a form <span class="keyword">is</span> generated</span><br><span class="line">  renderOption: <span class="function"><span class="params">()</span> =&gt;</span> MyCustomComponent, <span class="regexp">//</span> will <span class="keyword">return</span> MyCustomComponent <span class="keyword">as</span> expected</span><br><span class="line">  sortValues: <span class="function"><span class="params">()</span> =&gt;</span> mySortingFunction, <span class="regexp">//</span> will <span class="keyword">return</span> mySortingFunction <span class="keyword">as</span> expected</span><br><span class="line">&#125;,</span><br><span class="line">control: <span class="string">'MyCustomSelect'</span></span><br></pre></td></tr></table></figure>
-<p>When the form is generated, the closure is evaluated and return your component or function. Thus in<br><code>MyCustomSelect</code>, <code>props.renderOption</code> will equal <code>MyCustomComponent</code> as expected.</p>
-<h4 id="min"><a href="#min" class="headerlink" title="min"></a><code>min</code></h4><p>You can set <code>min</code> to force the field to be longer than a certain length (e.g. <code>min: 20</code>).</p>
-<h4 id="max"><a href="#max" class="headerlink" title="max"></a><code>max</code></h4><p>You can set <code>max</code> to limit the field to a certain length (e.g. <code>max: 140</code>).</p>
-<h4 id="minCount"><a href="#minCount" class="headerlink" title="minCount"></a><code>minCount</code></h4><p>The minimum count of items that must be in an array field.</p>
-<h4 id="maxCount"><a href="#maxCount" class="headerlink" title="maxCount"></a><code>maxCount</code></h4><p>The maximum count of items that can be in an array field.</p>
-<h4 id="defaultValue"><a href="#defaultValue" class="headerlink" title="defaultValue"></a><code>defaultValue</code></h4><p>The field’s default value. Note that you can also use <code>onCreate</code> to achieve the same effect.</p>
-<h4 id="description"><a href="#description" class="headerlink" title="description"></a><code>description</code></h4><p>A description that will be used as help text for the field. </p>
-<h2 id="Other-Properties"><a href="#Other-Properties" class="headerlink" title="Other Properties"></a>Other Properties</h2><h4 id="mustComplete-Users-only"><a href="#mustComplete-Users-only" class="headerlink" title="mustComplete (Users only)"></a><code>mustComplete</code> (<code>Users</code> only)</h4><p>You can mark a field as <code>mustComplete: true</code> to indicate that it should be completed when the user signs up. If you’re using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields.</p>
+</li>
+<li>You should be running on node v8.16.0<ul>
+<li>To install node, run <code>nvm install 8.16.0</code> in your terminal</li>
+</ul>
+</li>
+</ul>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><h3 id="Install-in-an-application-based-on-Vulcan-Starter"><a href="#Install-in-an-application-based-on-Vulcan-Starter" class="headerlink" title="Install in an application based on Vulcan Starter"></a>Install in an application based on Vulcan Starter</h3><p>Good news, the current version of the Vulcan Starter already includes Storybook. You can jump to the setup section.</p>
+<h3 id="Install-in-an-application-not-based-on-a-recent-version-of-Vulcan-Starter"><a href="#Install-in-an-application-not-based-on-a-recent-version-of-Vulcan-Starter" class="headerlink" title="Install in an application not based on a recent version of Vulcan Starter"></a>Install in an application not based on a recent version of Vulcan Starter</h3><ul>
+<li>Copy-paste the <code>.storybook</code> and <code>stories</code> folder from <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">Vulcan Starter</a> in your app</li>
+<li>Copy-paste <code>.babelrc</code> in your app if it does not exist already</li>
+<li><p>Add “stories” and “storybook-static” to your <code>.meteorignore</code> file. This excludes stories from your application build.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"stories"</span> &gt;&gt; .meteorignore</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"storybook-static"</span> &gt;&gt; .meteorignore</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Enhance your <code>package.json</code> with a storybook script:</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">"storybook": "start-storybook -p 6006",</span><br><span class="line">   	"build-storybook": "build-storybook</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Install the following packages:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install Storybook and relevant addons</span></span><br><span class="line">npm i --save-dev @storybook/addon-actions</span><br><span class="line">npm i --save-dev @storybook/addon-links</span><br><span class="line">npm i --save-dev @storybook/addon-knobs</span><br><span class="line">npm i --save-dev @storybook/addons</span><br><span class="line">npm i --save-dev @storybook/react</span><br><span class="line">npm i --save-dev @storybook/theming</span><br><span class="line">npm i --save-dev storybook-addon-intl</span><br><span class="line">npm i --save-dev storybook-react-router</span><br><span class="line">npm i --save-dev css-loader</span><br><span class="line"></span><br><span class="line"><span class="comment"># Must explicitely install Webpack 4.28.4 because of https://github.com/webpack/webpack/issues/8656</span></span><br><span class="line">npm i --save-exact --save-dev webpack@4.28.4</span><br><span class="line"></span><br><span class="line"><span class="comment"># Necessary to support Dynamic Imports</span></span><br><span class="line">npm i --save-dev @babel/plugin-syntax-dynamic-import</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load Vulcan packages from your local install</span></span><br><span class="line">npm i --save-dev vulcan-loader</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ditch other Meteor imports</span></span><br><span class="line">npm i --save-dev scrap-meteor-loader</span><br></pre></td></tr></table></figure>
+<h2 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h2><p>Just run this command:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> storybook</span></span><br></pre></td></tr></table></figure>
+<p>In case of error, please check that you followed the Prerequisites and Install steps correctly.</p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><h3 id="Add-stories"><a href="#Add-stories" class="headerlink" title="Add stories"></a>Add stories</h3><h4 id="Folder-location"><a href="#Folder-location" class="headerlink" title="Folder location"></a>Folder location</h4><p><strong>All stories must be located in the <code>stories</code> folder at the root of your application</strong>. As a default Storybook automatically finds stories based on filenames. However, you don’t want stories to be included in your Meteor build, so you have to put them in a clearly separated <code>stories</code> folder, and list this folder in your <code>.meteorignore</code> file. The Vulcan Starter provides examples of stories.</p>
+<h4 id="Components-initalization"><a href="#Components-initalization" class="headerlink" title="Components initalization"></a>Components initalization</h4><p>When importing a Vulcan package in a story, you may then need to manually trigger startup actions that Vulcan usually handles for you during Meteor startup. For example, the <code>populateComponentsApp</code> function must be called after a new package is imported, so that the <code>&lt;Components.XX /&gt;</code> is correctly defined in your stories based on registered components. You may find concrete examples in the Vulcan Starter and Vulcan core stories.</p>
+<h3 id="Load-your-packages"><a href="#Load-your-packages" class="headerlink" title="Load your packages"></a>Load your packages</h3><p>Our Webpack loaders, <code>vulcan-loader</code> and <code>scrap-meteor-loader</code>, are only here to handle Vulcan related packages.</p>
+<p>For your own packages, you will need to write a custom loader similar to <code>vulcan-loader</code>. We provide a complete example in the file <code>.storybook/loaders/starter-example-loader.js</code>. You can see how this loader is used in <code>.storybook/webpack.config.js</code> file.</p>
+<p><strong>Note:</strong> As a default, <code>vulcan-loader</code> and our example loader expects the client side entry point to be <strong><code>your-vulcan-package/lib/client/main.js</code></strong>.</p>
+<p>In order to be able to write a similar package loader for your application, we advise to define a strict naming convention for your package. This will allow to differentiate them from usual Meteor packages automatically. This is exactly what we do in Vulcan, with the <code>vulcan:</code> prefixing convetion. If your app is named “My App”, you can prefix all your packages with <code>ma:</code> or <code>ma-</code>. You can also write a simpler loader and list explicitly all your packages in it.</p>
+<h3 id="Mocks"><a href="#Mocks" class="headerlink" title="Mocks"></a>Mocks</h3><p>Since Meteor is not compatible with Webpack, we do not actually run the stories in a Meteor environment. Thus, global variables must be mocked.</p>
+<p>We provide basic mocks for global variables like Meteor, Mongo or <code>_</code> (underscore) in the <code>.storybook/mocks</code> folder. You can improve them if necessary.</p>
+<h3 id="Decorators"><a href="#Decorators" class="headerlink" title="Decorators"></a>Decorators</h3><p>Decorators are a way to wrap all your stories with a component. The main use case is loading your UI library and .css files. We provide two examples, with Bootstrap and Material UI. You can reuse or improve them based on your needs.</p>
+<h2 id="Caveats"><a href="#Caveats" class="headerlink" title="Caveats"></a>Caveats</h2><p>Meteor packages and Meteor itself are either mocked or simply removed. Thus, some components or packages may fail either at build time or runtime. Hopefully, this can be fixed by enhancing the mocks.</p>
 
     </div>
   </div>
@@ -657,18 +655,11 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev"
-          href="field-resolvers.html">
-          <span class="icon-arrow-left-alt"></span>
-          <span class="subtitle-pagination">Previous</span>
-          Field Resolvers
-        </a>
-      
       
         <a class="link primary next"
-          href="resolvers.html">
+          href="index.html">
           <span class="subtitle-pagination">Next</span>
-          Resolvers
+          Read Me
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -676,7 +667,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/schema-properties.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/storybook.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 
