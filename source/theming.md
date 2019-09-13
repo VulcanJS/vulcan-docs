@@ -156,7 +156,7 @@ class CustomLogo extends getRawComponent('Logo'){
 replaceComponent('Logo', CustomLogo);
 ```
 
-Note that using `getRawComponent` is also needed because components get registered at runtime. So in our `CustomLogo` example, `Components.Logo` would not be define dyet. 
+Note that using `getRawComponent` is also needed because components get registered at runtime. So in our `CustomLogo` example, `Components.Logo` would not be defined yet. 
 
 #### Alternative Approach
 
