@@ -36,7 +36,7 @@ You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.h
 
 These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
-* `onCreate({ newDocument, currentUser })`
+* `onCreate({ document, currentUser })`
 * `onUpdate({ data, document, currentUser })`
 * `onDelete({ document, currentUser })`
 
@@ -48,7 +48,7 @@ These schema properties are mostly used for controlling the appearance and behav
 
 The form label. If not provided, the label will be generated based on the field name and the available language strings data.
 
-#### `input` 
+#### `input`
 
 (legacy: `control`)
 
@@ -115,7 +115,7 @@ As long as a value is in `this.state.currentValues` it should be submitted with 
 
 #### `options`
 
-An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component's `props` as argument and returns an array. 
+An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component's `props` as argument and returns an array.
 
 ```js
 status: {
@@ -170,7 +170,7 @@ inputProperties: {
 control: 'MyCustomSelect'
 ```
 
-When the form is generated, the closure is evaluated and return your component or function. Thus in 
+When the form is generated, the closure is evaluated and return your component or function. Thus in
 `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
 
 #### `min`
@@ -195,7 +195,7 @@ The field's default value. Note that you can also use `onCreate` to achieve the 
 
 #### `description`
 
-A description that will be used as help text for the field. 
+A description that will be used as help text for the field.
 
 ## Other Properties
 
