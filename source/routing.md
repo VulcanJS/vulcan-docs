@@ -234,10 +234,12 @@ registerComponent('Dashboard', Dashboard, [withAccess, accessOptions]);
 
 The HoC takes two options: 
 
-- `groups`: an array of group names to limit who can access the component. If not specified, will default to requiring any logged-in user.
+- `groups`: an array of group names to limit who can access the component. If not specified, will default to requiring any logged-in user. Vulcan by default has impeded three groups, `admins`: for the admin users, `members`: for any logged-in user, and `guests`: for visitors who are not logged in.
 - `redirect`: an optional path to redirect the user to if the `groups` check fails.
 - `failureComponentName`: an optional registered component's name to display if the `groups` check fails.
 - `failureComponent`: an optional React component to display if the `groups` check fails.
+
+
 
 ### Manual Redirects
 
