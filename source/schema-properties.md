@@ -36,7 +36,7 @@ You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.h
 
 These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
-* `onCreate({ newDocument, currentUser })`
+* `onCreate({ document, currentUser })`
 * `onUpdate({ data, document, currentUser })`
 * `onDelete({ document, currentUser })`
 
