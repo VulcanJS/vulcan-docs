@@ -35,6 +35,13 @@ npm install
 npm start
 ```
 
+**Troubleshooting Tip**: If your app fails to start, try 
+
+```sh
+meteor reset
+npm start
+```
+
 And open `http://localhost:3000/` in your browser. You'll then be presented with the first step of the “Getting Started” tutorial. 
 
 Note that you can also start the app with:
