@@ -111,18 +111,23 @@ addGraphQLQuery(`currentUser: User`);
 
 Learn more about resolvers in the [Apollo documentation](http://dev.apollodata.com/tools/graphql-tools/resolvers.html).
 
-## Higher-Order Components
+## Higher-Order Components and Hooks
 
-To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).
+To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs) and hooks.
 
-An **HoC** is simply a function you can call on a React component to give it additional props. Think of it as a mechanic's assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.
+An **HoC** is simply a function you can call on a React component to give it additional props. Think of it as a mechanic's assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time. 
 
-### withMulti
+A hook provides similar enhancements, but it can be called directly within a stateless functional component.
+
+Both hooks and HOCs are based on Apollo [`useQuery` hook](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) and thus have a similar API and behaviour.
+
+### `useMulti` and `withMulti`
 
 The `withMulti` HoC is used to display lists of documents. It takes the following options:
 
 * `collection`: the collection on which to look for the `list` resolver.
 * `fragment` or `fragmentName`: the fragment to use. If you pass `fragmentName` instead of `fragment`, the name you passed will be used to look up a fragment registered with `registerFragment`.
+* `queryOptions`: option object passed down to the underlying Apollo [`useQuery`](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook
 
 For example:
 
@@ -130,16 +135,27 @@ For example:
 const listOptions = {
   collection: Movies,
   fragmentName: 'MoviesItem',
+  queryOptions: {
+      pollInterval: 0 // disable polling
+  }
 };
 
 export default withMulti(listOptions)(movies);
+// or with the hook
+const MyComponent = () => {
+    const { results } = useMulti(listOptions, { terms: { 
+        after: 14-08-2022
+    }})
+    ....
 ```
 
 The resulting wrapped component also takes in the following options:
 
 * `terms`: an object containing a list of querying, sorting, and filtering terms.
 
-Note that `terms` needs to be passed not as an option, but as a prop from the _parent_ component.
+Note that with the HOC `terms` needs to be passed not as an option, but as a prop from the _parent_ component. Similarly, it is passed as a field of the _second_ argument of the `useMulti` hook.
+
+This behaviour helps differentiating querying options (which barely varies) from the actual search paramters want (which may vary dynamically, for example if you add a search input to your component).
 
 The HoC then passes on the following props:
 
@@ -150,11 +166,17 @@ The HoC then passes on the following props:
 * `refetch`: a function that can be called to trigger a query refetch.
 * `loadMore`: a function that can be called to load more data.
 
-### withSingle
+The hooks returns an object containing similar props.
+
+### `useSingle` and `withSingle`
 
 The `withSingle` HoC displays a single document. It takes the same options as `withMulti`, but takes a `documentId` **prop**.
 
-Like `terms` for `withMulti`, `documentId` needs to be passed not as an option, but as a prop from the _parent_ component.
+Like `terms` for `withMulti`, `documentId` needs to be passed not as an option, but as a prop from the _parent_ component. Like `useMulti`, the `useSingle` HOC will take terms as an option of its second argument: 
+
+```js
+useSingle(options, { terms: { after: '14-08-2019'}})
+```
 
 This HoC then passes on the following child prop:
 
@@ -162,17 +184,17 @@ This HoC then passes on the following child prop:
 * `document`: the loaded document.
 * `refetch`: a function that can be called to trigger a query refetch.
 
+The hook returns an object with similar fields.
+
 ### Data Updating
 
-As long as you use `withMulti` in conjunction with `withCreate`, `withUpdate`, and `withDelete`, your lists will automatically be updated after any mutation. This includes:
+As long as you use `withMulti` or `useMulti` in conjunction with `withCreate`, `withUpdate`, and `withDelete`, your lists will automatically be updated after any mutation. This includes:
 
 * Inserting new items in lists after they're inserted.
 * Removing items when they're removed.
 * Reordering lists when an item is edited in a way that changes a sort.
 * Removing an item after it's been edited when it doesn't match a list's filters anymore.
 
-At this time, it's only possible to benefit from this auto-updating behavior if you're using the three built-in mutation HoCs, although making `withMulti` more flexible towards custom mutations is on the roadmap (PRs welcome!).
+At this time, it's only possible to benefit from this auto-updating behavior if you're using the three built-in mutation HoCs. 
 
-#### Alternative Approach
-
-You can replace any of Vulcan's generic HoCs with your own tailor-made HoCs (whether it is for queries or mutations) using the `graphql` utility. Note that if you do so, you will need to manually [update your queries](http://dev.apollodata.com/react/cache-updates.html) after each mutation.
+Getting the same behavior for custom mutations implies fine tuning your cache management, for example through the mutation `update` option of mutations.

@@ -13,18 +13,27 @@ When talking about mutations, it's important to distinguish between the differen
 3. The mutation resolver then calls a **mutator**. The mutator is the function that does the actual job of validating the request and mutating your data. The reason for this additional layer is that you'll often want to mutate data for *outside* your GraphQL API. By extracting that logic you're able to call the same exact mutator function whether you're inserting a new document sent by the front-end or, say, seeding your database with content extracted from an API. As usual, Vulcan offers a set of [default mutators](#Default-Mutators).
 4. Finally, the mutator calls a [database connector](/database.html#Connectors) to perform the actual database operation. By abstracting out the database operation, we're able to make mutators (and by extension your entire GraphQL API) database-agnostic. This means that you can switch from MongoDB to MySQL without having to modify any of the above three layers. 
 
-## Mutation Higher-Order Components
+## Mutation Hooks & Higher-Order Components
 
-Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
+Vulcan includes three main default hooks and higher-order components to make calling mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
-#### `withCreate`
+Both hooks and HOCs are based on Apollo [`useMutation` hook](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) and thus have a similar API and behaviour.
 
-This HoC takes the following two options:
+#### `useCreate` and `withCreate`
+
+Both take the following options:
 
 * `collection`: the collection to operate on.
 * `fragment`: specifies the data to ask for as a return value.
+* `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
 
-And passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `document` argument.
+The HOC passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `document` argument.
+
+The hook behaves similarly as Apollo [`useMutation` hook](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation). It returns an array whose first item is the `createMovie` callback.
+
+```js
+const [createMovie] = useCreate(options)
+```
 
 Takes an object as argument with a single `data` property and returns a promise:
 
@@ -35,11 +44,9 @@ this.props
   .catch(/* error */);
 ```
 
-#### `withUpdate`
+#### `useUpdate` and `withUpdate`
 
-Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `documentId`, `set`, and `unset`.
-
-Takes an object with two properties as an argument and returns a promise:
+Same options as `withCreate`. The returned `updateMovie` function takes an object with two properties as an argument and returns a promise:
 
 * `selector`: a selector pointing to the document to modify. Usually `{ documentId }`.
 * `data`: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to `null`, e.g.`{title: 'My New Title', body: 'My new body', status: null}`).
@@ -54,11 +61,14 @@ this.props
   .catch(/* error */);
 ```
 
-#### `withDelete`
+#### `useDelete` and `withDelete`
 
-A single `collection` option. The returned `deleteMovie` mutation takes a single `selector` argument.
+It takes the following options:
 
-Takes an object with a single `selector` property as an argument and returns a promise.
+- `collection`: the collection to operate on.
+- `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
+
+The returned `deleteMovie` takes an object with a single `selector` property as an argument and returns a promise.
 
 ```js
 this.props
@@ -69,14 +79,17 @@ this.props
   .catch(/* error */);
 ```
 
-#### `withMutation`
+#### `useRegisteredMutation` and `withMutation`
 
 In addition to the three main mutation HoCs, The `withMutation` HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers.
 
-It takes two options:
+Note that the hook is called `useRegisteredMutation`, since `useMutation` is already the name of the underlying Apollo hook.
+
+It takes these options:
 
 * `name`: the name of the mutation to call on the server (will also be the name of the prop passed to the component).
 * `args`: (optional) an object containing the mutation's arguments and types.
+* `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
 
 For example, here's how to wrap the `MyComponent` component to pass it an `addEmailNewsletter` function as prop:
 
