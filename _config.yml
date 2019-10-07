@@ -7,12 +7,12 @@ title: Vulcan Docs
 propertytitle: Vulcan Docs
 subtitle: Vulcan Docs
 description: Vulcan Docs
-logo: '/images/vulcan-logo-border-2.svg'
+logo: "/images/vulcan-logo-border-2.svg"
 author:
 language:
 timezone:
 versions:
-  - '1'
+  - "1"
 sidebar_categories:
   null:
     - index
@@ -51,12 +51,13 @@ sidebar_categories:
     - head-tags
     - errors
     - settings
-  Forms: 
+  Forms:
     - forms
     - forms-components
     - forms-custom
   Packages:
     - packages
+    - material-ui
     - email
     - newsletter
     - payments
@@ -95,8 +96,8 @@ typescript_api_box:
   data_file: docs.json
 
 social_links:
-  github: 'https://github.com/VulcanJS/vulcan-docs'
-  twitter: '@vulcanjs'
+  github: "https://github.com/VulcanJS/vulcan-docs"
+  twitter: "@vulcanjs"
 
 # API keys
 apis:

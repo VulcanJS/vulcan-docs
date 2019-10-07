@@ -24,7 +24,7 @@ Reading data basically means getting data from your database all the way to the 
 
 Let's assume you have a `Movies.jsx` component ready to take a `results` prop and display its contents as a list of movies.
 
-In order to pass that prop, you will call the [`useMulti` hook](/resolvers.html#withMulti), or wrap your component with the [`withMulti` higher-order component](/resolvers.html#withMulti). You just need to specify the appropriate [Collection](/schemas.html), and optionally also specify a [fragment](/fragments.html) to define which document fields to load.
+In order to pass that prop, you will call the [`useMulti` hook](/resolvers.html#useMulti-and-withMulti), or wrap your component with the [`withMulti` higher-order component](/resolvers.html#useMulti-and-withMulti). You just need to specify the appropriate [Collection](/schemas.html), and optionally also specify a [fragment](/fragments.html) to define which document fields to load.
 
 The `useMulti` hook will then query your GraphQL endpoint's corresponding [`movies` resolver](/resolvers.html#List-Resolver), which will usually have been generated automatically using Vulcan's [default resolvers](/resolvers.html#Default-Resolvers).
 
@@ -36,6 +36,6 @@ Now let's consider the opposite operation: writing data, such as editing a movie
 
 First, you should know that the movie update form can be [automatically generated from your schema](/forms.html), meaning you don't actually need to code it or worry about hooking it up to your GraphQL API.
 
-That form call the [`useUpdate` hook](/mutations.html#Higher-Order-Components), which in turn will call the `updateMovie` mutation on the server (which again can be [automatically generated from default mutations](/mutations.html#Default-Mutations)).
+That form call the [`useUpdate` hook](/mutations.html#Mutation-Hooks-amp-Higher-Order-Components), which in turn will call the `updateMovie` mutation on the server (which again can be [automatically generated from default mutations](/mutations.html#Default-Mutations)).
 
 `updateMovie` will then call a [boilerplate mutator](/mutations.html#Boilerplate-Mutations) which will perform **validation** based on your schema, and finally modify the document inside your database.
