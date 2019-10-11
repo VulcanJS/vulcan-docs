@@ -97,13 +97,25 @@ Vulcan features a number of helpers to make setting up your layer faster, most o
 
 ```js
 const Movies = createCollection({
-  typeName: "Movie",
+  typeName: 'Movie',
+
+  collectionName: 'Movies',
 
   schema,
 
   resolvers,
 
-  mutations
+  mutations,
+
+  permissions,
+
+  filters, 
+
+  defaultInput,
+
+  components,
+
+  generateGraphQLSchema, 
 });
 ```
 
@@ -113,11 +125,31 @@ The function takes the following arguments:
 * `collectionName`: optionally, the name of the collection throughout your app (will be lowercased in your MongoDB database). If not provided it will be the plural of your type name.
 * `dbCollectionName`: if you want to use a different name in your database you can specify it here.
 * `schema`, `resolvers`, `mutations`: see below.
+* `permissions`: an object defining the collection's document-level permissions
+* `filters`: an object defining filters to enhance collection queries.
+* `defaultINput`: an object defining the collection's default query input.
+* `components`: an object containing helper components.
 * `generateGraphQLSchema`: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to `true`).
 
 #### Alternative Approach
 
 Passing a schema, a resolver, and a mutation to `createCollection` enables a lot of Vulcan's internal synergy. That being said, you can also set `generateGraphQLSchema` to `false` and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer.
+
+### Extending Collections
+
+You can extend a collection's options with `extendCollection(collection, options)`. For example:
+
+```
+extendCollection(Posts, { 
+  callbacks: { 
+    create: {
+      after: [ notifyAdmins ]
+    }
+  }
+});
+```
+
+This can be useful when you want to declare a collection in a file shared by both client and server, but want to add some options (such as callbacks) only on the server.
 
 ## Extending Schemas
 

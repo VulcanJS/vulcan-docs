@@ -32,7 +32,7 @@ sidebar_categories:
     - resolvers
     - mutations
     - fragments
-    - terms-parameters
+    - filtering
     - server-queries
     # - redux
     - security
