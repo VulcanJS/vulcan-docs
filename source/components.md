@@ -1,5 +1,5 @@
 ---
-title: Components & Theming
+title: Components
 ---
 
 ## Using Components

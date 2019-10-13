@@ -195,10 +195,4 @@ The field's default value. Note that you can also use `onCreate` to achieve the 
 
 #### `description`
 
-A description that will be used as help text for the field. 
-
-## Other Properties
-
-#### `mustComplete` (`Users` only)
-
-You can mark a field as `mustComplete: true` to indicate that it should be completed when the user signs up. If you're using the Forum example, a form will then pop up prompting the user to complete their profile with the missing fields.
+A description that will be used as help text for the field in forms and in the GraphQL API. 

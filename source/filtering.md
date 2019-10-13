@@ -8,7 +8,28 @@ Note that in all following examples, you can only use **database** fields, not G
 
 ## Selecting
 
-Vulcan queries and mutations take a `where` argument to help you target one or more specific documents:
+Vulcan queries and mutations take a `where` argument to help you target one or more specific documents.
+
+The `where` argument can either accept a list of fields; or special `_and`, `_not`, and `_or` operators used to combine multiple `where` selectors. 
+
+Each field can then in turn receive an operator such as `_eq` or `_in` depending on its type. Note that this API was heavily inspired by the [Hasura](https://docs.hasura.io/1.0/graphql/manual/queries/query-filters.html) API. 
+
+Here is an example `MovieWhereInput` input type:
+
+```
+input MovieWhereInput {
+  _and: [MovieWhereInput]
+  _not: MovieWhereInput
+  _or: [MovieWhereInput]
+  _id: String_Selector
+  createdAt: Date_Selector
+  userId: String_Selector
+  slug: String_Selector
+  title: String_Selector
+}
+```
+
+And here is an example query using `where`: 
 
 ```
 query MyMovie {

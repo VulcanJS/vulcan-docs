@@ -16,33 +16,31 @@ versions:
 sidebar_categories:
   null:
     - index
-  Overview:
     - nutshell
     # - features
-    - architecture
+    # - architecture
     # - vulcan
     # - features-packages
     # - forum-packages
-  Collections:
+  Schemas:
     - schemas
     - graphql-schema
     - field-resolvers
     - schema-properties
-  Data Layer:
-    - resolvers
+  GraphQL API:
+    - queries
+    - filtering
     - mutations
     - fragments
-    - filtering
     - server-queries
+    - connecting-remotely
+  Server:
+    # - resolvers
+    # - mutations
     # - redux
-    - security
+    # - security
     - performance
     - database
-    - connecting-remotely
-  API:
-    - theming
-    - core-components
-    - ui-components
     - callbacks
     - users
     - groups-permissions
@@ -51,35 +49,41 @@ sidebar_categories:
     - head-tags
     - errors
     - settings
+  Components:
+    - components
+    - forms-components
+    - datatable
+    - ui-components
+    - other-components
   Forms: 
     - forms
-    - forms-components
     - forms-custom
-  Packages:
+  Other Packages:
     - packages
     - email
-    - newsletter
-    - payments
-    - admin
-    - embed
-    - cloudinary
-    - voting
+    # - newsletter
+    # - payments
+    # - admin
+    # - embed
+    # - cloudinary
+    # - voting
     - events
-    - forms-upload
+    - error-tracking
+    # - forms-upload
     - debug
   Testing:
     - unit-testing
     - storybook
-  Tutorials:
-    - example-simple
-    - example-movies
-    - example-instagram
-    - example-forum
-    - example-customization
-    - example-permissions
-    - sponsorship-tutorial
-    - deployment
-    - recipes
+  # Tutorials:
+  #   - example-simple
+  #   - example-movies
+  #   - example-instagram
+  #   - example-forum
+  #   - example-customization
+  #   - example-permissions
+  #   - sponsorship-tutorial
+  #   - deployment
+  #   - recipes
   Resources:
     - learn
     - examples

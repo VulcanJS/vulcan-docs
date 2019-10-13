@@ -74,12 +74,30 @@ const Movies = createCollection({
 
 The `createCollection` object takes a `permissions` property that itself takes four `canRead`, `canCreate`, `canUpdate`, and `canDelete` properties corresponding to the four basic CRUD operations. 
 
-These properties can take either an array of group names that will be allowed to perform the operation as in the example above; or a function that takes the following arguments and returns `true` or `false`:
+These properties can take either an array of group names that will be allowed to perform the operation as in the example above; or a function that returns `true` or `false`:
 
-- `canCreate`: `currentUser`
-- `canRead`: `currentUser`, `document`
-- `canUpdate`: `currentUser`, `document`
-- `canDelete`: `currentUser`, `document`
+```
+const Movies = createCollection({
+
+  collectionName: 'Movies',
+
+  //...
+
+  permissions: {
+    canCreate: (currentUser) => { return true },
+    canRead: (currentUser, document) => { return true },
+    canUpdate: (currentUser, document) => { return true },
+    canDelete: (currentUser, document) => { return true },
+  },
+
+});
+```
+
+### The Owners Group
+
+The `owners` group is a little special in that it's the only group that acts on specific documents. In other words, whereas defining `canRead: ['staff']` will allow access to *any* document in the collection to the `staff` group wholesale, specifying `canRead: ['owners']` will filter document one by one to check their ownership relative to the current user. 
+
+Also note that a document can only have one owner. If you need more granular permissions, you can use your own custom permission functions instead of relying on groups. 
 
 ## Field-level Permissions
 

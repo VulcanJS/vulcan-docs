@@ -13,7 +13,11 @@ When talking about mutations, it's important to distinguish between the differen
 3. The mutation resolver then calls a **mutator**. The mutator is the function that does the actual job of validating the request and mutating your data. The reason for this additional layer is that you'll often want to mutate data for *outside* your GraphQL API. By extracting that logic you're able to call the same exact mutator function whether you're inserting a new document sent by the front-end or, say, seeding your database with content extracted from an API. As usual, Vulcan offers a set of [default mutators](#Default-Mutators).
 4. Finally, the mutator calls a [database connector](/database.html#Connectors) to perform the actual database operation. By abstracting out the database operation, we're able to make mutators (and by extension your entire GraphQL API) database-agnostic. This means that you can switch from MongoDB to MySQL without having to modify any of the above three layers. 
 
-## Mutation Higher-Order Components
+## API
+
+## Client
+
+### Mutation Higher-Order Components
 
 Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
@@ -93,8 +97,9 @@ You would then call the function with:
 ```
 this.props.addEmailNewsletter({email: 'foo@bar.com'})
 ```
+## Server
 
-## Mutations Resolvers
+### Mutations Resolvers
 
 When creating a new collection, `createCollection` accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
 
@@ -102,7 +107,7 @@ When creating a new collection, `createCollection` accepts a `mutations` object.
 * `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
 * `mutation`: the mutation function.
 
-### Default Mutation Resolvers
+#### Default Mutation Resolvers
 
 Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:
 
@@ -166,7 +171,7 @@ async mutation(root, {documentId, set, unset}, context) {
 
 To learn more about what exactly the default mutations do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js).
 
-### Custom Mutations
+#### Custom Mutations
 
 You can also add your own mutations resolvers using `addGraphQLMutation` and `addGraphQLResolvers`:
 
@@ -188,11 +193,11 @@ const voteResolver = {
 addGraphQLResolvers(voteResolver);
 ```
 
-## Mutators
+### Mutators
 
 A **mutator** is the function that actually does the work of mutating data on the server. As opposed to the _mutation_, which is usually a fairly light function called directly through the GraphQL API, a _mutator_ will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.
 
-### Default Mutators
+#### Default Mutators
 
 Vulcan features three standard mutators: `createMutator`, `updateMutator`, and `deleteMutator`. They are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`.
 
@@ -245,7 +250,7 @@ const mutations = {
 };
 ```
 
-### Mutator Callbacks
+#### Mutator Callbacks
 
 Default mutators create the following callback hooks for every collection: 
 
@@ -256,7 +261,7 @@ Default mutators create the following callback hooks for every collection:
 
 You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 
-### Custom Mutators
+#### Custom Mutators
 
 If you're writing your own resolvers you can of course also write your own mutators, either by using Vulcan's [Connectors](/database.html#Connectors) or even by accessing your database directly. 
 

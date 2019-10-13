@@ -107,6 +107,16 @@ And if you'd like to use and customize the forum packages, you can then follow u
 
 You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
 
+## The Vulcan Core Package
+
+Unless mentioned otherwise, all Vulcan utilities function are imported from the `vulcan:core` Meteor package:
+
+```js
+import { createCollection } from 'meteor/vulcan:core';
+
+const Posts = createCollection({...});
+```
+
 ## Slack Channel
 
 Vulcan has a pretty active [Slack channel](http://slack.vulcanjs.org/) where you can ask for support, share ideas, and get tips. 
