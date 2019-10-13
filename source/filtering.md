@@ -1,5 +1,5 @@
 ---
-title: Filtering, Sorting & Selecting
+title: Filtering
 ---
 
 When loading data, you will usually want to apply some kind of filtering or sorting to your query. Vulcan offers the following tools to help you get the data you need. 

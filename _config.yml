@@ -17,6 +17,7 @@ sidebar_categories:
   null:
     - index
     - nutshell
+    - toc
     # - features
     # - architecture
     # - vulcan
@@ -24,16 +25,35 @@ sidebar_categories:
     # - forum-packages
   Schemas:
     - schemas
-    - graphql-schema
-    - field-resolvers
     - schema-properties
+    - field-resolvers
+    - relations
   GraphQL API:
+    - graphql-schema
     - queries
     - filtering
     - mutations
     - fragments
     - server-queries
     - connecting-remotely
+  Features: 
+    - routing
+    - settings
+    - groups-permissions
+    - callbacks
+    - users
+    - internationalization
+    - head-tags
+    - errors
+  Components:
+    - components
+    - ui-components
+    - datatable
+    - forms-components
+    - other-components
+  Forms: 
+    - forms
+    - forms-custom
   Server:
     # - resolvers
     # - mutations
@@ -41,23 +61,6 @@ sidebar_categories:
     # - security
     - performance
     - database
-    - callbacks
-    - users
-    - groups-permissions
-    - routing
-    - internationalization
-    - head-tags
-    - errors
-    - settings
-  Components:
-    - components
-    - forms-components
-    - datatable
-    - ui-components
-    - other-components
-  Forms: 
-    - forms
-    - forms-custom
   Other Packages:
     - packages
     - email

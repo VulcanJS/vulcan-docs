@@ -135,7 +135,7 @@ The function takes the following arguments:
 
 Passing a schema, a resolver, and a mutation to `createCollection` enables a lot of Vulcan's internal synergy. That being said, you can also set `generateGraphQLSchema` to `false` and use the custom schemas, custom resolvers, and custom mutations utilities documented below to bypass this if you prefer.
 
-### Extending Collections
+## Extending Collections
 
 You can extend a collection's options with `extendCollection(collection, options)`. For example:
 
@@ -150,6 +150,8 @@ extendCollection(Posts, {
 ```
 
 This can be useful when you want to declare a collection in a file shared by both client and server, but want to add some options (such as callbacks) only on the server.
+
+Note that this only works for collection `options`. If you need to extend the collection *schema*, see below. 
 
 ## Extending Schemas
 

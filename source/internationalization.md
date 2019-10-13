@@ -397,10 +397,10 @@ await VulcanEmail.buildAndSend({
 
 ### Email Templates
 
-Within an email template, internationalization strings are available as the `__` object: 
+Within an email template, internationalization strings are available as the `__` function: 
 
 ```
-<h1>{{__.welcome_email_title}}</h1>
+<h1>{{__ "welcome_email_title"}}</h1>
 ```
 
 If your i18n strings keys contain special characters (dots, spaces, etc.), you can escape them using the following `[...]` syntax:
@@ -409,4 +409,8 @@ If your i18n strings keys contain special characters (dots, spaces, etc.), you c
 <h1>{{__.[emails.inquiry_approved]}}</h1>
 ```
 
-Note that email internationalization is pretty basic and does not currently support string replacement. PR welcome! [TODO]
+If you need to pass values to be replaced, you can also add an optional second argument: 
+
+```
+{{__ "posts.create" postValues}}
+```
