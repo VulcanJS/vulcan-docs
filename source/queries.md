@@ -18,6 +18,21 @@ Here is an example single query definition for a `Movie` type:
 movie(input: SingleMovieInput): SingleMovieOutput
 ```
 
+And here's an example query:
+
+```
+query myMovie {
+  movie(input: { where: { name: { _eq: "Die Hard" } } } ) {
+    result {
+      _id
+      name
+      year
+      description
+    }
+  }
+}
+```
+
 ### Multi Query
 
 Here is an example multi query definition for a `Movie` type:
@@ -26,12 +41,24 @@ Here is an example multi query definition for a `Movie` type:
 movies(input: MultiMovieInput): MultiMovieOutput
 ```
 
+And here's an example query:
 
-### Query Input Argument
-
-Both single and multi queries take the same arguments (with the exception of `limit`, which is only available for the multi query). The only difference is that in the case of the single query, if the `where` argument selects more than one document only the first document of the set will be returned. 
+```
+query myMovies {
+  movies(input: { where: { year: { _eq: 1999 } } } ) {
+    results {
+      _id
+      name
+      year
+      description
+    }
+  }
+}
+```
 
 ### Input Argument
+
+Both single and multi queries take the same arguments (with the exception of `limit`, which is only available for the multi query). The only difference is that in the case of the single query, if the `where` argument selects more than one document only the first document of the set will be returned. 
 
 The `input` takes the following properties:
 
@@ -40,7 +67,7 @@ The `input` takes the following properties:
 - `limit`: how many results to return.
 - `offset`: how many results to skip.
 - `search`: a shortcut for searching across all searchable fields at once.
-- `id`: a shortcut for selecting a specific document by `_id`. 
+- `_id`: a shortcut for selecting a specific document by `_id`. 
 - `enableCache`: whether to enable caching for this query
 - `allowNull`: whether to return `null` instead of throwing an error when no document is found.
 
@@ -51,7 +78,7 @@ input SingleMovieInput {
   where: MovieWhereInput
   orderBy: MovieOrderByInput
   search: String
-  id: String
+  _id: String
   enableCache: Boolean
   allowNull: Boolean
 }
@@ -65,6 +92,12 @@ Vulcan also offers built-in client-side helpers that will generate the right Gra
 
 ### Hooks
 
+#### useSingle
+
+TODO
+
+#### useMulti
+
 TODO
 
 ### Higher-Order Components
@@ -77,10 +110,12 @@ An **HoC** is simply a function you can call on a React component to give it add
 
 The `withMulti` HoC is used to display lists of documents. It takes the following options:
 
+##### Options
+
 * `collection`: the collection on which to look for the `list` resolver.
 * `collectionName`: alternatively, you can also pass the collection name as a string.
 * `fragment` or `fragmentName`: the fragment to use. If you pass `fragmentName` instead of `fragment`, the name you passed will be used to look up a fragment registered with `registerFragment`.
-* 
+* `input`: an `input` object used to filter the data received (see [filtering](/filtering.html) section).
 
 For example:
 
@@ -93,13 +128,17 @@ const listOptions = {
 export default withMulti(listOptions)(movies);
 ```
 
-The resulting wrapped component also takes in the following options:
+##### Accepted Props
 
-* `terms`: an object containing a list of querying, sorting, and filtering terms.
+The resulting wrapped component also accepts a *dynamic* `input` object as a prop.
 
-Note that `terms` needs to be passed not as an option, but as a prop from the _parent_ component.
+This can be useful when you want your data to change based on some user action such as selecting filtering options in a dropdown, changing sorting order, etc.
 
-The HoC then passes on the following props:
+The dynamic `input` will always take priority over any “static” `input` defined in the HoC's initial `options`. 
+
+##### Passed-on Props
+
+The HoC then passes on the following props to the wrapped component:
 
 * `loading`: `true` while the data is loading.
 * `results`: the loaded array of documents.
@@ -110,9 +149,17 @@ The HoC then passes on the following props:
 
 #### withSingle
 
-The `withSingle` HoC displays a single document. It takes the same options as `withMulti`, but takes a `documentId` **prop**.
+The `withSingle` HoC displays a single document. 
 
-Like `terms` for `withMulti`, `documentId` needs to be passed not as an option, but as a prop from the _parent_ component.
+##### Options
+
+It takes the same options as `withMulti` (but its `input` also accepts `_id`).
+
+##### Accepted Props
+
+It accepts the same props as `withMulti` (but its `input` also accepts `_id`).
+
+##### Passed-on Props
 
 This HoC then passes on the following child prop:
 

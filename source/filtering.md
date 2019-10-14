@@ -2,11 +2,29 @@
 title: Filtering
 ---
 
-When loading data, you will usually want to apply some kind of filtering or sorting to your query. Vulcan offers the following tools to help you get the data you need. 
+When loading data, you will usually want to apply some kind of filtering or sorting to your query. Vulcan offers the following tools to help you get the data you need, whether you need to select a single document or a range of items. 
 
-Note that in all following examples, you can only use **database** fields, not GraphQL-only fields. 
+Note that all sorting, filtering, etc. operations happen at the database level. So in all following examples, you can only filter by **database** fields, not GraphQL-only fields. 
 
-## Selecting
+All arguments are available for both single and multi queries, unless mentioned otherwise. Additionally, single arguments can also be used as the **selector** argument in all mutations. 
+
+## _id (single only)
+
+Sometimes you already know the ID of the specific document you want to select. In those cases, you can use the `_id` argument:
+
+```
+query myMovie {
+  movie(input: { _id: "123foo" }) {
+    result{
+      _id
+      title
+      year
+    }
+  }
+}
+```
+
+## Where
 
 Vulcan queries and mutations take a `where` argument to help you target one or more specific documents.
 
@@ -43,7 +61,7 @@ query MyMovie {
 }
 ```
 
-## Ordering
+## OrderBy
 
 ```
 query RecentMovies {
@@ -57,7 +75,7 @@ query RecentMovies {
 }
 ```
 
-## Limiting
+## Limit (multi only)
 
 ```
 query RecentMovies {
@@ -71,7 +89,7 @@ query RecentMovies {
 }
 ```
 
-## Searching
+## Search
 
 In some cases you'll want to select data based on a field value, but without knowing exactly which field to search in. While you can build a complex query that lists every field needing to be searched, Vulcan also offers a shortcut in the form of the `search` argument: 
 
@@ -90,7 +108,7 @@ query FightMovies {
 
 On the server, Vulcan will search any field marked as `searchable: true` in its collection's schema for the string `fight` and will return the result. 
 
-## Filters
+## Filter
 
 There are also cases where your query is too complex to be able to define it through the GraphQL API. For example, you could imagine a scenario where you want to only show movies that have five-star reviews.
 
@@ -141,7 +159,7 @@ const Movies = createCollection({
 
 ## Default Input
 
-The `defaultInput` property lets you control what happens when no argument at all is provided to a query:
+The `defaultInput` property lets you control what happens when no argument at all is provided to a query by providing a default input when creating a collection:
 
 ```
 const Movies = createCollection({
