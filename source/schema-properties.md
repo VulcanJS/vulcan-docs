@@ -32,7 +32,7 @@ If it's a function, it'll be called on the `user` performing the operation, and 
 
 You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.html) section.
 
-### `onCreate`, `onUpdate`, `onDelete`
+#### `onCreate`, `onUpdate`, `onDelete`
 
 These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
@@ -49,8 +49,6 @@ These schema properties are mostly used for controlling the appearance and behav
 The form label. If not provided, the label will be generated based on the field name and the available language strings data.
 
 #### `input` 
-
-(legacy: `control`)
 
 Either a text string (one of `text`, `textarea`, `checkbox`, `checkboxgroup`, `radiogroup`, or `select`) or a React component.
 

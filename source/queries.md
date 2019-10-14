@@ -171,38 +171,6 @@ This HoC then passes on the following child prop:
 
 ### Resolvers
 
-As a time-saving convention, Vulcan makes available two default resolvers:
-
-* `multi`: used to return a list of documents matching a set of arguments, as well as the _total number_ of documents matching the same arguments.
-* `single`: used to return a single document matching an `_id` or `slug`
-
-You can pass a `resolver` object to `createCollection` when initializing your collection. It should include these two `multi` and `single` resolvers.
-
-Each resolver should have the following properties:
-
-* `name`: the resolver's name.
-* `resolver`: the resolver function.
-
-Note that if the collections include private data, you'll have to implement your own security layer inside each resolver to prevent unwanted access. Check out the [Controlling Viewing](/groups-permissions.html#Controlling-Viewing) section for more details.
-
-#### Multi Resolver
-
-The `multi` resolver is used to display lists of documents. It takes the following arguments:
-
-* `terms`: a JSON object containing a list of terms used to filter and sort the list.
-* `offset`: how many documents to offset the list by (used for paginating requests).
-* `limit`: how many documents to return.
-
-It should return an array of documents.
-
-#### Single Resolver
-
-The `single` resolver takes a `documentId` argument, and should return a single document. If no `documentId` is provided or the id does not match any existing document, it should either return null or throw an error depending on your use case.
-
-If you need to get only one element but you don't know its id, for example to display the most recent article on your website, the preferred pattern is to use the `multi` resolver with a limit of 1.
-
-### Default Resolvers
-
 Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling `getDefaultResolvers(collectionName)`:
 
 ```js

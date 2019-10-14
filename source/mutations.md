@@ -137,7 +137,7 @@ TODO
 
 TODO
 
-### Mutation Higher-Order Components
+### Higher-Order Components
 
 Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
@@ -228,17 +228,9 @@ this.props.addEmailNewsletter({email: 'foo@bar.com'})
 ```
 ## Server
 
-### Mutations Resolvers
+### Resolvers
 
-When creating a new collection, `createCollection` accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
-
-* `name`: the name of the mutation.
-* `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
-* `mutation`: the mutation function.
-
-#### Default Mutation Resolvers
-
-Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:
+Vulcan provides a set of default Create, Update, Upsert and Delete mutations you can use to save time:
 
 ```js
 import {
@@ -268,35 +260,6 @@ The `options` object can have the following properties:
 - `update` (Boolean): whether to create a `update` mutation (defaults to `true`).
 - `upsert` (Boolean): whether to create a `upsert` mutation (defaults to `true`).
 - `delete` (Boolean): whether to create a `delete` mutation (defaults to `true`).
-- `createCheck` (Function): a function used to customize the `create` check.
-- `updateCheck` (Function): a function used to customize the `update` check.
-- `upsertCheck` (Function): a function used to customize the `upsert` check.
-- `deleteCheck` (Function): a function used to customize the `delete` check.
-
-Vulcan's default mutations are fairly lightweight. For example here's the body of the `edit` mutation resolver (where `collectionName` is `getDefaultMutations`'s argument):
-
-```js
-async mutation(root, {documentId, set, unset}, context) {
-  
-  const collection = context[collectionName];
-
-  // get entire unmodified document from database
-  const document = await Connectors.get(collection, documentId);
-
-  // check if user can perform operation; if not throw error
-  Utils.performCheck(this.check, context.currentUser, document);
-
-  // call updateMutator boilerplate function
-  return await updateMutator({
-    collection, 
-    selector, 
-    data, 
-    currentUser: context.currentUser,
-    validate: true,
-    context,
-  });
-},
-```
 
 To learn more about what exactly the default mutations do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js).
 
@@ -348,35 +311,18 @@ If `validate` is set to `true`, these boilerplate operations will:
 * Add `userId` to document (insert only).
 * Run any validation callbacks (e.g. `movies.new.validate`).
 
-They will then run the mutation's document (or the `set` modifier) through the collection's sync callbacks (e.g. `movie.create.sync`), perform the operation, and finally run the async callbacks (e.g. `movie.create.async`).
+They will then run the mutation's document (or the `data` object) through the collection's sync callbacks (e.g. `movie.create.sync`), perform the operation, and finally run the async callbacks (e.g. `movie.create.async`).
 
-For example, here is the `Posts` collection's `create` mutation resolver, using the `createMutator` boilerplate mutation:
+For example, here is the `Posts` collection using the `createMutator` boilerplate mutator:
 
 ```js
-import { createMutator } from 'meteor/vulcan:core';
-
-const mutations = {
-  new: {
-    name: 'createPost',
-
-    check(user, document) {
-      if (!user) return false;
-      return Users.canDo(user, 'post.create');
-    },
-
-    mutation(root, { document }, context) {
-      performCheck(this.check, context.currentUser, document);
-
-      return createMutator({
-        collection: context.Posts,
-        document: document,
-        currentUser: context.currentUser,
-        validate: true,
-        context
-      });
-    }
-  }
-};
+createMutator({
+  collection: context.Posts,
+  document: document,
+  currentUser: context.currentUser,
+  validate: true,
+  context
+});
 ```
 
 #### Mutator Callbacks

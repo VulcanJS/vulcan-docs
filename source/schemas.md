@@ -151,7 +151,7 @@ extendCollection(Posts, {
 
 This can be useful when you want to declare a collection in a file shared by both client and server, but want to add some options (such as callbacks) only on the server.
 
-Note that this only works for collection `options`. If you need to extend the collection *schema*, see below. 
+Note that this works for all options except the schema, which is initialized with the initial `createCollection`. To extend the schema, see `addField` below.
 
 ## Extending Schemas
 
