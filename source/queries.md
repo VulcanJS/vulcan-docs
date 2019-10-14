@@ -115,7 +115,7 @@ The `withMulti` HoC is used to display lists of documents. It takes the followin
 * `collection`: the collection on which to look for the `list` resolver.
 * `collectionName`: alternatively, you can also pass the collection name as a string.
 * `fragment` or `fragmentName`: the fragment to use. If you pass `fragmentName` instead of `fragment`, the name you passed will be used to look up a fragment registered with `registerFragment`.
-* `input`: an `input` object used to filter the data received (see [filtering](/filtering.html) section).
+* `input`: an optional `input` object used to filter the data received (see [filtering](/filtering.html) section). This argument can also be passed dynamically as a prop (see below).
 
 For example:
 
@@ -153,11 +153,11 @@ The `withSingle` HoC displays a single document.
 
 ##### Options
 
-It takes the same options as `withMulti` (but its `input` also accepts `_id`).
+It takes the same options as `withMulti`, with the addition of `_id`.
 
 ##### Accepted Props
 
-It accepts the same props as `withMulti` (but its `input` also accepts `_id`).
+It takes the same props as `withMulti`, with the addition of `_id`.
 
 ##### Passed-on Props
 
