@@ -34,9 +34,6 @@
     <%- body %>
     <script src="<%= config.root || '/' %>script/smooth-scroll.min.js"></script>
     <script src="<%= config.root || '/' %>script/main.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
-
-
     <script>
       <% if (config.redirects) { %>
         var REDIRECTS = <%- JSON.stringify(config.redirects, 0, 2) %>;
