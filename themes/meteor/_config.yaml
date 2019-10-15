@@ -3,7 +3,7 @@ logo:
   #subbrand: images/logo-apollo-subbrands-developers-space.svg
   title: Vulcan Documentation
   subtitle: Vulcan Documentation
-  url: http://docs.vulcanjs.org/
+  url: https://docs.vulcanjs.org/
 favicon: images/favicon.ico
 
 nav_links:
