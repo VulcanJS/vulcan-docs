@@ -62,9 +62,24 @@ columns=[{
 }]
 ```
 
-## Filter Components
+## Filtering
 
-Filter components receive the following props:
+If a column is marked as `filterable: true`, a filter icon will automatically appear next to its header. The filter type depends on the column:
+
+1. If a custom filter component is passed, this is what will be used.
+2. Else, if the corresponding schema field has an `options` property, those will be used to populate a `CheckboxGroup` filter. 
+3. If there are no `options` and the field is a `Date` or `Number` field, corresponding greater than/lesser than filters will be shown. 
+4. If field is a string, a search field will be shown [TODO].
+
+### Filter Query/Options
+
+Filters will use a field's `options` property to populate a list of checkboxes. Alternatively, if a GraphQL `query` is defined on the field (in which case `options` should be a function that takes in the resulting `data` and returns a set of `options`), the filter will load the list of options from the database on the fly. 
+
+The `options` property should be an array of `{ label, value }` objects (although when using custom filter components, you can add more properties as well if you need to).
+
+### Filter Components
+
+Filter custom components receive the following props:
 
 - `name`: the field/column name.
 - `options`: the corresponding field's `options` (used to populate checkboxes, selects, etc.).
@@ -130,33 +145,6 @@ const RoomIdFilter = ({ field, options, filters = { [checkboxOperator]: [] }, se
   showNew={true}
   showEdit={true}
   showSearch={true}
-/>
-```
-
-```js
-const columns = [
-  'name',
-  {
-    name: 'email',
-    order: 10,
-    component: AdminUsersEmail
-  },
-  'createdAt',
-  {
-    name: 'actions',
-    order: 100,
-    component: AdminUsersActions
-  },
-];
-
-<Components.Datatable 
-  collection={Users} 
-  columns={columns} 
-  options={{
-    fragmentName: 'UsersAdmin',
-    terms: {view: 'usersAdmin'},
-    limit: 20
-  }}
 />
 ```
 
