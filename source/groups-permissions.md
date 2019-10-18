@@ -58,10 +58,6 @@ const Movies = createCollection({
 
   schema,
 
-  resolvers: getDefaultResolvers({ typeName: 'Movie' }),
-
-  mutations: getDefaultMutations({ typeName: 'Movie' }),
-
   permissions: {
     canCreate: ['members'],
     canRead: ['members'],
@@ -84,14 +80,22 @@ const Movies = createCollection({
   //...
 
   permissions: {
-    canCreate: (currentUser) => { return true },
-    canRead: (currentUser, document) => { return true },
-    canUpdate: (currentUser, document) => { return true },
-    canDelete: (currentUser, document) => { return true },
+    canCreate: options => { return true/false },
+    canRead: options => { return true/false },
+    canUpdate: options => { return true/false },
+    canDelete: options => { return true/false },
   },
 
 });
 ```
+
+The `options` object has the following properties:
+
+- `user`
+- `document`
+- `collection`
+- `context`
+- `operationName`
 
 ### The Owners Group
 
@@ -122,10 +126,6 @@ status: {
 },
 ```
 
-The `canUpdate` property takes an array of the names of the groups that can edit a given field. For more fine-grained permissions `canRead`, `canCreate`, and `canUpdate` can also take a function that returns a boolean as argument. These functions take the same arguments as their document-level equivalent: 
-
-- `canCreate`: `currentUser`
-- `canRead`: `currentUser`, `document`
-- `canUpdate`: `currentUser`, `document`
+The `canUpdate` property takes an array of the names of the groups that can edit a given field. For more fine-grained permissions `canRead`, `canCreate`, and `canUpdate` can also take a function that returns a boolean as argument.
 
 Note that there is no `canDelete` field-level check because any user who has the ability to modify a field's value also has the ability to erase its contents.

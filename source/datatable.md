@@ -2,31 +2,136 @@
 title: Datatable
 ---
 
-### Datatable
+The `Datatable` component is used to show a dynamic datatable for a given collection. 
 
-The `Datatable` component is used to show a dynamic datatable for a given collection. It takes the following props:
+## Required Props
 
-- `collection`: the collection to load data from.
-- `columns`: an array containing a list of columns (see below).
-- `options`: the `options` object passed to `withMulti` in order to load the data (optional).
-- `showEdit`: if `true`, will add a column with an Edit button at the end of each row (defaults to `false`).
+It takes the following props:
 
-The `columns` array is an array of either column names, objects, or both. If you're passing objects, each one should contain the following properties:
+- `collection` or `collectionName`: the collection object to load data from (or its name as a string).
+- `data`: alternatively, you can pass a raw JSON data array as the `data` prop. But note that in that case, many features (such as sorting, filtering, etc.) will not be available.
 
-- `name`: the name of the column.
-- `order`: the order of the column within the table (optional).
-- `component`: a custom component used to render this column's table cells (optional).
+### Optional Props
 
-For example:
+- `columns`: an array containing a list of columns (see below). If not `column` prop is passed, the datatable will use the keys of the first item as column headings. 
+- `options`: the `options` object passed to `withMulti` in order to load the data.
+- `showNew`: if `true`, will add a New Document button above the table (defaults to `false`).
+- `showEdit`: if `true`, will add a column with an Edit Document button at the end of each row (defaults to `false`).
+- `showSearch`: if `true`, will add a search field above the datatable (defaults to `false`).
+- `newFormProps`: options passed to the “New Document” form.
+- `editFormProps`: options passed to the Edit Document” forms.
+- `Components`: the `Components` object lets you override child components of a specific datatable.
+- `rowClass`: a string containing a CSS class applied to all rows; or a function that takes in the document corresponding to a table row and returns a string.
+- `initialState`: an object containing the initial filtering/sorting state of the datatable.
+- `useUrlState`: whether to store the datatable state in the URL. Defaults to `true`, but can be set to `false` when e.g. you need to handle multiple datatables on the same page.
+
+## Column Items
+
+The `columns` array is an array that describes which collection fields should be included in the datatable. It can contain either column names as strings (which should match the names of the document fields), objects, or both. 
+
+Note that columns do not necessarily have to correspond to schema fields. For example, you could add an `actions` column to each rows even though there is no `actions` field in your collection schema.
+
+### Required Props
+
+- `name`: the name of the field to display in the column.
+
+### Optional Props
+
+- `order`: the order of the column within the table.
+- `component`: a custom component used to render this column's table cells (see below).
+- `label`: a label for the column (if not provided, the formatted `name` will be used).
+- `sortable`: if `true`, sorting options will be shown next to the column header.
+- `filterable`: if `true`, sorting options will be shown next to the column header.
+- `filterComponent`: a component used to customize the contents of a column filter. See below.
+
+### Custom Components
+
+Custom cell components receive the following props:
+
+- `column`: the current column.
+- `document`: the current document.
+- `collection`: the current collection.
+- `Components`: the datatable's `Components` prop.
+
+You can use custom components to control how the inside of a table cell is rendered. This can have many uses, such as displaying field `Bar` in field `Foo`'s column:
+
+```
+columns=[{
+  name: 'startAt',
+  component: ({ document }) => <span>{document.startAtFormattedShort}</span>,
+}]
+```
+
+## Filter Components
+
+Filter components receive the following props:
+
+- `name`: the field/column name.
+- `options`: the corresponding field's `options` (used to populate checkboxes, selects, etc.).
+- `filters`: active filters for the column. Of the form `{ operator: filterArray}`, e.g. `{ _in: ['public', 'archived']}`.
+- `setFilters`: a function called to set the local state of the filter. Takes a single object as argument in the same format as `filters. 
+- `submitFilters`: a function called to submit the local state of the filter back to the datatable. Takes a single object as argument in the same format as `filters` (generally not used). 
+
+Note that the `filterComponent` only replaces the “inside” of the filter. The reset and submit buttons are not replaced, meaning your custom filter should generally only need to deal with setting the filter's internal state with `setFilters`, and not need to use `submitFilters`.
+
+### Example
+
+```js
+const RoomIdFilter = ({ field, options, filters = { [checkboxOperator]: [] }, setFilters }) => {
+  let value = filters[checkboxOperator];
+
+  const formattedOptions = options.map(({ value, label, image }) => ({
+    value,
+    label: (
+      <span booking-dashboard-roomid-filter-item>
+        <img className="booking-dashboard-roomid-filter-image" src={image} />
+        {label}
+      </span>
+    ),
+  }));
+
+  return (
+    <div className="booking-dashboard-roomid-filter">
+      <Components.FormComponentCheckboxGroup
+        path="filter"
+        itemProperties={{ layout: 'inputOnly' }}
+        inputProperties={{ options: formattedOptions }}
+        value={value}
+        updateCurrentValues={({ filter: newValues }) => {
+          setFilters({ [checkboxOperator]: newValues });
+        }}
+      />
+    </div>
+  );
+};
+```
+
+## Examples
+
+### Minimal Example
 
 ```js
 <Components.Datatable 
-  collection={Rooms} 
-  columns={['name', 'description']} 
+  collectionName="Posts" 
 />
 ```
 
-Or:
+### Basic Example
+
+```js
+<Components.Datatable 
+  collectionName="Posts"
+  columns={[
+    'title',
+    { name: 'createdAt', sortable: true },
+    'contents',
+    { name: 'status', filterable: true }
+  ]}
+  showNew={true}
+  showEdit={true}
+  showSearch={true}
+/>
+```
 
 ```js
 const columns = [
@@ -55,4 +160,64 @@ const columns = [
 />
 ```
 
-Note that columns do not necessarily have to correspond to schema fields. For example, you could add an `actions` column to each rows even though there is no `actions` field in your collection schema.
+### Complex Example
+
+```js
+<Components.Datatable
+  collectionName="Bookings"
+  options={{
+    fragmentName: 'BookingFragment',
+  }}
+  initialState={{
+    orderBy: {
+      createdAt: 'desc',
+    },
+    filters: {
+      status: {
+        _in: [1, 3, 5],
+      },
+    },
+  }}
+  columns={[
+    {
+      name: 'numberOfNights',
+      label: 'Infos',
+      component: BookingInfos,
+    },
+    {
+      name: 'createdAt',
+      component: BookingCreatedAt,
+      sortable: true,
+      filterable: true,
+    },
+    {
+      name: 'startAt',
+      sortable: true,
+      filterable: true,
+      component: ({ document }) => <span>{document.startAtFormattedShort}</span>,
+    },
+    {
+      name: 'endAt',
+      sortable: true,
+      filterable: true,
+      component: ({ document }) => <span>{document.endAtFormattedShort}</span>,
+    },
+    {
+      name: 'status',
+      component: BookingStatus,
+      filterable: true,
+      filterComponent: RoomStatusFilter,
+    },
+  ]}
+  showNew={Users.isAdmin(currentUser)}
+  showEdit={Users.isAdmin(currentUser)}
+  newFormOptions={{
+    removeFields: [
+      'source',
+      'status',
+      'numberOfGuests',
+    ],
+  }}
+  rowClass={document => `status-${getBookingStatusLabel(document.status)}`}
+/>
+```

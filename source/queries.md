@@ -151,13 +151,9 @@ The HoC then passes on the following props to the wrapped component:
 
 The `withSingle` HoC displays a single document. 
 
-##### Options
+##### Options & Props
 
-It takes the same options as `withMulti`, with the addition of `_id`.
-
-##### Accepted Props
-
-It takes the same props as `withMulti`, with the addition of `_id`.
+It takes the same options and props as `withMulti`, except that its `input` can have an `_id` property and doesn't support the `limit` property. 
 
 ##### Passed-on Props
 

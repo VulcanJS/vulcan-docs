@@ -129,7 +129,11 @@ The function takes the following arguments:
 * `filters`: an object defining filters to enhance collection queries.
 * `defaultINput`: an object defining the collection's default query input.
 * `components`: an object containing helper components.
+* `resolvers` (optional): an object containing `single` and `multi` query resolvers.
+* `mutations` (optional): an object containing `create`, `update`, `upsert`, and `delete` mutation resolvers.
 * `generateGraphQLSchema`: whether to use the objects passed above to automatically generate the GraphQL schema or not (defaults to `true`).
+
+Note that if you do not specify `resolvers` or `mutations`, default query resolvers and mutation resolvers will be generated for you. 
 
 #### Alternative Approach
 

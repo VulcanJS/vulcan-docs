@@ -148,9 +148,7 @@ This HoC takes the following two options:
 * `collection`: the collection to operate on.
 * `fragment`: specifies the data to ask for as a return value.
 
-And passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `document` argument.
-
-Takes an object as argument with a single `data` property and returns a promise:
+And passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `data` argument and returns a promise:
 
 ```js
 this.props
