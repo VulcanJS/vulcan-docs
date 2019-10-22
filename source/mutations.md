@@ -72,8 +72,8 @@ The returned `deleteMovie` takes an object with a single `selector` property as 
 
 ```js
 this.props
-  .removeMutation({
-    selector: { documentId },
+  .deleteMovie({
+    documentId,
   })
   .then(/* success */)
   .catch(/* error */);
