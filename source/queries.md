@@ -22,7 +22,7 @@ And here's an example query:
 
 ```
 query myMovie {
-  movie(input: { where: { name: { _eq: "Die Hard" } } } ) {
+  movie(input: { filter: { name: { _eq: "Die Hard" } } } ) {
     result {
       _id
       name
@@ -45,7 +45,7 @@ And here's an example query:
 
 ```
 query myMovies {
-  movies(input: { where: { year: { _eq: 1999 } } } ) {
+  movies(input: { filter: { year: { _eq: 1999 } } } ) {
     results {
       _id
       name
@@ -58,12 +58,12 @@ query myMovies {
 
 ### Input Argument
 
-Both single and multi queries take the same arguments (with the exception of `limit`, which is only available for the multi query). The only difference is that in the case of the single query, if the `where` argument selects more than one document only the first document of the set will be returned. 
+Both single and multi queries take the same arguments (with the exception of `limit`, which is only available for the multi query). The only difference is that in the case of the single query, if the `filter` argument selects more than one document only the first document of the set will be returned. 
 
 The `input` takes the following properties:
 
-- `where`: the object that lets you select the specific documents to return. 
-- `orderBy`: how to order the results.
+- `filter`: the object that lets you select the specific documents to return. 
+- `sort`: how to order the results.
 - `limit`: how many results to return.
 - `offset`: how many results to skip.
 - `search`: a shortcut for searching across all searchable fields at once.
@@ -75,8 +75,8 @@ Here is an example input type for the `Movie` type:
 
 ```
 input SingleMovieInput {
-  where: MovieWhereInput
-  orderBy: MovieOrderByInput
+  filter: MovieFilterInput
+  sort: MovieSortInput
   search: String
   _id: String
   enableCache: Boolean

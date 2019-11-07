@@ -92,9 +92,9 @@ const Movies = createCollection({
 The `options` object has the following properties:
 
 - `user`
-- `document`
+- `document` (except for `canCreate`)
 - `collection`
-- `context`
+- `context` (note: only available when permission check is called from server)
 - `operationName`
 
 ### The Owners Group
@@ -102,6 +102,14 @@ The `options` object has the following properties:
 The `owners` group is a little special in that it's the only group that acts on specific documents. In other words, whereas defining `canRead: ['staff']` will allow access to *any* document in the collection to the `staff` group wholesale, specifying `canRead: ['owners']` will filter document one by one to check their ownership relative to the current user. 
 
 Also note that a document can only have one owner. If you need more granular permissions, you can use your own custom permission functions instead of relying on groups. 
+
+### Checking Permissions
+
+If you need to test if a user passes a permission check, you can do so using the following shortcuts:
+
+- `Users.canCreate({ collection, user, context })`
+- `Users.canUpdate({ collection, user, document, context })`
+- `Users.canDelete({ collection, user, document, context })`
 
 ## Field-level Permissions
 

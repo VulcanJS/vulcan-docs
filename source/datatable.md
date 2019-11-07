@@ -4,7 +4,9 @@ title: Datatable
 
 The `Datatable` component is used to show a dynamic datatable for a given collection. 
 
-## Required Props
+## Datatable Props
+
+### Required Props
 
 It takes the following props:
 
@@ -157,7 +159,7 @@ const RoomIdFilter = ({ field, options, filters = { [checkboxOperator]: [] }, se
     fragmentName: 'BookingFragment',
   }}
   initialState={{
-    orderBy: {
+    sort: {
       createdAt: 'desc',
     },
     filters: {

@@ -127,7 +127,7 @@ The function takes the following arguments:
 * `schema`, `resolvers`, `mutations`: see below.
 * `permissions`: an object defining the collection's document-level permissions
 * `filters`: an object defining filters to enhance collection queries.
-* `defaultINput`: an object defining the collection's default query input.
+* `defaultInput`: an object defining the collection's default query input.
 * `components`: an object containing helper components.
 * `resolvers` (optional): an object containing `single` and `multi` query resolvers.
 * `mutations` (optional): an object containing `create`, `update`, `upsert`, and `delete` mutation resolvers.

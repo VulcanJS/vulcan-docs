@@ -15,19 +15,29 @@ When talking about mutations, it's important to distinguish between the differen
 
 ## API
 
+All mutations follow the "single argument" rule. In other words, they all have a single `input` argument which then contains one or more of the following nested arguments: 
+
+- `filter`: a `filter` object (see [filtering](/filtering.html)) used to target the document to mutate.
+- `id`: an alternate way to directly specify the `id` of the document to mutate.  
+- `data`: the mutation data.
+
+The mutations then all return a `data` object which contains the mutated document (note that the name of that property is always `data` no matter the returned document's type).
+
 ### Create Mutation
+
+Supported input arguments: `data`.
 
 Generated type:
 
 ```
-createMovie(data: CreateMovieDataInput!) : MovieOutput
+createMovie(input: CreateMovieInput) : MovieMutationOutput
 ```
 
 Example mutation: 
 
 ```
 query testCreate {
-  createMovie({ data: { name: "Die Hard", year: 1987 } }) {
+  createMovie(input: { data: { name: "Die Hard", year: 1987 } }) {
     _id
     name
     year
@@ -37,17 +47,19 @@ query testCreate {
 
 ### Update Mutation
 
+Supported input arguments: `filter`, `id`, `data`.
+
 Generated type:
 
 ```
-updateMovie(where: MovieWhereInput, _id: String, data: UpdateMovieDataInput! ) : MovieOutput
+updateMovie(input: UpdateMovieInput ) : MovieMutationOutput
 ```
 
 Example mutation: 
 
 ```
 query testUpdate1 {
-  updateMovie(where: { name: { _eq: "Die Hard" }, data: { year: 1988 }) {
+  updateMovie(input: { filter: { name: { _eq: "Die Hard" } }, data: { year: 1988 } }) {
     _id
     name
     year
@@ -60,7 +72,7 @@ or
 
 ```
 query testUpdate2 {
-  updateMovie( _id: "foo123", data: { year: 1988 }) {
+  updateMovie( input: { id: "foo123", data: { year: 1988 } }) {
     _id
     name
     year
@@ -70,17 +82,19 @@ query testUpdate2 {
 
 ### Upsert Mutation
 
+Supported input arguments: `filter`, `id`, `data`.
+
 Generated type:
 
 ```
-upsertMovie(where: MovieWhereInput, _id: String, data: UpdateMovieDataInput! ) : MovieOutput
+upsertMovie(input: UpsertMovieInput ) : MovieMutationOutput
 ```
 
 Example mutation: 
 
 ```
 query testUpsert {
-  upsertMovie(where: { name: { _eq: "Die Hard" }, data: { name: "Die Hard", year: 1988 }) {
+  upsertMovie(input: { filter: { name: { _eq: "Die Hard" }, data: { name: "Die Hard", year: 1988 } }) {
     _id
     name
     year
@@ -90,17 +104,19 @@ query testUpsert {
 
 ### Delete Mutation
 
+Supported input arguments: `filter`, `id`.
+
 Generated type:
 
 ```
-deleteMovie(where: MovieWhereInput, _id: String) : MovieOutput
+deleteMovie(input: MovieDeleteInput) : MovieMutationOutput
 ```
 
 Example mutation: 
 
 ```
 query testDelete1 {
-  deleteMovie(where: { name: { _eq: "Die Hard" }) {
+  deleteMovie(input: { filter: { name: { _eq: "Die Hard" } }) {
     _id
     name
     year
@@ -113,7 +129,7 @@ or
 
 ```
 query testDelete2 {
-  deleteMovie( _id: "foo123") {
+  deleteMovie( input: {id: "foo123" }) {
     _id
     name
     year
@@ -159,10 +175,10 @@ this.props
 
 #### `withUpdate`
 
-Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `where`, `_id`, and `data`:
+Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `filter`, `_id`, and `data`:
 
-* `where`: a “where” input pointing to the document to modify. See the [filtering](filtering.html) section.
-* `_id`: an `_id` used to identify a specific document (note that either `where` or `_id` should be set).
+* `filter`: a `filter` input pointing to the document to modify. See the [filtering](filtering.html) section.
+* `_id`: an `_id` used to identify a specific document (note that either `filter` or `_id` should be set).
 * `data`: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to `null`, e.g.`{title: 'My New Title', body: 'My new body', status: null}`).
 
 ```js
@@ -180,7 +196,7 @@ or
 ```js
 this.props
   .updateMovie({
-    where: { name: { _in: ['Die Hard', 'Terminator 2'] } },
+    filter: { name: { _in: ['Die Hard', 'Terminator 2'] } },
     data: { year: 1993 },
   })
   .then(/* success */)
@@ -189,7 +205,7 @@ this.props
 
 #### `withDelete`
 
-A single `collection` option. The returned `deleteMovie` mutation takes `where` and `_id` arguments:
+A single `collection` option. The returned `deleteMovie` mutation takes `filter` and `_id` arguments:
 
 ```js
 this.props
