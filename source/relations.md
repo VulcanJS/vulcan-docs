@@ -21,20 +21,26 @@ userId: {
 
 Since this is a `hasOne` relation, Vulcan will assume that the current field stores the `_id` of the related document to look up; and because we know that the type of the returned item should be `User` we can also easily figure out that we need to search the `Users` collection.
 
-In fact you can even leave out the `relation` property altogether, and Vulcan will do its best to guess the correct relation based on the type of the field (`hasOne` for regular fields, `hasMany` for arrays):
+Similarly, you can also define `hasMany` relations:
 
 ```
-userId: {
-  type: String,
+categoriesIds: {
+  type: Array,
   optional: true,
   canRead: ['guests'],
   resolveAs: {
-    fieldName: 'user',
-    type: 'User',
+    fieldName: 'categories',
+    type: '[Categories]',
+    relation: 'hasMany'
   }
+},
+'categoriesIds.$': {
+  type: String,
+  optional: true,
+  canRead: ['guests'],
 },
 ```
 
 ## Relations, Cards, and Datatables
 
-As an added bonus, if you define the `userId` field as having a relation to the `User` type (either implicitly or explicitly with the `relation` property), Cards and Datatables will be able to understand this relation and use smarter formatting when displaying this data. 
+As an added bonus, if you define the `userId` field as having a relation to the `User` type, Cards and Datatables will be able to understand this relation and use smarter formatting when displaying this data. 
