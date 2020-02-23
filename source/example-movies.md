@@ -819,6 +819,15 @@ import './fragments.js';
 import mutations from './mutations.js';
 import './permissions.js';
 
+const Movies = createCollection({
+  permissions: {
+    canCreate: ["members"],
+    canRead: ["guests"],
+    canUpdate: ["owners", "admins"],
+    canDelete: ["owners", "admins"]
+  }
+  //...
+})
 //...
 ```
 
@@ -827,6 +836,8 @@ Note that in this specific case, creating an action and checking for it is a bit
 One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
 Once again, we do this through the schema. We'll add an `canCreate` property to any “insertable” field and set it to `[members]` to indicate that a field should be insertable by any member of the `members` group (in other words, regular logged-in users):
+
+We also add [document-level permissions](/groups-permissions.html#Document-level-Permissions) to give permissions on a document level and allow us to [add permissions](/groups-permissions.html#Checking-Permissions) on the client.
 
 ```js
 const schema = {
@@ -913,7 +924,10 @@ const MoviesNewForm = ({currentUser}) =>
 
   <div>
 
-    {Movies.options.mutations.create.check(currentUser) ?
+    {Movies.canCreate({
+      collection: Gyms,
+      user: currentUser
+    }) ?
       <div style={ { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc' } }>
         <h4>Insert New Document</h4>
         <Components.SmartForm 
@@ -938,7 +952,7 @@ import '../components/movies/MoviesNewForm.jsx';
 A few things to note: 
 
 - We'll pass the `MoviesItemFragment` fragment to the form so that it knows what data to return from the server once the mutation is complete. 
-- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `create` mutation's `check` function to figure this out.
+- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the document level permissions we defined earlier to check if a user can create a movie using the `canCreate` helper on the collection.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
 Let's add the form component to `movies.jsx`:
