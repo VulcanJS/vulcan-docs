@@ -828,7 +828,6 @@ const Movies = createCollection({
   }
   //...
 })
-//...
 ```
 
 Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Vulcan, which you can learn more about in the [Groups & Permissions](/groups-permissions.html) section.
