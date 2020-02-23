@@ -925,7 +925,7 @@ const MoviesNewForm = ({currentUser}) =>
   <div>
 
     {Users.canCreate({
-      collection: Gyms,
+      collection: Movies,
       user: currentUser
     }) ?
       <div style={ { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc' } }>
