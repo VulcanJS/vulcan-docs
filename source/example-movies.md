@@ -918,12 +918,13 @@ import React, { PropTypes, Component } from 'react';
 import { Components, registerComponent, withCurrentUser, getFragment } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
+import Users from "meteor/vulcan:users";
 
 const MoviesNewForm = ({currentUser}) =>
 
   <div>
 
-    {Movies.canCreate({
+    {Users.canCreate({
       collection: Gyms,
       user: currentUser
     }) ?
