@@ -836,7 +836,7 @@ One more thing! By default, all schema fields are locked down, so we need to spe
 
 Once again, we do this through the schema. We'll add an `canCreate` property to any “insertable” field and set it to `[members]` to indicate that a field should be insertable by any member of the `members` group (in other words, regular logged-in users):
 
-We also add [document-level permissions](/groups-permissions.html#Document-level-Permissions) to give permissions on a document level and allow us to [add permissions](/groups-permissions.html#Checking-Permissions) on the client.
+We add [document-level permissions](/groups-permissions.html#Document-level-Permissions) to secure document access. It will also allow us to [check permissions](/groups-permissions.html#Checking-Permissions) client-side.
 
 ```js
 const schema = {
