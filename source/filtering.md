@@ -105,7 +105,7 @@ const Movies = createCollection({
 
 ```
 query RecentMovies {
-  movies(input: { filter: { year: { gte: 2010" } }, sort: { year: "desc" } }) {
+  movies(input: { filter: { year: { gte: "2010" } }, sort: { year: "desc" } }) {
     results{
       _id
       title
