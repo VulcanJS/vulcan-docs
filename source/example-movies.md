@@ -75,9 +75,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'vulcan:core@1.12.3',
-    'vulcan:forms@1.12.3',
-    'vulcan:accounts@1.12.3',
+    'vulcan:core@1.14.1',
+    'vulcan:forms@1.14.1',
+    'vulcan:accounts@1.14.1',
   ]);
 
   api.addFiles('lib/stylesheets/bootstrap.min.css');
