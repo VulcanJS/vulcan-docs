@@ -43,7 +43,7 @@ Note that columns do not necessarily have to correspond to schema fields. For ex
 - `component`: a custom component used to render this column's table cells (see below).
 - `label`: a label for the column (if not provided, the formatted `name` will be used).
 - `sortable`: if `true`, sorting options will be shown next to the column header.
-- `filterable`: if `true`, sorting options will be shown next to the column header.
+- `filterable`: if `true`, filtering options will be shown next to the column header.
 - `filterComponent`: a component used to customize the contents of a column filter. See below.
 
 ### Custom Components
