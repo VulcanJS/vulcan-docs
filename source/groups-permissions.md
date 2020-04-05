@@ -137,3 +137,5 @@ status: {
 The `canUpdate` property takes an array of the names of the groups that can edit a given field. For more fine-grained permissions `canRead`, `canCreate`, and `canUpdate` can also take a function that returns a boolean as argument.
 
 Note that there is no `canDelete` field-level check because any user who has the ability to modify a field's value also has the ability to erase its contents.
+
+Also, field-level checks will only proceed if the document-level check first passes. This means that while you can make them more restrictive (“regular users can edit their own posts, but only admins can edit a post's status”) you can't do the opposite (“only admins can edit posts, but regular users can edit a post's title”).

@@ -8,6 +8,27 @@ A range of special properties are available to control the behavior of each docu
 
 See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-schema#schema-rules).
 
+#### `type`
+
+The JavaScript/SimpleSchema type of the field's contents. Will automatically be converted to a matching GraphQL type in your GraphQL schema. 
+
+#### `arrayItem`
+
+For fields of type `Array`, this property accepts an object containing the properties applied to the array **items**. 
+
+(Note: this is a Vulcan-only equivalent to SimpleSchema's `foo.$` fields).
+
+```js
+addresses: {
+  type: Array,
+  optional: true,
+  arrayItem: {
+    type: createSchema(addressSchema),
+    optional: true
+  }
+}
+```
+
 ## Data Layer Properties
 
 #### `canRead`
