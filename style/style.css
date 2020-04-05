@@ -1368,18 +1368,22 @@ pre {
   margin: 0;
 }
 .document-formatting p a,
-.document-formatting li a {
+.document-formatting li a,
+.document-formatting table a {
   color: #F44A06;
   font-weight: 400;
 }
 .document-formatting p a:link,
 .document-formatting li a:link,
+.document-formatting table a:link,
 .document-formatting p a:visited,
-.document-formatting li a:visited {
+.document-formatting li a:visited,
+.document-formatting table a:visited {
   color: #F44A06;
 }
 .document-formatting p a:active,
-.document-formatting li a:active {
+.document-formatting li a:active,
+.document-formatting table a:active {
   color: #db4205;
 }
 .document-formatting figure {

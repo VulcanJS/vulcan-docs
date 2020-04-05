@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Filtering | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Filtering | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Filtering | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Filtering</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/filtering.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>When loading data, you will usually want to apply some kind of filtering or sorting to your query. Vulcan offers the following tools to help you get the data you need, whether you need to select a single document or a range of items. </p>
+<h4 id="Database-vs-GraphQL-Fields"><a href="#Database-vs-GraphQL-Fields" class="headerlink" title="Database vs GraphQL Fields"></a>Database vs GraphQL Fields</h4><p>Note that all sorting, filtering, etc. operations happen at the database level. So in all following examples, you can only filter and sort by <strong>database</strong> fields, not GraphQL-only fields. </p>
+<h2 id="Query-Arguments"><a href="#Query-Arguments" class="headerlink" title="Query Arguments"></a>Query Arguments</h2><p>The following arguments are available for both single-document and multi-documents queries. </p>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>Vulcan queries and mutations take a <code>filter</code> argument to help you target one or more specific documents.</p>
+<p>The <code>filter</code> argument can either accept a list of fields; or special <code>_and</code>, <code>_not</code>, and <code>_or</code> operators used to combine multiple <code>filter</code> selectors. </p>
+<p>Each field can then in turn receive an operator such as <code>_eq</code> or <code>_in</code> depending on its type. Note that this API was heavily inspired by the <a href="https://docs.hasura.io/1.0/graphql/manual/queries/query-filters.html" target="_blank" rel="noopener">Hasura</a> API. </p>
+<p>Here is an example <code>MovieFilterInput</code> input type:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input <span class="class">MovieFilterInput </span>&#123;</span><br><span class="line"><span class="symbol">  _and:</span> [MovieFilterInput]</span><br><span class="line"><span class="symbol">  _not:</span> MovieFilterInput</span><br><span class="line"><span class="symbol">  _or:</span> [MovieFilterInput]</span><br><span class="line"><span class="symbol">  _id:</span> String_Selector</span><br><span class="line"><span class="symbol">  createdAt:</span> Date_Selector</span><br><span class="line"><span class="symbol">  userId:</span> String_Selector</span><br><span class="line"><span class="symbol">  slug:</span> String_Selector</span><br><span class="line"><span class="symbol">  title:</span> String_Selector</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And here is an example query using <code>filter</code>: </p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">MyMovie</span> &#123;</span><br><span class="line">  <span class="selector-tag">movie</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">_id</span>: &#123; <span class="attribute">_eq</span>: <span class="string">"123foo"</span> &#125; &#125; &#125;) &#123;</span><br><span class="line">    <span class="selector-tag">result</span>&#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">title</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can use the <code>filter</code> argument to query for single documents, but if the filter matches more than one document only the first one will be returned. </p>
+<h4 id="Custom-Filters"><a href="#Custom-Filters" class="headerlink" title="Custom Filters"></a>Custom Filters</h4><p>There are also cases where your query is too complex to be able to define it through the GraphQL API. For example, you could imagine a scenario where you have <code>Movies</code> and <code>Reviews</code> rating them on a five-star scale, and want to filter movies to only show those with a specific rating average.</p>
+<p>In this case, you would define a server-side <code>_withRating</code> filter (starting with an underscore is a convention to differentiate the filter from field names), and then reference it in your query:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">MoviesWithRating</span> &#123;</span><br><span class="line">  <span class="selector-tag">movies</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">_withRating</span>: &#123; <span class="attribute">average</span>: <span class="number">4</span> &#125; &#125; &#125;) &#123;</span><br><span class="line">    <span class="selector-tag">results</span>&#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">title</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">      <span class="selector-tag">description</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The filter function takes an argument object with the query <code>input</code> and <code>context</code> as properties; and should return an object with <code>selector</code> and <code>options</code> properties. Here’s how you would define it:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  customFilters: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'_withRating'</span>,</span><br><span class="line">      <span class="built_in">arguments</span>: <span class="string">'average: Int'</span>,</span><br><span class="line">      filter: <span class="function">(<span class="params">&#123; input, context, filterArguments &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; average &#125; = filterArguments;</span><br><span class="line">        <span class="keyword">const</span> &#123; Reviews &#125; = context;</span><br><span class="line">        <span class="comment">// get all movies that have an average review score of X stars </span></span><br><span class="line">        <span class="keyword">const</span> xStarReviewsMoviesIds = getMoviesByScore(average);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          selector: &#123; _id: &#123;$<span class="keyword">in</span>: xStarReviewsMoviesIds &#125; &#125;,</span><br><span class="line">          options: &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">RecentMovies</span> &#123;</span><br><span class="line">  <span class="selector-tag">movies</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">year</span>: &#123; <span class="attribute">gte</span>: <span class="string">"2010"</span> &#125; &#125;, <span class="attribute">sort</span>: &#123; <span class="attribute">year</span>: <span class="string">"desc"</span> &#125; &#125;) &#123;</span><br><span class="line">    <span class="selector-tag">results</span>&#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">title</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Custom-Sorts"><a href="#Custom-Sorts" class="headerlink" title="Custom Sorts"></a>Custom Sorts</h4><p>Custom sorts are not yet implemented, but you can modify the <code>options</code> property returned by a custom filter to achieve the same effect. </p>
+<h3 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h3><p>In some cases you’ll want to select data based on a field value, but without knowing exactly which field to search in. While you can build a complex query that lists every field needing to be searched, Vulcan also offers a shortcut in the form of the <code>search</code> argument: </p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">query</span> FightMovies &#123;</span><br><span class="line">  movies(<span class="keyword">input</span>: &#123; <span class="keyword">search</span>: <span class="string">"fight"</span> ) &#123;</span><br><span class="line">    results&#123;</span><br><span class="line">      _id</span><br><span class="line">      title</span><br><span class="line">      <span class="built_in">year</span></span><br><span class="line">      description</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>On the server, Vulcan will search any field marked as <code>searchable: true</code> in its collection’s schema for the string <code>fight</code> and will return the result. </p>
+<h2 id="Single-Document-Queries-Arguments"><a href="#Single-Document-Queries-Arguments" class="headerlink" title="Single-Document Queries Arguments"></a>Single-Document Queries Arguments</h2><p>The following arguments are only available for single-document queries.</p>
+<h3 id="ID"><a href="#ID" class="headerlink" title="ID"></a>ID</h3><p>Sometimes you already know the ID of the specific document you want to select. In those cases, you can use the <code>id</code> argument:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query myMovie &#123;</span><br><span class="line">  movie(input: &#123; <span class="built_in">id</span>: <span class="string">"123foo"</span> &#125;) &#123;</span><br><span class="line">    <span class="literal">result</span>&#123;</span><br><span class="line">      _id</span><br><span class="line">      title</span><br><span class="line">      <span class="built_in">year</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multi-Document-Queries-Arguments"><a href="#Multi-Document-Queries-Arguments" class="headerlink" title="Multi Document Queries Arguments"></a>Multi Document Queries Arguments</h2><p>The following arguments are only available for multi-document queries.</p>
+<h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">RecentMovies</span> &#123;</span><br><span class="line">  <span class="selector-tag">movies</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">year</span>: &#123; <span class="attribute">gte</span>: <span class="number">2010</span><span class="string">" &#125; &#125;, sort: &#123; year: "</span>desc" &#125;, <span class="attribute">limit</span>: <span class="number">10</span> &#125;) &#123;</span><br><span class="line">    <span class="selector-tag">results</span>&#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">title</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Offset"><a href="#Offset" class="headerlink" title="Offset"></a>Offset</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query NextPageOfMovies &#123;</span><br><span class="line">  movies(<span class="string">input:</span> &#123; <span class="string">offset:</span> <span class="number">10</span>, <span class="string">limit:</span> <span class="number">10</span> &#125;) &#123;</span><br><span class="line">    results&#123;</span><br><span class="line">      _id</span><br><span class="line">      title</span><br><span class="line">      year</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Default-Input"><a href="#Default-Input" class="headerlink" title="Default Input"></a>Default Input</h2><p>The <code>defaultInput</code> property lets you control what happens when no argument at all is provided to a query by providing a default input when creating a collection:</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">  defaultInput: &#123;</span><br><span class="line">    <span class="built_in">sort</span>: &#123;</span><br><span class="line">      createdAt: <span class="string">'desc'</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="queries.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Queries
+        </a>
+      
+      
+        <a class="link primary next" href="mutations.html">
+          <span class="subtitle-pagination">Next</span>
+          Mutations
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/filtering.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Examples | Vulcan Docs</title>
+    <title>Field Decorators | Vulcan Docs</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://docs.vulcanjs.org">
-    <meta property="og:title" content="Examples | Vulcan Docs">
+    <meta property="og:title" content="Field Decorators | Vulcan Docs">
     <meta property="og:description" content>
     <meta property="og:image" content>
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Examples | Vulcan Docs">
+    <meta name="twitter:title" content="Field Decorators | Vulcan Docs">
     <meta name="twitter:description" content>
     <meta name="twitter:image" content>
 
@@ -359,8 +359,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="decorators.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
                   <span>Field Decorators</span>
                 </a>
               </li>
@@ -479,8 +479,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
                   <span>Examples</span>
                 </a>
               </li>
@@ -530,28 +530,39 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Examples</h1>
+      <h1 class="title-page">Field Decorators</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/examples.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/decorators.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <ul>
-<li><a href="http://zenshome.jp/" target="_blank" rel="noopener">ZensHome</a></li>
-<li><a href="http://lesswrong.com/" target="_blank" rel="noopener">LessWrong</a></li>
-<li><a href="http://huttle.co/" target="_blank" rel="noopener">Huttle</a></li>
-<li><a href="http://sidebar.io" target="_blank" rel="noopener">Sidebar</a></li>
-<li><a href="http://smarthosts.org" target="_blank" rel="noopener">SmartHosts</a></li>
-<li><a href="https://hackernoon.com/the-vulcan-js-challenge-15-days-for-an-app-e3735d1e3d4c" target="_blank" rel="noopener">Blogpost: The Vulcan.js challenge - 15 days for an app</a></li>
+      <p>(Available in Vulcan 1.15+)</p>
+<p>Decorators are functions you can call on your schema fields to “augment” them and make them work with special inputs such as checkboxes, radio buttons, autocomplete inputs, and more. </p>
+<p>Since different UI frameworks such as Bootstrap, Material, etc. can have slightly different behaviors, decorators should be defined for each framework and imported from the framework’s package (e.g. <code>meteor/vulcan:ui-bootstrap</code>).</p>
+<h2 id="Autocomplete-Bootstrap"><a href="#Autocomplete-Bootstrap" class="headerlink" title="Autocomplete (Bootstrap)"></a>Autocomplete (Bootstrap)</h2><p>You can make a schema field use an autocomplete input in your forms by calling the <code>makeAutocomplete</code> decorator.</p>
+<p>It takes the field as first argument, and an <code>options</code> object as second argument that takes the following properties:</p>
+<ul>
+<li><code>queryResolverName</code>: the name of the GraphQL resolver to query to load the list of autocomplete suggestions.</li>
+<li><code>labelPropertyName</code>: the name of the property used to serve as a label on which to autocomplete.</li>
 </ul>
-<p>If you know about something based on Vulcan.js which not this list and worth mentioning, you can <a href="https://github.com/VulcanJS/vulcan-docs/edit/master/source/examples.md" target="_blank" rel="noopener">edit this page</a> and submit a PR to the docs.</p>
+<p>For example, if you have a <code>Post</code> schema with a <code>categoriesIds</code> field, you would want to query the <code>categories</code> query resolver to load a list of categories as suggested items as the user types into the autocomplete field; and use a category’s <code>name</code> as a label. </p>
+<p>The autocomplete input will default as a single-value autocomplete, but will act as a multi-value autocomplete for any <code>Array</code> field. Note that even for single-value autocompletes, for consistency you should pass a <code>queryResolverName</code> pointing to a <em>multi</em> resolver, even if only one item is only ever loaded.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; makeAutocomplete &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:ui-bootstrap'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> postSchema = &#123;</span><br><span class="line">  categoriesIds: makeAutocomplete(&#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">    arrayItem: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      optional: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    label: <span class="string">'Categories'</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'owners'</span>],</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    resolveAs: &#123;</span><br><span class="line">      fieldName: <span class="string">'categories'</span>,</span><br><span class="line">      type: <span class="string">'[Category]'</span>,</span><br><span class="line">      relation: <span class="string">'hasMany'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">queryResolverName</span>: <span class="string">'categories'</span>, <span class="attr">labelPropertyName</span>: <span class="string">'name'</span> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="Checkboxgroup-Bootstrap"><a href="#Checkboxgroup-Bootstrap" class="headerlink" title="Checkboxgroup (Bootstrap)"></a>Checkboxgroup (Bootstrap)</h2><p>The <code>makeCheckboxgroup</code> decorator will add a checkbox group input, and automatically add an <code>allowedValues</code> property to your schema based on the field’s <code>options</code> property to restrict the field to allowed values. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; makeCheckboxgroup &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:ui-bootstrap'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">  checkboxGroupField: makeCheckboxgroup(&#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">    arrayItem: &#123; </span><br><span class="line">      type: <span class="built_in">String</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'owners'</span>],</span><br><span class="line">    options: fieldOptions</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Radiogroup-Bootstrap"><a href="#Radiogroup-Bootstrap" class="headerlink" title="Radiogroup (Bootstrap)"></a>Radiogroup (Bootstrap)</h2><p>The <code>makeRadiogroup</code> decorator will add a radio buttin group input, and automatically add an <code>allowedValues</code> property to your schema based on the field’s <code>options</code> property to restrict the field to allowed values. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; makeRadiogroup &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:ui-bootstrap'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">  radioGroupField: makeRadiogroup(&#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">    arrayItem: &#123; </span><br><span class="line">      type: <span class="built_in">String</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'owners'</span>],</span><br><span class="line">    options: fieldOptions</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Likert-Bootstrap"><a href="#Likert-Bootstrap" class="headerlink" title="Likert (Bootstrap)"></a>Likert (Bootstrap)</h2><p>The <code>makeLikert</code> decorator will add a Likert scale input, as well as automatically set the proper <code>Int</code> type for the field’s array items. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">  likertField: makeLikert(&#123;</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'owners'</span>],</span><br><span class="line">    options: [</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'reservation'</span>, <span class="attr">label</span>: <span class="string">'Reservation process'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'ease_of_use'</span>, <span class="attr">label</span>: <span class="string">'Ease of use'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'design'</span>, <span class="attr">label</span>: <span class="string">'Visual design'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'support'</span>, <span class="attr">label</span>: <span class="string">'Customer support'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'properties'</span>, <span class="attr">label</span>: <span class="string">'Number of properties'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'accomodations'</span>, <span class="attr">label</span>: <span class="string">'Quality of accomodations'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">value</span>: <span class="string">'pricing'</span>, <span class="attr">label</span>: <span class="string">'Price of accomodations'</span> &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
   </div>
 
@@ -559,16 +570,16 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev" href="learn.html">
+        <a class="link primary prev" href="forms.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Learn More
+          Forms
         </a>
       
       
-        <a class="link primary next" href="common-problems.html">
+        <a class="link primary next" href="forms-custom.html">
           <span class="subtitle-pagination">Next</span>
-          Common Problems
+          Custom Form Components
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -576,7 +587,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/examples.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/decorators.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

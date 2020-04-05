@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Queries | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Queries | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Queries | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="field-resolvers.html" class="sidebar-link ">
+                  <span>Field Resolvers</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Queries</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/queries.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>When using Vulcan’s default resolvers, two types of queries are automatically generated for every collection: the <code>single</code> query (which returns a single document) and the <code>multi</code> query (which returns a list of documents). </p>
+<p>A set of default query resolvers is generated on the server to power these queries; and a set of client-side higher-order components and hooks is provided to make working with those queries easier. </p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>All Vulcan queries follow the single argument pattern. In other words, they take a single input argument that encapsulates all of the query’s variables; and they return a single output object that contains all the query data.</p>
+<h3 id="Single-Query"><a href="#Single-Query" class="headerlink" title="Single Query"></a>Single Query</h3><p>Here is an example single query definition for a <code>Movie</code> type:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">movie</span><span class="params">(input: SingleMovieInput)</span></span>: SingleMovieOutput</span><br></pre></td></tr></table></figure>
+
+<p>And here’s an example query:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">myMovie</span> &#123;</span><br><span class="line">  <span class="selector-tag">movie</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">name</span>: &#123; <span class="attribute">_eq</span>: <span class="string">"Die Hard"</span> &#125; &#125; &#125; ) &#123;</span><br><span class="line">    <span class="selector-tag">result</span> &#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">name</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">      <span class="selector-tag">description</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Multi-Query"><a href="#Multi-Query" class="headerlink" title="Multi Query"></a>Multi Query</h3><p>Here is an example multi query definition for a <code>Movie</code> type:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">movies</span><span class="params">(input: MultiMovieInput)</span></span>: MultiMovieOutput</span><br></pre></td></tr></table></figure>
+
+<p>And here’s an example query:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">query</span> <span class="selector-tag">myMovies</span> &#123;</span><br><span class="line">  <span class="selector-tag">movies</span>(<span class="attribute">input</span>: &#123; <span class="attribute">filter</span>: &#123; <span class="attribute">year</span>: &#123; <span class="attribute">_eq</span>: <span class="number">1999</span> &#125; &#125; &#125; ) &#123;</span><br><span class="line">    <span class="selector-tag">results</span> &#123;</span><br><span class="line">      <span class="selector-tag">_id</span></span><br><span class="line">      <span class="selector-tag">name</span></span><br><span class="line">      <span class="selector-tag">year</span></span><br><span class="line">      <span class="selector-tag">description</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Input-Argument"><a href="#Input-Argument" class="headerlink" title="Input Argument"></a>Input Argument</h3><p>Both single and multi queries take the same arguments (with the exception of <code>limit</code>, which is only available for the multi query). The only difference is that in the case of the single query, if the <code>filter</code> argument selects more than one document only the first document of the set will be returned. </p>
+<p>The <code>input</code> takes the following properties:</p>
+<ul>
+<li><code>filter</code>: the object that lets you select the specific documents to return. </li>
+<li><code>sort</code>: how to order the results.</li>
+<li><code>limit</code>: how many results to return.</li>
+<li><code>offset</code>: how many results to skip.</li>
+<li><code>search</code>: a shortcut for searching across all searchable fields at once.</li>
+<li><code>_id</code>: a shortcut for selecting a specific document by <code>_id</code>. </li>
+<li><code>enableCache</code>: whether to enable caching for this query</li>
+<li><code>allowNull</code>: whether to return <code>null</code> instead of throwing an error when no document is found.</li>
+</ul>
+<p>Here is an example input type for the <code>Movie</code> type:</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">input <span class="class">SingleMovieInput </span>&#123;</span><br><span class="line"><span class="symbol">  filter:</span> MovieFilterInput</span><br><span class="line"><span class="symbol">  sort:</span> MovieSortInput</span><br><span class="line"><span class="symbol">  search:</span> String</span><br><span class="line"><span class="symbol">  _id:</span> String</span><br><span class="line"><span class="symbol">  enableCache:</span> Boolean</span><br><span class="line"><span class="symbol">  allowNull:</span> Boolean</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can learn more about these arguments in the <a href="/filtering.html">filtering</a> section. </p>
+<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><p>Vulcan also offers built-in client-side helpers that will generate the right GraphQL query for you. </p>
+<h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><h4 id="useSingle"><a href="#useSingle" class="headerlink" title="useSingle"></a>useSingle</h4><p>TODO</p>
+<h4 id="useMulti"><a href="#useMulti" class="headerlink" title="useMulti"></a>useMulti</h4><p>TODO</p>
+<h3 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h3><p>To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).</p>
+<p>An <strong>HoC</strong> is simply a function you can call on a React component to give it additional props. Think of it as a mechanic’s assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.</p>
+<h4 id="withMulti"><a href="#withMulti" class="headerlink" title="withMulti"></a>withMulti</h4><p>The <code>withMulti</code> HoC is used to display lists of documents. It takes the following options:</p>
+<h5 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h5><ul>
+<li><code>collection</code>: the collection on which to look for the <code>list</code> resolver.</li>
+<li><code>collectionName</code>: alternatively, you can also pass the collection name as a string.</li>
+<li><code>fragment</code> or <code>fragmentName</code>: the fragment to use. If you pass <code>fragmentName</code> instead of <code>fragment</code>, the name you passed will be used to look up a fragment registered with <code>registerFragment</code>.</li>
+<li><code>input</code>: an optional <code>input</code> object used to filter the data received (see <a href="/filtering.html">filtering</a> section). This argument can also be passed dynamically as a prop (see below).</li>
+</ul>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listOptions = &#123;</span><br><span class="line">  collection: Movies,</span><br><span class="line">  fragmentName: <span class="string">'MoviesItem'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withMulti(listOptions)(movies);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Accepted-Props"><a href="#Accepted-Props" class="headerlink" title="Accepted Props"></a>Accepted Props</h5><p>The resulting wrapped component also accepts a <em>dynamic</em> <code>input</code> object as a prop.</p>
+<p>This can be useful when you want your data to change based on some user action such as selecting filtering options in a dropdown, changing sorting order, etc.</p>
+<p>The dynamic <code>input</code> will always take priority over any “static” <code>input</code> defined in the HoC’s initial <code>options</code>. </p>
+<h5 id="Passed-on-Props"><a href="#Passed-on-Props" class="headerlink" title="Passed-on Props"></a>Passed-on Props</h5><p>The HoC then passes on the following props to the wrapped component:</p>
+<ul>
+<li><code>loading</code>: <code>true</code> while the data is loading.</li>
+<li><code>results</code>: the loaded array of documents.</li>
+<li><code>totalCount</code>: the total count of results.</li>
+<li><code>count</code>: the number of current results (i.e. <code>results.length</code>).</li>
+<li><code>refetch</code>: a function that can be called to trigger a query refetch.</li>
+<li><code>loadMore</code>: a function that can be called to load more data.</li>
+</ul>
+<h4 id="withSingle"><a href="#withSingle" class="headerlink" title="withSingle"></a>withSingle</h4><p>The <code>withSingle</code> HoC displays a single document. </p>
+<h5 id="Options-amp-Props"><a href="#Options-amp-Props" class="headerlink" title="Options &amp; Props"></a>Options &amp; Props</h5><p>It takes the same options and props as <code>withMulti</code>, except that its <code>input</code> can have an <code>_id</code> property and doesn’t support the <code>limit</code> property. </p>
+<h5 id="Passed-on-Props-1"><a href="#Passed-on-Props-1" class="headerlink" title="Passed-on Props"></a>Passed-on Props</h5><p>This HoC then passes on the following child prop:</p>
+<ul>
+<li><code>loading</code>: <code>true</code> while the data is loading.</li>
+<li><code>document</code>: the loaded document.</li>
+<li><code>refetch</code>: a function that can be called to trigger a query refetch.</li>
+</ul>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><h3 id="Resolvers"><a href="#Resolvers" class="headerlink" title="Resolvers"></a>Resolvers</h3><p>Vulcan provides a set of default List, Single and Total resolvers you can use to save time by calling <code>getDefaultResolvers(collectionName)</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createCollection,</span><br><span class="line">  getDefaultResolvers,</span><br><span class="line">  getDefaultMutations</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  resolvers: getDefaultResolvers(options),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(options)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+
+<p>The <code>options</code> object can have the following properties: </p>
+<ul>
+<li><code>typeName</code> (String): the resolver’s type name (required).</li>
+<li><code>cacheMaxAge</code> (Number): a custom cache age (in seconds) for the resolvers. </li>
+</ul>
+<p>To learn more about what exactly the default resolvers do, you can <a href="https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_resolvers.js" target="_blank" rel="noopener">find their code here</a>.</p>
+<h3 id="Custom-Resolvers"><a href="#Custom-Resolvers" class="headerlink" title="Custom Resolvers"></a>Custom Resolvers</h3><p>In some cases, you will want to go beyond the three default resolvers. For example, you might want to create a resolver that returns a single random post, or the current user. You can do so by using <code>addGraphQLResolvers</code> and <code>addGraphQLQuery</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLResolvers, addGraphQLQuery &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserResolver = &#123;</span><br><span class="line">  Query: &#123;</span><br><span class="line">    currentUser(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: args.userId &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">addGraphQLResolvers(currentUserResolver);</span><br><span class="line"></span><br><span class="line">addGraphQLQuery(<span class="string">`currentUser: User`</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>addGraphQLResolvers</code> adds the actual resolver function, while <code>addGraphQLQuery</code> adds the corresponding <strong>query type</strong> (if your new resolver is not mentioned in your GraphQL schema, you won’t be able to query it).</p>
+<p>Learn more about resolvers in the <a href="http://dev.apollodata.com/tools/graphql-tools/resolvers.html" target="_blank" rel="noopener">Apollo documentation</a>.</p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="graphql-schema.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          GraphQL Schema
+        </a>
+      
+      
+        <a class="link primary next" href="filtering.html">
+          <span class="subtitle-pagination">Next</span>
+          Filtering
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/queries.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

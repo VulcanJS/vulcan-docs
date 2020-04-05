@@ -45,7 +45,7 @@
 </clipPath>
 <g id="Movies.jsx" clip-path="url(#clip-1)">
 </g>
-<g id="withList">
+<g id="withMulti">
 <g id="Rectangle">
 <mask id="mask1_outline_ins">
 <use xlink:href="#path8_fill" fill="white" transform="translate(4081 -32)"/>
@@ -67,7 +67,7 @@
 </g>
 </g>
 </g>
-<g id="withList-wrapped component">
+<g id="withMulti-wrapped component">
 <use xlink:href="#path13_fill" transform="translate(4230 59)" fill="#BDBDBD"/>
 </g>
 </g>
@@ -84,7 +84,7 @@
 <g id="SERVER">
 <use xlink:href="#path16_fill" transform="matrix(6.12323e-17 -1 1 6.12323e-17 4013 351)" fill="#E0E0E0"/>
 </g>
-<g id="MoviesList">
+<g id="movies">
 <g id="Rectangle">
 <mask id="mask4_outline_ins">
 <use xlink:href="#path17_fill" fill="white" transform="translate(4081 187)"/>
