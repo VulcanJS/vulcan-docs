@@ -175,16 +175,17 @@ this.props
 
 #### `withUpdate`
 
-Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `filter`, `_id`, and `data`:
+Same options as `withCreate`. The returned `updateMovie` mutation takes two arguments: `selector` and `data`:
 
-* `filter`: a `filter` input pointing to the document to modify. See the [filtering](filtering.html) section.
-* `_id`: an `_id` used to identify a specific document (note that either `filter` or `_id` should be set).
+* `selector`:
+  * `filter`: a `filter` input pointing to the document to modify. See the [filtering](filtering.html) section.
+  * `_id`: an `_id` used to identify a specific document (note that either `filter` or `_id` should be set).
 * `data`: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to `null`, e.g.`{title: 'My New Title', body: 'My new body', status: null}`).
 
 ```js
 this.props
   .updateMovie({
-    _id: 'foo123',
+    selector: { _id: 'foo123' },
     data: { year: 2001 },
   })
   .then(/* success */)
@@ -196,7 +197,7 @@ or
 ```js
 this.props
   .updateMovie({
-    filter: { name: { _in: ['Die Hard', 'Terminator 2'] } },
+    selector: { filter: { name: { _in: ['Die Hard', 'Terminator 2'] } } },
     data: { year: 1993 },
   })
   .then(/* success */)
