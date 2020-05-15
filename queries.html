@@ -126,6 +126,20 @@
             
               
               <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="toc.html" class="sidebar-link ">
                   <span>Table of Contents</span>
                 </a>
@@ -575,7 +589,20 @@
 <p>You can learn more about these arguments in the <a href="/filtering.html">filtering</a> section. </p>
 <h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><p>Vulcan also offers built-in client-side helpers that will generate the right GraphQL query for you. </p>
 <h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><h4 id="useSingle"><a href="#useSingle" class="headerlink" title="useSingle"></a>useSingle</h4><p>TODO</p>
-<h4 id="useMulti"><a href="#useMulti" class="headerlink" title="useMulti"></a>useMulti</h4><p>TODO</p>
+<h4 id="useMulti2"><a href="#useMulti2" class="headerlink" title="useMulti2"></a>useMulti2</h4><p>Usage:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> properties = useMulti2(options);</span><br></pre></td></tr></table></figure>
+
+<p>Options:</p>
+<ul>
+<li><code>collection</code>:</li>
+<li><code>collectionName</code>: </li>
+<li><code>fragment</code>: </li>
+<li><code>fragmentName</code>:</li>
+</ul>
+<p>Returned properties:</p>
+<p>-<code>loading</code>: Bool – indicates whether the query is loading.<br>-<code>loadingInitial</code>: Bool – indicates whether this is the initial load.<br>-<code>loadingMore</code>: Bool - indicates whether the query is loading additional data.<br>-<code>results</code>: Array – the results returned by the query.<br>-<code>totalCount</code>: Int – the total non-paginated count for the documents matching the query.<br>-<code>refetch</code>: Function – a function that lets you re-run the query.<br>-<code>networkStatus</code>: Int – the Apollo Client network status.<br>-<code>error</code>: Error – the Apollo Client error.<br>-<code>count</code>: Int – the count of paginated documents matching the query.<br>-<code>loadMore</code>: Function – a function to load more documents.<br>-<code>loadMoreInc</code>: Function – a function to load more documents incrementally.<br>-<code>fragmentName</code>: String – the name of the fragment used to load the data.<br>-<code>fragment</code>: Object – the fragment used to load the data.<br>-<code>data</code>: Object – the raw Apollo Client result object.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useMulti2 &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Posts <span class="keyword">from</span> <span class="string">'../../modules/posts/collection'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PostList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; loading,loadingInitial, loadingMore, count, results, data, refetch, totalCount,  = useMulti2(&#123; <span class="attr">collection</span>: Posts &#125;);</span><br><span class="line">  <span class="built_in">console</span>.log(foo)</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"post-list"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default PostList;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="Higher-Order-Components"><a href="#Higher-Order-Components" class="headerlink" title="Higher-Order Components"></a>Higher-Order Components</h3><p>To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).</p>
 <p>An <strong>HoC</strong> is simply a function you can call on a React component to give it additional props. Think of it as a mechanic’s assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.</p>
 <h4 id="withMulti"><a href="#withMulti" class="headerlink" title="withMulti"></a>withMulti</h4><p>The <code>withMulti</code> HoC is used to display lists of documents. It takes the following options:</p>

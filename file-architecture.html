@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Querying on the Server | Vulcan Docs</title>
+    <title>File Architecture | Vulcan Docs</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://docs.vulcanjs.org">
-    <meta property="og:title" content="Querying on the Server | Vulcan Docs">
+    <meta property="og:title" content="File Architecture | Vulcan Docs">
     <meta property="og:description" content>
     <meta property="og:image" content>
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Querying on the Server | Vulcan Docs">
+    <meta name="twitter:title" content="File Architecture | Vulcan Docs">
     <meta name="twitter:description" content>
     <meta name="twitter:image" content>
 
@@ -132,8 +132,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="file-architecture.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
                   <span>File Architecture</span>
                 </a>
               </li>
@@ -227,8 +227,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
                 </a>
               </li>
@@ -544,38 +544,44 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Querying on the Server</h1>
+      <h1 class="title-page">File Architecture</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/file-architecture.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Most of the Data Layer section’s contents applies to the client. After all, if you’re on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?</p>
-<p>But the truth is that connecting to the database directly can lead to problems. For example, let’s assume you have a <code>user</code> resolver on your <code>Post</code> type that gives you access to the post’s author. On the client, you could write:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> authorName = post.user.displayName;</span><br></pre></td></tr></table></figure>
-
-<p>On the server, it’s easy enough to obtain that post document:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> post = Posts.findOne(documentId);</span><br></pre></td></tr></table></figure>
-
-<p>But the document you fetch directly from MongoDB won’t have a <code>user</code> property, let alone a <code>user.displayName</code> (since those are provided by the GraphQL resolver).</p>
-<p>Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL <em>on the server</em></p>
-<h3 id="runGraphQL-query-variables"><a href="#runGraphQL-query-variables" class="headerlink" title="runGraphQL(query, variables)"></a>runGraphQL(query, variables)</h3><p><code>runGraphQL</code> lets you execute any GraphQL query or mutation against your schema and get its result back on the server. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runGraphQL &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runGraphQL(query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>(Note that you’ll need to be inside an <code>async</code> context to use the <code>await</code> keyword)</p>
-<h3 id="collection-queryOne-inputOrId-options"><a href="#collection-queryOne-inputOrId-options" class="headerlink" title="collection.queryOne(inputOrId, options)"></a>collection.queryOne(inputOrId, options)</h3><p>A common need on the server is fetching a single document by its <code>_id</code>. You can do so with <code>collection.queryOne</code>. The first argument is either a string <code>_id</code>, or a full <code>input</code> object (as used by <code>single</code> queries). </p>
-<p>The second argument is an <code>options</code> object with a <code>fragmentText</code> property. If no fragment is provided, the query will use the collection’s <code>defaultFragment</code>. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId, &#123;</span><br><span class="line">  fragmentText: <span class="string">`</span></span><br><span class="line"><span class="string">    fragment MyUsersFragment on User &#123;</span></span><br><span class="line"><span class="string">      _id</span></span><br><span class="line"><span class="string">      username</span></span><br><span class="line"><span class="string">      createdAt</span></span><br><span class="line"><span class="string">      posts&#123;</span></span><br><span class="line"><span class="string">        _id</span></span><br><span class="line"><span class="string">        title</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="queryOne-vs-load"><a href="#queryOne-vs-load" class="headerlink" title="queryOne vs load"></a><code>queryOne</code> vs <code>load</code></h3><p>It might seem like <code>queryOne</code> does the same thing as the <a href="/performance.html#Caching-amp-Batching">Dataloader layer</a>‘s <code>load</code>, but there’s a crucial difference in how they’re used. </p>
-<p><code>queryOne</code> uses your existing GraphQL resolvers behind the scenes, which means it itself can’t be used <em>inside</em> a resolver (or you’d risk an infinite loop). It’s thus meant to be used from outside of your GraphQL resolver tree, from a server script, cron job, migration, etc. or any kind of server code unrelated to the client. </p>
-<p><code>load</code> on the other hand is specifically made to be used inside resolvers and add a caching and batching layer to them. </p>
+      <h2 id="Package-Based-Architecture"><a href="#Package-Based-Architecture" class="headerlink" title="Package-Based Architecture"></a>Package-Based Architecture</h2><p>Vulcan’s core code follows a <strong>file-based architecture</strong>, which means every feature lives inside its own package which can be enabled or disabled to add or remove said feature; or even over-ridden with your own custom package of the same name. </p>
+<h2 id="App-Packages"><a href="#App-Packages" class="headerlink" title="App Packages"></a>App Packages</h2><p>When building your own Vulcan app, you will typically create a new package that contains the code for your app. Although you are of course free to follow your own structure, we recommend the following file architecture.</p>
+<h3 id="Root-Level"><a href="#Root-Level" class="headerlink" title="Root Level"></a>Root Level</h3><p>First, a Meteor package will contain a <code>package.js</code> package manifest that list its contents. On the same level, you will have a <code>lib</code> directory that contains the entirety of the package’s code. This <code>lib</code> directory is then divided into three directories: </p>
+<ul>
+<li><code>/client</code>: code that will only run inside the browser.</li>
+<li><code>/server</code>: code that will only run on the server.</li>
+<li><code>/modules</code>: code that will run on both. </li>
+</ul>
+<p>Both <code>client</code> and <code>server</code> should contain a <code>main.js</code> entry point that will load client- and server- specific code as well a shared <code>modules</code> code. </p>
+<h3 id="Client-Directory"><a href="#Client-Directory" class="headerlink" title="Client Directory"></a>Client Directory</h3><p>Because Vulcan enables server-side rendering, very little code actually runs <em>only</em> on the client. This directory will thus be empty save for the <code>main.js</code> entry point that should point back to <code>modules/index.js</code>. </p>
+<h3 id="Modules-Directory"><a href="#Modules-Directory" class="headerlink" title="Modules Directory"></a>Modules Directory</h3><p>We recommend splitting your code around your collection (a.k.a. models). For example, a forum app could have the following directories:</p>
+<ul>
+<li><code>/modules/posts</code></li>
+<li><code>/modules/users</code></li>
+<li><code>/modules/comments</code></li>
+</ul>
+<p>Each directory will then contain all or some of the following files: </p>
+<ul>
+<li><code>collection.js</code>: the main collection/model declaration</li>
+<li><code>schema.js</code>: the schema definition</li>
+<li><code>fragments.js</code>: GraphQL fragments related to the collection</li>
+<li><code>helpers.js</code>: any other code related to the collection</li>
+</ul>
+<p>Additionally, we also recommend always including an <code>index.js</code> file to centralize all imports/exports in every directory. </p>
+<h4 id="Other-Code"><a href="#Other-Code" class="headerlink" title="Other Code"></a>Other Code</h4><p>You will usually also end up with some code that is not directly related to any collection, such as components imports, route declarations, or internationalization definitions. You can leave those files in <code>/modules</code>. </p>
+<h3 id="Server-Directory"><a href="#Server-Directory" class="headerlink" title="Server Directory"></a>Server Directory</h3><p>The server directory should more or less mirror the <code>modules</code> directory in terms of being organized by collection, except it will contain code that only runs on the server, such as mutation callbacks.</p>
 
     </div>
   </div>
@@ -584,16 +590,16 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev" href="fragments.html">
+        <a class="link primary prev" href="cheatsheet.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Fragments
+          Cheatsheet
         </a>
       
       
-        <a class="link primary next" href="connecting-remotely.html">
+        <a class="link primary next" href="toc.html">
           <span class="subtitle-pagination">Next</span>
-          Connecting Remotely
+          Table of Contents
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -601,7 +607,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/file-architecture.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

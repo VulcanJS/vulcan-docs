@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>Querying on the Server | Vulcan Docs</title>
+    <title>Cheatsheet | Vulcan Docs</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://docs.vulcanjs.org">
-    <meta property="og:title" content="Querying on the Server | Vulcan Docs">
+    <meta property="og:title" content="Cheatsheet | Vulcan Docs">
     <meta property="og:description" content>
     <meta property="og:image" content>
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="Querying on the Server | Vulcan Docs">
+    <meta name="twitter:title" content="Cheatsheet | Vulcan Docs">
     <meta name="twitter:description" content>
     <meta name="twitter:image" content>
 
@@ -125,8 +125,8 @@
               </li>
             
               
-              <li class="item-toc ">
-                <a href="cheatsheet.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
                   <span>Cheatsheet</span>
                 </a>
               </li>
@@ -227,8 +227,8 @@
               </li>
             
               
-              <li class="item-toc  current">
-                <a href class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
                   <span>Querying on the Server</span>
                 </a>
               </li>
@@ -544,38 +544,32 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">Querying on the Server</h1>
+      <h1 class="title-page">Cheatsheet</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/cheatsheet.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>Most of the Data Layer section’s contents applies to the client. After all, if you’re on the server, you can simply connect to your database directly, so why would you need to worry about the data layer?</p>
-<p>But the truth is that connecting to the database directly can lead to problems. For example, let’s assume you have a <code>user</code> resolver on your <code>Post</code> type that gives you access to the post’s author. On the client, you could write:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> authorName = post.user.displayName;</span><br></pre></td></tr></table></figure>
+      <h2 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations"></a>Mutations</h2><h3 id="Mutators"><a href="#Mutators" class="headerlink" title="Mutators"></a>Mutators</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> createMutator(&#123;</span><br><span class="line">  collection,</span><br><span class="line">  data,</span><br><span class="line">  currentUser,</span><br><span class="line">  validate,</span><br><span class="line">  context,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> updateMutator(&#123;</span><br><span class="line">  documentId</span><br><span class="line">  collection,</span><br><span class="line">  data,</span><br><span class="line">  currentUser,</span><br><span class="line">  validate,</span><br><span class="line">  context,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> deleteMutator(&#123;</span><br><span class="line">  documentId,</span><br><span class="line">  collection,</span><br><span class="line">  currentUser,</span><br><span class="line">  validate,</span><br><span class="line">  context,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>On the server, it’s easy enough to obtain that post document:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> post = Posts.findOne(documentId);</span><br></pre></td></tr></table></figure>
+<h3 id="Callbacks"><a href="#Callbacks" class="headerlink" title="Callbacks"></a>Callbacks</h3><h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create</span></span><br><span class="line"><span class="keyword">const</span> properties = &#123;</span><br><span class="line">  data,</span><br><span class="line">  originalData: clone(data),</span><br><span class="line">  currentUser,</span><br><span class="line">  collection,</span><br><span class="line">  context,</span><br><span class="line">  schema,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// update</span></span><br><span class="line"><span class="keyword">const</span> properties = &#123;</span><br><span class="line">  data,</span><br><span class="line">  originalData: clone(data),</span><br><span class="line">  <span class="built_in">document</span>,</span><br><span class="line">  originalDocument: oldDocument,</span><br><span class="line">  currentUser,</span><br><span class="line">  collection,</span><br><span class="line">  context,</span><br><span class="line">  schema,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// delete</span></span><br><span class="line"><span class="keyword">const</span> properties = &#123; </span><br><span class="line">  <span class="built_in">document</span>, </span><br><span class="line">  currentUser, </span><br><span class="line">  collection, </span><br><span class="line">  context, </span><br><span class="line">  schema </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>But the document you fetch directly from MongoDB won’t have a <code>user</code> property, let alone a <code>user.displayName</code> (since those are provided by the GraphQL resolver).</p>
-<p>Thankfully, VulcanJS features a few special utilities to let you query for data through GraphQL <em>on the server</em></p>
-<h3 id="runGraphQL-query-variables"><a href="#runGraphQL-query-variables" class="headerlink" title="runGraphQL(query, variables)"></a>runGraphQL(query, variables)</h3><p><code>runGraphQL</code> lets you execute any GraphQL query or mutation against your schema and get its result back on the server. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; runGraphQL &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> = (<span class="params"></span>) =&gt; </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">    query OneRoom($documentId: String)&#123;</span></span><br><span class="line"><span class="string">      RoomsSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        user&#123;</span></span><br><span class="line"><span class="string">          _id</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> runGraphQL(query, &#123;<span class="attr">documentId</span>: <span class="string">'123foo'</span>&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Mutation-Callbacks"><a href="#Mutation-Callbacks" class="headerlink" title="Mutation Callbacks"></a>Mutation Callbacks</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">createCollection(&#123;</span><br><span class="line">  callbacks &#123;</span><br><span class="line">    create: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">    update: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params">data, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> data; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>(Note that you’ll need to be inside an <code>async</code> context to use the <code>await</code> keyword)</p>
-<h3 id="collection-queryOne-inputOrId-options"><a href="#collection-queryOne-inputOrId-options" class="headerlink" title="collection.queryOne(inputOrId, options)"></a>collection.queryOne(inputOrId, options)</h3><p>A common need on the server is fetching a single document by its <code>_id</code>. You can do so with <code>collection.queryOne</code>. The first argument is either a string <code>_id</code>, or a full <code>input</code> object (as used by <code>single</code> queries). </p>
-<p>The second argument is an <code>options</code> object with a <code>fragmentText</code> property. If no fragment is provided, the query will use the collection’s <code>defaultFragment</code>. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> Users.queryOne(userId, &#123;</span><br><span class="line">  fragmentText: <span class="string">`</span></span><br><span class="line"><span class="string">    fragment MyUsersFragment on User &#123;</span></span><br><span class="line"><span class="string">      _id</span></span><br><span class="line"><span class="string">      username</span></span><br><span class="line"><span class="string">      createdAt</span></span><br><span class="line"><span class="string">      posts&#123;</span></span><br><span class="line"><span class="string">        _id</span></span><br><span class="line"><span class="string">        title</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="queryOne-vs-load"><a href="#queryOne-vs-load" class="headerlink" title="queryOne vs load"></a><code>queryOne</code> vs <code>load</code></h3><p>It might seem like <code>queryOne</code> does the same thing as the <a href="/performance.html#Caching-amp-Batching">Dataloader layer</a>‘s <code>load</code>, but there’s a crucial difference in how they’re used. </p>
-<p><code>queryOne</code> uses your existing GraphQL resolvers behind the scenes, which means it itself can’t be used <em>inside</em> a resolver (or you’d risk an infinite loop). It’s thus meant to be used from outside of your GraphQL resolver tree, from a server script, cron job, migration, etc. or any kind of server code unrelated to the client. </p>
-<p><code>load</code> on the other hand is specifically made to be used inside resolvers and add a caching and batching layer to them. </p>
+<h4 id="Field-Callbacks"><a href="#Field-Callbacks" class="headerlink" title="Field Callbacks"></a>Field Callbacks</h4><pre><code class="js"><span class="keyword">const</span> schema = {
+  field: {
+    onCreate: <span class="function">(<span class="params">properties</span>) =&gt;</span> { <span class="keyword">return</span> fieldValue },
+    onUpdate: <span class="function">(<span class="params">properties</span>) =&gt;</span> { <span class="keyword">return</span> fieldValue },
+    onDelete: <span class="function">(<span class="params">properties</span>) =&gt;</span> { <span class="comment">// return nothing }</span>
+  }
+}
+</code></pre>
 
     </div>
   </div>
@@ -584,16 +578,16 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev" href="fragments.html">
+        <a class="link primary prev" href="nutshell.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Fragments
+          Vulcan in a Nutshell
         </a>
       
       
-        <a class="link primary next" href="connecting-remotely.html">
+        <a class="link primary next" href="file-architecture.html">
           <span class="subtitle-pagination">Next</span>
-          Connecting Remotely
+          File Architecture
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -601,7 +595,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/server-queries.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/cheatsheet.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

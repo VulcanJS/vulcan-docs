@@ -126,6 +126,20 @@
             
               
               <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="toc.html" class="sidebar-link ">
                   <span>Table of Contents</span>
                 </a>
@@ -556,8 +570,9 @@
 <h4 id="data-variables"><a href="#data-variables" class="headerlink" title="data(variables)"></a><code>data(variables)</code></h4><p>A function that returns an object used to populate the email. It will either be passed a <code>variables</code> object by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
 <h4 id="query"><a href="#query" class="headerlink" title="query"></a><code>query</code></h4><p>A string containing a GraphQL query used to populate the email see below). If both <code>data</code> and <code>query</code> are provided, their results will be merged and passed on to the email.</p>
 <p>Similarly to <code>data()</code>, the query will either use the <code>variables</code> object passed by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
-<h4 id="path"><a href="#path" class="headerlink" title="path"></a><code>path</code></h4><p>A path for the route at which the email will be available to preview (when using <code>vulcan:debug</code>).</p>
+<h4 id="path"><a href="#path" class="headerlink" title="path"></a><code>path</code></h4><p>A path for the route at which the email will be available to preview (when using <code>vulcan:debug</code>). If the path contains paramerters (such as <code>/email/post-approved/:postId?</code>), these parameters will be passed as variables to the <code>data()</code> function as well as the <code>query</code>.</p>
 <h4 id="testVariables"><a href="#testVariables" class="headerlink" title="testVariables"></a><code>testVariables</code></h4><p>An object containing default variables passed to <code>query()</code> when testing the email. If not specified, a blank object will be used. </p>
+<p>You can also pass a <code>testVariables(params)</code> function instead, in which case the <code>params</code> object will contain any route params you’ve defined. For example, if you’ve set the test route for an email to be <code>/email/post-approved/:postId?</code> then visit <code>/email/post-approved/foo123</code>, then <code>params</code> will be equal to <code>{ postId: &#39;foo123&#39; }</code>. </p>
 <h2 id="Querying-For-Data"><a href="#Querying-For-Data" class="headerlink" title="Querying For Data"></a>Querying For Data</h2><p>Just like you can use GraphQL to query for data on the client and populate your React component’s contents, you can also use it to query for data on the server and populate your Handlebars templates:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  accountApproved: &#123;</span><br><span class="line">    template: <span class="string">"accountApproved"</span>,</span><br><span class="line">    path: <span class="string">"/email/account-approved/:_id?"</span>,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">const</span> user = _.isEmpty(data) ? &#123;<span class="attr">displayName</span>: <span class="string">'[user]'</span>&#125; : data.UsersSingle;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"Welcome $&#123;user.displayName&#125;! Your account has been approved."</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    query: <span class="string">`</span></span><br><span class="line"><span class="string">      query UsersSingleQuery($documentId: String)&#123;</span></span><br><span class="line"><span class="string">        UsersSingle(documentId: $documentId)&#123;</span></span><br><span class="line"><span class="string">          displayName</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        SiteData&#123;</span></span><br><span class="line"><span class="string">          title</span></span><br><span class="line"><span class="string">          url</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 

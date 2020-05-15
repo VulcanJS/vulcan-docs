@@ -126,6 +126,20 @@
             
               
               <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
                 <a href="toc.html" class="sidebar-link ">
                   <span>Table of Contents</span>
                 </a>
@@ -595,6 +609,17 @@
 <h2 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h2><p>By default, any error in a callback function will be swallowed to avoid affecting other callbacks or the mutation itself. You can pass <code>break</code> on your <code>Error</code> object to cause the chain of callbacks to stop when using a <em>sync</em> callback.</p>
 <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mySyncCallback</span>(</span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> value = Posts.callingAFunctionThatDoesNotExistThisThrowsAnError();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (<span class="built_in">error</span>) &#123;</span><br><span class="line">    console.<span class="built_in">error</span>(<span class="built_in">error</span>);</span><br><span class="line">    // Cause Vulcan <span class="keyword">to</span> halt execution of resolver <span class="literal">and</span> <span class="keyword">throw</span> the <span class="built_in">error</span> <span class="keyword">to</span> Apollo</span><br><span class="line">    <span class="built_in">error</span>.break = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">error</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="comment">'post.create.before', mySyncCallback);</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Error-Callback"><a href="#Error-Callback" class="headerlink" title="Error Callback"></a>Error Callback</h3><p>This example extends a collection on the server with a callback that checks for any post with duplicate links on create and update. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Connectors, extendCollection &#125; <span class="keyword">from</span> <span class="string">"meteor/vulcan:core"</span>;</span><br><span class="line"><span class="keyword">import</span> Posts <span class="keyword">from</span> <span class="string">"../../modules/posts/collection.js"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> checkForDuplicates = <span class="keyword">async</span> (validationErrors, &#123; <span class="built_in">document</span>, data &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="built_in">document</span>.url || data.url;</span><br><span class="line">  <span class="keyword">const</span> duplicatePost = <span class="keyword">await</span> Connectors.get(Posts, &#123; url &#125;);</span><br><span class="line">  <span class="keyword">if</span> (duplicatePost) &#123;</span><br><span class="line">    validationErrors.push(&#123;</span><br><span class="line">      id: <span class="string">'app.duplicate_post'</span>,</span><br><span class="line">      path: <span class="string">'url'</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> validationErrors;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">extendCollection(Posts, &#123;</span><br><span class="line">  callbacks: &#123;</span><br><span class="line">    create: &#123;</span><br><span class="line">      validate: [checkForDuplicates],</span><br><span class="line">    &#125;,</span><br><span class="line">    update: &#123;</span><br><span class="line">      validate: [checkForDuplicates],</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Some things to note: </p>
+<ul>
+<li>Callbacks only run on the server, so we are extending the collection on the server instead of including this code in the main collection declaration, which is shared with the client. </li>
+<li>We look for the URL on both <code>document</code> (which exists within Create mutations) and <code>data</code> (for Update mutations).</li>
+<li>Instead of throwing an error, we add an error item to the <code>validationErrors</code> array.</li>
+<li>We set the path of that error to the path of our URL field so that the error can be displayed under the relevant form field when shown on the client. </li>
+<li>Hooks can be called in an <code>async</code> manner. </li>
+</ul>
 
     </div>
   </div>
