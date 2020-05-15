@@ -17,6 +17,8 @@ sidebar_categories:
   null:
     - index
     - nutshell
+    - cheatsheet
+    - file-architecture
     - toc
     # - features
     # - architecture

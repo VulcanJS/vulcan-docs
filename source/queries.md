@@ -96,9 +96,55 @@ Vulcan also offers built-in client-side helpers that will generate the right Gra
 
 TODO
 
-#### useMulti
+#### useMulti2
 
-TODO
+Usage:
+
+```js
+const properties = useMulti2(options);
+```
+
+Options:
+
+- `collection`:
+- `collectionName`: 
+- `fragment`: 
+- `fragmentName`:
+
+Returned properties:
+
+-`loading`: Bool – indicates whether the query is loading.
+-`loadingInitial`: Bool – indicates whether this is the initial load.
+-`loadingMore`: Bool - indicates whether the query is loading additional data.
+-`results`: Array – the results returned by the query.
+-`totalCount`: Int – the total non-paginated count for the documents matching the query.
+-`refetch`: Function – a function that lets you re-run the query.
+-`networkStatus`: Int – the Apollo Client network status.
+-`error`: Error – the Apollo Client error.
+-`count`: Int – the count of paginated documents matching the query.
+-`loadMore`: Function – a function to load more documents.
+-`loadMoreInc`: Function – a function to load more documents incrementally.
+-`fragmentName`: String – the name of the fragment used to load the data.
+-`fragment`: Object – the fragment used to load the data.
+-`data`: Object – the raw Apollo Client result object.
+
+```js
+import React from 'react';
+import { useMulti2 } from 'meteor/vulcan:core';
+import Posts from '../../modules/posts/collection';
+
+const PostList = () => {
+  const { loading,loadingInitial, loadingMore, count, results, data, refetch, totalCount,  = useMulti2({ collection: Posts });
+  console.log(foo)
+  return (
+    <div className="post-list">
+
+    </div>
+  );
+};
+
+export default PostList;
+```
 
 ### Higher-Order Components
 

@@ -101,6 +101,26 @@ const Movies = createCollection({
 });
 ```
 
+##### Custom Filters & Nested Fields
+
+Custom filters can be useful to work around the limitations of the filtering system. For example, unlike MongoDB the GraphQL filtering API does not let you filter based on nested document fields (e.g. `addresses.country`) since every filter needs to be defined in the GraphQL schema. But you can define a custom filter instead: 
+
+```js
+customFilters: [
+  {
+    name: '_withAddressCountry',
+    arguments: 'country: String',
+    filter: ({ input, context, filterArguments }) => {
+      const { country } = filterArguments;
+      return {
+        selector: { 'addresses.country': country },
+        options: {},
+      };
+    },
+  },
+],
+```
+
 ### Sort
 
 ```

@@ -8,11 +8,34 @@ A range of special properties are available to control the behavior of each docu
 
 See the [SimpleSchema documentation](https://github.com/aldeed/meteor-simple-schema#schema-rules).
 
-#### `type`
+### `type`
 
 The JavaScript/SimpleSchema type of the field's contents. Will automatically be converted to a matching GraphQL type in your GraphQL schema. 
 
-#### `arrayItem`
+#### The Date Type
+
+The `Date` type benefits from an extra feature: for any `foo` date field, a new GraphQL-only `fooFormatted` field will automatically be generated to return the date as a formatted string. 
+
+You can pass a `format` argument to this new field to control the format using the [Moment.js formatting API](https://momentjs.com/docs/#/displaying/format/). You can also pass the string `ago` to display the date in a “two hours ago” format. 
+
+For example, here's a sample query: 
+
+```
+query PostsQuery{
+  posts{
+    results{
+      title
+      postedAt
+      postedAtFormatted # will default to YYYY/MM/DD format
+      postedAtFormattedMonth: postedAtFormatted(format:"MMM")
+      postedAtFormattedAgo: postedAtFormatted(format:"ago")
+
+    }
+  }
+}
+```
+
+### `arrayItem`
 
 For fields of type `Array`, this property accepts an object containing the properties applied to the array **items**. 
 
@@ -31,29 +54,29 @@ addresses: {
 
 ## Data Layer Properties
 
-#### `canRead`
+### `canRead`
 
 Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` viewing the document and the `document` itself, and should return `true` or `false`.
 
-#### `canCreate`
+### `canCreate`
 
 Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and should return `true` or `false`. When generating a form for inserting new documents, the form will contain all the fields that return `true` for the current user.
 
-#### `canUpdate`
+### `canUpdate`
 
 Can either be a string, an array of group names, or a function.
 
 If it's a function, it'll be called on the `user` performing the operation, and the `document` being operated on, and should return `true` or `false`. When generating a form for editing existing documents, the form will contain all the fields that return `true` for the current user.
 
-#### `resolveAs`
+### `resolveAs`
 
 You can learn more about `resolveAs` in the [Field Resolvers](/field-resolvers.html) section.
 
-#### `onCreate`, `onUpdate`, `onDelete`
+### `onCreate`, `onUpdate`, `onDelete`
 
 These three properties can take a callback function that will run during the corresponding operation, and should return the new value of the corresponding field.
 
@@ -65,19 +88,19 @@ These three properties can take a callback function that will run during the cor
 
 These schema properties are mostly used for controlling the appearance and behavior of Vulcan's auto-generated forms.
 
-#### `label`
+### `label`
 
 The form label. If not provided, the label will be generated based on the field name and the available language strings data.
 
-#### `input` 
+### `input` 
 
 Either a text string (one of `text`, `textarea`, `checkbox`, `checkboxgroup`, `radiogroup`, or `select`) or a React component.
 
-#### `order`
+### `order`
 
 A number corresponding to the position of the property's field inside the form.
 
-#### `group`
+### `group`
 
 An optional object containing the group/section/fieldset in which to include the form element. Groups have `name`, `label`, `order`, and other properties.
 
@@ -108,19 +131,19 @@ Note that fields with no groups are always rendered first in the form in a defau
 
 You only need to specify the group details for the first field that refers to it. Subsequently you can just use `group: { name: "admin" }`.
 
-#### `placeholder`
+### `placeholder`
 
 A placeholder value for the form field.
 
-#### `beforeComponent`
+### `beforeComponent`
 
 A React component that will be inserted just before the form component itself.
 
-#### `afterComponent`
+### `afterComponent`
 
 A React component that will be inserted just after the form component itself.
 
-#### `hidden`
+### `hidden`
 
 Can either be a boolean or a function accepting form props as argument and returning a boolean.
 
@@ -132,7 +155,7 @@ this.context.updateCurrentValues({ foo: 'bar' });
 
 As long as a value is in `this.state.currentValues` it should be submitted with the form, no matter whether there is an actual form item or not.
 
-#### `options`
+### `options`
 
 An array containing a set of options for the form (for select, checkbox, radio, etc. controls), or a function that takes the component's `props` as argument and returns an array. 
 
@@ -161,11 +184,11 @@ status: {
 },
 ```
 
-#### `query`
+### `query`
 
 A query used to require extra data needed to display the form field. See [field-specific data loading](/forms.html#Field-Specific-Data-Loading).
 
-#### `inputProperties`
+### `inputProperties`
 
 An object defining the props that will be passed to the `input` component to customize it. You can pass either values, or a function that will be evaluated each time the form is generated.
 
@@ -192,26 +215,26 @@ control: 'MyCustomSelect'
 When the form is generated, the closure is evaluated and return your component or function. Thus in 
 `MyCustomSelect`, `props.renderOption` will equal `MyCustomComponent` as expected.
 
-#### `min`
+### `min`
 
 You can set `min` to force the field to be longer than a certain length (e.g. `min: 20`).
 
-#### `max`
+### `max`
 
 You can set `max` to limit the field to a certain length (e.g. `max: 140`).
 
-#### `minCount`
+### `minCount`
 
 The minimum count of items that must be in an array field.
 
-#### `maxCount`
+### `maxCount`
 
 The maximum count of items that can be in an array field.
 
-#### `defaultValue`
+### `defaultValue`
 
 The field's default value. Note that you can also use `onCreate` to achieve the same effect.
 
-#### `description`
+### `description`
 
 A description that will be used as help text for the field in forms and in the GraphQL API. 

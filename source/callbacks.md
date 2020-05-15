@@ -167,3 +167,45 @@ function mySyncCallback() {
 
 addCallback('post.create.before', mySyncCallback);
 ```
+
+## Examples
+
+### Error Callback
+
+This example extends a collection on the server with a callback that checks for any post with duplicate links on create and update. 
+
+```js
+import { Connectors, extendCollection } from "meteor/vulcan:core";
+import Posts from "../../modules/posts/collection.js";
+
+const checkForDuplicates = async (validationErrors, { document, data }) => {
+  const url = document.url || data.url;
+  const duplicatePost = await Connectors.get(Posts, { url });
+  if (duplicatePost) {
+    validationErrors.push({
+      id: 'app.duplicate_post',
+      path: 'url',
+    });
+  }
+  return validationErrors;
+};
+
+extendCollection(Posts, {
+  callbacks: {
+    create: {
+      validate: [checkForDuplicates],
+    },
+    update: {
+      validate: [checkForDuplicates],
+    },
+  },
+});
+```
+
+Some things to note: 
+
+- Callbacks only run on the server, so we are extending the collection on the server instead of including this code in the main collection declaration, which is shared with the client. 
+- We look for the URL on both `document` (which exists within Create mutations) and `data` (for Update mutations).
+- Instead of throwing an error, we add an error item to the `validationErrors` array.
+- We set the path of that error to the path of our URL field so that the error can be displayed under the relevant form field when shown on the client. 
+- Hooks can be called in an `async` manner. 

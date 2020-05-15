@@ -60,11 +60,13 @@ Similarly to `data()`, the query will either use the `variables` object passed b
 
 #### `path`
 
-A path for the route at which the email will be available to preview (when using `vulcan:debug`).
+A path for the route at which the email will be available to preview (when using `vulcan:debug`). If the path contains paramerters (such as `/email/post-approved/:postId?`), these parameters will be passed as variables to the `data()` function as well as the `query`.
 
 #### `testVariables`
 
 An object containing default variables passed to `query()` when testing the email. If not specified, a blank object will be used. 
+
+You can also pass a `testVariables(params)` function instead, in which case the `params` object will contain any route params you've defined. For example, if you've set the test route for an email to be `/email/post-approved/:postId?` then visit `/email/post-approved/foo123`, then `params` will be equal to `{ postId: 'foo123' }`. 
 
 ## Querying For Data
 
