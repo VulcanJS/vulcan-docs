@@ -95,7 +95,7 @@ addRoute({
 });
 ```
 
-Can be changed to a dynamic route using `renderDynamicComponent` and `import(...)`:
+Can be changed to a dynamic route using `renderDynamicComponent` and `import(...)`, provided the Admin component is exported as default:
 
 ```js
 import { renderDynamicComponent } from 'meteor/vulcan:core';
