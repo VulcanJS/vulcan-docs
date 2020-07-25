@@ -4,17 +4,17 @@ title: Relations
 
 A common use case for field resolvers is fetching one or more item associated with the current document, such as the user corresponding to a post's `userId` field; or the array of categories correponding to its `categoriesIds` field. 
 
-While you can achieve this by explicitly writing out the resolver as in the `userId` example mentioned in the [Fields Resolvers](/fields-resolvers.html) section, Vulcan also offers a shortcut syntax using the `relation` property:
+While you can achieve this by explicitly adding an API schema field, Vulcan also offers a shortcut syntax using the `relation` property:
 
 ```
 userId: {
   type: String,
   optional: true,
   canRead: ['guests'],
-  resolveAs: {
+  relation: {
     fieldName: 'user',
-    type: 'User',
-    relation: 'hasOne', // one of 'hasOne' or 'hasMany'
+    typeName: 'User',
+    kind: 'hasOne', // one of 'hasOne' or 'hasMany'
   }
 },
 ```
@@ -26,18 +26,18 @@ Similarly, you can also define `hasMany` relations:
 ```
 categoriesIds: {
   type: Array,
-  optional: true,
-  canRead: ['guests'],
-  resolveAs: {
-    fieldName: 'categories',
-    type: '[Categories]',
-    relation: 'hasMany'
+  arrayItem: {
+    type: String,
+    optional: true,
+    canRead: ['guests'],
   }
-},
-'categoriesIds.$': {
-  type: String,
   optional: true,
   canRead: ['guests'],
+  relation: {
+    fieldName: 'categories',
+    typeName: '[Categories]',
+    kind: 'hasMany'
+  }
 },
 ```
 

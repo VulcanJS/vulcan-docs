@@ -213,6 +213,10 @@ query NextPageOfMovies {
 
 ## Default Input
 
+**[DEPRECATED]**
+
+**Specifying a `defaultInput` is handy, but it means that the options used by the server might end up different from the ones pass by the client, which can often be confusing and lead to less visibility on what's going on inside your API. For that reason we recommend you explicitly specify all filtering, sorting, etc. options on the client.**
+
 The `defaultInput` property lets you control what happens when no argument at all is provided to a query by providing a default input when creating a collection:
 
 ```

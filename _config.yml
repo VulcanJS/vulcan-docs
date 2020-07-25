@@ -28,10 +28,11 @@ sidebar_categories:
   Schemas:
     - schemas
     - schema-properties
-    - field-resolvers
+    # - field-resolvers
     - relations
   GraphQL API:
     - graphql-schema
+    - api-schemas
     - queries
     - filtering
     - mutations

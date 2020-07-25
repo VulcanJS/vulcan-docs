@@ -2,21 +2,100 @@
 title: Cheatsheet
 ---
 
+
+## Queries
+
+### Input
+
+```js
+const singleInput = {
+  filter,
+  sort,
+  search,
+  id,
+  enableCache,
+  enableTotal,
+  contextName,
+}
+
+const multiInput = {
+  filter,
+  sort,
+  search,
+  offset,
+  limit,
+  enableCache,
+  enableTotal,
+  contextName,
+}
+```
+
+### Hooks
+
+```js
+const { results, loading, error, networkStatus, refetch } = useSingle2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
+```
+
+```js
+const { results, loading, error, networkStatus, refetch } = useMulti2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
+```
+
 ## Mutations
+
+### Hooks
+
+```js
+const [ createFunction, { data, loading, error }] = useCreate({ 
+  collection, 
+  fragmentName, 
+  input, 
+  mutationOptions, // passed to Apollo hook
+});
+```
+
+```js
+const [ updateFunction, { data, loading, error }] = useUpdate({ 
+  collection, 
+  fragmentName, 
+  input, 
+  mutationOptions, // passed to Apollo hook
+});
+```
+
+```js
+const [ deleteFunction, { data, loading, error }] = useDelete({ 
+  collection, 
+  fragmentName, 
+  input, 
+  mutationOptions, // passed to Apollo hook
+});
+```
 
 ### Mutators
 
 ```js
 await createMutator({
-  collection,
-  data,
-  currentUser,
-  validate,
-  context,
+  collection, // collection containing document to mutate
+  data, // data received from client
+  currentUser, // current user
+  validate, // boolean, whether to validate the operation
+  context, // GraphQL context
 });
 
 await updateMutator({
-  documentId
+  documentId // id of document to mutate
   collection,
   data,
   currentUser,
@@ -38,7 +117,7 @@ await deleteMutator({
 #### Properties
 
 ```js
-// create
+// movies.create.*
 const properties = {
   data,
   originalData: clone(data),
@@ -48,7 +127,7 @@ const properties = {
   schema,
 };
 
-// update
+// movies.update.*
 const properties = {
   data,
   originalData: clone(data),
@@ -60,7 +139,7 @@ const properties = {
   schema,
 };
 
-// delete
+// movies.delete.*
 const properties = { 
   document, 
   currentUser, 
@@ -107,4 +186,5 @@ const schema = {
     onDelete: (properties) => { // return nothing }
   }
 }
+
 

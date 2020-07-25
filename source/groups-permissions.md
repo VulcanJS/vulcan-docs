@@ -139,3 +139,32 @@ The `canUpdate` property takes an array of the names of the groups that can edit
 Note that there is no `canDelete` field-level check because any user who has the ability to modify a field's value also has the ability to erase its contents.
 
 Also, field-level checks will only proceed if the document-level check first passes. This means that while you can make them more restrictive (“regular users can edit their own posts, but only admins can edit a post's status”) you can't do the opposite (“only admins can edit posts, but regular users can edit a post's title”).
+
+## Route Access
+
+You can use groups as a way to define route-level permissions to limit access to certain pages. To do so, add an `access` property to your route definitions:
+
+```js
+const adminAccessOptions = {
+  groups: ['admins'],
+  redirect: '/log-in'
+}
+
+addRoute([
+  {
+    name: 'admin.posts',
+    path: '/admin/posts',
+    component: AdminPosts,
+    layoutComponent: AdminLayout,
+    access: adminAccessOptions,
+  },
+]);
+```
+
+This property accepts an object with the following properties:
+
+- `groups`: an array of group names allowed to access the route.
+- `check`: alternatively, a function that will be called on the `currentUser` and returns a boolean.
+- `redirect`: the path to redirect the user to if they are not logged in.
+- `redirectMessage`: the message to show to users when they are redirected (requires having the `Components.FlashMessages` component somewhere in your component tree). Defaults to the `app.please_sign_up_log_in` i18n string. 
+- `failureComponent` or `failureComponentName`: a component (or a registered component name) that will be shown in place of the route's content if the user is logged in but isn't allowed to access the route. Defaults to the `app.no_access_permissions` i18n string.  
