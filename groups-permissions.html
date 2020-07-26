@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Groups & Permissions | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Groups & Permissions | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Groups & Permissions | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Groups & Permissions</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/groups-permissions.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a groups debugging UI is available at <a href="http://0.0.0.0:3000/debug/groups" target="_blank" rel="noopener">http://0.0.0.0:3000/debug/groups</a>.</strong></p>
+<h2 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h2><p>Vulcan permissions work through user groups. There are two types of groups, <strong>default groups</strong> and <strong>custom groups</strong>. </p>
+<h3 id="Default-Groups"><a href="#Default-Groups" class="headerlink" title="Default Groups"></a>Default Groups</h3><p>Default groups exist out of the box for any Vulcan app, and they are <em>dynamic</em> in nature. In other words, a user is considered as belonging to these four groups based on a range of different factors. These groups are:</p>
+<ul>
+<li><code>guests</code>: any <strong>non-logged-in</strong> user. In other words, any client connecting to your app, whether they are authentified or not. The only permissions usually assigned to this group are <code>read</code> permissions. </li>
+<li><code>members</code>: any <strong>logged-in</strong> user. This group will typically be able to <code>create</code> documents. </li>
+<li><code>owners</code>: any logged-in user that <strong>is the owner of the current document</strong> (which is determined by comparing a document’s <code>userId</code> property with the current user’s own <code>_id</code>).</li>
+<li><code>admins</code>: any user with its <code>isAdmin</code> property set to <code>true</code>.</li>
+</ul>
+<h3 id="Custom-Groups"><a href="#Custom-Groups" class="headerlink" title="Custom Groups"></a>Custom Groups</h3><p>Unlike default groups, you have to explicitly define custom groups:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Users</span><span class="selector-class">.createGroup</span>(<span class="string">'staff'</span>); <span class="comment">// create a new 'staff' group</span></span><br></pre></td></tr></table></figure>
+
+<p>You can then assign a group to a user by modifying their <code>groups</code> property (an array of group name strings), either through your app itself or in the database directly. </p>
+<p>Out of the box, custom groups don’t do anything. You can check if a user belongs to any given group with:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Users</span><span class="selector-class">.isMemberOf</span>(currentUser, <span class="string">'staff'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>And then act based on the result. </p>
+<h3 id="Combining-Groups"><a href="#Combining-Groups" class="headerlink" title="Combining Groups"></a>Combining Groups</h3><p>Note that a user can belong to more than one group. For example, a logged-in user from the <code>staff</code> group with the <code>isAdmin</code> set to true that is also the creator of the document being edited would be considered as belonging to the <code>members</code>, <code>owners</code>, <code>admins</code>, and <code>staff</code> groups at the same time. </p>
+<h3 id="The-Admin-Group"><a href="#The-Admin-Group" class="headerlink" title="The Admin Group"></a>The Admin Group</h3><p>Note that the admin role will always make any permission check return <code>true</code>, and will also automatically be assigned to the first user that signs up on any new Vulcan app. </p>
+<h2 id="Document-level-Permissions"><a href="#Document-level-Permissions" class="headerlink" title="Document-level Permissions"></a>Document-level Permissions</h2><p>The main way to define permissions in your app is through the <code>createCollection</code> function:</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const <span class="symbol">Movies</span> = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema,</span><br><span class="line"></span><br><span class="line">  permissions: &#123;</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canRead: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'owners'</span>, <span class="string">'admins'</span>],</span><br><span class="line">    canDelete: [<span class="string">'owners'</span>, <span class="string">'admins'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The <code>createCollection</code> object takes a <code>permissions</code> property that itself takes four <code>canRead</code>, <code>canCreate</code>, <code>canUpdate</code>, and <code>canDelete</code> properties corresponding to the four basic CRUD operations. </p>
+<p>These properties can take either an array of group names that will be allowed to perform the operation as in the example above; or a function that returns <code>true</code> or <code>false</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">  permissions: &#123;</span><br><span class="line">    canCreate: <span class="function"><span class="params">options</span> =&gt;</span> &#123; <span class="keyword">return</span> <span class="literal">true</span>/<span class="literal">false</span> &#125;,</span><br><span class="line">    canRead: <span class="function"><span class="params">options</span> =&gt;</span> &#123; <span class="keyword">return</span> <span class="literal">true</span>/<span class="literal">false</span> &#125;,</span><br><span class="line">    canUpdate: <span class="function"><span class="params">options</span> =&gt;</span> &#123; <span class="keyword">return</span> <span class="literal">true</span>/<span class="literal">false</span> &#125;,</span><br><span class="line">    canDelete: <span class="function"><span class="params">options</span> =&gt;</span> &#123; <span class="keyword">return</span> <span class="literal">true</span>/<span class="literal">false</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The <code>options</code> object has the following properties:</p>
+<ul>
+<li><code>user</code></li>
+<li><code>document</code> (except for <code>canCreate</code>)</li>
+<li><code>collection</code></li>
+<li><code>context</code> (note: only available when permission check is called from server)</li>
+<li><code>operationName</code></li>
+</ul>
+<h3 id="The-Owners-Group"><a href="#The-Owners-Group" class="headerlink" title="The Owners Group"></a>The Owners Group</h3><p>The <code>owners</code> group is a little special in that it’s the only group that acts on specific documents. In other words, whereas defining <code>canRead: [&#39;staff&#39;]</code> will allow access to <em>any</em> document in the collection to the <code>staff</code> group wholesale, specifying <code>canRead: [&#39;owners&#39;]</code> will filter document one by one to check their ownership relative to the current user. </p>
+<p>Also note that a document can only have one owner. If you need more granular permissions, you can use your own custom permission functions instead of relying on groups. </p>
+<h3 id="Checking-Permissions"><a href="#Checking-Permissions" class="headerlink" title="Checking Permissions"></a>Checking Permissions</h3><p>If you need to test if a user passes a permission check, you can do so using the following shortcuts:</p>
+<ul>
+<li><code>Users.canCreate({ collection, user, context })</code></li>
+<li><code>Users.canUpdate({ collection, user, document, context })</code></li>
+<li><code>Users.canDelete({ collection, user, document, context })</code></li>
+</ul>
+<h2 id="Field-level-Permissions"><a href="#Field-level-Permissions" class="headerlink" title="Field-level Permissions"></a>Field-level Permissions</h2><p>Vulcan has two levels of permission checks: the document level, and the field level. </p>
+<p>Consider a scenario where a user can edit their own posts, but an admin can edit anybody’s post. Now let’s add the requirement that a user can only edit a post’s <code>title</code> property, but an admin can also edit a post’s <code>status</code>. </p>
+<p>First, as explained above, we’ll need a <strong>document-level</strong> check to see if the current user can edit a given document. Next comes the second check: is the user trying to modify fields they don’t have access to? This check lives at the field level, in the schema:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;</span><br><span class="line">  type: <span class="built_in">String</span>,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  canCreate: [<span class="string">'members'</span>],</span><br><span class="line">  canUpdate: [<span class="string">'owners'</span>],</span><br><span class="line">&#125;,</span><br><span class="line">status: &#123;</span><br><span class="line">  type: <span class="built_in">Number</span>,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  canCreate: [<span class="string">'admins'</span>],</span><br><span class="line">  canUpdate: [<span class="string">'admins'</span>],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>The <code>canUpdate</code> property takes an array of the names of the groups that can edit a given field. For more fine-grained permissions <code>canRead</code>, <code>canCreate</code>, and <code>canUpdate</code> can also take a function that returns a boolean as argument.</p>
+<p>Note that there is no <code>canDelete</code> field-level check because any user who has the ability to modify a field’s value also has the ability to erase its contents.</p>
+<p>Also, field-level checks will only proceed if the document-level check first passes. This means that while you can make them more restrictive (“regular users can edit their own posts, but only admins can edit a post’s status”) you can’t do the opposite (“only admins can edit posts, but regular users can edit a post’s title”).</p>
+<h2 id="Route-Access"><a href="#Route-Access" class="headerlink" title="Route Access"></a>Route Access</h2><p>You can use groups as a way to define route-level permissions to limit access to certain pages. To do so, add an <code>access</code> property to your route definitions:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> adminAccessOptions = &#123;</span><br><span class="line">  groups: [<span class="string">'admins'</span>],</span><br><span class="line">  redirect: <span class="string">'/log-in'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addRoute([</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'admin.posts'</span>,</span><br><span class="line">    path: <span class="string">'/admin/posts'</span>,</span><br><span class="line">    component: AdminPosts,</span><br><span class="line">    layoutComponent: AdminLayout,</span><br><span class="line">    access: adminAccessOptions,</span><br><span class="line">  &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p>This property accepts an object with the following properties:</p>
+<ul>
+<li><code>groups</code>: an array of group names allowed to access the route.</li>
+<li><code>check</code>: alternatively, a function that will be called on the <code>currentUser</code> and returns a boolean.</li>
+<li><code>redirect</code>: the path to redirect the user to if they are not logged in.</li>
+<li><code>redirectMessage</code>: the message to show to users when they are redirected (requires having the <code>Components.FlashMessages</code> component somewhere in your component tree). Defaults to the <code>app.please_sign_up_log_in</code> i18n string. </li>
+<li><code>failureComponent</code> or <code>failureComponentName</code>: a component (or a registered component name) that will be shown in place of the route’s content if the user is logged in but isn’t allowed to access the route. Defaults to the <code>app.no_access_permissions</code> i18n string.  </li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="settings.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Settings
+        </a>
+      
+      
+        <a class="link primary next" href="callbacks.html">
+          <span class="subtitle-pagination">Next</span>
+          Callbacks
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/groups-permissions.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

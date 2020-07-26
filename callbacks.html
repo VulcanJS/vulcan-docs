@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Callbacks | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Callbacks | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Callbacks | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Callbacks</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/callbacks.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>Vulcan uses a system of hooks and callbacks for many of its operations.</p>
+<p>A <strong>hook</strong> is a specific point in the code where <strong>callbacks</strong> can be attached and executed. These callbacks are middleware-like functions that take in an argument, then pass it on to the next callback attached to the same hook. </p>
+<p>They are a handy way to inject your own code into other, pre-existing operations without having to modify the code of these operations directly. </p>
+<p>Callback functions can take more than one arguments, but the first argument is special in that - for sync callbacks – it will be updated each time to reflect the return value of each successive function, letting you progressively iterate over a value or object. </p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, a callback debugging UI is available at <a href="http://localhost:3000/debug/callbacks" target="_blank" rel="noopener">http://localhost:3000/debug/callbacks</a>.</strong></p>
+<h2 id="Collection-Callbacks"><a href="#Collection-Callbacks" class="headerlink" title="Collection Callbacks"></a>Collection Callbacks</h2><p>The most common place to use callbacks is after CRUD operations on your collections (in other words creating or updating a document).</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">  callbacks: &#123;</span><br><span class="line">    create: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">    update: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params">data, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> data; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>: &#123;</span><br><span class="line">      validate: [<span class="function">(<span class="params">validationErrors, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> validationErrors; &#125;],</span><br><span class="line">      before: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      after: [<span class="function">(<span class="params"><span class="built_in">document</span>, properties</span>) =&gt;</span> &#123; <span class="keyword">return</span> <span class="built_in">document</span>; &#125;],</span><br><span class="line">      <span class="keyword">async</span>: [<span class="function">(<span class="params">properties</span>) =&gt;</span> &#123; <span class="comment">/* no return value */</span> &#125;],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Note that the <code>update.before</code> callback functions take <code>data</code> as iterator argument, and not <code>document</code>. </p>
+<p>Each hook takes an array of callback functions. Note that you don’t need to specify all hooks:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">const</span> <span class="string">Movies</span> <span class="string">=</span> <span class="string">createCollection(&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  collectionName:</span> <span class="string">'Movies'</span><span class="string">,</span></span><br><span class="line"></span><br><span class="line">  <span class="string">//...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  callbacks:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    create:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">      async:</span> <span class="string">[</span> <span class="string">sendPostCreateNotification,</span> <span class="string">createNewComment</span> <span class="string">],</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line"><span class="attr">    update:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">      before:</span> <span class="string">[</span> <span class="string">addAuthorId</span> <span class="string">],</span></span><br><span class="line"><span class="attr">      async:</span> <span class="string">[</span> <span class="string">sendPostUpdateNotification</span> <span class="string">],</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;,</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#125;);</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Callback-Hooks"><a href="#Callback-Hooks" class="headerlink" title="Callback Hooks"></a>Callback Hooks</h3><p>The four hooks correspond to the following events in the lifecycle of a mutator:</p>
+<ul>
+<li><code>validate</code>: when the data received from the client undergoes validation. Note that this can be skipped, for example if you are calling the mutator from the server and already trust the data. </li>
+<li><code>before</code>: a hook that can modify the data before it is submitted to the database.</li>
+<li><code>after</code> a hook that runs after the database operation; but before the document is returned to the client.</li>
+<li><code>async</code>: a hook that runs after the database operation in an asynchronous manner, meaning it will not return anything or affect the mutation’s return value; but also won’t hold back the mutation from returning while it executes. </li>
+</ul>
+<h3 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h3><h4 id="validationErrors"><a href="#validationErrors" class="headerlink" title="validationErrors"></a><code>validationErrors</code></h4><p><code>validationErrors</code> is an array that starts empty and then gets populated by each successive validation callback. If that array is not empty, the mutation will throw an error regrouping all the issues encounted during validation. </p>
+<h4 id="document"><a href="#document" class="headerlink" title="document"></a><code>document</code></h4><p>The <code>document</code> argument is the document being inserted or updated in the database.</p>
+<h4 id="data"><a href="#data" class="headerlink" title="data"></a><code>data</code></h4><p><code>data</code> is a modifier object used to figure out what changes to perform in the database. It can be equal to the entire <code>document</code>, or simply contain a subset of the fields to update. </p>
+<p>Additionally, any field set to <code>null</code> in the <code>data</code> object will be deleted from that document in the database.</p>
+<h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a><code>properties</code></h4><p>The <code>properties</code> object contains properties that are optionally passed to each callback function, but are not affected by said functions (and should generally not be mutated by them). </p>
+<p>All <code>properties</code> objects for all callbacks of all operations share these common properties: </p>
+<ul>
+<li><code>currentUser</code>: the user performing the operation (can be <code>undefined</code>).</li>
+<li><code>collection</code>: the collection affected by the operation. </li>
+<li><code>schema</code>: the collection schema. </li>
+<li><code>context</code> the GraphQL context of the mutation. </li>
+</ul>
+<p>In addition, each operation receives a few additional specific properties.</p>
+<h5 id="create"><a href="#create" class="headerlink" title="create"></a><code>create</code></h5><ul>
+<li><code>document</code>: the document to create received from the client.</li>
+<li><code>originalDocument</code>: the original document before going through callbacks.</li>
+</ul>
+<h5 id="update"><a href="#update" class="headerlink" title="update"></a><code>update</code></h5><ul>
+<li><code>data</code>: the object received from the client (that will be inserted in the database).</li>
+<li><code>originalData</code>: a copy of the original <code>data</code> (before it is mutated by callbacks).</li>
+<li><code>document</code>: the document resulting from the mutation.</li>
+<li><code>originalDocument</code>: the original document before the mutation being applied.</li>
+</ul>
+<p>Note that for <code>validate</code> and <code>before</code> callbacks, <code>document</code> will be a <em>simulated</em> preview of the mutation result. </p>
+<h5 id="delete"><a href="#delete" class="headerlink" title="delete"></a><code>delete</code></h5><ul>
+<li><code>document</code>: the document being deleted.</li>
+</ul>
+<h2 id="Global-Callbacks"><a href="#Global-Callbacks" class="headerlink" title="Global Callbacks"></a>Global Callbacks</h2><p>In addition to collection-specific callbacks, you can also define global callbacks that will run for every collections:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">addGlobalCallbacks</span>(&#123;</span><br><span class="line">  <span class="attribute">create</span>: &#123;</span><br><span class="line">    <span class="comment">// same as above</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attribute">update</span>: &#123;</span><br><span class="line">    <span class="comment">// same as above</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attribute">delete</span>: &#123;</span><br><span class="line">    <span class="comment">// same as above</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Note that if you call <code>addGlobalCallbacks()</code> multiple times, the callback object will be merged together. This can be useful to add global callbacks from more than one place in your code. </p>
+<h2 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h2><p>By default, any error in a callback function will be swallowed to avoid affecting other callbacks or the mutation itself. You can pass <code>break</code> on your <code>Error</code> object to cause the chain of callbacks to stop when using a <em>sync</em> callback.</p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mySyncCallback</span>(</span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> value = Posts.callingAFunctionThatDoesNotExistThisThrowsAnError();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (<span class="built_in">error</span>) &#123;</span><br><span class="line">    console.<span class="built_in">error</span>(<span class="built_in">error</span>);</span><br><span class="line">    // Cause Vulcan <span class="keyword">to</span> halt execution of resolver <span class="literal">and</span> <span class="keyword">throw</span> the <span class="built_in">error</span> <span class="keyword">to</span> Apollo</span><br><span class="line">    <span class="built_in">error</span>.break = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">error</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="comment">'post.create.before', mySyncCallback);</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Error-Callback"><a href="#Error-Callback" class="headerlink" title="Error Callback"></a>Error Callback</h3><p>This example extends a collection on the server with a callback that checks for any post with duplicate links on create and update. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Connectors, extendCollection &#125; <span class="keyword">from</span> <span class="string">"meteor/vulcan:core"</span>;</span><br><span class="line"><span class="keyword">import</span> Posts <span class="keyword">from</span> <span class="string">"../../modules/posts/collection.js"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> checkForDuplicates = <span class="keyword">async</span> (validationErrors, &#123; <span class="built_in">document</span>, data &#125;) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="built_in">document</span>.url || data.url;</span><br><span class="line">  <span class="keyword">const</span> duplicatePost = <span class="keyword">await</span> Connectors.get(Posts, &#123; url &#125;);</span><br><span class="line">  <span class="keyword">if</span> (duplicatePost) &#123;</span><br><span class="line">    validationErrors.push(&#123;</span><br><span class="line">      id: <span class="string">'app.duplicate_post'</span>,</span><br><span class="line">      path: <span class="string">'url'</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> validationErrors;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">extendCollection(Posts, &#123;</span><br><span class="line">  callbacks: &#123;</span><br><span class="line">    create: &#123;</span><br><span class="line">      validate: [checkForDuplicates],</span><br><span class="line">    &#125;,</span><br><span class="line">    update: &#123;</span><br><span class="line">      validate: [checkForDuplicates],</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Some things to note: </p>
+<ul>
+<li>Callbacks only run on the server, so we are extending the collection on the server instead of including this code in the main collection declaration, which is shared with the client. </li>
+<li>We look for the URL on both <code>document</code> (which exists within Create mutations) and <code>data</code> (for Update mutations).</li>
+<li>Instead of throwing an error, we add an error item to the <code>validationErrors</code> array.</li>
+<li>We set the path of that error to the path of our URL field so that the error can be displayed under the relevant form field when shown on the client. </li>
+<li>Hooks can be called in an <code>async</code> manner. </li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="groups-permissions.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Groups & Permissions
+        </a>
+      
+      
+        <a class="link primary next" href="users.html">
+          <span class="subtitle-pagination">Next</span>
+          Users
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/callbacks.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

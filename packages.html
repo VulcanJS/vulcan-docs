@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Packages Types | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Packages Types | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Packages Types | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Packages Types</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/packages.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>Vulcan uses a package-based architecture, meaning that the entirety of its codebase resides in packages.</p>
+<h2 id="Package-Types"><a href="#Package-Types" class="headerlink" title="Package Types"></a>Package Types</h2><p>Vulcan makes use of many different packages types, so it might be a good idea to get them straight before we move on.</p>
+<h3 id="NPM-Packages"><a href="#NPM-Packages" class="headerlink" title="NPM Packages"></a>NPM Packages</h3><p>These are listed in your <code>package.json</code> file, and they are generic Node JavaScript packages that don’t contain any Vulcan-specific code. </p>
+<p>Example: <code>react</code></p>
+<h3 id="Meteor-Core-Packages"><a href="#Meteor-Core-Packages" class="headerlink" title="Meteor Core Packages"></a>Meteor Core Packages</h3><p>In addition to NPM, Meteor also features its own package management system used in parallel. Meteor Core Packages are the packages that make up the Meteor framework itself. </p>
+<p>Example: <code>meteor-base</code></p>
+<h3 id="Meteor-Remote-Packages"><a href="#Meteor-Remote-Packages" class="headerlink" title="Meteor Remote Packages"></a>Meteor Remote Packages</h3><p>Meteor can also load packages from its package server. Remote packages must always follow the <code>username:package</code> naming convention.</p>
+<p>Example: <code>aldeed:collection2-core</code></p>
+<h3 id="Meteor-Local-Packages"><a href="#Meteor-Local-Packages" class="headerlink" title="Meteor Local Packages"></a>Meteor Local Packages</h3><p>Finally, Meteor can also load packages from the local file system. These packages can be named whatever you want, and don’t need to follow the <code>username:package</code> convention. </p>
+<p>Example: <code>example-movies</code>, <code>vulcan:forms</code></p>
+<p>Note that if both a local and remote Meteor package use the same name, Meteor will use the local copy.</p>
+<h2 id="Vulcan-Packages"><a href="#Vulcan-Packages" class="headerlink" title="Vulcan Packages"></a>Vulcan Packages</h2><p>Different Vulcan packages can play different roles. So here’s a quick overview of the different Vulcan package categories you’ll come across. </p>
+<h3 id="Core-Packages"><a href="#Core-Packages" class="headerlink" title="Core Packages"></a>Core Packages</h3><p>The <code>vulcan:core</code> package contains the heart of Vulcan, and itself depends on a set of core packages:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">vulcan:</span><span class="class"><span class="keyword">lib</span></span></span><br><span class="line"><span class="symbol">vulcan:</span>routing</span><br><span class="line"><span class="symbol">vulcan:</span>users</span><br></pre></td></tr></table></figure>
+
+<p>Note that since <code>vulcan:core</code> already includes these dependencies, you only need to make your own package depend on <code>vulcan:core</code>. </p>
+<h3 id="Features-Packages"><a href="#Features-Packages" class="headerlink" title="Features Packages"></a>Features Packages</h3><p>These optional packages provide additional features for your Vulcan app.</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">vulcan:</span>accounts</span><br><span class="line"><span class="symbol">vulcan:</span>forms</span><br><span class="line"><span class="symbol">vulcan:</span>email</span><br><span class="line"><span class="symbol">vulcan:</span>events</span><br></pre></td></tr></table></figure>
+
+<h3 id="Forum-Packages"><a href="#Forum-Packages" class="headerlink" title="Forum Packages"></a>Forum Packages</h3><p>Because Vulcan started its life as Telescope, a Hacker News-like forum app, it still includes quite a few packages that are made specifically to help you build a forum-type community app (enabled through <a href="example-forum.html">the <code>example-forum</code> package</a>). </p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">vulcan:</span>posts</span><br><span class="line"><span class="symbol">vulcan:</span>comments</span><br><span class="line"><span class="symbol">vulcan:</span>newsletter</span><br><span class="line"><span class="symbol">vulcan:</span>notifications</span><br><span class="line"><span class="symbol">vulcan:</span>getting-started</span><br><span class="line"><span class="symbol">vulcan:</span>categories</span><br><span class="line"><span class="symbol">vulcan:</span>voting</span><br><span class="line"><span class="symbol">vulcan:</span>embedly</span><br><span class="line"><span class="symbol">vulcan:</span>api</span><br><span class="line"><span class="symbol">vulcan:</span>rss</span><br><span class="line"><span class="symbol">vulcan:</span>subscribe</span><br></pre></td></tr></table></figure>
+
+<h3 id="Language-Packages"><a href="#Language-Packages" class="headerlink" title="Language Packages"></a>Language Packages</h3><p>These contain the language strings used throughout Vulcan (for the app core, features packages, and forum packages). You need <strong>at least one of them</strong> enabled. </p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vulcan:i18n-<span class="keyword">en</span>-<span class="keyword">us</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Accounts-Package"><a href="#Accounts-Package" class="headerlink" title="Accounts Package"></a>Accounts Package</h3><p>Accounts package contain the back-end authentication logic used by Meteor’s account system. You need <strong>at least one of them</strong> enabled.</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">accounts-password@<span class="number">1.3</span><span class="number">.4</span></span><br><span class="line"><span class="meta"># accounts-twitter</span></span><br><span class="line"><span class="meta"># accounts-facebook</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Custom-Packages"><a href="#Custom-Packages" class="headerlink" title="Custom Packages"></a>Custom Packages</h3><p>Any other package that contains your own logic. </p>
+<p>Out of the box, four example custom packages are provided:</p>
+<ul>
+<li><code>example-movies</code> contains a bare-bones forms and data loading example. </li>
+<li><code>example-instagram</code> goes a little bit further with a simple Instagram clone.</li>
+<li><code>example-forum</code> includes the original Telescope forum app.</li>
+<li><code>example-customization</code> shows how to customize and extend the forum example packages without having to modify their code directly. </li>
+</ul>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">example-movies</span><br><span class="line"><span class="meta"># example-movies-full</span></span><br><span class="line"><span class="meta"># example-forum</span></span><br><span class="line"><span class="meta"># example-customization</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Controlling-Dependencies"><a href="#Controlling-Dependencies" class="headerlink" title="Controlling Dependencies"></a>Controlling Dependencies</h2><p>Generally speaking, there are two ways a package can be added to your codebase. It can be a top-level dependency, or one of your packages can itself depend on it. </p>
+<p>For example, the <code>example-movies</code> package depends on <code>vulcan:core</code>, so adding <code>example-movies</code> will automatically add <code>vulcan:core</code> as well. This is why <code>vulcan:core</code> is not listed in your <code>.meteor/packages</code> file. </p>
+<p>But although <code>example-movies</code> can use the English text strings stored in <code>vulcan:i18n-en-us</code>, it doesn’t <em>depend</em> on it. This means you can (for example) swap out <code>vulcan:i18n-en-us</code> for <code>vulcan:i18n-fr-fr</code> in <code>.meteor/packages</code> to get French strings. </p>
+<p>A complete list of all Meteor packages currently loaded is stored in the <code>.meteor/versions</code> file. </p>
+<p>Note that Meteor packages may be added even if they are not located within the Vulcan root directory, by setting the <code>METEOR_PACKAGE_DIRS</code> environment variable. For example, the following commands will allow you to modify your <code>.profile</code> file to add any package located in the <code>packages</code> subdirectory of your home directory:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; <span class="variable">$HOME</span>/.profile</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">METEOR_PACKAGE_DIRS</span>=<span class="variable">$HOME</span>/packages</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="database.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Database Layer
+        </a>
+      
+      
+        <a class="link primary next" href="email.html">
+          <span class="subtitle-pagination">Next</span>
+          Email
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/packages.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

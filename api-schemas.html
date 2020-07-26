@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- Basic -->
-    <title>GraphQL Schema | Vulcan Docs</title>
+    <title>API Schemas | Vulcan Docs</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
@@ -12,12 +12,12 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://docs.vulcanjs.org">
-    <meta property="og:title" content="GraphQL Schema | Vulcan Docs">
+    <meta property="og:title" content="API Schemas | Vulcan Docs">
     <meta property="og:description" content>
     <meta property="og:image" content>
     <meta name="twitter:card" content="summary_image_large">
     <meta name="twitter:site" content="@vulcanjs">
-    <meta name="twitter:title" content="GraphQL Schema | Vulcan Docs">
+    <meta name="twitter:title" content="API Schemas | Vulcan Docs">
     <meta name="twitter:description" content>
     <meta name="twitter:image" content>
 
@@ -185,15 +185,15 @@
           <ul class="list-toc">
             
               
-              <li class="item-toc  current">
-                <a href class="sidebar-link  current">
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
                   <span>GraphQL Schema</span>
                 </a>
               </li>
             
               
-              <li class="item-toc ">
-                <a href="api-schemas.html" class="sidebar-link ">
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
                   <span>API Schemas</span>
                 </a>
               </li>
@@ -544,31 +544,33 @@
 <div class="content">
   <div class="content-wrapper">
     <div class="header-content">
-      <h1 class="title-page">GraphQL Schema</h1>
+      <h1 class="title-page">API Schemas</h1>
       
 
       <div class="page-actions">
         <div class="actions-group">
-          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/graphql-schema.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/api-schemas.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
           
         </div>
       </div>
     </div>
 
     <div class="document-formatting">
-      <p>The first piece of any GraphQL API is the <strong>schema</strong>, which defines what data is made available to the client.</p>
-<p>In Vulcan, this GraphQL schema can be generated automatically from your collection’s JSON schema, so you don’t have to type things twice. Just pass a <a href="https://github.com/aldeed/node-simple-schema" target="_blank" rel="noopener">SimpleSchema</a>-compatible JSON schema as <code>createCollection</code>‘s <code>schema</code> property.</p>
-<h2 id="Viewing-the-Schema"><a href="#Viewing-the-Schema" class="headerlink" title="Viewing the Schema"></a>Viewing the Schema</h2><p>You can view your GraphQL schema using the Meteor shell. First, launch the shell from your terminal with:</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor <span class="keyword">shell</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+      <p>API schemas lets you define schema fields that only exist in your GraphQL API, meaning these “virtual” fields don’t appear in your forms and don’t get saved to your database.</p>
+<h3 id="Defining-API-Schemas"><a href="#Defining-API-Schemas" class="headerlink" title="Defining API Schemas"></a>Defining API Schemas</h3><p>These fields support the following properties: </p>
+<ul>
+<li><code>canRead</code>: same as main schema canRead, with one notable exception: for apiSchema fields, canRead will default to [guests] (e.g. the field is public).</li>
+<li><code>description</code>: this is used as help text for the GraphQL API. </li>
+<li><code>typeName</code>: this is the GraphQL type (and not the JavaScript type, unlike “normal” fields!) the field should get resolved to.</li>
+<li><code>arguments</code>: the field’s arguments. </li>
+<li><code>resolver</code>: the field’s resolver function.</li>
+</ul>
+<p>Note that canCreate and canUpdate are not supported on apiSchema fields, since these fields by definition can not be stored in the database.</p>
+<p>For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> apiSchema = &#123;</span><br><span class="line">  latestPost: &#123;</span><br><span class="line">    canRead: [<span class="string">'members'</span>],</span><br><span class="line">    description,</span><br><span class="line">    typeName: <span class="string">'Post'</span>,</span><br><span class="line">    resolve: <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">//... &#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Then, type:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Vulcan</span><span class="selector-class">.getGraphQLSchema</span>()</span><br></pre></td></tr></table></figure>
-
-<p>Note: if <code>Vulcan</code> is not defined you can import it first with <code>import {Vulcan} from &#39;meteor/vulcan:lib&#39;</code>.</p>
-<h2 id="Custom-Schemas"><a href="#Custom-Schemas" class="headerlink" title="Custom Schemas"></a>Custom Schemas</h2><p>If you need to manually add a schema, you can also do this using the <code>addGraphQLSchema</code> function which will add one or more <a href="http://graphql.org/learn/schema/" target="_blank" rel="noopener">GraphQL schemas</a> to your GraphQL API:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addGraphQLSchema &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> customSchema = <span class="string">`</span></span><br><span class="line"><span class="string">  input Custom &#123;</span></span><br><span class="line"><span class="string">    _id: String</span></span><br><span class="line"><span class="string">    userId: String</span></span><br><span class="line"><span class="string">    title: String</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">addGraphQLSchema(customSchema);</span><br></pre></td></tr></table></figure>
-
-
+<h3 id="Adding-API-Schemas"><a href="#Adding-API-Schemas" class="headerlink" title="Adding API Schemas"></a>Adding API Schemas</h3><p>You can add an API schema to a collection with:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extendCollection(Posts, &#123;</span><br><span class="line">  apiSchema,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
     </div>
   </div>
 
@@ -576,16 +578,16 @@
     <div class="content-wrapper">
       
       
-        <a class="link primary prev" href="relations.html">
+        <a class="link primary prev" href="graphql-schema.html">
           <span class="icon-arrow-left-alt"></span>
           <span class="subtitle-pagination">Previous</span>
-          Relations
+          GraphQL Schema
         </a>
       
       
-        <a class="link primary next" href="api-schemas.html">
+        <a class="link primary next" href="queries.html">
           <span class="subtitle-pagination">Next</span>
-          API Schemas
+          Queries
           <span class="icon-arrow-right-alt"></span>
         </a>
       
@@ -593,7 +595,7 @@
   </div>
 
   <div class="github">
-    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/graphql-schema.md" target="_blank">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/api-schemas.md" target="_blank">
       <span class="icon-github"></span>Edit on GitHub</a>
   </div>
 

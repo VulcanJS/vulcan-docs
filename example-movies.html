@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Movies Example | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Movies Example | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Movies Example | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Movies Example</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/example-movies.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>Out of the box, Vulcan comes with many features such as handling posts and comments, generating a newsletter, and much more. </p>
+<p>But it’s important to understand that you can also use the underlying framework powering these features directly and build a completely different type of app. </p>
+<p>So in this tutorial, we’ll focus on understanding this framework and seeing how to build a simple paginated list of movies. </p>
+<p>The completed code for this tutorial can be found in <a href="https://github.com/VulcanJS/Vulcan-Starter/tree/master/packages/example-movies" target="_blank" rel="noopener">the <code>example-movies</code> package</a>.</p>
+<h2 id="Video-Tutorial"><a href="#Video-Tutorial" class="headerlink" title="Video Tutorial"></a>Video Tutorial</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/4HidaFce6j0" frameborder="0" allowfullscreen></iframe>
+
+<p>Note: this video differs slightly from the following tutorial when it comes to <a href="#The-User-Resolver">defining the <code>user</code> resolver on the <code>userId</code> field</a>. Both approaches will work, but make sure you check the tutorial to get the most up-to-date syntax. </p>
+<h2 id="Short-amp-Long-Versions"><a href="#Short-amp-Long-Versions" class="headerlink" title="Short &amp; Long Versions"></a>Short &amp; Long Versions</h2><p>This tutorial includes a shorter version that uses some of Vulcan’s default presets to save you time. If you’d rather to this short version, just skip every section marked with a <code>*</code> sign.</p>
+<h2 id="Set-Up"><a href="#Set-Up" class="headerlink" title="Set Up"></a>Set Up</h2><p>Clone the <a href="https://github.com/VulcanJS/Vulcan-Starter" target="_blank" rel="noopener">vulcan-starter</a> repository to get a working Vulcan project. </p>
+<p>Then, make sure you’re only including the packages you need. This means everything in your <code>.meteor/packages</code> file should be commented out except for the core packages, a language package, and an accounts package.</p>
+<p>Here’s a quick overview of the main packages:</p>
+<ul>
+<li><code>vulcan:core</code>: Vulcan’s core libraries. </li>
+<li><code>vulcan:forms</code>: the library used for generating and submitting forms. </li>
+<li><code>vulcan:routing</code>: sets up and initializes routing and server-side rendering.</li>
+<li><code>vulcan:users</code>: user management (groups, permissions, etc.).</li>
+</ul>
+<p>From these packages, we only need to keep <code>vulcan:core</code>, which will automatically include all the other packages Vulcan needs to work.</p>
+<p>We’ll also keep <code>vulcan:i18n-en-us</code>, since it contains strings for core UI features, as well as Meteor’s <code>accounts-password</code> package to activate password log in.</p>
+<p>Finally, open a terminal at the root of the vulcan-starter directory and install the node packages: <code>npm install</code></p>
+<h2 id="Creating-a-Package"><a href="#Creating-a-Package" class="headerlink" title="Creating a Package"></a>Creating a Package</h2><p>The next step will be creating a Meteor package to hold our code. This will be a <em>local</em> package, meaning it will live inside your repo, but we’ll still have all the advantages of regular, remote packages (easy to enable/disable, restricted scope, ability to specify dependencies, etc.).</p>
+<p>Create a new <code>my-package</code> directory under <code>/packages</code>. We’ll use the following file structure:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">my-package</span><br><span class="line">- package.js</span><br><span class="line">  lib</span><br><span class="line">    client</span><br><span class="line">      - main.js</span><br><span class="line">    components</span><br><span class="line">      movies</span><br><span class="line">    modules</span><br><span class="line">      movies</span><br><span class="line">      - index.js</span><br><span class="line">    server</span><br><span class="line">      - main.js</span><br><span class="line">    stylesheets</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>package.js</code> is your <a href="http://docs.meteor.com/api/packagejs.html" target="_blank" rel="noopener">package manifest</a>, and it tells Meteor which files to load.</li>
+<li><code>client/main.js</code> and <code>server/main.js</code> are the client and server entry points.</li>
+<li><code>modules/index.js</code> lists all the various modules that make up our package. </li>
+</ul>
+<p>Set up all the directories along with the blank files within. Once this is done, let’s start with the <code>package.js</code> file:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Package.describe(&#123;</span><br><span class="line">  name: <span class="string">'my-package'</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Package.onUse(<span class="function"><span class="keyword">function</span> (<span class="params">api</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  api.use([</span><br><span class="line">    <span class="string">'vulcan:core@1.14.1'</span>,</span><br><span class="line">    <span class="string">'vulcan:forms@1.14.1'</span>,</span><br><span class="line">    <span class="string">'vulcan:accounts@1.14.1'</span>,</span><br><span class="line">  ]);</span><br><span class="line"></span><br><span class="line">  api.addFiles(<span class="string">'lib/stylesheets/bootstrap.min.css'</span>);</span><br><span class="line"></span><br><span class="line">  api.mainModule(<span class="string">'lib/server/main.js'</span>, <span class="string">'server'</span>);</span><br><span class="line">  api.mainModule(<span class="string">'lib/client/main.js'</span>, <span class="string">'client'</span>);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The <code>api.use</code> block defines our package’s dependencies: <code>vulcan:core</code>, <code>vulcan:forms</code>, and <code>vulcan:accounts</code>, a package that provides a set of React components for managing log in and sign up. </p>
+<p>We then define our two client and server endpoints using <code>api.mainModule</code>. Create <code>lib/client/main.js</code> and <code>lib/server/main.js</code>, and paste in the following line in both:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../modules/index.js'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Finally, let’s include the <a href="http://getbootstrap.com" target="_blank" rel="noopener">Bootstrap</a> stylesheet in <code>lib/stylesheets/bootstrap.min.css</code> to make our app look a little better. You can get it from <a href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" target="_blank" rel="noopener">here</a>.</p>
+<p>The last step to activate your package is enabling it using the <code>meteor add</code> command to add it to your <code>.meteor/packages</code> file:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meteor <span class="keyword">add</span><span class="bash"> my-package</span></span><br></pre></td></tr></table></figure>
+
+<p>It may seem like not much happened, but once Meteor restart our custom package will now be active and loaded. </p>
+<h2 id="Our-First-Component"><a href="#Our-First-Component" class="headerlink" title="Our First Component"></a>Our First Component</h2><p>We now have the basic structure of our package, so let’s get to work. We’ll create a new component and a new route to display it. </p>
+<p>First, create a new <code>components</code> directory inside <code>lib</code> if you haven’t done so yet and add the <code>movies</code> directory inside of it. In <code>components/movies</code> add a new file named <code>MoviesList.jsx</code> containing a <code>MoviesList</code> component:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; registerComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesList = <span class="function"><span class="params">()</span> =&gt;</span> </span><br><span class="line">  </span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">maxWidth</span>: <span class="string">'500px'</span>, <span class="attr">margin</span>: <span class="string">'20px auto'</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    Hello World!</span><br><span class="line"></span><br><span class="line">    &#123;<span class="comment">/* user accounts placeholder */</span>&#125;</span><br><span class="line"></span><br><span class="line">      &lt;div className=<span class="string">"movies"</span>&gt;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* new document form placeholder */</span>&#125;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* documents list placeholder */</span>&#125;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* load more placeholder */</span>&#125;</span><br><span class="line"></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">registerComponent(&#123;<span class="attr">name</span>: <span class="string">'MoviesList'</span>, <span class="attr">component</span>: MoviesList&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>We’ll also create a new <code>components.js</code> file inside <code>modules</code> so we can import our new component and make it available globally: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../components/movies/MoviesList.jsx'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Then we need to import the <code>components.js</code> inside of our <code>modules/index.js</code> before going to the next step.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./components.js'</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Routing"><a href="#Routing" class="headerlink" title="Routing"></a>Routing</h2><p>We can now create a <a href="/routing.html">route</a> to display this component. Create a new <code>routes.js</code> file inside <code>modules</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addRoute &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">addRoute(&#123; <span class="attr">name</span>: <span class="string">'movies'</span>, <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">componentName</span>: <span class="string">'MoviesList'</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>In case you’re wondering, <code>addRoute</code> is a very thin wrapper over <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">React Router</a>. </p>
+<p>Make sure to also import <code>routes.js</code> inside <code>modules/index.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./routes.js'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>If everything worked properly, open a terminal at the root of the vulcan-starter directory and type <code>npm start</code> you should now be able to head to <code>http://localhost:3000/</code> and see your <code>MoviesList</code> component show up. </p>
+<h2 id="The-Schema"><a href="#The-Schema" class="headerlink" title="The Schema"></a>The Schema</h2><p>We want to display a list of movies, which means querying for data as well as setting up basic insert, edit, and remove operations. But before we can do any of that, we need to define what a “movie” is. In other words, we need a schema. </p>
+<p>Vulcan uses JSON schemas based on the <a href="https://github.com/aldeed/simple-schema-js" target="_blank" rel="noopener">SimpleSchema</a> npm module. You can also check out the <a href="/schemas.html">Collections &amp; Schemas</a> section if you want to learn more. </p>
+<p>Create <code>schema.js</code> inside <code>modules/movies</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// default properties</span></span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  createdAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    onCreate: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// custom properties</span></span><br><span class="line"></span><br><span class="line">  name: &#123;</span><br><span class="line">    label: <span class="string">'Name'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  year: &#123;</span><br><span class="line">    label: <span class="string">'Year'</span>,</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  review: &#123;</span><br><span class="line">    label: <span class="string">'Review'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> schema;</span><br></pre></td></tr></table></figure>
+
+<p>Note that we’re setting up an <code>onCreate</code> function on the <code>createdAt</code> field to initialize it to the current timestamp whenever a new document is inserted. </p>
+<p>And we’re also setting <code>canRead: [&#39;guests&#39;]</code> on every field to make sure they’re visible to non-logged-in users (who belong to the default <code>guests</code> group). By default, any schema field is kept private, so we need to make sure we don’t forget this step if we want our data to be publicly accessible.</p>
+<h2 id="Setting-Up-a-Collection"><a href="#Setting-Up-a-Collection" class="headerlink" title="Setting Up a Collection"></a>Setting Up a Collection</h2><p>We’re now ready to set up our <code>Movies</code> collection. Create a new <code>collection.js</code> file inside <code>modules/movies</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema: schema,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+
+<p><code>createCollection</code> takes in a collection name, type name (in other words, the GraphQL type of documents belonging to this collection), a schema (as well as a few other objecs we’ll learn about later) and sets up a fully working GraphQL data layer for you!</p>
+<p>As we did previously with <code>routes.js</code>, import <code>collection.js</code> from <code>index.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The Movies collection</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Routes</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'./routes.js'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>At this point it might not look like much has changed, but we now have a functional GraphQL schema! You can see it by opening up the Meteor shell in a terminal window (by typing <code>meteor shell</code> from within your app directory) and typing:</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;GraphQLSchema&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:lib'</span></span><br><span class="line">GraphQLSchema.finalSchema</span><br></pre></td></tr></table></figure>
+
+<p>But even though we have a schema, we can’t actually query for a document yet because we don’t have any <strong>query resolvers</strong>. </p>
+<h2 id="Note-Default-Resolvers-amp-Mutations"><a href="#Note-Default-Resolvers-amp-Mutations" class="headerlink" title="Note: Default Resolvers &amp; Mutations"></a>Note: Default Resolvers &amp; Mutations</h2><p>Vulcan provides a set of <a href="/resolvers.html#Default-Resolvers">default resolvers</a> to speed things up, but for the sake of learning how things work this tutorial will show you how to write resolvers yourself. </p>
+<p>If you’d rather skip this and use the defaults for now, just use the following code in <code>collection.js</code>, and simply ignore any section concerning the <code>resolvers.js</code> or <code>mutations.js</code> files (they will be marked with a <code>*</code> sign):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection, getDefaultResolvers, getDefaultMutations &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema: schema,</span><br><span class="line">  </span><br><span class="line">  resolvers: getDefaultResolvers(&#123;<span class="attr">typeName</span>: <span class="string">'Movie'</span>&#125;),</span><br><span class="line"></span><br><span class="line">  mutations: getDefaultMutations(&#123;<span class="attr">typeName</span>: <span class="string">'Movie'</span>&#125;),</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+
+<p>The code above throws an error <code>Error: Type &quot;CreateMovieDataInput&quot; not found in document.</code> This is because we need to set permission to mutate the collection. This will be done later in the <a href="#Actions-Groups-amp-Permissions">Actions, Groups, &amp; Permissions</a> chapter. For now, to avoid this error, you can comment out the line defining the mutations in the collection, but don’t forget to uncomment it once we have set the permissions.</p>
+<h2 id="Custom-Query-Resolvers"><a href="#Custom-Query-Resolvers" class="headerlink" title="Custom Query Resolvers*"></a>Custom Query Resolvers*</h2><p><em>(Note: you can skip this section if you’re using default resolvers and mutations)</em></p>
+<p>In a nutshell, a resolver tells the server how to respond to a specific GraphQL query, and you can learn more about them in the <a href="/resolvers.html">Resolvers</a> section. </p>
+<p>Let’s start simple. Create a new <code>resolvers.js</code> file inside <code>modules/movies</code> and add:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolvers = &#123;</span><br><span class="line">  multi: &#123;</span><br><span class="line"></span><br><span class="line">    name: <span class="string">'movies'</span>,</span><br><span class="line"></span><br><span class="line">    resolver(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">results</span>: context.Movies.find().fetch() &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> resolvers;</span><br></pre></td></tr></table></figure>
+
+<p>Then import this new file from <code>collection.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"><span class="keyword">import</span> resolvers <span class="keyword">from</span> <span class="string">'./resolvers.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema: schema,</span><br><span class="line">  </span><br><span class="line">  resolvers: resolvers,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Seeding-The-Database"><a href="#Seeding-The-Database" class="headerlink" title="Seeding The Database"></a>Seeding The Database</h2><p>We can try out our new query resolver using <a href="https://github.com/graphql/graphiql" target="_blank" rel="noopener">GraphiQL</a>, but first we need some data. Create a new <code>seed.js</code> file inside <code>server</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../modules/movies/collection.js'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createMutator &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> seedData = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Star Wars'</span>,</span><br><span class="line">    year: <span class="number">1973</span>,</span><br><span class="line">    review: <span class="string">`A classic.`</span>,</span><br><span class="line">    privateComments: <span class="string">`Actually, I don't really like Star Wars…`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Die Hard'</span>,</span><br><span class="line">    year: <span class="number">1987</span>,</span><br><span class="line">    review: <span class="string">`A must-see if you like action movies.`</span>,</span><br><span class="line">    privateComments: <span class="string">`I love Bruce Willis so much!`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Terminator'</span>,</span><br><span class="line">    year: <span class="number">1983</span>,</span><br><span class="line">    review: <span class="string">`Once again, Schwarzenegger shows why he's the boss.`</span>,</span><br><span class="line">    privateComments: <span class="string">`Terminator is my favorite movie ever. `</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Jaws'</span>,</span><br><span class="line">    year: <span class="number">1971</span>,</span><br><span class="line">    review: <span class="string">'The original blockbuster.'</span>,</span><br><span class="line">    privateComments: <span class="string">`I'm scared of sharks…`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Die Hard II'</span>,</span><br><span class="line">    year: <span class="number">1991</span>,</span><br><span class="line">    review: <span class="string">`Another classic.`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Rush Hour'</span>,</span><br><span class="line">    year: <span class="number">1993</span>,</span><br><span class="line">    review: <span class="string">`Jackie Chan at his best.`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Citizen Kane'</span>,</span><br><span class="line">    year: <span class="number">1943</span>,</span><br><span class="line">    review: <span class="string">`A disappointing lack of action sequences.`</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'Commando'</span>,</span><br><span class="line">    year: <span class="number">1983</span>,</span><br><span class="line">    review: <span class="string">'A good contender for highest kill count ever.'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">Meteor.startup(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Users.find().fetch().length === <span class="number">0</span>) &#123;</span><br><span class="line">    Accounts.createUser(&#123;</span><br><span class="line">      username: <span class="string">'DemoUser'</span>,</span><br><span class="line">      email: <span class="string">'dummyuser@telescopeapp.org'</span>,</span><br><span class="line">      profile: &#123;</span><br><span class="line">        isDummy: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> currentUser = Users.findOne();</span><br><span class="line">  <span class="keyword">if</span> (Movies.find().fetch().length === <span class="number">0</span>) &#123;</span><br><span class="line">    seedData.forEach(<span class="function"><span class="params">document</span> =&gt;</span> &#123;</span><br><span class="line">      createMutator(&#123;</span><br><span class="line">        collection: Movies,</span><br><span class="line">        <span class="built_in">document</span>: <span class="built_in">document</span>, </span><br><span class="line">        currentUser: currentUser,</span><br><span class="line">        validate: <span class="literal">false</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>This time, we don’t want to import this on the client, so we’ll import it directly from our <code>server/main.js</code> endpoint:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../modules/index.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./seed.js'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Head to <a href="http://localhost:3000/graphiql" target="_blank" rel="noopener">http://localhost:3000/graphiql</a> and type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query moviesQuery &#123;</span><br><span class="line">  movies &#123;</span><br><span class="line">    results &#123;</span><br><span class="line">      createdAt</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You should get a list of movie names and creation dates on the right. If you’d like, try requesting more fields:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">query moviesQuery &#123;</span><br><span class="line">  movies &#123;</span><br><span class="line">    results &#123;</span><br><span class="line">      createdAt</span><br><span class="line">      name</span><br><span class="line">      review</span><br><span class="line">      year</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>As you can see, the great thing about GraphQL is that you can specify exactly which piece of data you need!</p>
+<h2 id="More-Advanced-Resolvers"><a href="#More-Advanced-Resolvers" class="headerlink" title="More Advanced Resolvers*"></a>More Advanced Resolvers*</h2><p><em>(Note: you can skip this section if you’re using default resolvers and mutations)</em></p>
+<p>Although our resolver works, it’s fairly limited. As it stands, we can’t filter, sort, or paginate our data. Even though we might not need these features right away, now is a good time to set things up in a more future-proof way.</p>
+<p>Our resolver will accept a <a href="terms-parameters.html">terms</a> object that can specify filtering and sorting options, which is then transformed into a MongoDB-compatible object by the <code>Movies.getParameters()</code> function. Additionally, we’ll add a <code>totalCount</code> field that contains the <em>number</em> of documents matching these terms:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolvers = &#123;</span><br><span class="line">  multi: &#123;</span><br><span class="line">    name: <span class="string">'movies'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> resolver(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">input</span>: &#123;terms = &#123;&#125;&#125; = &#123;<span class="attr">terms</span>: &#123;&#125;&#125; &#125; = args;</span><br><span class="line">      <span class="keyword">let</span> &#123; selector, options &#125; = <span class="keyword">await</span> context.Movies.getParameters(terms, &#123;&#125;, context.currentUser);</span><br><span class="line">      movies = <span class="keyword">await</span> context.Movies.find(selector, options);</span><br><span class="line">      moviesContent = movies.fetch();</span><br><span class="line">      moviesCount = movies.count();</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">results</span>: moviesContent, <span class="attr">totalCount</span>: moviesCount &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> resolvers;</span><br></pre></td></tr></table></figure>
+
+<p>Our resolvers take three arguments:</p>
+<ul>
+<li><code>root</code>: a link back to the root of the current GraphQL node. You can safely ignore this for now. </li>
+<li><code>args</code>: an object containing the query arguments passed from the client.</li>
+<li><code>context</code>: an object enabling access to our collections, as well as utilities such as <code>getViewableFields</code> (which is used to get a list of all fields viewable for the current user for a given collection). </li>
+</ul>
+<p>Once we’ve figured out the correct <code>selector</code> and <code>options</code> object from the <code>terms</code> and the current user, all that’s left is to make the actual database query using <code>Movies.find()</code>. </p>
+<h2 id="The-User-Resolver"><a href="#The-User-Resolver" class="headerlink" title="The User Resolver"></a>The User Resolver</h2><p>If you inspect the collection schema for a movie, you’ll notice it contains a <code>userId</code> field that contains a string. </p>
+<p>But that string, while useful internally, isn’t much use to our app’s users. Instead, we’d much rather display the reviewer’s name. In order to do so, we’ll <strong>resolver</strong> the <code>userId</code> field as a <code>user</code> object containing all the data we need. </p>
+<p>Go back to your <code>schema.js</code> file, and add the following <code>resolveAs</code> property to the <code>userId</code> field:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">userId: &#123;</span><br><span class="line">  type: <span class="built_in">String</span>,</span><br><span class="line">  optional: <span class="literal">true</span>,</span><br><span class="line">  canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  resolveAs: &#123;</span><br><span class="line">    fieldName: <span class="string">'user'</span>,</span><br><span class="line">    type: <span class="string">'User'</span>,</span><br><span class="line">    resolver: <span class="function">(<span class="params">movie, args, context</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: movie.userId &#125;, &#123; <span class="attr">fields</span>: context.Users.getViewableFields(context.currentUser, context.Users) &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    addOriginalField: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>We are doing four things here:</p>
+<ol>
+<li>Specifying that the field should be named <code>user</code> in the API.</li>
+<li>Specifying that the <code>user</code> field returns an object of GraphQL type <code>User</code>.</li>
+<li>Defining a <code>resolver</code> function that indicates how to retrieve that object.</li>
+<li>Specifying that in addition to this new <code>user</code> object, we want the original <code>userId</code> field to still be available as well. </li>
+</ol>
+<p>To test this, go back to <a href="http://localhost:3000/graphiql" target="_blank" rel="noopener">GraphiQL</a> and send the following query to our server: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query moviesQuery &#123;</span><br><span class="line">  movies &#123;</span><br><span class="line">    results &#123;</span><br><span class="line">      name</span><br><span class="line">      userId</span><br><span class="line">      user &#123;</span><br><span class="line">        username</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    totalCount</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You should see new fields returned by the server:</p>
+<ul>
+<li>Inside the <code>results</code> there should be the <code>userId</code> field, an object <code>user</code> containing the username of the creator. You can also query all the fields from the <code>Users</code> collection, such as <code>email</code>.</li>
+<li>Additionally to the <code>results</code> object, there should be a <code>totalCount</code> field that contains the number of movies queried.</li>
+</ul>
+<h2 id="Displaying-Data"><a href="#Displaying-Data" class="headerlink" title="Displaying Data"></a>Displaying Data</h2><p>Now that we know we can access data from the client, let’s see how to actually load and display it within our app. </p>
+<p>We’ll need two pieces for this: a <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.uid3w3pk8" target="_blank" rel="noopener"><strong>container</strong> component</a> that loads the data, and a <strong>presentational</strong> component that displays it. Fortunately, Vulcan comes with <a href="resolvers.html#Higher-Order-Components">a set of built-in higher-order container components</a> which we can use out of the box, so we can focus on the presentational components.</p>
+<p>Create a new <code>MoviesItem.jsx</code> component inside <code>components/movies</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; registerComponent, Components &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesItem = <span class="function">(<span class="params">&#123;movie, currentUser&#125;</span>) =&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">paddingBottom</span>: <span class="string">"15px"</span>,<span class="attr">marginBottom</span>: <span class="string">"15px"</span>, <span class="attr">borderBottom</span>: <span class="string">"1px solid #ccc"</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;h4&gt;&#123;movie.name&#125; (&#123;movie.year&#125;)&lt;<span class="regexp">/h4&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;&#123;movie.review&#125; – &#123;movie.user &amp;&amp; movie.user.displayName&#125;&lt;/</span>p&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">registerComponent(&#123;name: 'MoviesItem', component: MoviesItem&#125;);</span></span><br></pre></td></tr></table></figure>
+
+<p>Don’t forget to import our new component in <code>components.js</code>: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../components/movies/MoviesItem.jsx'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>We’ll also come back to the <code>MoviesList</code> component and use a <a href="fragments.html">GraphQL fragment</a> (which we’ll define in the next section) to specify what data we want to load using the <code>withMulti</code> <a href="/resolvers.html#Higher-Order-Components">higher-order component</a>, and then show it using <code>MoviesItem</code>: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, registerComponent, withMulti, withCurrentUser, Loading &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesList = <span class="function">(<span class="params">&#123;results = [], currentUser, loading, loadMore, count, totalCount&#125;</span>) =&gt;</span> </span><br><span class="line">  </span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">maxWidth</span>: <span class="string">'500px'</span>, <span class="attr">margin</span>: <span class="string">'20px auto'</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    &#123;<span class="comment">/* user accounts placeholder*/</span>&#125;</span><br><span class="line"></span><br><span class="line">    &#123;loading ? </span><br><span class="line"></span><br><span class="line">      &lt;Loading /&gt; :</span><br><span class="line"></span><br><span class="line">      &lt;div className=<span class="string">"movies"</span>&gt;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* new document form placeholder */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/* documents list */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &#123;results.map(<span class="function"><span class="params">movie</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Components.MoviesItem</span> <span class="attr">key</span>=<span class="string">&#123;movie._id&#125;</span> <span class="attr">movie</span>=<span class="string">&#123;movie&#125;</span> <span class="attr">currentUser</span>=<span class="string">&#123;currentUser&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">        </span></span><br><span class="line"><span class="xml">        &#123;/* load more */&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">        &#123;totalCount &gt; results.length ?</span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">onClick</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;e.preventDefault(); loadMore();&#125;&#125;&gt;Load More (&#123;count&#125;/&#123;totalCount&#125;)<span class="tag">&lt;/<span class="name">a</span>&gt;</span> : </span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">p</span>&gt;</span>No more items.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const options = &#123;</span></span><br><span class="line"><span class="regexp">  collection: Movies,</span></span><br><span class="line"><span class="regexp">  fragmentName: 'MoviesItemFragment',</span></span><br><span class="line"><span class="regexp">  limit: 5</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">registerComponent(&#123; name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser] &#125;);</span></span><br></pre></td></tr></table></figure>
+
+<p>We want to provide <code>MoviesList</code> with the <code>results</code> document list and the <code>currentUser</code> property, so we wrap it with <code>withMulti</code> and <code>withCurrentUser</code>.</p>
+<h2 id="Fragments"><a href="#Fragments" class="headerlink" title="Fragments"></a>Fragments</h2><p>At this stage, we’ll probably get an error message saying the fragment we’re using is not yet defined. To remedy this, create a new <code>fragments.js</code> file inside <code>modules/movies</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; registerFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line">registerFragment(<span class="string">`</span></span><br><span class="line"><span class="string">  fragment MoviesItemFragment on Movie &#123;</span></span><br><span class="line"><span class="string">    _id</span></span><br><span class="line"><span class="string">    createdAt</span></span><br><span class="line"><span class="string">    userId</span></span><br><span class="line"><span class="string">    user &#123;</span></span><br><span class="line"><span class="string">      displayName</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    name</span></span><br><span class="line"><span class="string">    year</span></span><br><span class="line"><span class="string">    review</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>);</span><br></pre></td></tr></table></figure>
+
+<p>And don’t forget to import it within <code>collection.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"><span class="keyword">import</span> resolvers <span class="keyword">from</span> <span class="string">'./resolvers.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./fragments.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+
+<p>Once you save, you should finally get your prize: a shiny new movie list displayed right there on your screen!</p>
+<h2 id="User-Accounts"><a href="#User-Accounts" class="headerlink" title="User Accounts"></a>User Accounts</h2><p>So far so good, but we can’t yet do a lot with our app. In order to give it a little more potential, let’s add user accounts to <code>MoviesList</code>: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, registerComponent, withMulti, withCurrentUser, Loading &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesList = <span class="function">(<span class="params">&#123;results = [], currentUser, loading, loadMore, count, totalCount&#125;</span>) =&gt;</span> </span><br><span class="line">  </span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">maxWidth</span>: <span class="string">'500px'</span>, <span class="attr">margin</span>: <span class="string">'20px auto'</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    &#123;<span class="comment">/* user accounts */</span>&#125;</span><br><span class="line"></span><br><span class="line">    &lt;div style=&#123; &#123; <span class="attr">padding</span>: <span class="string">'20px 0'</span>, <span class="attr">marginBottom</span>: <span class="string">'20px'</span>, <span class="attr">borderBottom</span>: <span class="string">'1px solid #ccc'</span> &#125; &#125;&gt;</span><br><span class="line">    </span><br><span class="line">      &lt;Components.AccountsLoginForm /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &#123;loading ? </span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;Loading /</span>&gt; :</span><br><span class="line"></span><br><span class="line">      &lt;div className=<span class="string">"movies"</span>&gt;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* new document form placeholder */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/* documents list */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &#123;results.map(<span class="function"><span class="params">movie</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Components.MoviesItem</span> <span class="attr">key</span>=<span class="string">&#123;movie._id&#125;</span> <span class="attr">movie</span>=<span class="string">&#123;movie&#125;</span> <span class="attr">currentUser</span>=<span class="string">&#123;currentUser&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">        </span></span><br><span class="line"><span class="xml">        &#123;/* load more */&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">        &#123;totalCount &gt; results.length ?</span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">onClick</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;e.preventDefault(); loadMore();&#125;&#125;&gt;Load More (&#123;count&#125;/&#123;totalCount&#125;)<span class="tag">&lt;/<span class="name">a</span>&gt;</span> : </span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">p</span>&gt;</span>No more items.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const options = &#123;</span></span><br><span class="line"><span class="regexp">  collection: Movies,</span></span><br><span class="line"><span class="regexp">  fragmentName: 'MoviesItemFragment',</span></span><br><span class="line"><span class="regexp">  limit: 5</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">registerComponent(&#123; name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser] &#125;);</span></span><br></pre></td></tr></table></figure>
+
+<p>Yay! You can now log in and sign up at your own leisure. Note that the <code>&lt;Components.AccountsLoginForm /&gt;</code> component is a ready-made accounts UI component that comes from the <code>vulcan:accounts</code> package. </p>
+<h2 id="Mutations"><a href="#Mutations" class="headerlink" title="Mutations*"></a>Mutations*</h2><p><em>(Note: you can skip this section if you’re using default resolvers and mutations)</em></p>
+<p>Now that we’re logged in, we can start interacting with our data. Let’s build a simple form for adding new movies.</p>
+<p>Before we can build the user-facing part of this feature though, we need to think about how the insertion will be handled server-side, using <a href="mutations.html">Mutations</a>.</p>
+<p>Create a new <code>mutations.js</code> file in <code>modules/movies</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createMutator, Utils &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">  create: &#123;</span><br><span class="line">    name: <span class="string">'createMovie'</span>,</span><br><span class="line"></span><br><span class="line">    check(user) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.canDo(user, <span class="string">'movie.create'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">data</span>: <span class="built_in">document</span> &#125; = args;</span><br><span class="line">      </span><br><span class="line">      Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> createMutator(&#123;</span><br><span class="line">        collection: context.Movies,</span><br><span class="line">        <span class="built_in">document</span>: <span class="built_in">document</span>,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>, </span><br><span class="line">        context,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mutations;</span><br></pre></td></tr></table></figure>
+
+<p>This mutation performs a simple check for the presence of a logged-in user and whether they can perform the action, and then passes on the <code>document</code> property to one of Vulcan’s boilerplate mutations, <code>createMutator</code>. </p>
+<p>Let’s pass it on to our <code>createCollection</code> function in <code>collection.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"><span class="keyword">import</span> resolvers <span class="keyword">from</span> <span class="string">'./resolvers.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./fragments.js'</span>;</span><br><span class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line"></span><br><span class="line">  collectionName: <span class="string">'Movies'</span>,</span><br><span class="line"></span><br><span class="line">  typeName: <span class="string">'Movie'</span>,</span><br><span class="line"></span><br><span class="line">  schema: schema,</span><br><span class="line">  </span><br><span class="line">  resolvers: resolvers,</span><br><span class="line"></span><br><span class="line">  mutations: mutations,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Movies;</span><br></pre></td></tr></table></figure>
+
+<p>At this state, your application should be crashing with the message <code>Error: Type &quot;CreateMovieDataInput&quot; not found in document.</code>. This will be fixed once we set the permissions to mutate the data.</p>
+<h2 id="Actions-Groups-amp-Permissions"><a href="#Actions-Groups-amp-Permissions" class="headerlink" title="Actions, Groups, &amp; Permissions"></a>Actions, Groups, &amp; Permissions</h2><p>The mutation’s <code>check</code> function checks if the user can perform an action named <code>movies.create</code>. We want all logged-in users (known as the <code>members</code> group) to be able to perform this action, so let’s take care of this by creating a new <code>movies/permissions.js</code> file:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> membersActions = [</span><br><span class="line">  <span class="string">'movie.create'</span>,</span><br><span class="line">];</span><br><span class="line">Users.groups.members.can(membersActions);</span><br></pre></td></tr></table></figure>
+
+<p>And adding it to <code>collection.js</code> as usual:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"><span class="keyword">import</span> resolvers <span class="keyword">from</span> <span class="string">'./resolvers.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./fragments.js'</span>;</span><br><span class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./permissions.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Movies = createCollection(&#123;</span><br><span class="line">  permissions: &#123;</span><br><span class="line">    canCreate: [<span class="string">"members"</span>],</span><br><span class="line">    canRead: [<span class="string">"guests"</span>],</span><br><span class="line">    canUpdate: [<span class="string">"owners"</span>, <span class="string">"admins"</span>],</span><br><span class="line">    canDelete: [<span class="string">"owners"</span>, <span class="string">"admins"</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Vulcan, which you can learn more about in the <a href="/groups-permissions.html">Groups &amp; Permissions</a> section.</p>
+<p>One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. </p>
+<p>Once again, we do this through the schema. We’ll add an <code>canCreate</code> property to any “insertable” field and set it to <code>[members]</code> to indicate that a field should be insertable by any member of the <code>members</code> group (in other words, regular logged-in users):</p>
+<p>We add <a href="/groups-permissions.html#Document-level-Permissions">document-level permissions</a> to secure document access. It will also allow us to <a href="/groups-permissions.html#Checking-Permissions">check permissions</a> client-side.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// default properties</span></span><br><span class="line"></span><br><span class="line">  _id: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  createdAt: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    onCreate: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  userId: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    resolveAs: &#123;</span><br><span class="line">      fieldName: <span class="string">'user'</span>,</span><br><span class="line">      type: <span class="string">'User'</span>,</span><br><span class="line">      resolver: <span class="function">(<span class="params">movie, args, context</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> context.Users.findOne(&#123; <span class="attr">_id</span>: movie.userId &#125;, &#123; <span class="attr">fields</span>: context.Users.getViewableFields(context.currentUser, context.Users) &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">      addOriginalField: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// custom properties</span></span><br><span class="line"></span><br><span class="line">  name: &#123;</span><br><span class="line">    label: <span class="string">'Name'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'members'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  year: &#123;</span><br><span class="line">    label: <span class="string">'Year'</span>,</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'members'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  review: &#123;</span><br><span class="line">    label: <span class="string">'Review'</span>,</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    optional: <span class="literal">true</span>,</span><br><span class="line">    control: <span class="string">'textarea'</span>,</span><br><span class="line">    canRead: [<span class="string">'guests'</span>],</span><br><span class="line">    canCreate: [<span class="string">'members'</span>],</span><br><span class="line">    canUpdate: [<span class="string">'members'</span>]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> schema;</span><br></pre></td></tr></table></figure>
+
+<p>While we’re at it we’ll also specify which fields can be edited via <code>canUpdate</code>. In this case, the three fields we want members to be able to write to are <code>name</code>, <code>year</code>, and <code>review</code>. Finally, we’ll also give the <code>review</code> field a <code>textarea</code> form control. </p>
+<p>At this point it’s worth pointing out that for mutations like inserting and editing a document, we have two distinct permission “checkpoints”: first, the mutation’s <code>check</code> function checks if the user can perform the mutation at all. Then, each of the mutated document’s fields is checked individually to see if the user should be able to mutate it.</p>
+<p>This makes it easy to set up collections with admin-only fields, for example. </p>
+<h2 id="Forms"><a href="#Forms" class="headerlink" title="Forms"></a>Forms</h2><p>We now have everything we need to create a new <code>MoviesNewForm.jsx</code> component using the <a href="/forms.html">SmartForm</a> utility:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, registerComponent, withCurrentUser, getFragment &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">"meteor/vulcan:users"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesNewForm = <span class="function">(<span class="params">&#123;currentUser&#125;</span>) =&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;div&gt;</span><br><span class="line"></span><br><span class="line">    &#123;Users.canCreate(&#123;</span><br><span class="line">      collection: Movies,</span><br><span class="line">      user: currentUser</span><br><span class="line">    &#125;) ?</span><br><span class="line">      &lt;div style=&#123; &#123; <span class="attr">marginBottom</span>: <span class="string">'20px'</span>, <span class="attr">paddingBottom</span>: <span class="string">'20px'</span>, <span class="attr">borderBottom</span>: <span class="string">'1px solid #ccc'</span> &#125; &#125;&gt;</span><br><span class="line">        &lt;h4&gt;Insert New Document&lt;<span class="regexp">/h4&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Components.SmartForm </span></span><br><span class="line"><span class="regexp">          collection=&#123;Movies&#125;</span></span><br><span class="line"><span class="regexp">          mutationFragment=&#123;getFragment('MoviesItemFragment')&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt; </span><br><span class="line">      &lt;<span class="regexp">/div&gt; :</span></span><br><span class="line"><span class="regexp">      null</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">registerComponent(&#123; <span class="attr">name</span>: <span class="string">'MoviesNewForm'</span>, <span class="attr">component</span>: MoviesNewForm, <span class="attr">hocs</span>: [withCurrentUser] &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>And import it in <code>components.js</code>: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../components/movies/MoviesNewForm.jsx'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>A few things to note: </p>
+<ul>
+<li>We’ll pass the <code>MoviesItemFragment</code> fragment to the form so that it knows what data to return from the server once the mutation is complete. </li>
+<li>We only want to show the “New Movie” form when a user actually <em>can</em> submit a new movie, so we’ll make use of the document level permissions we defined earlier to check if a user can create a movie using the <code>canCreate</code> helper on the collection.</li>
+<li>We need to access the current user to perform this check, so we’ll use the <code>withCurrentUser</code> higher-order component. </li>
+</ul>
+<p>Let’s add the form component to <code>movies.jsx</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, withMulti, withCurrentUser, Loading, registerComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesList = <span class="function">(<span class="params">&#123;results = [], currentUser, loading, loadMore, count, totalCount&#125;</span>) =&gt;</span> </span><br><span class="line">  </span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">maxWidth</span>: <span class="string">'500px'</span>, <span class="attr">margin</span>: <span class="string">'20px auto'</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    &#123;<span class="comment">/* user accounts */</span>&#125;</span><br><span class="line"></span><br><span class="line">    &lt;div style=&#123; &#123; <span class="attr">padding</span>: <span class="string">'20px 0'</span>, <span class="attr">marginBottom</span>: <span class="string">'20px'</span>, <span class="attr">borderBottom</span>: <span class="string">'1px solid #ccc'</span> &#125; &#125;&gt;</span><br><span class="line">    </span><br><span class="line">      &lt;Components.AccountsLoginForm /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &#123;loading ? </span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;Loading /</span>&gt; :</span><br><span class="line"></span><br><span class="line">      &lt;div className=<span class="string">"movies"</span>&gt;</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="comment">/* new document form */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &lt;Components.MoviesNewForm /&gt;</span><br><span class="line"></span><br><span class="line">        &#123;<span class="comment">/* documents list */</span>&#125;</span><br><span class="line"></span><br><span class="line">        &#123;results.map(<span class="function"><span class="params">movie</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Components.MoviesItem</span> <span class="attr">key</span>=<span class="string">&#123;movie._id&#125;</span> <span class="attr">movie</span>=<span class="string">&#123;movie&#125;</span> <span class="attr">currentUser</span>=<span class="string">&#123;currentUser&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">        </span></span><br><span class="line"><span class="xml">        &#123;/* load more */&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">        &#123;totalCount &gt; results.length ?</span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">onClick</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;e.preventDefault(); loadMore();&#125;&#125;&gt;Load More (&#123;count&#125;/&#123;totalCount&#125;)<span class="tag">&lt;/<span class="name">a</span>&gt;</span> : </span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">p</span>&gt;</span>No more items.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const options = &#123;</span></span><br><span class="line"><span class="regexp">  collection: Movies,</span></span><br><span class="line"><span class="regexp">  fragmentName: 'MoviesItemFragment',</span></span><br><span class="line"><span class="regexp">  limit: 5</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">registerComponent(&#123;name: 'MoviesList', component: MoviesList, hocs: [[withMulti, options], withCurrentUser]&#125;);</span></span><br></pre></td></tr></table></figure>
+
+<p>Now fill out the form and submit it. The query will be updated and the new movie will appear right there in our list! </p>
+<h2 id="Editing-Movies"><a href="#Editing-Movies" class="headerlink" title="Editing Movies"></a>Editing Movies</h2><p>We’re almost done! All we need now is to add a way to edit movies. First, create a new <code>MoviesEditForm.jsx</code> component:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, registerComponent, getFragment &#125; <span class="keyword">from</span> <span class="string">"meteor/vulcan:core"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesEditForm = <span class="function">(<span class="params">&#123;documentId, closeModal&#125;</span>) =&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;Components.SmartForm </span><br><span class="line">    collection=&#123;Movies&#125;</span><br><span class="line">    documentId=&#123;documentId&#125;</span><br><span class="line">    mutationFragment=&#123;getFragment(<span class="string">'MoviesItemFragment'</span>)&#125;</span><br><span class="line">    showRemove=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">    successCallback=&#123;<span class="built_in">document</span> =&gt; &#123;</span><br><span class="line">      closeModal();</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  /&gt;</span><br><span class="line"></span><br><span class="line">registerComponent(&#123; <span class="attr">name</span>: <span class="string">'MoviesEditForm'</span>, <span class="attr">component</span>: MoviesEditForm&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>And in <code>components.js</code>: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'../components/movies/MoviesEditForm.jsx'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Because we’re passing a specific <code>documentId</code> property to the <code>SmartForm</code> component, this form will be an <strong>edit document</strong> form. We’re also passing <code>showRemove</code> to show a “delete document” option, and a <code>successCallback</code> function to close the modal popup inside which the form will be displayed. </p>
+<p>But note that to <em>edit</em> a document, we first need to know what that document <em>is</em>. In other words, we need to load the document on the client. SmartForms can take care of this for us, but we do need to write a new resolver. After all, the one we have displays a <em>list</em> of document, not a <em>single</em> document. </p>
+<p>Go back to <code>resolvers.js</code> and add a <code>single</code> resolver:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolvers = &#123;</span><br><span class="line">  multi: &#123;</span><br><span class="line">    name: <span class="string">'movies'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> resolver(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">input</span>: &#123;terms = &#123;&#125;&#125; = &#123;<span class="attr">terms</span>: &#123;&#125;&#125; &#125; = args;</span><br><span class="line">      <span class="keyword">let</span> &#123; selector, options &#125; = <span class="keyword">await</span> context.Movies.getParameters(terms, &#123;&#125;, context.currentUser);</span><br><span class="line">      movies = <span class="keyword">await</span> context.Movies.find(selector, options);</span><br><span class="line">      moviesContent = movies.fetch();</span><br><span class="line">      moviesCount = movies.count();</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">results</span>: moviesContent, <span class="attr">totalCount</span>: moviesCount &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  single: &#123;</span><br><span class="line">    name: <span class="string">'movie'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> resolver(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> _id = args.input.selector.documentId || args.input.selector._id; </span><br><span class="line">      <span class="keyword">const</span> <span class="built_in">document</span> = <span class="keyword">await</span> context.Movies.findOne(&#123; <span class="attr">_id</span>: _id &#125;);</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">result</span>: context.Users.restrictViewableFields(context.currentUser, context.Movies, <span class="built_in">document</span>) &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> resolvers;</span><br></pre></td></tr></table></figure>
+
+<p>Now let’s go back to <code>MoviesItem</code> and make use of our form:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Components, registerComponent &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Movies <span class="keyword">from</span> <span class="string">'../../modules/movies/collection.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MoviesItem = <span class="function">(<span class="params">&#123;movie, currentUser&#125;</span>) =&gt;</span></span><br><span class="line"></span><br><span class="line">  &lt;div style=&#123; &#123; <span class="attr">paddingBottom</span>: <span class="string">"15px"</span>,<span class="attr">marginBottom</span>: <span class="string">"15px"</span>, <span class="attr">borderBottom</span>: <span class="string">"1px solid #ccc"</span> &#125; &#125;&gt;</span><br><span class="line"></span><br><span class="line">    &#123;<span class="comment">/* document properties */</span>&#125;</span><br><span class="line">    </span><br><span class="line">    &lt;h4&gt;&#123;movie.name&#125; (&#123;movie.year&#125;)&lt;<span class="regexp">/h4&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;&#123;movie.review&#125; – &#123;movie.user &amp;&amp; movie.user.displayName&#125;&lt;/</span>p&gt;</span><br><span class="line">    </span><br><span class="line">    &#123;<span class="comment">/* edit document form */</span>&#125;</span><br><span class="line"></span><br><span class="line">    &#123;Movies.options.mutations.update.check(currentUser, movie) ? </span><br><span class="line">      &lt;Components.ModalTrigger label=<span class="string">"Edit Movie"</span>&gt;</span><br><span class="line">        &lt;Components.MoviesEditForm currentUser=&#123;currentUser&#125; documentId=&#123;movie._id&#125; /&gt;</span><br><span class="line">      &lt;<span class="regexp">/Components.ModalTrigger&gt;</span></span><br><span class="line"><span class="regexp">      : null</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">registerComponent(&#123; <span class="attr">name</span>: <span class="string">'MoviesItem'</span>, <span class="attr">component</span>: MoviesItem &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>This time we’re using the <code>&lt;Components.ModalTrigger /&gt;</code> Vulcan component to show our form inside a popup (assuming the current user can perform an edit, of course).</p>
+<p>Finally, we’ll also need to hook up our update and delete mutations in <code>mutations.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Define the three default mutations:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">- create (e.g.: createMovie(data: &#123;document: CreateMovieDataInput!&#125;) : MovieOutput )</span></span><br><span class="line"><span class="comment">- update (e.g.: updateMovie(selector: MovieSelectorUniqueInput!, data: UpdateMovieDataInput!) : MovieOutput )</span></span><br><span class="line"><span class="comment">- delete (e.g.: deleteMovie(selector: MovieSelectorUniqueInput!) : MovieOutput )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Each mutation has:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">- A name</span></span><br><span class="line"><span class="comment">- A check function that takes the current user and (optionally) the document affected</span></span><br><span class="line"><span class="comment">- The actual mutation</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  createMutator,</span><br><span class="line">  updateMutator,</span><br><span class="line">  deleteMutator,</span><br><span class="line">  Utils,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">  create: &#123;</span><br><span class="line">    name: <span class="string">'createMovie'</span>,</span><br><span class="line"></span><br><span class="line">    check(user) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.canDo(user, <span class="string">'movie.create'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, args, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">data</span>: <span class="built_in">document</span> &#125; = args;</span><br><span class="line">      </span><br><span class="line">      Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> createMutator(&#123;</span><br><span class="line">        collection: context.Movies,</span><br><span class="line">        <span class="built_in">document</span>: <span class="built_in">document</span>,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>, </span><br><span class="line">        context,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  update: &#123;</span><br><span class="line">    name: <span class="string">'updateMovie'</span>,</span><br><span class="line"></span><br><span class="line">    check(user, <span class="built_in">document</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user || !<span class="built_in">document</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.owns(user, <span class="built_in">document</span>)</span><br><span class="line">        ? Users.canDo(user, <span class="string">'movie.update.own'</span>)</span><br><span class="line">        : Users.canDo(user, <span class="string">`movie.update.all`</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, &#123;selector, data&#125;, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="built_in">document</span> = context.Movies.findOne( &#123;<span class="attr">_id</span>: selector.documentId || selector._id&#125;);</span><br><span class="line">      Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> updateMutator(&#123;</span><br><span class="line">        collection: context.Movies,</span><br><span class="line">        selector: selector,</span><br><span class="line">        data: data,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>,</span><br><span class="line">        context,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span>: &#123;</span><br><span class="line">    name: <span class="string">'deleteMovie'</span>,</span><br><span class="line"></span><br><span class="line">    check(user, <span class="built_in">document</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!user || !<span class="built_in">document</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> Users.owns(user, <span class="built_in">document</span>)</span><br><span class="line">        ? Users.canDo(user, <span class="string">'movie.delete.own'</span>)</span><br><span class="line">        : Users.canDo(user, <span class="string">`movie.delete.all`</span>);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    mutation(root, &#123; selector &#125;, context) &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="built_in">document</span> = context.Movies.findOne(&#123; <span class="attr">_id</span>: selector.documentId || selector._id &#125;);</span><br><span class="line">      Utils.performCheck(<span class="keyword">this</span>.check, context.currentUser, <span class="built_in">document</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> deleteMutator(&#123;</span><br><span class="line">        collection: context.Movies,</span><br><span class="line">        selector: selector,</span><br><span class="line">        currentUser: context.currentUser,</span><br><span class="line">        validate: <span class="literal">true</span>,</span><br><span class="line">        context,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mutations;</span><br></pre></td></tr></table></figure>
+
+<p>For the <code>check</code> function to work properly we need to update the <code>permissions.js</code> file.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Users <span class="keyword">from</span> <span class="string">'meteor/vulcan:users'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> membersActions = [</span><br><span class="line">  <span class="string">'movie.create'</span>,</span><br><span class="line">  <span class="string">'movie.update.own'</span>,</span><br><span class="line">  <span class="string">'movie.delete.own'</span>,</span><br><span class="line">];</span><br><span class="line">Users.groups.members.can(membersActions);</span><br></pre></td></tr></table></figure>
+
+<p>All done! You should now be able to edit and remove movies. </p>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><p>As it stands, our movie list isn’t really sorted. What if we wanted to sort it by movie year? In Vulcan, document lists receive their options via a <code>terms</code> object. And whenever that object is processed (whether on the client or server), it goes through a serie of successive callbacks. So if we want to set a default sort, we can do so through one of these callbacks. </p>
+<p>Create a <code>parameters.js</code> file (learn more about <a href="terms-parameters.html">terms and parameters here</a>):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortByYear</span> (<span class="params">parameters, terms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    selector: parameters.selector, </span><br><span class="line">    options: &#123;...parameters.options, <span class="attr">sort</span>: &#123;<span class="attr">year</span>: <span class="number">-1</span>&#125;&#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback(<span class="string">"movie.parameters"</span>, sortByYear);</span><br></pre></td></tr></table></figure>
+
+<p>And add it to <code>movies/collection.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createCollection &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"><span class="keyword">import</span> schema <span class="keyword">from</span> <span class="string">'./schema.js'</span>;</span><br><span class="line"><span class="keyword">import</span> resolvers <span class="keyword">from</span> <span class="string">'./resolvers.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./fragments.js'</span>;</span><br><span class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./permissions.js'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./parameters.js'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+
+<p>Note that the list automatically re-sorts as you edit individual documents. This might seem like a simple feature, but it’s one more thing you’d have to implement yourself if you weren’t using Vulcan!</p>
+<h2 id="Going-Further"><a href="#Going-Further" class="headerlink" title="Going Further"></a>Going Further</h2><p>You can try to add a page displaying a single movie, fetching the data with the <code>withSingle</code> higher-order component. Look into the starter package <a href="https://github.com/VulcanJS/Vulcan-Starter/" target="_blank" rel="noopener">example-movies</a> for an implementation of this.</p>
+<p>This is probably a good place to stop, but you can go further simply by going through the code of the <code>example-instagram</code> package. In it, you’ll see how to create a resolver for single documents so you can load more data for a specific movie, and use permission checks to enforce fine-grained security throughout your app.</p>
+<p>And this is just the start. You can do a lot more with Vulcan, Apollo, and React, as you’ll soon see!</p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+      
+        <a class="link primary next" href="index.html">
+          <span class="subtitle-pagination">Next</span>
+          Read Me
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/example-movies.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

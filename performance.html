@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Performance | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Performance | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Performance | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Performance</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/performance.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>GraphQL makes it easy to create rich schemas with multiple nested layers, but that can also come at a performance cost. Thankfully, Vulcan offer you a few ways to get the benefits of GraphQL without suffering too much of a slow-down. </p>
+<h2 id="Caching-amp-Batching"><a href="#Caching-amp-Batching" class="headerlink" title="Caching &amp; Batching"></a>Caching &amp; Batching</h2><p>You can optionally use <a href="https://github.com/facebook/dataloader" target="_blank" rel="noopener">Dataloader</a> inside your resolvers to get better server-side performance through caching and batching.</p>
+<p>To understand how this works, let’s suppose you’re displaying five posts on your homepage, each of which has an author. </p>
+<p>Without batching, this would result in one database call to fetch the five posts, then one call per post to fetch the author as each <code>Post.author</code> resolver is called, for a total of six database queries. </p>
+<p>With batching enabled, these five calls to the <code>users</code> collection are batched together, for a total of two database calls. </p>
+<p>Additionally, with caching enabled, any queries for the same documents (for example, your posts also have <code>commenters</code>) won’t hit the database at all but instead load data from Dataloader’s cache. </p>
+<p>Note that the cache is <strong>per-request</strong>, meaning that it will not persist across multiple reloads or different users (which would otherwise lead to outdated data).</p>
+<p>To load data from Dataloader instead of the database, you can use the following two functions:</p>
+<ul>
+<li><code>collection.loader.load(_id)</code>: takes the <code>_id</code> of a document.</li>
+<li><code>collection.loader.loadMany(_ids)</code>: takes an array of <code>_id</code>s. </li>
+</ul>
+<p>If the documents requested are not present in the cache, Dataloader will automatically query the database for them. </p>
+<p>Additionally, you can also manually add documents to the cache with:</p>
+<ul>
+<li><code>collection.loader.prime(_id, document)</code></li>
+</ul>
+<p>Finally, note that <code>load</code> and <code>loadMany</code> can only take <code>_id</code>s. If you instead need to query for data using more complex Mongo selectors, you can simply keep querying the database directly with <code>collection.find()</code> and <code>collection.findOne()</code>. </p>
+<p>Learn more: <a href="https://www.youtube.com/watch?v=55Ep5KBTIQE" target="_blank" rel="noopener">Using Dataloader to batch and cache database calls</a>.</p>
+<h2 id="Performance-Optimization"><a href="#Performance-Optimization" class="headerlink" title="Performance Optimization"></a>Performance Optimization</h2><p>If you use complex GraphQL queries and resolvers a lot, you might notice some slow loading times. Here’s a few things you can try to speed things up.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=M8Jmz8q2sUk" target="_blank" rel="noopener">Video Case Study: GraphQL Performance Optimization</a></li>
+</ul>
+<h4 id="Add-Mongo-Indexes"><a href="#Add-Mongo-Indexes" class="headerlink" title="Add Mongo Indexes"></a>Add Mongo Indexes</h4><p>Make sure you’re adding indexes for any frequently used Mongo selectors. For example, if you’re often looking up all posts associated with a specific user ID, you’ll want to add an index for that:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Posts.rawCollection().createIndex(&#123;<span class="attr">userId</span>: <span class="number">1</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Use-Dataloader"><a href="#Use-Dataloader" class="headerlink" title="Use Dataloader"></a>Use Dataloader</h4><p>Dataloader ensures your data is loaded from your server’s in-memory cache instead of the database whenever possible, leading to much faster load times. </p>
+<p>You can use it whenever you’re requesting a single document or multiple documents based on their <code>_id</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// without Dataloader</span></span><br><span class="line"><span class="keyword">const</span> room = Rooms.findOne(booking.roomId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// with Dataloader</span></span><br><span class="line"><span class="keyword">const</span> room = <span class="keyword">await</span> Rooms.loader.load(booking.roomId);</span><br></pre></td></tr></table></figure>
+
+<p>Multiple documents:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// without Dataloader</span></span><br><span class="line"><span class="keyword">const</span> photos = Photos.find(post.photoIds).fetch();</span><br><span class="line"></span><br><span class="line"><span class="comment">// with Dataloader</span></span><br><span class="line"><span class="keyword">const</span> photos = <span class="keyword">await</span> Rooms.loader.loadMany(post.photoIds);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Remove-Unnecessary-Fields"><a href="#Remove-Unnecessary-Fields" class="headerlink" title="Remove Unnecessary Fields"></a>Remove Unnecessary Fields</h4><p>Sometimes you might be asking for a field you don’t actually need, especially if you reuse the same fragments in multiple places. Always make sure you don’t load any data you don’t use, especially if these fields in turn trigger their own resolvers.</p>
+<h4 id="Denormalize-Data"><a href="#Denormalize-Data" class="headerlink" title="Denormalize Data"></a>Denormalize Data</h4><p>Although GraphQL makes it possible to keep data normalized inside your database in theory, in practice it can still be better for performance to denormalize (i.e. copy) some properties. </p>
+<p>For example, let’s imagine you want to know how many comments a user has made. You could definitely have a <code>commentCount</code> property with its own custom resolver that counts all comments with the right <code>userId</code>. </p>
+<p>But on the other hand, it would be far better from a performance point of view to simply store that information as a field on each user document and increment/decrement it every time a user creates or deletes a comment. </p>
+<h4 id="Ensure-Fast-Server-DB-Speeds"><a href="#Ensure-Fast-Server-DB-Speeds" class="headerlink" title="Ensure Fast Server-DB Speeds"></a>Ensure Fast Server-DB Speeds</h4><p>At some point, the last bottleneck is the time it takes for the server to get data back from the database (assuming you’re not hosting both on the same instance). </p>
+<p>For example, if you’re in Tokyo and your database is too, but your server is in New York, your data has to go from Tokyo to New York then back to Tokyo, leading to slower load times than if everything was just stored in New York.</p>
+<p>For that reason, try to have both your server and database stored within the same Amazon (or equivalent) server cluster. </p>
+<h4 id="Use-Caching"><a href="#Use-Caching" class="headerlink" title="Use Caching"></a>Use Caching</h4><p>Finally, services like <a href="https://www.apollographql.com/engine/" target="_blank" rel="noopener">Apollo Engine</a> make it easy to implement a global <a href="https://github.com/apollographql/engine-docs/blob/master/source/caching.md" target="_blank" rel="noopener">caching layer</a> by using <a href="https://github.com/apollographql/apollo-cache-control" target="_blank" rel="noopener">Apollo Cache Control</a>.</p>
+<p>Unlike Dataloader’s cache, this is not a temporary field-by-field cache; but a persistent cache that caches the entire GraphQL response. </p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="forms-custom.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Custom Form Components
+        </a>
+      
+      
+        <a class="link primary next" href="database.html">
+          <span class="subtitle-pagination">Next</span>
+          Database Layer
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/performance.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

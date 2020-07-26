@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Payments | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Payments | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Payments | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="email.html" class="sidebar-link ">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Payments</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/payments.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>This package helps you process charges with Vulcan. It currently only supports Stripe, but other payment processors may be supported in the future (PRs welcome!). </p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>This package does the following things: </p>
+<ul>
+<li>Provide a button that triggers the <a href="https://stripe.com/checkout" target="_blank" rel="noopener">Stripe Checkout</a> form.</li>
+<li>Once the form is submitted, trigger a GraphQL mutation that will:<ul>
+<li>Perform the charge.</li>
+<li>Create a new Charge.</li>
+<li>Modify a document associated with the charge.</li>
+</ul>
+</li>
+<li>The mutation then returns a document associated with the charge to the client.</li>
+</ul>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">yarn</span> <span class="keyword">add </span><span class="keyword">stripe </span>react-<span class="keyword">stripe-checkout</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h2><p>Stripe requires the following public setting in your <code>settings.json</code>. </p>
+<ul>
+<li><code>public.stripe.publishableKey</code>: your publishable Stripe key.</li>
+</ul>
+<p>As well as the following private setting (can be stored in the setting’s root or on <code>private</code>): </p>
+<ul>
+<li><code>stripe.secretKey</code>: your Stripe secret key. </li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"public"</span>: &#123;</span><br><span class="line">    <span class="string">"stripe"</span>: &#123;</span><br><span class="line">      <span class="string">"publishableKey"</span>: <span class="string">"pk_test_K0rkFDrT0jj4NqG5Dumr3RaU"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"stripe"</span>: &#123;</span><br><span class="line">    <span class="string">"secretKey"</span>: <span class="string">"sk_test_sfdhj34jdsfxhjs234sd0K"</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Charges"><a href="#Charges" class="headerlink" title="Charges"></a>Charges</h2><p>Charges are stored in the database with the following fields:</p>
+<ul>
+<li><code>_id</code>: the charge’s id. </li>
+<li><code>createdAt</code>: the charge’s timestamp.</li>
+<li><code>userId</code>: the Vulcan <code>_id</code> of the user performing the purchase. </li>
+<li><code>tokenId</code>: the charge token’s id. </li>
+<li><code>productKey</code>: the key corresponding to the product being purchased, as defined with <code>addProduct</code>.</li>
+<li><code>type</code>: the type of charge (currently only <code>stripe</code> is supported).</li>
+<li><code>test</code>: whether the operation is a test or not. </li>
+<li><code>data</code>: a JSON object containing all charge data generated by the payment processor.</li>
+<li><code>properties</code>: a JSON object containing any custom properties passed by the client. </li>
+<li><code>ip</code>: the IP address of the client performing the purchase. </li>
+</ul>
+<h2 id="Products"><a href="#Products" class="headerlink" title="Products"></a>Products</h2><p>A product is a type of purchase a user can make. It has a <code>name</code>, <code>amount</code> (in cents), <code>currency</code>, and <code>description</code>.</p>
+<p>New products are defined using the <code>addProduct</code> function, which takes two arguments. The first argument is a unique <strong>product key</strong> used to identify the product. The second argument can be an object (for “static” products like a subscription):</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addProduct &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:payments'</span>;</span><br><span class="line"></span><br><span class="line">addProduct(<span class="string">'membership'</span>, &#123;</span><br><span class="line">  name: <span class="string">'VulcanJS Membership'</span>,</span><br><span class="line">  amount: <span class="number">25000</span>,</span><br><span class="line">  currency: <span class="string">'USD'</span>,</span><br><span class="line">  <span class="keyword">description</span>: <span class="string">'Become a paid member.'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Or it can be a function (for “dynamic” products like in an e-commerce site) that takes the associated document (i.e. the product being sold) as argument and returns an object:</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import &#123; <span class="keyword">addProduct </span>&#125; from <span class="string">'meteor/vulcan:payments'</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">addProduct('book', </span><span class="keyword">book </span>=&gt; (&#123;</span><br><span class="line"><span class="symbol">  name:</span> <span class="keyword">book.title,</span></span><br><span class="line"><span class="keyword"> </span> amount: <span class="keyword">book.price,</span></span><br><span class="line"><span class="keyword"> </span> currency: <span class="string">'USD'</span>,</span><br><span class="line"><span class="symbol">  description:</span> <span class="keyword">book.description</span></span><br><span class="line"><span class="keyword">&#125;));</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Coupons"><a href="#Coupons" class="headerlink" title="Coupons"></a>Coupons</h3><p>In addition, you can also define coupon codes for your products:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">addProduct</span>(<span class="string">'membership'</span>, &#123;</span><br><span class="line">  <span class="attribute">amount</span>: <span class="number">25000</span>,</span><br><span class="line">  <span class="attribute">currency</span>: <span class="string">'USD'</span>,</span><br><span class="line">  <span class="attribute">description</span>: <span class="string">'Become a paid member.'</span>,</span><br><span class="line">  <span class="attribute">coupons</span>: &#123;</span><br><span class="line">    <span class="attribute">VULCAN</span>: <span class="number">10000</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Make sure you define your products in a location accessible to both client and server, in order to access them both on the front-end to configure Stripe Checkout, and in the back-end to perform the actual charge. </p>
+<h3 id="Subscription-Products"><a href="#Subscription-Products" class="headerlink" title="Subscription Products"></a>Subscription Products</h3><p>You can create recurring subscription products:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">addProduct(<span class="string">'monthlyBooking'</span>, booking =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> don't use findOne</span></span><br><span class="line">  <span class="keyword">const</span> room = booking.room || Rooms.findOne(&#123;<span class="attr">_id</span>: booking.roomId&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name: <span class="string">'Rent this room'</span>,</span><br><span class="line">    currency: <span class="string">'JPY'</span>,</span><br><span class="line">    description: <span class="string">`Rent <span class="subst">$&#123;room.name&#125;</span>`</span>,</span><br><span class="line">    plan: getPlanId(room, booking.numberOfGuests),</span><br><span class="line">    initialAmount: booking.initialAmount,</span><br><span class="line">    initialAmountDescription: <span class="string">`Security deposit and cleaning fee`</span>,</span><br><span class="line">    amount: booking.amount,</span><br><span class="line">    subscriptionProperties: &#123;</span><br><span class="line">      billing_cycle_anchor: booking.startAt.valueOf().toString().slice(<span class="number">0</span>,<span class="number">-3</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Subscription-Properties"><a href="#Subscription-Properties" class="headerlink" title="Subscription Properties"></a>Subscription Properties</h4><p>You can add a <code>subscriptionProperties</code> object to a product to pass extra properties to the payment gateway. For example, here’s how to delay a subscription until the start date of a booking by setting the subscription’s <code>trial_end</code> property:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">addProduct(<span class="string">'booking'</span>, booking =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name: <span class="string">'Rent a room'</span>,</span><br><span class="line">    currency: <span class="string">'JPY'</span>,</span><br><span class="line">    amount: booking.amount,</span><br><span class="line">    subscriptionProperties: &#123;</span><br><span class="line">      trial_end: booking.startAt.valueOf().toString().slice(<span class="number">0</span>,<span class="number">-3</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Inside <code>vulcan:payments</code>, this <code>subscriptionProperties</code> object will be passed on to the following code:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> subscription = <span class="keyword">await</span> stripe.subscriptions.create(&#123;</span><br><span class="line">  customer: customer.id,</span><br><span class="line">  items: [</span><br><span class="line">    &#123; <span class="attr">plan</span>: product.plan &#125;,</span><br><span class="line">  ],</span><br><span class="line">  metadata,</span><br><span class="line">  ...product.subscriptionProperties,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Checkout-Component"><a href="#Checkout-Component" class="headerlink" title="Checkout Component"></a>Checkout Component</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Components.Checkout </span><br><span class="line">    productKey=<span class="string">"jobPosting"</span></span><br><span class="line">    associatedCollection=&#123;Jobs&#125;</span><br><span class="line">    associatedDocument=&#123;job&#125;</span><br><span class="line">    callback=&#123;setToPaid&#125;</span><br><span class="line">    button=&#123;&lt;Button className=<span class="string">"buy-job-button"</span> bsStyle=<span class="string">"primary"</span>&gt;Complete Payment&lt;<span class="regexp">/Button&gt;&#125;</span></span><br><span class="line"><span class="regexp">  /</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>productKey</code>: The key of the product to buy. </li>
+<li><code>button</code>: The button that triggers the Stripe Checkout overlay.</li>
+<li><code>associatedCollection</code>: the associated collection.</li>
+<li><code>associatedDocument</code>: the associated <code>document</code>. </li>
+<li><code>callback</code>: a callback function that runs once the charge is successful (takes the <code>charge</code> as result argument).</li>
+<li><code>fragment</code>: a GraphQL fragment specifying the fields expected in return after the charge. </li>
+<li><code>fragmentName</code>: a registeredGraphQL fragment name.</li>
+<li><code>properties</code>: any other properties you want to pass on to <code>createChargeMutation</code> on the server. </li>
+</ul>
+<h2 id="Associating-a-Collection-Document"><a href="#Associating-a-Collection-Document" class="headerlink" title="Associating a Collection Document"></a>Associating a Collection Document</h2><p>The Vulcan Charge package requires associating a document with a purchase, typically the item being paid for. For example, maybe you want people to buy access to a file hosted on your servers, and give them download access once the transaction is complete. </p>
+<p>The <code>associatedCollection</code> and <code>associatedId</code> props give you an easy way to implement this by automatically setting a <code>chargeIds</code> field on the document once the charge succeeds. </p>
+<p>For example, if you pass <code>associatedCollection={Jobs}</code> and <code>associatedId=&quot;foo123&quot;</code> to the Checkout component, the resulting charge’s <code>_id</code> will automatically be added to a <code>chargeIds</code> array on job <code>foo123</code>. </p>
+<p>The <code>createChargeMutation</code> GraphQL mutation will then return that job according to the <code>fragment</code> property specified. </p>
+<p>Note: you will need to make sure that your collection accepts this <code>chargeIds</code> field. For example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Jobs.addField([</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'chargeIds'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    fieldName: <span class="string">'chargeIds.$'</span>,</span><br><span class="line">    fieldSchema: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      optional: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<h4 id="The-“Chargeable”-Type"><a href="#The-“Chargeable”-Type" class="headerlink" title="The “Chargeable” Type"></a>The “Chargeable” Type</h4><p>In order to be able to return any associated document, the package creates a new <code>Chargeable</code> GraphQL type that is an union of every collection’s types. </p>
+<h2 id="Post-Charge-Updates"><a href="#Post-Charge-Updates" class="headerlink" title="Post-Charge Updates"></a>Post-Charge Updates</h2><p>The best way to update a document based on a successful charge is by using the <code>collection.charge.sync</code> callback. </p>
+<p>Callback functions on this hook will run with a MongoDB <code>modifier</code> as the first argument (although note that only <code>$set</code> and <code>$unset</code> operations are supported here), the <code>document</code> associated with the charge as their second argument, and the <code>charge</code> object as their third argument. </p>
+<p>Because the callback is added in a <strong>sync</strong> manner, the final document returned by the <code>createChargeMutation</code> mutation will include any new values set by the callback hook. </p>
+<h4 id="Example-1-Setting-a-job-offer-as-paid"><a href="#Example-1-Setting-a-job-offer-as-paid" class="headerlink" title="Example 1: Setting a job offer as paid"></a>Example 1: Setting a job offer as paid</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setToPaidOnCharge</span> (<span class="params">modifier, job, charge</span>) </span>&#123;</span><br><span class="line">  modifier.$<span class="keyword">set</span>.status = 'paid';</span><br><span class="line">  return modifier;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback('jobs.charge.sync', setToPaidOnCharge);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Example-2-Adding-a-user-to-a-group"><a href="#Example-2-Adding-a-user-to-a-group" class="headerlink" title="Example 2: Adding a user to a group"></a>Example 2: Adding a user to a group</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makePaidMember</span> (<span class="params">modifier, user, charge</span>) </span>&#123;</span><br><span class="line">  modifier.$<span class="keyword">set</span>.groups = [...user.groups, 'paidMembers'];</span><br><span class="line">  return modifier;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback('users.charge.sync', makePaidMember);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Example-3-Giving-a-user-access-to-a-specific-document"><a href="#Example-3-Giving-a-user-access-to-a-specific-document" class="headerlink" title="Example 3: Giving a user access to a specific document"></a>Example 3: Giving a user access to a specific document</h4><p>We’ll pass the <code>videoId</code> property to our <code>Checkout</code> component (<code>property={ { videoId: video._id } }</code>) to make it accessible as <code>charge.properties.videoId</code> inside the callback: </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addCallback &#125; <span class="keyword">from</span> <span class="string">'meteor/vulcan:core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">giveAccessToVideo</span> (<span class="params">modifier, user, charge</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> videoId = charge.properties.videoId;</span><br><span class="line">  modifier.$<span class="keyword">set</span>.accessibleVideos = [...user.accessibleVideos, videoId];</span><br><span class="line">  return modifier;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addCallback('users.charge.sync', giveAccessToVideo);</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+      
+        <a class="link primary next" href="index.html">
+          <span class="subtitle-pagination">Next</span>
+          Read Me
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/payments.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>

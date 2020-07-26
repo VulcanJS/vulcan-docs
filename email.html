@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    <!-- Basic -->
+    <title>Email | Vulcan Docs</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico" sizes="16x16 32x32 64x64">
+
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://docs.vulcanjs.org">
+    <meta property="og:title" content="Email | Vulcan Docs">
+    <meta property="og:description" content>
+    <meta property="og:image" content>
+    <meta name="twitter:card" content="summary_image_large">
+    <meta name="twitter:site" content="@vulcanjs">
+    <meta name="twitter:title" content="Email | Vulcan Docs">
+    <meta name="twitter:description" content>
+    <meta name="twitter:image" content>
+
+    <!-- Misc -->
+    <meta name="google-site-verification" content>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+
+
+  </head>
+  <body class>
+    
+
+<div class="nav dark">
+  <div class="nav-group">
+    <div class="nav-item show-mobile">
+      <span class="js-sidebar-toggle ">
+        <span class="icon-menu"></span>
+      </span>
+    </div>
+    <div class="nav-item">
+      <a class="logo-wrapper" href="https://docs.vulcanjs.org/" title="Vulcan Documentation Vulcan Documentation">
+        <img src="/images/vulcan-logo-border-2.svg" alt="Vulcan Documentation" class="logo">
+        <span>Vulcan Documentation</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-group right">
+
+    <div class="nav-item wrapper-search">
+      <div class="input-symbol small round">
+        <input type="text" placeholder="Search Vulcan Docs" id="desktop-search-input">
+        <span class="icon-search"></span>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      
+      <div class="nav-item show-desktop false ">
+        <a class="link" href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class href="https://docs.vulcanjs.org/" title="Vulcan Documentation">
+        <span>Vulcan Documentation Vulcan Documentation</span>
+      </a>
+    </div>
+    
+      <div class="panel-item " ">
+        <a class href="https://github.com/vulcanjs/vulcan">
+          <span>GitHub</span>
+        </a>
+      </div>
+    
+      <div class="panel-item " ">
+        <a class href="http://slack.vulcanjs.org">
+          <span>Slack</span>
+        </a>
+      </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap">
+      
+    </div>
+
+    <ul class="toc">
+      
+        <li>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="index.html" class="sidebar-link ">
+                  <span>Read Me</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="nutshell.html" class="sidebar-link ">
+                  <span>Vulcan in a Nutshell</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="cheatsheet.html" class="sidebar-link ">
+                  <span>Cheatsheet</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="file-architecture.html" class="sidebar-link ">
+                  <span>File Architecture</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="toc.html" class="sidebar-link ">
+                  <span>Table of Contents</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Schemas</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="schemas.html" class="sidebar-link ">
+                  <span>Schemas & Collections</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="schema-properties.html" class="sidebar-link ">
+                  <span>Schema Properties</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="relations.html" class="sidebar-link ">
+                  <span>Relations</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">GraphQL API</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="graphql-schema.html" class="sidebar-link ">
+                  <span>GraphQL Schema</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="api-schemas.html" class="sidebar-link ">
+                  <span>API Schemas</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="queries.html" class="sidebar-link ">
+                  <span>Queries</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="filtering.html" class="sidebar-link ">
+                  <span>Filtering</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="mutations.html" class="sidebar-link ">
+                  <span>Mutations</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="fragments.html" class="sidebar-link ">
+                  <span>Fragments</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="server-queries.html" class="sidebar-link ">
+                  <span>Querying on the Server</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="connecting-remotely.html" class="sidebar-link ">
+                  <span>Connecting Remotely</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Features</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="routing.html" class="sidebar-link ">
+                  <span>Routing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="settings.html" class="sidebar-link ">
+                  <span>Settings</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="groups-permissions.html" class="sidebar-link ">
+                  <span>Groups & Permissions</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="callbacks.html" class="sidebar-link ">
+                  <span>Callbacks</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="users.html" class="sidebar-link ">
+                  <span>Users</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="internationalization.html" class="sidebar-link ">
+                  <span>Internationalization</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="head-tags.html" class="sidebar-link ">
+                  <span>Head Tags</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="errors.html" class="sidebar-link ">
+                  <span>Errors & Messages</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Components</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="components.html" class="sidebar-link ">
+                  <span>Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="ui-components.html" class="sidebar-link ">
+                  <span>UI Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="datatable.html" class="sidebar-link ">
+                  <span>Datatable</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="card.html" class="sidebar-link ">
+                  <span>Card</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-components.html" class="sidebar-link ">
+                  <span>Form Components</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="other-components.html" class="sidebar-link ">
+                  <span>Other Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Forms</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="forms.html" class="sidebar-link ">
+                  <span>Forms</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="decorators.html" class="sidebar-link ">
+                  <span>Field Decorators</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="forms-custom.html" class="sidebar-link ">
+                  <span>Custom Form Components</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Server</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="performance.html" class="sidebar-link ">
+                  <span>Performance</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="database.html" class="sidebar-link ">
+                  <span>Database Layer</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Other Packages</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="packages.html" class="sidebar-link ">
+                  <span>Packages Types</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc  current">
+                <a href class="sidebar-link  current">
+                  <span>Email</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="events.html" class="sidebar-link ">
+                  <span>Analytics & Event Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="error-tracking.html" class="sidebar-link ">
+                  <span>Error Tracking</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="debug.html" class="sidebar-link ">
+                  <span>Debugging</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Testing</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="unit-testing.html" class="sidebar-link ">
+                  <span>Unit Testing</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="storybook.html" class="sidebar-link ">
+                  <span>Storybook</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li>
+          
+            <div class="heading-toc">Resources</div>
+          
+          <ul class="list-toc">
+            
+              
+              <li class="item-toc ">
+                <a href="learn.html" class="sidebar-link ">
+                  <span>Learn More</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="examples.html" class="sidebar-link ">
+                  <span>Examples</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="common-problems.html" class="sidebar-link ">
+                  <span>Common Problems</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="plugins.html" class="sidebar-link ">
+                  <span>Plugins</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="themes.html" class="sidebar-link ">
+                  <span>Themes</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="tutorials.html" class="sidebar-link ">
+                  <span>Tutorials</span>
+                </a>
+              </li>
+            
+              
+              <li class="item-toc ">
+                <a href="videos.html" class="sidebar-link ">
+                  <span>Videos</span>
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="content-wrapper">
+    <div class="header-content">
+      <h1 class="title-page">Email</h1>
+      
+
+      <div class="page-actions">
+        <div class="actions-group">
+          <a class="btn tertiary small round lowercase" href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/email.md" target="_blank"><span class="icon-github"></span> <span>Edit on GitHub</span></a>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="document-formatting">
+      <p>Vulcan includes a simple-yet-powerful email-sending system.</p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p><strong>If you’ve got the <a href="/debug.html">debug package</a> enabled, an email debugging UI is available at <a href="http://localhost:3000/debug/emails" target="_blank" rel="noopener">http://localhost:3000/debug/emails</a>.</strong></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Setting up emails in Vulcan is a three-step process. </p>
+<p>First, you’ll need to load and register an email’s <strong>template</strong>. This is the Handlebars file that controls the actual markup that will be sent out. </p>
+<p>Then, you can <strong>define the email itself</strong>. Defining a new email means not only specifying which previously registered template to use, but also how to generate the subject line, figure out who to send out the email to, and how to query for the data used to populate that email. </p>
+<p>Finally, you can <strong>send the email</strong>. Because so much of the work has happened upfront this is usually just a matter of specifying which email to send, and optionally including some variables to customize it.</p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>In order to send emails, you’ll need to set up an email provider. You can do so by providing an SMTP URL (e.g. <code>smtp://username:password@smtp.mailgun.org:587/</code>) in your <code>settings.json</code> file under the <code>mailUrl</code> property.</p>
+<p>Note: if your username contains an <code>@</code> make sure to replace it with <code>%40</code> to escape it. </p>
+<h2 id="Email-Templates"><a href="#Email-Templates" class="headerlink" title="Email Templates"></a>Email Templates</h2><p>Unlike components, emails don’t use React but the <a href="http://handlebarsjs.com/" target="_blank" rel="noopener">Handlebars</a> templating language. Before you can use a template with Vulcan’s email system, you’ll need to register it. A ‘wrapper’ template must first be registered as a container for your templates (e.g. Vulcan-Starter/packages/example-forum/lib/server/email/templates/common/wrapper.handlebars).</p>
+<p>In order to register a new template or override an existing one, first you must import it as a text asset in your <code>package.js</code> file (or store it in your <code>/public</code> directory):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">api.addAssets([<span class="string">'path/to/template/wrapper.handlebars'</span>,], [<span class="string">'server'</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>You’ll then be able to add a new template with <code>VulcanEmail.addTemplates</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addTemplates(&#123;</span><br><span class="line">  wrapper: Assets.getText(<span class="string">'path/to/template/wrapper.handlebars'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Or override an existing one with:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.templates.wrapper = Assets.getText(<span class="string">'path/to/template/wrapper.handlebars'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Registering-Emails"><a href="#Registering-Emails" class="headerlink" title="Registering Emails"></a>Registering Emails</h2><p>Just like components, emails need to be centrally registered with Vulcan.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"></span><br><span class="line">VulcanEmail.addEmails(&#123;</span><br><span class="line"></span><br><span class="line">  test: &#123;</span><br><span class="line">    template: <span class="string">'test'</span>,</span><br><span class="line">    testPath: <span class="string">'/email/test'</span>,</span><br><span class="line">    data() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    subject(data) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'This is a test'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Email-Properties"><a href="#Email-Properties" class="headerlink" title="Email Properties"></a>Email Properties</h3><p>The <code>VulcanEmail.addEmails</code> function takes an object that itself contains individual objects for each email. Each email object can have the following properties:</p>
+<h4 id="template"><a href="#template" class="headerlink" title="template"></a><code>template</code></h4><p>The name of the template used to display the email (see below).</p>
+<h4 id="to-data"><a href="#to-data" class="headerlink" title="to(data)"></a><code>to(data)</code></h4><p>Either a function that takes in the email’s <code>data</code> as argument and returns the recipient’s email, or a string. </p>
+<h4 id="subject-data"><a href="#subject-data" class="headerlink" title="subject(data)"></a><code>subject(data)</code></h4><p>Either a function that takes in the email’s <code>data</code> as argument and returns the subject, or a string. </p>
+<h4 id="data-variables"><a href="#data-variables" class="headerlink" title="data(variables)"></a><code>data(variables)</code></h4><p>A function that returns an object used to populate the email. It will either be passed a <code>variables</code> object by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
+<h4 id="query"><a href="#query" class="headerlink" title="query"></a><code>query</code></h4><p>A string containing a GraphQL query used to populate the email see below). If both <code>data</code> and <code>query</code> are provided, their results will be merged and passed on to the email.</p>
+<p>Similarly to <code>data()</code>, the query will either use the <code>variables</code> object passed by <code>VulcanEmail.buildAndSend</code>, or use <code>testVariables</code>.</p>
+<h3 id="Test-Properties"><a href="#Test-Properties" class="headerlink" title="Test Properties"></a>Test Properties</h3><p>Additionally, you can define some test properties to make previewing and testing the email easier. These properties will be used when previewing the email from the email debug dashboard.</p>
+<h4 id="testPath"><a href="#testPath" class="headerlink" title="testPath"></a><code>testPath</code></h4><p>A path for the route at which the email will be available to preview (when using <code>vulcan:debug</code>). If the path contains paramerters (such as <code>/email/post-approved/:postId?</code>), these parameters will be passed as variables to the <code>data()</code> function as well as the <code>query</code>.</p>
+<h4 id="testVariables"><a href="#testVariables" class="headerlink" title="testVariables"></a><code>testVariables</code></h4><p>An object containing default variables passed to <code>query()</code> when testing the email. If not specified, a blank object will be used. </p>
+<p>This is useful to simulate an actual email sending function, since said function would usually pass variables to the </p>
+<p>You can also pass a <code>testVariables(params)</code> function instead, in which case the <code>params</code> object will contain any route params you’ve defined. For example, if you’ve set the test route for an email to be <code>/email/post-approved/:postId?</code> then visit <code>/email/post-approved/foo123</code>, then <code>params</code> will be equal to <code>{ postId: &#39;foo123&#39; }</code>. </p>
+<h3 id="Full-Example"><a href="#Full-Example" class="headerlink" title="Full Example"></a>Full Example</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VulcanEmail <span class="keyword">from</span> <span class="string">'meteor/vulcan:email'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">get</span> from 'lodash/<span class="keyword">get</span>';</span><br><span class="line"></span><br><span class="line">const postsQuery = `</span><br><span class="line">  query PostsSingleQuery($input: SinglePostInput!)&#123;</span><br><span class="line">    siteData &#123;</span><br><span class="line">      title</span><br><span class="line">      url</span><br><span class="line">    &#125;</span><br><span class="line">    post(input: $input)&#123;</span><br><span class="line">      result&#123;</span><br><span class="line"></span><br><span class="line">        title</span><br><span class="line">        url</span><br><span class="line">        htmlBody</span><br><span class="line"></span><br><span class="line">        scheduledAtFormatted</span><br><span class="line">        paidAtFormatted</span><br><span class="line">        sponsorshipPriceFormatted</span><br><span class="line"></span><br><span class="line">        user&#123;</span><br><span class="line">          pageUrl</span><br><span class="line">          displayName</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="string">`;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">VulcanEmail.addEmails(&#123;</span></span><br><span class="line"><span class="string">  postApproved: &#123;</span></span><br><span class="line"><span class="string">    template: "postApproved",</span></span><br><span class="line"><span class="string">    to(data) &#123;</span></span><br><span class="line"><span class="string">      return get(data, 'data.post.result.user.email', 'foo@example.com')</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    subject(data) &#123;</span></span><br><span class="line"><span class="string">      const dummyPost = &#123; title: "[title]" &#125;;</span></span><br><span class="line"><span class="string">      const post = get(data, 'data.post.result', dummyPost)</span></span><br><span class="line"><span class="string">      return "Your post “" + post.title + "” has been approved";</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    query: postsQuery,</span></span><br><span class="line"><span class="string">    testPath: "/email/post-approved/:postId?",</span></span><br><span class="line"><span class="string">    testVariables(&#123; postId &#125;) &#123;</span></span><br><span class="line"><span class="string">      return &#123; input: &#123; id: postId &#125; &#125;;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>As you can see, just like you can use GraphQL to query for data on the client and populate your React component’s contents, you can also use it to query for data on the server and populate your Handlebars templates.</p>
+<p>A few things to note:</p>
+<ul>
+<li>Queries can accept variables, which will be passed by <code>VulcanEmail.buildAndSend()</code> (see below); or <code>testVariables</code> when testing.</li>
+<li>A single query can query resolvers for entirely different collections. This lets you mix-and-match different data types in the same email. </li>
+<li>If the default resolvers (<code>post</code>, <code>posts</code>, etc.) don’t return the data you need for a specific email, don’t forget you can also create your own custom resolvers with <code>addGraphQLResolvers</code> and <code>addGraphQLQuery</code>.</li>
+</ul>
+<h2 id="Sending-Emails"><a href="#Sending-Emails" class="headerlink" title="Sending Emails"></a>Sending Emails</h2><p>Finally, you can send emails with <code>VulcanEmail.buildAndSend(options)</code>. The function takes an <code>options</code> object with the following fields:</p>
+<ul>
+<li><code>emailName</code>: the name of the email as registered using <code>VulcanEmail.addEmails</code>.</li>
+<li><code>variables</code>: (optional) the variables to pass to the email’s GraphQL <code>query</code> and the <code>data</code> function.</li>
+</ul>
+<p>Additionally, you can also specify <code>to</code> and <code>subject</code> properties, otherwise they will be derived from the email definition associated with the <code>emailName</code> you specified.</p>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+    <div class="content-wrapper">
+      
+      
+        <a class="link primary prev" href="packages.html">
+          <span class="icon-arrow-left-alt"></span>
+          <span class="subtitle-pagination">Previous</span>
+          Packages Types
+        </a>
+      
+      
+        <a class="link primary next" href="events.html">
+          <span class="subtitle-pagination">Next</span>
+          Analytics & Event Tracking
+          <span class="icon-arrow-right-alt"></span>
+        </a>
+      
+    </div>
+  </div>
+
+  <div class="github">
+    <a class="link tertiary " href="https://github.com/vulcanjs/vulcan-docs/tree/master/source/email.md" target="_blank">
+      <span class="icon-github"></span>Edit on GitHub</a>
+  </div>
+
+  
+</div>
+
+    <script src="/script/smooth-scroll.min.js"></script>
+    <script src="/script/main.js"></script>
+    <script>
+      
+    </script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+    <script type="text/javascript"> docsearch({
+      apiKey: 'ab091fbd89cda3abd54a35c4441b3e9b',
+      indexName: 'vulcanjs',
+      inputSelector: '#desktop-search-input',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+
+  </body>
+</html>
