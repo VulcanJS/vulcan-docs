@@ -2,6 +2,7 @@
 title: Components
 ---
 
+Note: while the component API is still available, it is now recommended to only use it 
 ## Using Components
 
 Assuming a component is registered, you can use it with `Components.Foo`. For example:

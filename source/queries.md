@@ -94,16 +94,31 @@ Vulcan also offers built-in client-side helpers that will generate the right Gra
 
 #### useSingle
 
-TODO
+```js
+const { result, loading, error, networkStatus, refetch } = useSingle2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
+```
+
+You will find the document available as the `result` property of the hook's return object. Note that under the hood `useSingle2` and `useMulti2` use Apollo's [useQuery](https://www.apollographql.com/docs/react/data/queries/#usequery-api), and all of that hook's return values are also available in `useSingle2` and `useMulti2`. 
 
 #### useMulti2
 
 Usage:
 
 ```js
-const properties = useMulti2(options);
+const { results, loading, error, networkStatus, refetch } = useMulti2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
 ```
-
 Options:
 
 - `collection`:
@@ -134,11 +149,10 @@ import { useMulti2 } from 'meteor/vulcan:core';
 import Posts from '../../modules/posts/collection';
 
 const PostList = () => {
-  const { loading,loadingInitial, loadingMore, count, results, data, refetch, totalCount,  = useMulti2({ collection: Posts });
-  console.log(foo)
+  const { results, data, loading }  = useMulti2({ collection: Posts });
   return (
     <div className="post-list">
-
+      {loading ? <Components.Loading /> : results.map(post => <Post post={post}/>)}
     </div>
   );
 };
@@ -147,6 +161,8 @@ export default PostList;
 ```
 
 ### Higher-Order Components
+
+**Note: HoCs are now deprecated in favor of hooks**
 
 To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).
 
