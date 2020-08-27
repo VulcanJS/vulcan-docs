@@ -145,10 +145,10 @@ query testDelete2 {
 
 ```js
 import React, { useState } from 'react';
-import { Components, useCreate } from 'meteor/vulcan:core';
+import { Components, useCreate2 } from 'meteor/vulcan:core';
 
 const CreatePost = () => {
-  const [createPost, { called, loading }] = useCreate({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [createPost, { called, loading }] = useCreate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
   const [error, setError] = useState();
 
   return (
@@ -185,10 +185,10 @@ export default CreatePost;
 
 ```js
 import React, { useState } from 'react';
-import { Components, useUpdate } from 'meteor/vulcan:core';
+import { Components, useUpdate2 } from 'meteor/vulcan:core';
 
 const UpdatePost = () => {
-  const [updatePost, { called, loading }] = useUpdate({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [updatePost, { called, loading }] = useUpdate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
   const [error, setError] = useState();
 
   return (
