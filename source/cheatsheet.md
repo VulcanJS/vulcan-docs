@@ -33,7 +33,7 @@ const multiInput = {
 ### Hooks
 
 ```js
-const { results, loading, error, networkStatus, refetch } = useSingle2({ 
+const { document, loading, error, networkStatus, refetch } = useSingle2({ 
   collection, 
   fragmentName, 
   input, 
@@ -57,30 +57,37 @@ const { results, loading, error, networkStatus, refetch } = useMulti2({
 ### Hooks
 
 ```js
-const [ createFunction, { data, loading, error }] = useCreate({ 
+const [ createFunction, { data, loading, error }] = useCreate2({ 
   collection, 
   fragmentName, 
-  input, 
   mutationOptions, // passed to Apollo hook
 });
+
+// to use the function: 
+createFunction({ input });
+
 ```
 
 ```js
-const [ updateFunction, { data, loading, error }] = useUpdate({ 
+const [ updateFunction, { data, loading, error }] = useUpdate2({ 
   collection, 
   fragmentName, 
-  input, 
   mutationOptions, // passed to Apollo hook
 });
+
+// to use the function: 
+updateFunction({ input });
 ```
 
 ```js
-const [ deleteFunction, { data, loading, error }] = useDelete({ 
+const [ deleteFunction, { data, loading, error }] = useDelete2({ 
   collection, 
   fragmentName, 
-  input, 
   mutationOptions, // passed to Apollo hook
 });
+
+// to use the function: 
+deleteFunction({ input });
 ```
 
 ### Mutators
