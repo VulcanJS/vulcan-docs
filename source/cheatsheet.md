@@ -64,7 +64,7 @@ const [ createFunction, { data, loading, error }] = useCreate2({
 });
 
 // to use the function: 
-createFunction({ input });
+createFunction({ input: { data } });
 
 ```
 
@@ -76,7 +76,7 @@ const [ updateFunction, { data, loading, error }] = useUpdate2({
 });
 
 // to use the function: 
-updateFunction({ input });
+updateFunction({ input: { id, data } });
 ```
 
 ```js
@@ -87,7 +87,7 @@ const [ deleteFunction, { data, loading, error }] = useDelete2({
 });
 
 // to use the function: 
-deleteFunction({ input });
+deleteFunction({ input: { id } });
 ```
 
 ### Mutators
