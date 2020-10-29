@@ -71,13 +71,20 @@ By default, Vulcan will use the `Components.Layout` component as a layout. Howev
 ```js
 addRoute({
   name: 'foo',
-  path: '/',
+  path: '/foo',
   component: Foo,
   layoutName: 'AdminLayout'
 });
+
+addRoute({
+  name: 'bar',
+  path: '/bar',
+  component: Bar,
+  layoutComponent: AdminLayout
+});
 ```
 
-Note that this supposes you've previously registered the `AdminLayout` component using `registerComponent`.
+Note that using the `layoutName` property supposes you've previously registered the `AdminLayout` component using `registerComponent`.
 
 ## Dynamic Imports
 
