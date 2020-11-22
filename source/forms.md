@@ -157,6 +157,10 @@ If a `cancelCallback` function is provided, a "cancel" link will be shown next t
 
 A callback to call when a document is successfully removed (deleted).
 
+#### `changeCallback(currentDocument)`
+
+A callback called a every change or blur event inside the form.
+
 ### Fragments
 
 #### `queryFragment`
