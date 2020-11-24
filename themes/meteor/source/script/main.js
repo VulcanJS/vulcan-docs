@@ -45,7 +45,6 @@
 
   for (const el of document.querySelectorAll('[data-hotkey]')) {
     Hotkey.install(el)
-    console.log(el)
   }
 
   function createSubMenu (container, headers) {
