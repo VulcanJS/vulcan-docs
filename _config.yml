@@ -50,6 +50,7 @@ sidebar_categories:
     - internationalization
     - head-tags
     - errors
+    - reactive-state
     - settings
   Forms:
     - forms
