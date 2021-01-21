@@ -4,7 +4,11 @@ title: Reactive State
 
 ## Introduction
 
-Vulcan's Reactive State feature offers simple global state management on the client side based on [Apollo Client reactive variables](https://www.apollographql.com/docs/react/local-state/reactive-variables/).
+Vulcan's Reactive State feature offers simple global state management on the client side based on [Apollo Client reactive variables](https://www.apollographql.com/docs/react/local-state/reactive-variables/). You can think of Reactive State as a wrapper around Apollo reactive variables with some added features:
+
+* Schema validation of objects stored in Reactive State using our familiar SimpleSchema pattern
+* Object state mutation similar to React `setState()` (with Apollo reactive vars updating an object value replaces the whole object)
+* The ability to reset all reactive states globally - which happens automatically when the user logs out
 
 Use it to store session data that survives re-renders and router transitions, unlike component state. You can create as many reactive states as you need, each identified with a unique key, and each holding either a simple scalar value like a boolean or string, or an object with an optional SimpleSchema for cleaning and validation.
 
@@ -19,9 +23,17 @@ export const exampleOpenState =
     createReactiveState({ stateKey: 'exampleOpenState', defaultValue: false });
 ```
 
-At any time you can get the state’s current value using `exampleOpenState()` which, in this case, would return `false`.
+At any time you can get the state’s current value using `reactiveState()`, or in this example:
 
-You can set the state to a new value using `exampleOpenState({newValue})` (in this case `exampleOpenState(true)`).
+```js
+let isOpen = exampleOpenState();  // isOpen is set to false
+```
+
+You can set the state to a new value using `reactiveState(newValue)`:
+
+```js
+exampleOpenState(true);
+```
 
 You can use a global state to make components reactive using [Apollo Client's useReactiveVar hook](https://www.apollographql.com/docs/react/local-state/managing-state-with-field-policies/#storing-local-state-in-reactive-variables):
 
@@ -104,10 +116,22 @@ const topBarSchema = {
   },
 };
 
-const topBarState = createReactiveState({ stateKey: 'topBarState', schema: topBarSchema });
+export const topBarState = createReactiveState({ 
+  stateKey: 'topBarState', 
+  schema: topBarSchema,
+});
 ```
 
-We recommend that you export the returned state and import it where you need to use it. Alternatively, you can retrieve a registered state using `getReactiveState('topBarState')`. To get its value, use `topBarState()`, which in this case would be:
+We recommend that you export the returned state and import it where you need to use it. Alternatively, you can retrieve a registered state using `getReactiveState('topBarState')`.
+
+Let's have a closer look at the returned state. In addition to using it to get or set the state's value, it has the following properties:
+
+ * `stateKey` - The name/id/key of the state
+ * `schema` - A `SimpleSchema` instance (or `undefined` if a schema was not passed when creating the state)
+ * `defaultValue` - The default value of the state, passed as a parameter when creating the state, or derived from the schema (or `undefined` if neither `defaultValue` nor `schema` was passed when creating the state)
+ * `reactiveVar` - An Apollo reactive variable
+
+Using the above example, the default value of a newly created `topBarState` would be:
 
 ```json
 {
@@ -117,23 +141,15 @@ We recommend that you export the returned state and import it where you need to 
 }
 ```
 
-Let's have a closer look at the returned state. In addition to using it to get or set the state's value, it has the following properties:
+## Mutating an object state
 
- * `stateKey` - The name/id/key of the state
- * `schema` - A `SimpleSchema` instance (or `undefined` if a schema was not passed when creating the state)
- * `defaultValue` - The default value of the state, passed as a parameter when creating the state, or derived from the schema (or `undefined` if neither `defaultValue` nor `schema` was passed when creating the state)
- * `reactiveVar` - An Apollo reactive variable
-
-
-## Updating an object state
-
-Earlier we saw `exampleOpenState(true)`, which updates the state's value. For an object state this works in a way that's similar to React's `setState`. If you pass an object, it performs a shallow merge, updating only the properties included in the object.
+Earlier we saw `exampleOpenState(true)`, which updates the state's value. For an object state this works in a way that's similar to React's `setState()`. If you pass an object parameter, it performs a shallow merge on the current value, updating only the properties included in the parameter.
 
 ```js
 topBarState({ isOpen: true });
 ```
 
-If you pass a function, you can mutate the state as you wish.
+If you pass a function, you can mutate the state as you wish:
 
 ```js
 topBarState(state => { 
