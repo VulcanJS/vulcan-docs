@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "global": "^4.3.2",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.5.3",
     "hexo": "^3.8.0",
     "hexo-deployer-git": "^1.0.0",
     "hexo-generator-archive": "^0.1.2",
