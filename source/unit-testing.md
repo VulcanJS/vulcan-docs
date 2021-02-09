@@ -1,5 +1,5 @@
 ---
-title: Unit testing
+title: Unit Testing
 ---
 
 Currently we are using [Mocha](https://mochajs.org/) for unit and integration testing. 

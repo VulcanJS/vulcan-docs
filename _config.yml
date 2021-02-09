@@ -16,72 +16,84 @@ versions:
 sidebar_categories:
   null:
     - index
-  Overview:
     - nutshell
+    - cheatsheet
+    - file-architecture
+    - toc
     # - features
-    - architecture
+    # - architecture
     # - vulcan
     # - features-packages
     # - forum-packages
-  Collections:
+  Schemas:
     - schemas
-    - graphql-schema
-    - field-resolvers
     - schema-properties
-  Data Layer:
-    - resolvers
+    # - field-resolvers
+    - relations
+  GraphQL API:
+    - graphql-schema
+    - api-schemas
+    - queries
+    - filtering
     - mutations
     - fragments
-    - terms-parameters
     - server-queries
-    # - redux
-    - security
-    - performance
-    - database
     - connecting-remotely
-  API:
-    - theming
-    - core-components
-    - ui-components
+  Features:
+    - routing
+    - settings
+    - groups-permissions
     - callbacks
     - users
-    - groups-permissions
-    - routing
     - internationalization
     - head-tags
     - errors
     - reactive-state
-    - settings
+  Components:
+    - components
+    - ui-components
+    - datatable
+    - card
+    - forms-components
+    - other-components
   Forms:
     - forms
-    - forms-components
+    - decorators
     - forms-custom
-  Packages:
+  Server:
+    # - resolvers
+    # - mutations
+    # - redux
+    # - security
+    - performance
+    - database
+  Other Packages:
     - packages
     - material-ui
     - email
-    - newsletter
-    - payments
-    - admin
-    - embed
-    - cloudinary
-    - voting
+    # - newsletter
+    # - payments
+    # - admin
+    # - embed
+    # - cloudinary
+    # - voting
     - events
-    - forms-upload
+    - error-tracking
+    # - forms-upload
     - debug
   Testing:
     - unit-testing
     - storybook
-  Tutorials:
-    - example-simple
-    - example-movies
-    - example-instagram
-    - example-forum
-    - example-customization
-    - example-permissions
-    - sponsorship-tutorial
-    - deployment
-    - recipes
+  # Tutorials:
+  #   - example-simple
+  #   - example-movies
+  #   - example-instagram
+  #   - example-forum
+  #   - example-customization
+  #   - example-permissions
+  #   - sponsorship-tutorial
+  #   - deployment
+  #   - recipes
   Resources:
     - learn
     - examples
@@ -105,7 +117,7 @@ apis:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://docs.vulcanjs.org/
+url: https://docs.vulcanjs.org/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

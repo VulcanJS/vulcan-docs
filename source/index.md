@@ -6,6 +6,8 @@ title: Read Me
 
 Vulcan is a framework that gives you a set of tools for quickly building React & GraphQL-based web applications. Out of the box, it can handle data loading, automatically generate forms, handle email notifications, and much more. 
 
+*Note: you can find the old version of these docs (for pre-1.14 Vulcan) [here](https://5dc94d3d478e66000815d452--vulcan-docs.netlify.com/).*
+
 ## Why Vulcan?
 
 Vulcan is unique in that it spans the full stack, from the database to the browser. While there exists many excellent back-end frameworks or backend-as-a-service providers, these all still require you to handle your front-end code yourself, including building a set of components to read, write, and display data. 
@@ -97,15 +99,17 @@ When you first run the Vulcan starter repo, you'll see the “Getting Started”
 
 After that, you can also go through the [Simple Example tutorial](example-simple.html) to get a grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
-You can then take the more in-depth [Movies Example tutorial](example-movies.html) to get a better understanding of VulcanJS's internals. You can enable the Movies Example package by uncommenting it in `.meteor/packages`, and commenting out `example-simple` in its place)
+At this stage, you can check out the [`example-forum`](example-forum.html) package to see what a full Vulcan app looks like, or the [`example-forms`](example-forms.html) example to learn more about Vulcan's forms system. 
 
-Once you've gone through these tutorials, you can enable the `example-instagram` package, which takes the same basic example but goes a little further, as well as take a look at its code. 
+## The Vulcan Core Package
 
-At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced forum features by checking out the [`example-forum`](example-forum.html) package. 
+Unless mentioned otherwise, all Vulcan utilities function are imported from the `vulcan:core` Meteor package:
 
-And if you'd like to use and customize the forum packages, you can then follow up with the [customization example tutorial](example-customization.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
+```js
+import { createCollection } from 'meteor/vulcan:core';
 
-You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
+const Posts = createCollection({...});
+```
 
 ## Slack Channel
 

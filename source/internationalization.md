@@ -335,17 +335,17 @@ In other words, for the above examples you need to make sure you register the `e
 
 #### Migration Script
 
-Vulcan includes a migration script that will take all internationalized schema fields (i.e. those using the `getIntlString()` type) and convert their data format. 
+Vulcan includes a migration script that will take all internationalized schema fields (i.e. those with `intl: true`) and convert their data format. 
 
 Just call `Vulcan.migrateIntlFields(locale)` from your `meteor shell` (where `locale` is the locale of the fields' current content) or from inside a `meteor.startup()` block (note that `Vulcan` is a global, meaning it doesn't need to be imported).
 
 ### Field Schema
 
-In order to make a field support multiple languages, all you need to do is replace its `String` type with `getIntlString()` (imported from `vulcan:core`):
+In order to make a field support multiple languages, all you need to do is set `intl` to `true`:
 
 ```js
 title: {
-  type: getIntlString(),
+  intl: true,
   optional: false,
   canRead: ['guests'],
   canCreate: ['admins'],
@@ -397,10 +397,10 @@ await VulcanEmail.buildAndSend({
 
 ### Email Templates
 
-Within an email template, internationalization strings are available as the `__` object: 
+Within an email template, internationalization strings are available as the `__` function: 
 
 ```
-<h1>{{__.welcome_email_title}}</h1>
+<h1>{{__ "welcome_email_title"}}</h1>
 ```
 
 If your i18n strings keys contain special characters (dots, spaces, etc.), you can escape them using the following `[...]` syntax:
@@ -409,4 +409,8 @@ If your i18n strings keys contain special characters (dots, spaces, etc.), you c
 <h1>{{__.[emails.inquiry_approved]}}</h1>
 ```
 
-Note that email internationalization is pretty basic and does not currently support string replacement. PR welcome! [TODO]
+If you need to pass values to be replaced, you can also add an optional second argument: 
+
+```
+{{__ "posts.create" postValues}}
+```

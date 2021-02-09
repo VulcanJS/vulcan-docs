@@ -13,7 +13,222 @@ When talking about mutations, it's important to distinguish between the differen
 3. The mutation resolver then calls a **mutator**. The mutator is the function that does the actual job of validating the request and mutating your data. The reason for this additional layer is that you'll often want to mutate data for *outside* your GraphQL API. By extracting that logic you're able to call the same exact mutator function whether you're inserting a new document sent by the front-end or, say, seeding your database with content extracted from an API. As usual, Vulcan offers a set of [default mutators](#Default-Mutators).
 4. Finally, the mutator calls a [database connector](/database.html#Connectors) to perform the actual database operation. By abstracting out the database operation, we're able to make mutators (and by extension your entire GraphQL API) database-agnostic. This means that you can switch from MongoDB to MySQL without having to modify any of the above three layers. 
 
-## Mutation Hooks & Higher-Order Components
+## API
+
+All mutations follow the "single argument" rule. In other words, they all have a single `input` argument which then contains one or more of the following nested arguments: 
+
+- `filter`: a `filter` object (see [filtering](/filtering.html)) used to target the document to mutate.
+- `id`: an alternate way to directly specify the `id` of the document to mutate.  
+- `data`: the mutation data.
+
+The mutations then all return a `data` object which contains the mutated document (note that the name of that property is always `data` no matter the returned document's type).
+
+### Create Mutation
+
+Supported input arguments: `data`.
+
+Generated type:
+
+```
+createMovie(input: CreateMovieInput) : MovieMutationOutput
+```
+
+Example mutation: 
+
+```
+query testCreate {
+  createMovie(input: { data: { name: "Die Hard", year: 1987 } }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+### Update Mutation
+
+Supported input arguments: `filter`, `id`, `data`.
+
+Generated type:
+
+```
+updateMovie(input: UpdateMovieInput ) : MovieMutationOutput
+```
+
+Example mutation: 
+
+```
+query testUpdate1 {
+  updateMovie(input: { filter: { name: { _eq: "Die Hard" } }, data: { year: 1988 } }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+or
+
+
+```
+query testUpdate2 {
+  updateMovie( input: { id: "foo123", data: { year: 1988 } }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+### Upsert Mutation
+
+Supported input arguments: `filter`, `id`, `data`.
+
+Generated type:
+
+```
+upsertMovie(input: UpsertMovieInput ) : MovieMutationOutput
+```
+
+Example mutation: 
+
+```
+query testUpsert {
+  upsertMovie(input: { filter: { name: { _eq: "Die Hard" }, data: { name: "Die Hard", year: 1988 } }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+### Delete Mutation
+
+Supported input arguments: `filter`, `id`.
+
+Generated type:
+
+```
+deleteMovie(input: MovieDeleteInput) : MovieMutationOutput
+```
+
+Example mutation: 
+
+```
+query testDelete1 {
+  deleteMovie(input: { filter: { name: { _eq: "Die Hard" } }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+or
+
+
+```
+query testDelete2 {
+  deleteMovie( input: {id: "foo123" }) {
+    _id
+    name
+    year
+  }
+}
+```
+
+## Client
+
+### Hooks
+
+#### useCreate
+
+```js
+import React, { useState } from 'react';
+import { Components, useCreate2 } from 'meteor/vulcan:core';
+
+const CreatePost = () => {
+  const [createPost, { called, loading }] = useCreate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [error, setError] = useState();
+
+  return (
+    <div>
+      {error ? (
+        <Components.FormErrors errors={getErrors(error)} />
+      ) :
+      loading ? (
+        <Components.Loading />
+      ) : called ? (
+        <p>Thanks for submitting a post!</p>
+      ) : (
+        <Components.Button
+          onClick={async () => {
+            try {
+              const input = { data: { title: 'My post title', body: 'My post body', url: 'https://myurl.com' } };
+              await createPost({ input });
+            } catch (error) {
+              setError(error);
+            }
+          }}
+        >
+          Submit Post
+        </Components.Button>
+      )}
+    </div>
+  );
+};
+
+export default CreatePost;
+```
+
+#### useUpdate
+
+```js
+import React, { useState } from 'react';
+import { Components, useUpdate2 } from 'meteor/vulcan:core';
+
+const UpdatePost = () => {
+  const [updatePost, { called, loading }] = useUpdate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [error, setError] = useState();
+
+  return (
+    <div>
+      {error ? (
+        <Components.FormErrors errors={getErrors(error)} />
+      ) :
+      loading ? (
+        <Components.Loading />
+      ) : called ? (
+        <p>Thanks for udpating a post!</p>
+      ) : (
+        <Components.Button
+          onClick={async () => {
+            try {
+              const input = {
+                id: 'foo123',
+                data: { title: 'My post title2', body: 'My post body', url: 'https://myurl.com/2' },
+              };
+              await updatePost({ input });
+            } catch (error) {
+              setError(error);
+            }
+          }}
+        >
+          Update Post
+        </Components.Button>
+      )}
+    </div>
+  );
+};
+
+export default UpdatePost;
+```
+
+#### useDelete
+
+TODO
+
+### Higher-Order Components
 
 Vulcan includes three main default hooks and higher-order components to make calling mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
@@ -46,16 +261,29 @@ this.props
 
 #### `useUpdate` and `withUpdate`
 
-Same options as `withCreate`. The returned `updateMovie` function takes an object with two properties as an argument and returns a promise:
+Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `filter`, `_id`, and `data`:
 
-* `selector`: a selector pointing to the document to modify. Usually `{ documentId }`.
+* `filter`: a `filter` input pointing to the document to modify. See the [filtering](filtering.html) section.
+* `_id`: an `_id` used to identify a specific document (note that either `filter` or `_id` should be set).
 * `data`: the fields to modify or delete (as a list of field name/value pairs with deleted fields set to `null`, e.g.`{title: 'My New Title', body: 'My new body', status: null}`).
 
 ```js
 this.props
   .updateMovie({
-    selector: { documentId },
-    data,
+    _id: 'foo123',
+    data: { year: 2001 },
+  })
+  .then(/* success */)
+  .catch(/* error */);
+```
+
+or
+
+```js
+this.props
+  .updateMovie({
+    filter: { name: { _in: ['Die Hard', 'Terminator 2'] } },
+    data: { year: 1993 },
   })
   .then(/* success */)
   .catch(/* error */);
@@ -63,12 +291,7 @@ this.props
 
 #### `useDelete` and `withDelete`
 
-It takes the following options:
-
-- `collection`: the collection to operate on.
-- `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
-
-The returned `deleteMovie` takes an object with a single `selector` property as an argument and returns a promise.
+A single `collection` option. The returned `deleteMovie` mutation takes `filter` and `_id` arguments:
 
 ```js
 this.props
@@ -106,18 +329,11 @@ You would then call the function with:
 ```
 this.props.addEmailNewsletter({email: 'foo@bar.com'})
 ```
+## Server
 
-## Mutations Resolvers
+### Resolvers
 
-When creating a new collection, `createCollection` accepts a `mutations` object. This object should include three mutations, `new`, `edit`, and `remove`, each of which has the following properties:
-
-* `name`: the name of the mutation.
-* `check`: a function that takes the current user and (optionally) the document being operated on, and return `true` or `false` based on whether the user can perform the operation.
-* `mutation`: the mutation function.
-
-### Default Mutation Resolvers
-
-Vulcan provides a set of default New, Edit and Remove mutations you can use to save time:
+Vulcan provides a set of default Create, Update, Upsert and Delete mutations you can use to save time:
 
 ```js
 import {
@@ -147,39 +363,10 @@ The `options` object can have the following properties:
 - `update` (Boolean): whether to create a `update` mutation (defaults to `true`).
 - `upsert` (Boolean): whether to create a `upsert` mutation (defaults to `true`).
 - `delete` (Boolean): whether to create a `delete` mutation (defaults to `true`).
-- `createCheck` (Function): a function used to customize the `create` check.
-- `updateCheck` (Function): a function used to customize the `update` check.
-- `upsertCheck` (Function): a function used to customize the `upsert` check.
-- `deleteCheck` (Function): a function used to customize the `delete` check.
-
-Vulcan's default mutations are fairly lightweight. For example here's the body of the `edit` mutation resolver (where `collectionName` is `getDefaultMutations`'s argument):
-
-```js
-async mutation(root, {documentId, set, unset}, context) {
-  
-  const collection = context[collectionName];
-
-  // get entire unmodified document from database
-  const document = await Connectors.get(collection, documentId);
-
-  // check if user can perform operation; if not throw error
-  Utils.performCheck(this.check, context.currentUser, document);
-
-  // call updateMutator boilerplate function
-  return await updateMutator({
-    collection, 
-    selector, 
-    data, 
-    currentUser: context.currentUser,
-    validate: true,
-    context,
-  });
-},
-```
 
 To learn more about what exactly the default mutations do, you can [find their code here](https://github.com/VulcanJS/Vulcan/blob/devel/packages/vulcan-core/lib/modules/default_mutations.js).
 
-### Custom Mutations
+#### Custom Mutations
 
 You can also add your own mutations resolvers using `addGraphQLMutation` and `addGraphQLResolvers`:
 
@@ -201,11 +388,11 @@ const voteResolver = {
 addGraphQLResolvers(voteResolver);
 ```
 
-## Mutators
+### Mutators
 
 A **mutator** is the function that actually does the work of mutating data on the server. As opposed to the _mutation_, which is usually a fairly light function called directly through the GraphQL API, a _mutator_ will take care of the heavy lifting, including validation, callbacks, etc., and should be written in such a way that it can be called from anywhere: a GraphQL API, a REST API, from the server directly, etc.
 
-### Default Mutators
+#### Default Mutators
 
 Vulcan features three standard mutators: `createMutator`, `updateMutator`, and `deleteMutator`. They are in essence thin wrappers around the standard Mongo `insert`, `update`, and `remove`.
 
@@ -227,38 +414,21 @@ If `validate` is set to `true`, these boilerplate operations will:
 * Add `userId` to document (insert only).
 * Run any validation callbacks (e.g. `movies.new.validate`).
 
-They will then run the mutation's document (or the `set` modifier) through the collection's sync callbacks (e.g. `movie.create.sync`), perform the operation, and finally run the async callbacks (e.g. `movie.create.async`).
+They will then run the mutation's document (or the `data` object) through the collection's sync callbacks (e.g. `movie.create.sync`), perform the operation, and finally run the async callbacks (e.g. `movie.create.async`).
 
-For example, here is the `Posts` collection's `create` mutation resolver, using the `createMutator` boilerplate mutation:
+For example, here is the `Posts` collection using the `createMutator` boilerplate mutator:
 
 ```js
-import { createMutator } from 'meteor/vulcan:core';
-
-const mutations = {
-  new: {
-    name: 'createPost',
-
-    check(user, document) {
-      if (!user) return false;
-      return Users.canDo(user, 'post.create');
-    },
-
-    mutation(root, { document }, context) {
-      performCheck(this.check, context.currentUser, document);
-
-      return createMutator({
-        collection: context.Posts,
-        document: document,
-        currentUser: context.currentUser,
-        validate: true,
-        context
-      });
-    }
-  }
-};
+createMutator({
+  collection: context.Posts,
+  document: document,
+  currentUser: context.currentUser,
+  validate: true,
+  context
+});
 ```
 
-### Mutator Callbacks
+#### Mutator Callbacks
 
 Default mutators create the following callback hooks for every collection: 
 
@@ -269,7 +439,7 @@ Default mutators create the following callback hooks for every collection:
 
 You can learn more about callbacks in the [Callbacks](callbacks.html) section.
 
-### Custom Mutators
+#### Custom Mutators
 
 If you're writing your own resolvers you can of course also write your own mutators, either by using Vulcan's [Connectors](/database.html#Connectors) or even by accessing your database directly. 
 

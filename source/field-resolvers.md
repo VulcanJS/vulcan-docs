@@ -20,7 +20,10 @@ userId: {
     arguments: 'foo: Int = 10',
     type: 'User',
     resolver: (movie, args, context) => {
-      return context.Users.findOne({ _id: movie.userId }, { fields: context.Users.getViewableFields(context.currentUser, context.Users) });
+      if (!movie.userId) return;
+      const { currentUser, Users } = context;
+      const user = await Users.loader.load(movie.userId);
+      return Users.restrictViewableFields(currentUser, Users, user);
     },
     addOriginalField: true
   }

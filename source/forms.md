@@ -157,6 +157,10 @@ If a `cancelCallback` function is provided, a "cancel" link will be shown next t
 
 A callback to call when a document is successfully removed (deleted).
 
+#### `changeCallback(currentDocument)`
+
+A callback called a every change or blur event inside the form.
+
 ### Fragments
 
 #### `queryFragment`
@@ -190,11 +194,13 @@ categoryId: {
   canUpdate: ['members'],
   canRead: ['guests'],
   query: `
-    CategoriesList{
-      _id
-      name
-      slug
-      order
+    categories(input: { limit: 999 }){
+      results{
+        _id
+        name
+        slug
+        order
+      }
     }
   `,
   options: props => props.data.CategoriesList.map(category => ({
@@ -207,9 +213,11 @@ categoryId: {
 
 We're doing two things here. First, we're setting the `query` property and passing it an additional bit of GraphQL query code that will be executed when the form is loaded. 
 
-Because the extra query code calls the `CategoriesList` resolver, whatever the resolver returns will then be available on `props.data` once our data is done loading. 
+Because the extra query code calls the `categories` resolver, whatever the resolver returns will then be available on `props.data` once our data is done loading. 
 
 This lets us set the `options` property in order to populate our dropdown. Essentially, we're just translating a list of categories into a list of `{ value, label }` pairs.
+
+Note that it's usually a good idea to pass a high `limit` to field queries, since you usually want to load the entirety of your collection (since the `categoryId` could point to any category in your database). This does mean that this pattern is currently not ideal for collections with large number of items.
 
 ### Using `documentId`
 

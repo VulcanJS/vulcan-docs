@@ -20,6 +20,8 @@ Then, type:
 Vulcan.getGraphQLSchema()
 ```
 
+Note: if `Vulcan` is not defined you can import it first with `import {Vulcan} from 'meteor/vulcan:lib'`.
+
 ## Custom Schemas
 
 If you need to manually add a schema, you can also do this using the `addGraphQLSchema` function which will add one or more [GraphQL schemas](http://graphql.org/learn/schema/) to your GraphQL API:

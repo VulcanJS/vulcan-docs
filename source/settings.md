@@ -62,9 +62,14 @@ You can use the settings file to store your oAuth configurations:
   "facebook": {
     "appId": "foo",
     "secret": "bar"
+  },
+  "github": {
+    "clientId": "foo",
+    "secret": "bar"
   }
 }
 ```
+Don't forget to add the matching meteor package, e.g. `accounts-twitter`, `accounts-facebook`, `accounts-github` etc.
 
 ## registerSetting
 

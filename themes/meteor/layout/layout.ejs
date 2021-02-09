@@ -23,6 +23,7 @@
 
     <!-- Misc -->
     <meta name="google-site-verification" content="" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200,300italic,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<%= config.root || '/' %>style/style.css">
 
@@ -33,10 +34,8 @@
   <body class="">
     <%- body %>
     <script src="<%= config.root || '/' %>script/smooth-scroll.min.js"></script>
+    <script src="<%= config.root || '/' %>script/hotkey.js"></script>
     <script src="<%= config.root || '/' %>script/main.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
-
-
     <script>
       <% if (config.redirects) { %>
         var REDIRECTS = <%- JSON.stringify(config.redirects, 0, 2) %>;

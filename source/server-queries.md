@@ -48,9 +48,11 @@ async function foo = () => {
 
 (Note that you'll need to be inside an `async` context to use the `await` keyword)
 
-### collection.queryOne(documentId, options)
+### collection.queryOne(inputOrId, options)
 
-A common need on the server is fetching a single document by its `_id`. You can do so with `collection.queryOne`. It takes an `options` object with a `fragmentText` property. If no fragment is provided, the query will use the collection's `defaultFragment`. 
+A common need on the server is fetching a single document by its `_id`. You can do so with `collection.queryOne`. The first argument is either a string `_id`, or a full `input` object (as used by `single` queries). 
+
+The second argument is an `options` object with a `fragmentText` property. If no fragment is provided, the query will use the collection's `defaultFragment`. 
 
 ```js
 const user = await Users.queryOne(userId);
