@@ -101,11 +101,31 @@ const Movies = createCollection({
 });
 ```
 
+##### Custom Filters & Nested Fields
+
+Custom filters can be useful to work around the limitations of the filtering system. For example, unlike MongoDB the GraphQL filtering API does not let you filter based on nested document fields (e.g. `addresses.country`) since every filter needs to be defined in the GraphQL schema. But you can define a custom filter instead: 
+
+```js
+customFilters: [
+  {
+    name: '_withAddressCountry',
+    arguments: 'country: String',
+    filter: ({ input, context, filterArguments }) => {
+      const { country } = filterArguments;
+      return {
+        selector: { 'addresses.country': country },
+        options: {},
+      };
+    },
+  },
+],
+```
+
 ### Sort
 
 ```
 query RecentMovies {
-  movies(input: { filter: { year: { gte: 2010" } }, sort: { year: "desc" } }) {
+  movies(input: { filter: { year: { gte: "2010" } }, sort: { year: "desc" } }) {
     results{
       _id
       title
@@ -192,6 +212,10 @@ query NextPageOfMovies {
 ```
 
 ## Default Input
+
+**[DEPRECATED]**
+
+**Specifying a `defaultInput` is handy, but it means that the options used by the server might end up different from the ones pass by the client, which can often be confusing and lead to less visibility on what's going on inside your API. For that reason we recommend you explicitly specify all filtering, sorting, etc. options on the client.**
 
 The `defaultInput` property lets you control what happens when no argument at all is provided to a query by providing a default input when creating a collection:
 

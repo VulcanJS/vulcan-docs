@@ -75,9 +75,9 @@ Package.describe({
 Package.onUse(function (api) {
 
   api.use([
-    'vulcan:core@1.12.3',
-    'vulcan:forms@1.12.3',
-    'vulcan:accounts@1.12.3',
+    'vulcan:core@1.14.1',
+    'vulcan:forms@1.14.1',
+    'vulcan:accounts@1.14.1',
   ]);
 
   api.addFiles('lib/stylesheets/bootstrap.min.css');
@@ -819,7 +819,15 @@ import './fragments.js';
 import mutations from './mutations.js';
 import './permissions.js';
 
-//...
+const Movies = createCollection({
+  permissions: {
+    canCreate: ["members"],
+    canRead: ["guests"],
+    canUpdate: ["owners", "admins"],
+    canDelete: ["owners", "admins"]
+  }
+  //...
+})
 ```
 
 Note that in this specific case, creating an action and checking for it is a bit superfluous, as it boils down to checking if the user is logged in. But this is a good introduction to the permission patterns used in Vulcan, which you can learn more about in the [Groups & Permissions](/groups-permissions.html) section.
@@ -827,6 +835,8 @@ Note that in this specific case, creating an action and checking for it is a bit
 One more thing! By default, all schema fields are locked down, so we need to specify which ones the user should be able to insert as part of a “new document” operation. 
 
 Once again, we do this through the schema. We'll add an `canCreate` property to any “insertable” field and set it to `[members]` to indicate that a field should be insertable by any member of the `members` group (in other words, regular logged-in users):
+
+We add [document-level permissions](/groups-permissions.html#Document-level-Permissions) to secure document access. It will also allow us to [check permissions](/groups-permissions.html#Checking-Permissions) client-side.
 
 ```js
 const schema = {
@@ -908,12 +918,16 @@ import React, { PropTypes, Component } from 'react';
 import { Components, registerComponent, withCurrentUser, getFragment } from 'meteor/vulcan:core';
 
 import Movies from '../../modules/movies/collection.js';
+import Users from "meteor/vulcan:users";
 
 const MoviesNewForm = ({currentUser}) =>
 
   <div>
 
-    {Movies.options.mutations.create.check(currentUser) ?
+    {Users.canCreate({
+      collection: Movies,
+      user: currentUser
+    }) ?
       <div style={ { marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #ccc' } }>
         <h4>Insert New Document</h4>
         <Components.SmartForm 
@@ -938,7 +952,7 @@ import '../components/movies/MoviesNewForm.jsx';
 A few things to note: 
 
 - We'll pass the `MoviesItemFragment` fragment to the form so that it knows what data to return from the server once the mutation is complete. 
-- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the `create` mutation's `check` function to figure this out.
+- We only want to show the “New Movie” form when a user actually *can* submit a new movie, so we'll make use of the document level permissions we defined earlier to check if a user can create a movie using the `canCreate` helper on the collection.
 - We need to access the current user to perform this check, so we'll use the `withCurrentUser` higher-order component. 
 
 Let's add the form component to `movies.jsx`:

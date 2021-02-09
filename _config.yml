@@ -17,6 +17,8 @@ sidebar_categories:
   null:
     - index
     - nutshell
+    - cheatsheet
+    - file-architecture
     - toc
     # - features
     # - architecture
@@ -26,10 +28,11 @@ sidebar_categories:
   Schemas:
     - schemas
     - schema-properties
-    - field-resolvers
+    # - field-resolvers
     - relations
   GraphQL API:
     - graphql-schema
+    - api-schemas
     - queries
     - filtering
     - mutations
@@ -49,10 +52,12 @@ sidebar_categories:
     - components
     - ui-components
     - datatable
+    - card
     - forms-components
     - other-components
   Forms: 
     - forms
+    - decorators
     - forms-custom
   Server:
     # - resolvers

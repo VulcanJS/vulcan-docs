@@ -94,13 +94,75 @@ Vulcan also offers built-in client-side helpers that will generate the right Gra
 
 #### useSingle
 
-TODO
+```js
+const { result, loading, error, networkStatus, refetch } = useSingle2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
+```
 
-#### useMulti
+You will find the document available as the `result` property of the hook's return object. Note that under the hood `useSingle2` and `useMulti2` use Apollo's [useQuery](https://www.apollographql.com/docs/react/data/queries/#usequery-api), and all of that hook's return values are also available in `useSingle2` and `useMulti2`. 
 
-TODO
+#### useMulti2
+
+Usage:
+
+```js
+const { results, loading, error, networkStatus, refetch } = useMulti2({ 
+  collection, 
+  fragmentName, 
+  input, 
+  pollInterval, 
+  queryOptions, // passed to Apollo hook
+});
+```
+Options:
+
+- `collection`:
+- `collectionName`: 
+- `fragment`: 
+- `fragmentName`:
+
+Returned properties:
+
+-`loading`: Bool – indicates whether the query is loading.
+-`loadingInitial`: Bool – indicates whether this is the initial load.
+-`loadingMore`: Bool - indicates whether the query is loading additional data.
+-`results`: Array – the results returned by the query.
+-`totalCount`: Int – the total non-paginated count for the documents matching the query.
+-`refetch`: Function – a function that lets you re-run the query.
+-`networkStatus`: Int – the Apollo Client network status.
+-`error`: Error – the Apollo Client error.
+-`count`: Int – the count of paginated documents matching the query.
+-`loadMore`: Function – a function to load more documents.
+-`loadMoreInc`: Function – a function to load more documents incrementally.
+-`fragmentName`: String – the name of the fragment used to load the data.
+-`fragment`: Object – the fragment used to load the data.
+-`data`: Object – the raw Apollo Client result object.
+
+```js
+import React from 'react';
+import { useMulti2 } from 'meteor/vulcan:core';
+import Posts from '../../modules/posts/collection';
+
+const PostList = () => {
+  const { results, data, loading }  = useMulti2({ collection: Posts });
+  return (
+    <div className="post-list">
+      {loading ? <Components.Loading /> : results.map(post => <Post post={post}/>)}
+    </div>
+  );
+};
+
+export default PostList;
+```
 
 ### Higher-Order Components
+
+**Note: HoCs are now deprecated in favor of hooks**
 
 To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).
 

@@ -143,11 +143,86 @@ query testDelete2 {
 
 #### useCreate
 
-TODO
+```js
+import React, { useState } from 'react';
+import { Components, useCreate2 } from 'meteor/vulcan:core';
+
+const CreatePost = () => {
+  const [createPost, { called, loading }] = useCreate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [error, setError] = useState();
+
+  return (
+    <div>
+      {error ? (
+        <Components.FormErrors errors={getErrors(error)} />
+      ) :
+      loading ? (
+        <Components.Loading />
+      ) : called ? (
+        <p>Thanks for submitting a post!</p>
+      ) : (
+        <Components.Button
+          onClick={async () => {
+            try {
+              const input = { data: { title: 'My post title', body: 'My post body', url: 'https://myurl.com' } };
+              await createPost({ input });
+            } catch (error) {
+              setError(error);
+            }
+          }}
+        >
+          Submit Post
+        </Components.Button>
+      )}
+    </div>
+  );
+};
+
+export default CreatePost;
+```
 
 #### useUpdate
 
-TODO
+```js
+import React, { useState } from 'react';
+import { Components, useUpdate2 } from 'meteor/vulcan:core';
+
+const UpdatePost = () => {
+  const [updatePost, { called, loading }] = useUpdate2({ collectionName: 'Posts', fragmentName: 'PostFragment' });
+  const [error, setError] = useState();
+
+  return (
+    <div>
+      {error ? (
+        <Components.FormErrors errors={getErrors(error)} />
+      ) :
+      loading ? (
+        <Components.Loading />
+      ) : called ? (
+        <p>Thanks for udpating a post!</p>
+      ) : (
+        <Components.Button
+          onClick={async () => {
+            try {
+              const input = {
+                id: 'foo123',
+                data: { title: 'My post title2', body: 'My post body', url: 'https://myurl.com/2' },
+              };
+              await updatePost({ input });
+            } catch (error) {
+              setError(error);
+            }
+          }}
+        >
+          Update Post
+        </Components.Button>
+      )}
+    </div>
+  );
+};
+
+export default UpdatePost;
+```
 
 #### useDelete
 

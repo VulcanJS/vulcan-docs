@@ -4,15 +4,16 @@ title: Read Me
 
 ## What's Vulcan?
 
-Vulcan is a framework that gives you a set of tools for quickly building React & GraphQL-based web applications. Out of the box, it can handle data loading, automatically generate forms, handle email notifications, and much more. 
+Vulcan is a framework that gives you a set of tools for quickly building React & GraphQL-based web applications. It can handle data loading, e-mail notifications, automatic form generation, and much more, out of the box. 
+
 
 *Note: you can find the old version of these docs (for pre-1.14 Vulcan) [here](https://5dc94d3d478e66000815d452--vulcan-docs.netlify.com/).*
 
 ## Why Vulcan?
 
-Vulcan is unique in that it spans the full stack, from the database to the browser. While there exists many excellent back-end frameworks or backend-as-a-service providers, these all still require you to handle your front-end code yourself, including building a set of components to read, write, and display data. 
+Vulcan is unique in that it spans the full-stack, from the database to the browser. While there exist many excellent back-end frameworks or backend-as-a-service providers, these all still require you to handle the front-end code yourself, including building a set of components to read, write, and display data. 
 
-But because Vulcan is full-stack, it's able to speed up these repetitive tasks by providing a whole range of helper components that are fine-tuned to the Vulcan back-end, and as a result just work out of the box. 
+However, being full-stack, Vulcan is able to speed up these repetitive tasks by providing a whole range of helper components that are fine-tuned to the Vulcan back-end, and as a result just work out of the box. 
 
 You can get a good overview of what Vulcan can do in the [Features](features.html) section. 
 
@@ -52,20 +53,20 @@ Note that you can also start the app with:
 meteor --settings settings.json 
 ```
 
-All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if missing. 
+All `npm start` does is run the above command, while also checking for the presence of `settings.json` first and creating it for you if it is missing. 
 
-(A note for `windows` user: While running `npm install` you might get error regarding `node-gyp` and `bcrypt` package installation. This is because you need [windows-build-tool](https://github.com/nodejs/node-gyp/blob/master/README.md#on-windows) for `node-gyp` installation which is [required](https://github.com/kelektiv/node.bcrypt.js#dependencies) for `bcrypt` installation.)
+(A note for `windows` user: While running `npm install` you might get an error regarding `node-gyp` and `bcrypt` package installation. This is because you need [windows-build-tool](https://github.com/nodejs/node-gyp/blob/master/README.md#on-windows) for `node-gyp` installation which is [required](https://github.com/kelektiv/node.bcrypt.js#dependencies) for `bcrypt` installation.)
 
 ## Two-Repo Install (Optional)
 
 - [Full video tutorial](https://www.youtube.com/watch?v=mEemOReAw5Y)
 
-In order to make working with Vulcan easier (especially when it comes to updating the core packages), you can also follow the more complicated "two-repo" pattern, with the two repositories being: 
+In order to make working with Vulcan easier (especially when it comes to updating the core packages), you are also free to follow the more complicated "two-repo" pattern, with the two repositories being: 
 
 1. Your own Vulcan project (for example, a clone of the Vulcan Starter project as outlined above).
 2. A clone of [the main Vulcan repo](https://github.com/VulcanJS/Vulcan/), which the first repo will use as the source for the Vulcan core code. 
 
-Follow these steps to get set up:
+Follow these steps to get set-up:
 
 1. Clone the main [VulcanJS repo](https://github.com/VulcanJS/Vulcan) locally (for example, to `~/Vulcan`).
 2. Create a new Meteor project or clone the [Vulcan starter repo](https://github.com/VulcanJS/Vulcan-Starter) (this will become your project's repo).
@@ -95,19 +96,11 @@ If you follow this install method, your Vulcan core files will *not* be included
 
 ## Getting Started
 
-When you first run the Vulcan starter repo, you'll see the “Getting Started” tutorial, and you should be able to follow along from there. 
+When you first run the Vulcan starter repo, you'll see the “Getting Started” tutorial and you should be able to follow along from there. 
 
 After that, you can also go through the [Simple Example tutorial](example-simple.html) to get a grasp of how Vulcan's building blocks (data loading, forms, etc.) work. 
 
-You can then take the more in-depth [Movies Example tutorial](example-movies.html) to get a better understanding of VulcanJS's internals. You can enable the Movies Example package by uncommenting it in `.meteor/packages`, and commenting out `example-simple` in its place)
-
-Once you've gone through these tutorials, you can enable the `example-instagram` package, which takes the same basic example but goes a little further, as well as take a look at its code. 
-
-At this stage, you can either continue using Vulcan's basic building blocks, or enable the more advanced forum features by checking out the [`example-forum`](example-forum.html) package. 
-
-And if you'd like to use and customize the forum packages, you can then follow up with the [customization example tutorial](example-customization.html) tutorial, which will take you through the code of the included `example-customization` package and show you how to adapt Vulcan packages to your needs without modifying their code directly, by tweaking styles, overriding components, and inserting your own logic in Vulcan's back-end. 
-
-You can also check out [Vulcan's YouTube channel](https://www.youtube.com/channel/UCGIvQQ6zw7ov2cHgD70HFlA) to learn more about the framework. 
+At this stage, you can check out the [`example-forum`](example-forum.html) package to see what a full Vulcan app looks like, or the [`example-forms`](example-forms.html) example to learn more about Vulcan's forms system. 
 
 ## The Vulcan Core Package
 

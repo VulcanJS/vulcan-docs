@@ -23,7 +23,7 @@ Note that you have to specify the route's full path as the `to` prop, not its na
 Here's how you can add routes to your app (using React Router):
 
 ```js
-import Foo from './foo.jsx';
+import Foo from './foo.jsx'; // if Foo exported as default
 
 addRoute({
   name: 'foo',
@@ -32,12 +32,12 @@ addRoute({
 });
 ```
 
-If on the other hand you've previously registered a component with `registerComponent`, you can simply specify the `componentName` property instead:
+If on the other hand you've previously registered a component with `registerComponent`, you can simply pass `getComponent('Foo')` to `component`, or even specify the `componentName` property instead:
 
 ```js
 addRoute({
   name: 'foo',
-  path: '/',
+  path: '/foo',
   componentName: 'Foo'
 });
 ```
@@ -48,7 +48,7 @@ Finally, to change the index (`/`) route, you can just do:
 addRoute({
   name: 'foo',
   path: '/',
-  component: Foo
+  componentName: 'Foo'
 });
 ```
 
@@ -71,13 +71,20 @@ By default, Vulcan will use the `Components.Layout` component as a layout. Howev
 ```js
 addRoute({
   name: 'foo',
-  path: '/',
+  path: '/foo',
   component: Foo,
   layoutName: 'AdminLayout'
 });
+
+addRoute({
+  name: 'bar',
+  path: '/bar',
+  component: Bar,
+  layoutComponent: AdminLayout
+});
 ```
 
-Note that this supposes you've previously registered the `AdminLayout` component using `registerComponent`.
+Note that using the `layoutName` property supposes you've previously registered the `AdminLayout` component using `registerComponent`.
 
 ## Dynamic Imports
 
@@ -95,19 +102,19 @@ addRoute({
 });
 ```
 
-Can be changed to a dynamic route using `getDynamicComponent` and `import(...)`:
+Can be changed to a dynamic route using `renderDynamicComponent` and `import(...)`, provided the Admin component is exported as default:
 
 ```js
-import { getDynamicComponent } from 'meteor/vulcan:core';
+import { renderDynamicComponent } from 'meteor/vulcan:core';
 
 addRoute({
   name: 'admin',
   path: '/admin',
-  component: () => getDynamicComponent(import('./Admin.jsx'))
+  component: props => renderDynamicComponent(import('./Admin.jsx'), props)
 });
 ```
 
-Note that components are imported as soon as the `import()` statement runs. This is why it's important to wrap the `getDynamicComponent()` block in a function call (`() => ...`) to delay its execution and ensure dynamic components are not loaded prematurely. 
+Note that components are imported as soon as the `import()` statement runs. This is why it's important to wrap the `renderDynamicComponent()` block in a function call (`props => ...`) to delay its execution and ensure dynamic components are not loaded prematurely. 
 
 Learn more about [dynamic imports here](https://blog.meteor.com/announcing-meteor-1-5-b82be66571bb).
 

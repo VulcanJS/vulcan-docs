@@ -17,9 +17,9 @@ It takes the following props:
 
 - `columns`: an array containing a list of columns (see below). If not `column` prop is passed, the datatable will use the keys of the first item as column headings. 
 - `options`: the `options` object passed to `withMulti` in order to load the data.
-- `showNew`: if `true`, will add a New Document button above the table (defaults to `false`).
-- `showEdit`: if `true`, will add a column with an Edit Document button at the end of each row (defaults to `false`).
-- `showSearch`: if `true`, will add a search field above the datatable (defaults to `false`).
+- `showNew`: if `true`, will add a New Document button above the table (defaults to `true`).
+- `showEdit`: if `true`, will add a column with an Edit Document button at the end of each row (defaults to `true`).
+- `showSearch`: if `true`, will add a search field above the datatable (defaults to `true`).
 - `newFormProps`: options passed to the “New Document” form.
 - `editFormProps`: options passed to the Edit Document” forms.
 - `Components`: the `Components` object lets you override child components of a specific datatable.
@@ -43,7 +43,7 @@ Note that columns do not necessarily have to correspond to schema fields. For ex
 - `component`: a custom component used to render this column's table cells (see below).
 - `label`: a label for the column (if not provided, the formatted `name` will be used).
 - `sortable`: if `true`, sorting options will be shown next to the column header.
-- `filterable`: if `true`, sorting options will be shown next to the column header.
+- `filterable`: if `true`, filtering options will be shown next to the column header.
 - `filterComponent`: a component used to customize the contents of a column filter. See below.
 
 ### Custom Components
