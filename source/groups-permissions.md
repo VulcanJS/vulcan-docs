@@ -111,6 +111,8 @@ If you need to test if a user passes a permission check, you can do so using the
 - `Users.canUpdate({ collection, user, document, context })`
 - `Users.canDelete({ collection, user, document, context })`
 
+The `Users` object must be imported from `meteor/vulcan:users`.
+
 ## Field-level Permissions
 
 Vulcan has two levels of permission checks: the document level, and the field level. 

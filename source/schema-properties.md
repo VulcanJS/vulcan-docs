@@ -147,12 +147,12 @@ A React component that will be inserted just after the form component itself.
 
 Can either be a boolean or a function accepting form props as argument and returning a boolean.
 
-Remove the field from the form altogether. To populate the field manipulate the value through the context, e.g.:
+Remove the field from the form altogether. To pass the value of the field to a SmartForm, use prefilledProps. 
 
+In a custom form component, to populate the field manipulate the value through the context, e.g.:
 ```js
 this.context.updateCurrentValues({ foo: 'bar' });
 ```
-
 As long as a value is in `this.state.currentValues` it should be submitted with the form, no matter whether there is an actual form item or not.
 
 ### `options`
