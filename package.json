@@ -19,7 +19,7 @@
     "hexo-renderer-less": "^0.2.0",
     "hexo-renderer-marked": "^1.0.1",
     "hexo-server": "^0.3.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "showdown": "^1.9.1"
   },
   "devDependencies": {
