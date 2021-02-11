@@ -2,6 +2,8 @@
 title: Reactive State
 ---
 
+#### ⭐️ New in Vulcan 1.17.0
+
 ## Introduction
 
 Vulcan's Reactive State feature offers simple global state management on the client side based on [Apollo Client reactive variables](https://www.apollographql.com/docs/react/local-state/reactive-variables/). You can think of Reactive State as a wrapper around Apollo reactive variables with some added features:
