@@ -37,6 +37,7 @@ sidebar_categories:
     - filtering
     - mutations
     - fragments
+    - aggregation
     - server-queries
     - connecting-remotely
   Features:
