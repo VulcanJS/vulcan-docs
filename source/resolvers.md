@@ -14,7 +14,7 @@ That being said if you wanted `createdAt` to resolve to, say, `formatDate(post.c
 
 ### Data Updating
 
-As long as you use `withMulti` in conjunction with `withCreate`, `withUpdate`, and `withDelete`, your lists will automatically be updated after any mutation. This includes:
+As long as you use `withMulti` or `useMulti` in conjunction with `withCreate`, `withUpdate`, and `withDelete`, your lists will automatically be updated after any mutation. This includes:
 
 * Inserting new items in lists after they're inserted.
 * Removing items when they're removed.

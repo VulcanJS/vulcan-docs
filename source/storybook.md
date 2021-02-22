@@ -80,8 +80,10 @@ npm i --save-dev scrap-meteor-loader
 
 Just run this command:
 
-```
+```sh
 npm run storybook
+# or if you want to load Material UI
+STORYBOOK_UI="material" npm run storybook
 ```
 
 In case of error, please check that you followed the Prerequisites and Install steps correctly.

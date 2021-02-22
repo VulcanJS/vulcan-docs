@@ -143,7 +143,7 @@ This is how the `vulcan:newsletter` package extends the `Posts` schema with a `s
 
 ```js
 Posts.addField({
-  fieldName: 'scheduledAt",
+  fieldName: 'scheduledAt',
   fieldSchema: {
     type: Date,
     optional: true

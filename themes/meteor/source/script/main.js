@@ -43,6 +43,10 @@
     })
   }
 
+  for (const el of document.querySelectorAll('[data-hotkey]')) {
+    Hotkey.install(el)
+  }
+
   function createSubMenu (container, headers) {
     var subMenu = document.createElement('ul')
     subMenu.className = 'sub-menu'
@@ -161,13 +165,6 @@
       location.assign(targetPath)
     })
   })
-
-  // fastclick to remove click delay in mobile browsers
-  if ('addEventListener' in document) {
-    document.addEventListener('DOMContentLoaded', function() {
-      FastClick.attach(document.body);
-    }, false);
-  }
 
   // search toggle
   var nav = document.querySelector('.nav');

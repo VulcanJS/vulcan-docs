@@ -10,6 +10,8 @@ As of December 2016, there are three major versions of Telescope:
 
 This guide focuses on migrating from Vulcan Classic to Vulcan Apollo. If you're still on the Legacy version, I'm afraid there isn't really an easy migration path and you're probably best off starting a new codebase from scratch. 
 
+If you already use Vulcan Apollo and want to update your version, see the [CHANGELOG](https://github.com/VulcanJS/Vulcan/blob/devel/CHANGELOG.md) and [MIGRATING](https://github.com/VulcanJS/Vulcan/blob/devel/MIGRATING.md) documentations.
+
 ## Git Merging
 
 The first step will be merging in the latest commits from the `apollo` branch. I personally use [SourceTree](https://www.sourcetreeapp.com/) to help manage Git repos, but any good Git app (or even the command line) should work just fine. 

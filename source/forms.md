@@ -161,6 +161,10 @@ A callback to call when a document is successfully removed (deleted).
 
 A callback called when the form is initialized.
 
+#### `changeCallback(currentDocument)`
+
+A callback called a every change or blur event inside the form.
+
 ### Fragments
 
 #### `queryFragment`

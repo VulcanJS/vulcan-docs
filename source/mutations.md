@@ -230,16 +230,27 @@ TODO
 
 ### Higher-Order Components
 
-Vulcan includes three main default higher-order components to make calliing mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
+Vulcan includes three main default hooks and higher-order components to make calling mutations from your React components easier. Note that when using the [Forms](forms.html) module, all three mutation HoCs are automatically added for you.
 
-#### `withCreate`
+Both hooks and HOCs are based on Apollo [`useMutation` hook](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) and thus have a similar API and behaviour.
 
-This HoC takes the following two options:
+#### `useCreate` and `withCreate`
+
+Both take the following options:
 
 * `collection`: the collection to operate on.
 * `fragment`: specifies the data to ask for as a return value.
+* `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
 
-And passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `data` argument and returns a promise:
+The HOC passes on a `createMovie` (or `createPost`, `createUser`, etc.) function to the wrapped component, which takes a single `document` argument.
+
+The hook behaves similarly as Apollo [`useMutation` hook](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation). It returns an array whose first item is the `createMovie` callback.
+
+```js
+const [createMovie] = useCreate(options)
+```
+
+Takes an object as argument with a single `data` property and returns a promise:
 
 ```js
 this.props
@@ -248,7 +259,7 @@ this.props
   .catch(/* error */);
 ```
 
-#### `withUpdate`
+#### `useUpdate` and `withUpdate`
 
 Same options as `withCreate`. The returned `updateMovie` mutation takes three arguments: `filter`, `_id`, and `data`:
 
@@ -278,27 +289,30 @@ this.props
   .catch(/* error */);
 ```
 
-#### `withDelete`
+#### `useDelete` and `withDelete`
 
 A single `collection` option. The returned `deleteMovie` mutation takes `filter` and `_id` arguments:
 
 ```js
 this.props
-  .removeMutation({
-    _id,
+  .deleteMovie({
+    documentId,
   })
   .then(/* success */)
   .catch(/* error */);
 ```
 
-#### `withMutation`
+#### `useRegisteredMutation` and `withMutation`
 
 In addition to the three main mutation HoCs, The `withMutation` HoC provides an easy way to call a specific mutation on the server by letting you create ad-hoc mutation containers.
 
-It takes two options:
+Note that the hook is called `useRegisteredMutation`, since `useMutation` is already the name of the underlying Apollo hook.
+
+It takes these options:
 
 * `name`: the name of the mutation to call on the server (will also be the name of the prop passed to the component).
 * `args`: (optional) an object containing the mutation's arguments and types.
+* `mutationOptions`: option object passed down to the underlying Apollo [`useMutation`](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook
 
 For example, here's how to wrap the `MyComponent` component to pass it an `addEmailNewsletter` function as prop:
 

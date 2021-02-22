@@ -67,7 +67,7 @@ The `input` takes the following properties:
 - `limit`: how many results to return.
 - `offset`: how many results to skip.
 - `search`: a shortcut for searching across all searchable fields at once.
-- `_id`: a shortcut for selecting a specific document by `_id`. 
+- `id`: a shortcut for selecting a specific document by `_id`. 
 - `enableCache`: whether to enable caching for this query
 - `allowNull`: whether to return `null` instead of throwing an error when no document is found.
 
@@ -78,7 +78,7 @@ input SingleMovieInput {
   filter: MovieFilterInput
   sort: MovieSortInput
   search: String
-  _id: String
+  id: String
   enableCache: Boolean
   allowNull: Boolean
 }
@@ -128,20 +128,20 @@ Options:
 
 Returned properties:
 
--`loading`: Bool – indicates whether the query is loading.
--`loadingInitial`: Bool – indicates whether this is the initial load.
--`loadingMore`: Bool - indicates whether the query is loading additional data.
--`results`: Array – the results returned by the query.
--`totalCount`: Int – the total non-paginated count for the documents matching the query.
--`refetch`: Function – a function that lets you re-run the query.
--`networkStatus`: Int – the Apollo Client network status.
--`error`: Error – the Apollo Client error.
--`count`: Int – the count of paginated documents matching the query.
--`loadMore`: Function – a function to load more documents.
--`loadMoreInc`: Function – a function to load more documents incrementally.
--`fragmentName`: String – the name of the fragment used to load the data.
--`fragment`: Object – the fragment used to load the data.
--`data`: Object – the raw Apollo Client result object.
+- `loading`: Bool – indicates whether the query is loading.
+- `loadingInitial`: Bool – indicates whether this is the initial load.
+- `loadingMore`: Bool - indicates whether the query is loading additional data.
+- `results`: Array – the results returned by the query.
+- `totalCount`: Int – the total non-paginated count for the documents matching the query.
+- `refetch`: Function – a function that lets you re-run the query.
+- `networkStatus`: Int – the Apollo Client network status.
+- `error`: Error – the Apollo Client error.
+- `count`: Int – the count of paginated documents matching the query.
+- `loadMore`: Function – a function to load more documents.
+- `loadMoreInc`: Function – a function to load more documents incrementally.
+- `fragmentName`: String – the name of the fragment used to load the data.
+- `fragment`: Object – the fragment used to load the data.
+- `data`: Object – the raw Apollo Client result object.
 
 ```js
 import React from 'react';
@@ -162,9 +162,7 @@ export default PostList;
 
 ### Higher-Order Components
 
-**Note: HoCs are now deprecated in favor of hooks**
-
-To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs).
+To make working with Apollo easier, Vulcan provides you with a set of higher-order components (HoCs) to use with class components.
 
 An **HoC** is simply a function you can call on a React component to give it additional props. Think of it as a mechanic's assistant following along with a little toolbox, ready to hand over a screwdriver or socket wrench at the appropriate time.
 
